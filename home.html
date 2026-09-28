@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="ha">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#176b4d" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Fasahar" />
+
+  <title>Gida — Fasahar Al'umma</title>
+  <meta name="description" content="Fasahar zamani ga al'umma baki ɗaya. Koyi ƙwarewar dijital a Hausa da Turanci." />
+
+  <link rel="manifest" href="/manifest.json" />
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <link rel="stylesheet" href="/css/style.css" />
+
+  <style>
+    /* ============================================================
+       SPLASH SCREEN — rich green, feels premium
+       ============================================================ */
+    .splash {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background:
+        radial-gradient(circle at 50% 20%, rgba(231,168,59,.20), transparent 45%),
+        linear-gradient(160deg, #176b4d 0%, #0f4d38 60%, #0a3826 100%);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      transition: opacity 0.7s ease, visibility 0.7s ease;
+    }
+
+    .splash.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    /* Soft decorative glow behind logo */
+    .splash::before {
+      content: "";
+      position: absolute;
+      top: 24%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.12), transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Faint grid pattern for texture */
+    .splash::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 80%, rgba(231,168,59,0.12), transparent 40%),
+        radial-gradient(circle at 85% 15%, rgba(255,255,255,0.06), transparent 35%);
+      pointer-events: none;
+    }
+
+    .splash-inner {
+      position: relative;
+      text-align: center;
+      padding: 32px;
+      z-index: 1;
+      animation: splashIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    @keyframes splashIn {
+      from { opacity: 0; transform: translateY(16px) scale(0.96); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .splash-logo {
+      width: 120px;
+      height: 120px;
+      border-radius: 28px;
+      background: var(--white);
+      display: grid;
+      place-items: center;
+      margin: 0 auto 32px;
+      padding: 14px;
+      box-shadow:
+        0 24px 60px rgba(0, 0, 0, 0.28),
+        0 0 0 1px rgba(255, 255, 255, 0.15),
+        inset 0 -4px 12px rgba(0, 0, 0, 0.04);
+      animation: logoFloat 3s ease-in-out infinite;
+    }
+
+    .splash-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    @keyframes logoFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    .splash-title {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -1.4px;
+      color: var(--white);
+      margin-bottom: 10px;
+      line-height: 1.1;
+    }
+
+    .splash-tagline {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.78);
+      font-weight: 500;
+      max-width: 280px;
+      margin: 0 auto;
+      line-height: 1.55;
+    }
+
+    .splash-divider {
+      width: 40px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 100px;
+      margin: 20px auto;
+    }
+
+    .splash-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 48px;
+    }
+
+    .splash-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.85);
+      animation: dotPulse 1.4s ease-in-out infinite;
+    }
+
+    .splash-dot:nth-child(2) { animation-delay: 0.2s; }
+    .splash-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes dotPulse {
+      0%, 100% { opacity: 0.3; transform: scale(0.85); }
+      50%      { opacity: 1;   transform: scale(1); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .splash-logo,
+      .splash-dot { animation: none; }
+    }
+
+    /* ============================================================
+       HOME
+       ============================================================ */
+    .home {
+      opacity: 0;
+      transition: opacity 0.6s ease 0.1s;
+      padding: 20px 0 100px;
+    }
+
+    .home.visible { opacity: 1; }
+
+    /* ---- Greeting ---- */
+    .greeting {
+      padding: 24px 0 28px;
+    }
+
+    .greeting-hello {
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .greeting-title {
+      font-size: clamp(26px, 6vw, 34px);
+      font-weight: 800;
+      letter-spacing: -1.2px;
+      color: var(--dark);
+      line-height: 1.15;
+    }
+
+    /* ---- Overall progress ---- */
+    .overall {
+      background: linear-gradient(135deg, #e8f3ed 0%, #f2f7f3 100%);
+      border: 1px solid #d6e2da;
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .overall-ring {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: conic-gradient(var(--primary) var(--progress, 0%), #d9e4dd 0);
+      display: grid;
+      place-items: center;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .overall-ring::before {
+      content: "";
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--white);
+      position: absolute;
+    }
+
+    .overall-ring span {
+      position: relative;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--primary-dark);
+    }
+
+    .overall-info { flex: 1; min-width: 0; }
+    .overall-info h4 {
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 2px;
+      color: var(--dark);
+    }
+    .overall-info p {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    /* ---- Resume ---- */
+    .resume {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      border-radius: var(--radius);
+      padding: 18px;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      color: #fff;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 12px 32px rgba(23, 107, 77, 0.25);
+    }
+
+    .resume:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 40px rgba(23, 107, 77, 0.35);
+    }
+
+    .resume-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.16);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      flex-shrink: 0;
+      backdrop-filter: blur(8px);
+    }
+
+    .resume-body { flex: 1; min-width: 0; }
+    .resume-label {
+      font-size: 11px;
+      font-weight: 800;
+      color: rgba(255, 255, 255, 0.75);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 2px;
+    }
+    .resume-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .resume-arrow {
+      color: #fff;
+      font-size: 16px;
+      flex-shrink: 0;
+      opacity: 0.85;
+    }
+
+    /* ---- Section head ---- */
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .section-head h3 {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--dark);
+      letter-spacing: -0.4px;
+    }
+
+    .section-head span {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    /* ---- Module grid ---- */
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .module-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      position: relative;
+      overflow: hidden;
+      min-height: 156px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .module-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+      border-color: #d6e2da;
+    }
+
+    .module-card:active {
+      transform: scale(0.98);
+    }
+
+    .module-card.completed {
+      background: linear-gradient(135deg, #e8f3ed 0%, #f2f7f3 100%);
+      border-color: #c8e6d3;
+    }
+
+    .module-card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: #e8f3ed;
+      color: var(--primary);
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .module-card.completed .module-card-icon {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .module-card-body { flex: 1; }
+
+    .module-card-title {
+      font-size: 14px;
+      font-weight: 800;
+      line-height: 1.25;
+      color: var(--dark);
+      margin-bottom: 4px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .module-card-meta {
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .module-card-progress { margin-top: auto; }
+
+    .module-card-progress .bar {
+      height: 4px;
+      background: #e8eeea;
+      border-radius: 100px;
+      overflow: hidden;
+      margin-bottom: 6px;
+    }
+
+    .module-card-progress .bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      border-radius: inherit;
+      transition: width 0.6s ease;
+    }
+
+    .module-card-progress .bar-label {
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    /* ---- Opportunities card ---- */
+    .module-card.opportunities {
+      grid-column: span 2;
+      min-height: auto;
+      flex-direction: row;
+      align-items: center;
+      gap: 14px;
+      background: linear-gradient(135deg, #fff6e3 0%, #fffaf0 100%);
+      border-color: #f0e0b8;
+    }
+
+    .module-card.opportunities .module-card-icon {
+      background: #fdeec8;
+      color: var(--accent-dark);
+    }
+
+    /* ============================================================
+       DESKTOP HAMBURGER + DRAWER
+       ============================================================ */
+    .hamburger {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: var(--primary);
+      color: #fff;
+      font-size: 18px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 800;
+      box-shadow: 0 8px 24px rgba(23, 107, 77, 0.28);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .hamburger:hover {
+      background: var(--primary-dark);
+      transform: scale(1.04);
+    }
+
+    .drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 320px;
+      max-width: 85vw;
+      height: 100dvh;
+      background: var(--white);
+      border-left: 1px solid var(--border);
+      box-shadow: -20px 0 60px rgba(20, 50, 38, 0.12);
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 900;
+      padding: 24px;
+      overflow-y: auto;
+    }
+
+    .drawer.open { transform: translateX(0); }
+
+    .drawer-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--soft);
+      color: var(--dark);
+      font-size: 14px;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      border: none;
+      transition: background 0.15s;
+    }
+
+    .drawer-close:hover { background: var(--border); }
+
+    .drawer-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+      padding-top: 8px;
+    }
+
+    .drawer-brand img {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .drawer-brand strong {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--dark);
+    }
+
+    .drawer-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .drawer-nav a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--dark);
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .drawer-nav a:hover {
+      background: #e8f3ed;
+      color: var(--primary);
+    }
+
+    .drawer-nav a i {
+      width: 20px;
+      text-align: center;
+      font-size: 15px;
+      color: var(--primary);
+    }
+
+    .drawer-section-label {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--muted);
+      margin: 24px 4px 10px;
+    }
+
+    .drawer-toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: var(--soft);
+      margin-bottom: 8px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .drawer-lang {
+      display: flex;
+      gap: 4px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 3px;
+    }
+
+    .drawer-lang span {
+      padding: 5px 12px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .drawer-lang span.active {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(23, 35, 30, 0.35);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 850;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+
+    .overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (min-width: 561px) {
+      .module-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+      .module-card.opportunities { grid-column: span 3; }
+    }
+
+    @media (min-width: 901px) {
+      body { padding-bottom: 0; }
+      .tabbar { display: none !important; }
+      .hamburger { display: flex; }
+      .home {
+        padding-top: 60px;
+        padding-bottom: 60px;
+        max-width: 1120px;
+      }
+      .module-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+      .module-card { min-height: 180px; padding: 20px; }
+      .module-card-title { font-size: 15px; }
+      .greeting-title { font-size: 40px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       SPLASH
+       ============================================================ -->
+  <div class="splash" id="splash" aria-hidden="true">
+    <div class="splash-inner">
+      <div class="splash-logo">
+        <img src="/images/logo.png" alt="Fasahar Al'umma" />
+      </div>
+      <h1 class="splash-title">Fasahar Al'umma</h1>
+      <div class="splash-divider"></div>
+      <p class="splash-tagline">Fasahar zamani ga al'umma baki ɗaya</p>
+      <div class="splash-dots">
+        <span class="splash-dot"></span>
+        <span class="splash-dot"></span>
+        <span class="splash-dot"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       DESKTOP HAMBURGER + DRAWER
+       ============================================================ -->
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <i class="fa-solid fa-bars"></i>
+  </button>
+
+  <div class="overlay" id="drawerOverlay"></div>
+
+  <aside class="drawer" id="drawer" aria-label="Menu">
+    <button class="drawer-close" id="drawerClose" aria-label="Close">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+
+    <div class="drawer-brand">
+      <img src="/images/logo.png" alt="Fasahar Al'umma" />
+      <strong>Fasahar Al'umma</strong>
+    </div>
+
+    <nav class="drawer-nav">
+      <a href="/home.html">
+        <i class="fa-solid fa-house"></i>
+        <span>Gida</span>
+      </a>
+      <a href="#modules">
+        <i class="fa-solid fa-book-open"></i>
+        <span>Darussa</span>
+      </a>
+      <a href="/opportunities.html">
+        <i class="fa-solid fa-hand-holding-heart"></i>
+        <span>Dama</span>
+      </a>
+      <a href="/profile.html">
+        <i class="fa-solid fa-user"></i>
+        <span>Bayani</span>
+      </a>
+    </nav>
+
+    <div class="drawer-section-label">Saituna</div>
+
+    <div class="drawer-toggle-row">
+      <span>Harshe</span>
+      <div class="drawer-lang" id="drawerLang">
+        <span data-lang="ha" class="active">HA</span>
+        <span data-lang="en">EN</span>
+      </div>
+    </div>
+
+    <div class="drawer-toggle-row">
+      <span>Sauti</span>
+      <button id="drawerSound" style="background:none;border:none;color:var(--primary);font-size:16px;cursor:pointer;">
+        <i class="fa-solid fa-volume-high"></i>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ============================================================
+       HOME CONTENT
+       ============================================================ -->
+  <main class="container home" id="home">
+
+    <section class="greeting">
+      <p class="greeting-hello" id="greetingHello">Sannu 👋</p>
+      <h1 class="greeting-title" id="greetingTitle">Ci gaba da koyo</h1>
+    </section>
+
+    <div class="overall" id="overallBox">
+      <div class="overall-ring" id="overallRing">
+        <span id="overallPercent">0%</span>
+      </div>
+      <div class="overall-info">
+        <h4 id="overallTitle">Ci gaban gaba ɗaya</h4>
+        <p id="overallSub">Fara darasi na farko don ganin ci gabanka.</p>
+      </div>
+    </div>
+
+    <div id="resumeMount"></div>
+
+    <div class="section-head" id="modules">
+      <h3>Hanyoyin karatunka</h3>
+      <span id="modulesCount">0 / 6</span>
+    </div>
+
+    <div class="module-grid" id="moduleGrid"></div>
+
+  </main>
+
+  <div id="tabbar"></div>
+
+  <script src="/data.js"></script>
+  <script src="/storage.js"></script>
+  <script src="/app.js"></script>
+
+  <script>
+    /* ============================================================
+       SPLASH → HOME
+       ============================================================ */
+    (function initSplash() {
+      const splash = document.getElementById("splash");
+      const home = document.getElementById("home");
+      const DELAY = 2000;
+
+      setTimeout(() => {
+        splash.classList.add("hidden");
+        home.classList.add("visible");
+        setTimeout(() => { splash.style.display = "none"; }, 800);
+      }, DELAY);
+    })();
+
+    /* ============================================================
+       HOME RENDERING
+       ============================================================ */
+    (function renderHome() {
+      const lang = STORAGE.getLanguage();
+      const isHa = lang === "ha";
+
+      /* Greeting */
+      const hour = new Date().getHours();
+      let hello;
+      if (isHa) {
+        if (hour < 12) hello = "Barka da safiya";
+        else if (hour < 17) hello = "Barka da rana";
+        else hello = "Barka da yamma";
+      } else {
+        if (hour < 12) hello = "Good morning";
+        else if (hour < 17) hello = "Good afternoon";
+        else hello = "Good evening";
+      }
+      document.getElementById("greetingHello").textContent = hello + " 👋";
+      document.getElementById("greetingTitle").textContent =
+        isHa ? "Ci gaba da koyo" : "Continue learning";
+
+      /* Overall progress */
+      const overall = STORAGE.getOverallProgress();
+      const ring = document.getElementById("overallRing");
+      const pct = document.getElementById("overallPercent");
+      ring.style.setProperty("--progress", overall.percent + "%");
+      pct.textContent = overall.percent + "%";
+
+      const overallSub = document.getElementById("overallSub");
+      if (overall.completed === 0) {
+        overallSub.textContent = isHa
+          ? "Fara darasi na farko don ganin ci gabanka."
+          : "Start your first lesson to see progress here.";
+      } else {
+        overallSub.textContent = isHa
+          ? `${overall.completed} daga cikin ${overall.total} darussa an kammala.`
+          : `${overall.completed} of ${overall.total} lessons completed.`;
+      }
+
+      /* Resume card */
+      const session = STORAGE.getSession();
+      const resumeMount = document.getElementById("resumeMount");
+
+      if (session) {
+        const mod = DATA.modules.find((m) => m.id === session.moduleId);
+        const lesson = mod?.lessons.find((l) => l.id === session.lessonId);
+        if (mod && lesson) {
+          const lessonTitle = isHa ? lesson.title_ha : lesson.title_en;
+          resumeMount.innerHTML = `
+            <a class="resume" href="/lesson.html?module=${session.moduleId}&lesson=${session.lessonId}&step=${session.step}">
+              <div class="resume-icon"><i class="fa-solid fa-circle-play"></i></div>
+              <div class="resume-body">
+                <div class="resume-label">${isHa ? "Ci gaba da darasin ka" : "Resume your lesson"}</div>
+                <div class="resume-title">${lessonTitle}</div>
+              </div>
+              <i class="fa-solid fa-chevron-right resume-arrow"></i>
+            </a>
+          `;
+        }
+      }
+
+      /* Module grid */
+      const grid = document.getElementById("moduleGrid");
+      let completedModules = 0;
+
+      DATA.modules.forEach((mod) => {
+        const progress = STORAGE.getModuleProgress(mod.id);
+        const isComplete = progress.percent === 100;
+        if (isComplete) completedModules++;
+
+        const title = isHa ? mod.title_ha : mod.title_en;
+        const lessonsLeft = progress.total - progress.completed;
+
+        let meta;
+        if (isComplete) {
+          meta = isHa ? "An kammala" : "Completed";
+        } else if (progress.completed === 0) {
+          meta = isHa ? `${progress.total} darussa` : `${progress.total} lessons`;
+        } else {
+          meta = isHa ? `${lessonsLeft} darasi suka rage` : `${lessonsLeft} lessons left`;
+        }
+
+        const card = document.createElement("a");
+        card.href = `/module.html?id=${mod.id}`;
+        card.className = "module-card" + (isComplete ? " completed" : "");
+        card.innerHTML = `
+          <div class="module-card-icon">${APP.icon(iconKeyFor(mod.id))}</div>
+          <div class="module-card-body">
+            <div class="module-card-title">${title}</div>
+            <div class="module-card-meta">${meta}</div>
+          </div>
+          <div class="module-card-progress">
+            <div class="bar"><div class="bar-fill" style="width:${progress.percent}%"></div></div>
+            <div class="bar-label">${progress.percent}%</div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      /* Opportunities card */
+      const opp = document.createElement("a");
+      opp.href = "/opportunities.html";
+      opp.className = "module-card opportunities";
+      opp.innerHTML = `
+        <div class="module-card-icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
+        <div class="module-card-body">
+          <div class="module-card-title">${isHa ? "Dama da Tallafi" : "Opportunities & Grants"}</div>
+          <div class="module-card-meta">${isHa ? "Abubuwan da za ka iya nema" : "Things you can apply for"}</div>
+        </div>
+        <i class="fa-solid fa-chevron-right" style="color:var(--accent-dark)"></i>
+      `;
+      grid.appendChild(opp);
+
+      document.getElementById("modulesCount").textContent =
+        `${completedModules} / ${DATA.modules.length}`;
+
+      function iconKeyFor(id) {
+        const map = {
+          "phone-internet": "phone",
+          "email-work": "email",
+          "whatsapp-social": "chat",
+          "digital-safety": "safety",
+          "ai-basics": "ai",
+          "digital-business": "business"
+        };
+        return map[id] || "modules";
+      }
+    })();
+
+    /* ============================================================
+       DRAWER
+       ============================================================ */
+    (function initDrawer() {
+      const hamburger = document.getElementById("hamburger");
+      const drawer = document.getElementById("drawer");
+      const overlay = document.getElementById("drawerOverlay");
+      const close = document.getElementById("drawerClose");
+      const langToggle = document.getElementById("drawerLang");
+      const soundBtn = document.getElementById("drawerSound");
+
+      function open() {
+        drawer.classList.add("open");
+        overlay.classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+      function closeDrawer() {
+        drawer.classList.remove("open");
+        overlay.classList.remove("open");
+        document.body.style.overflow = "";
+      }
+
+      hamburger.addEventListener("click", () => { APP.playSound("tap"); open(); });
+      close.addEventListener("click", closeDrawer);
+      overlay.addEventListener("click", closeDrawer);
+
+      langToggle.addEventListener("click", (e) => {
+        const target = e.target.closest("[data-lang]");
+        if (!target) return;
+        const lang = target.dataset.lang;
+        if (lang === STORAGE.getLanguage()) return;
+        APP.setLanguage(lang);
+        APP.playSound("tap");
+        langToggle.querySelectorAll("span").forEach((s) => {
+          s.classList.toggle("active", s.dataset.lang === lang);
+        });
+      });
+
+      function updateSoundIcon() {
+        const on = STORAGE.getSoundEnabled();
+        soundBtn.innerHTML = on
+          ? '<i class="fa-solid fa-volume-high"></i>'
+          : '<i class="fa-solid fa-volume-xmark"></i>';
+      }
+      updateSoundIcon();
+      soundBtn.addEventListener("click", () => {
+        const next = !STORAGE.getSoundEnabled();
+        STORAGE.setSoundEnabled(next);
+        updateSoundIcon();
+        if (next) APP.playSound("tap");
+      });
+
+      document.addEventListener("languagechange", (e) => {
+        langToggle.querySelectorAll("span").forEach((s) => {
+          s.classList.toggle("active", s.dataset.lang === e.detail.lang);
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>
