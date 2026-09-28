@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="ha">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#176b4d" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
+  <title>Jarrabawa — Fasahar Al'umma</title>
+  <meta name="description" content="Yi jarrabawar module don kammalawa." />
+
+  <link rel="manifest" href="/manifest.json" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <link rel="stylesheet" href="/css/style.css" />
+
+  <style>
+    /* ============================================================
+       EXAM PAGE
+       ============================================================ */
+    .exam-page {
+      padding: 20px 0 120px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .exam-page.visible { opacity: 1; }
+
+    /* ---- Top bar ---- */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .back-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      color: var(--dark);
+      display: grid;
+      place-items: center;
+      font-size: 15px;
+      flex-shrink: 0;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .back-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .breadcrumb {
+      flex: 1;
+      min-width: 0;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .breadcrumb strong {
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    /* ---- Hero header ---- */
+    .exam-hero {
+      background: linear-gradient(135deg, #176b4d 0%, #0f4d38 100%);
+      border-radius: var(--radius);
+      padding: 26px 24px;
+      margin-bottom: 28px;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .exam-hero::before {
+      content: "";
+      position: absolute;
+      top: -50%; right: -20%;
+      width: 260px; height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(231,168,59,0.18), transparent 70%);
+      pointer-events: none;
+    }
+
+    .exam-hero-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.14);
+      color: var(--accent);
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+      margin-bottom: 16px;
+      backdrop-filter: blur(8px);
+      position: relative;
+    }
+
+    .exam-hero h1 {
+      font-size: clamp(22px, 5.5vw, 28px);
+      font-weight: 800;
+      letter-spacing: -0.9px;
+      line-height: 1.2;
+      margin-bottom: 8px;
+      position: relative;
+    }
+
+    .exam-hero p {
+      font-size: 13.5px;
+      color: rgba(255, 255, 255, 0.82);
+      line-height: 1.55;
+      position: relative;
+      margin-bottom: 18px;
+    }
+
+    .exam-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      position: relative;
+    }
+
+    .exam-meta-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 100px;
+      background: rgba(255, 255, 255, 0.14);
+      font-size: 12px;
+      font-weight: 700;
+      backdrop-filter: blur(6px);
+      color: #fff;
+    }
+
+    .exam-meta-chip i {
+      font-size: 11px;
+      color: var(--accent);
+    }
+
+    /* ---- Question card ---- */
+    .question-list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+
+    .question-card {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      transition: border-color 0.2s;
+    }
+
+    .question-card.answered {
+      border-color: #c8e6d3;
+    }
+
+    .question-card.correct {
+      border-color: var(--primary);
+      background: linear-gradient(135deg, #f0faf4 0%, #e8f5ed 100%);
+    }
+
+    .question-card.incorrect {
+      border-color: #e8b4b4;
+      background: #fdf6f6;
+    }
+
+    .question-head {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .question-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    .question-card.correct .question-num {
+      background: var(--primary);
+    }
+
+    .question-card.incorrect .question-num {
+      background: #c94a4a;
+    }
+
+    .question-text {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1.5;
+      letter-spacing: -0.2px;
+    }
+
+    /* ---- Options ---- */
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .option {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      padding: 13px 14px;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      text-align: left;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--dark);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .option:hover {
+      border-color: var(--primary);
+      background: #f7fbf9;
+    }
+
+    .option:active { transform: scale(0.99); }
+
+    .option-letter {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--soft);
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 12px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+
+    .option-text { flex: 1; }
+
+    .option-status {
+      flex-shrink: 0;
+      font-size: 16px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    /* Selected (before submit) */
+    .option.selected {
+      border-color: var(--primary);
+      background: #e8f5ed;
+    }
+
+    .option.selected .option-letter {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    /* After grading */
+    .option.correct-answer {
+      border-color: var(--primary);
+      background: #e8f5ed;
+    }
+    .option.correct-answer .option-letter {
+      background: var(--primary);
+      color: #fff;
+    }
+    .option.correct-answer .option-status {
+      color: var(--primary);
+      opacity: 1;
+    }
+
+    .option.wrong-answer {
+      border-color: #e8b4b4;
+      background: #fdf1f1;
+    }
+    .option.wrong-answer .option-letter {
+      background: #c94a4a;
+      color: #fff;
+    }
+    .option.wrong-answer .option-status {
+      color: #c94a4a;
+      opacity: 1;
+    }
+
+    .option:disabled { cursor: default; }
+    .option:disabled:hover { border-color: var(--border); background: var(--white); }
+    .option.selected:disabled:hover { border-color: var(--primary); background: #e8f5ed; }
+    .option.correct-answer:disabled:hover { border-color: var(--primary); background: #e8f5ed; }
+    .option.wrong-answer:disabled:hover { border-color: #e8b4b4; background: #fdf1f1; }
+
+    /* ---- Explanation after grading ---- */
+    .explanation {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: var(--soft);
+      border-left: 3px solid var(--primary);
+      font-size: 12.5px;
+      color: var(--dark);
+      line-height: 1.6;
+      display: none;
+    }
+
+    .explanation.show { display: block; animation: fadeIn 0.3s ease both; }
+
+    .explanation strong {
+      color: var(--primary-dark);
+      font-weight: 800;
+      display: block;
+      margin-bottom: 3px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---- Submit bar ---- */
+    .submit-bar {
+      position: fixed;
+      left: 0; right: 0;
+      bottom: calc(68px + env(safe-area-inset-bottom, 0px));
+      padding: 14px 16px;
+      background: linear-gradient(to top, rgba(255,255,255,0.98) 60%, rgba(255,255,255,0.85) 100%);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border);
+      z-index: 100;
+    }
+
+    .submit-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .submit-info strong {
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    .submit-progress {
+      height: 4px;
+      background: var(--border);
+      border-radius: 100px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .submit-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      border-radius: inherit;
+      transition: width 0.3s ease;
+      width: 0%;
+    }
+
+    .submit-btn {
+      width: 100%;
+      min-height: 54px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-radius: 14px;
+      font-weight: 800;
+      font-size: 14px;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 8px 24px rgba(23, 107, 77, 0.28);
+    }
+
+    .submit-btn:hover:not(:disabled) {
+      background: var(--primary-dark);
+    }
+
+    .submit-btn:active:not(:disabled) { transform: scale(0.98); }
+
+    .submit-btn:disabled {
+      background: #cfe0d6;
+      color: #7a8c81;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    /* ============================================================
+       RESULT VIEW (replaces questions after submit)
+       ============================================================ */
+    .result-view {
+      display: none;
+      animation: fadeIn 0.4s ease both;
+    }
+
+    .result-view.show { display: block; }
+
+    .result-card {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 24px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .result-card.pass {
+      background: linear-gradient(135deg, #e8f5ed 0%, #d8ede2 100%);
+      border-color: #c8e6d3;
+    }
+
+    .result-card.fail {
+      background: linear-gradient(135deg, #fdf6f6 0%, #fbeeee 100%);
+      border-color: #e8b4b4;
+    }
+
+    .result-icon {
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      background: var(--white);
+      display: grid;
+      place-items: center;
+      font-size: 36px;
+      margin: 0 auto 20px;
+      box-shadow: 0 12px 32px rgba(23, 107, 77, 0.15);
+    }
+
+    .result-card.pass .result-icon { color: var(--primary); }
+    .result-card.fail .result-icon { color: #c94a4a; }
+
+    .result-title {
+      font-size: clamp(22px, 5vw, 28px);
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+
+    .result-sub {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.55;
+      margin-bottom: 22px;
+      max-width: 360px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Score ring */
+    .score-ring {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: conic-gradient(var(--primary) var(--score, 0%), #d9e4dd 0);
+      display: grid;
+      place-items: center;
+      position: relative;
+      margin: 0 auto 20px;
+    }
+
+    .result-card.fail .score-ring {
+      background: conic-gradient(#c94a4a var(--score, 0%), #f0d6d6 0);
+    }
+
+    .score-ring::before {
+      content: "";
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      background: var(--white);
+      position: absolute;
+    }
+
+    .score-inner {
+      position: relative;
+      text-align: center;
+    }
+
+    .score-value {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--dark);
+      line-height: 1;
+    }
+
+    .score-label {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* Result actions */
+    .result-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .result-btn {
+      width: 100%;
+      min-height: 52px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-radius: 14px;
+      font-weight: 800;
+      font-size: 14px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .result-btn-primary {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(23, 107, 77, 0.28);
+    }
+    .result-btn-primary:hover { background: var(--primary-dark); }
+
+    .result-btn-gold {
+      background: var(--accent);
+      color: var(--dark);
+      box-shadow: 0 8px 24px rgba(231, 168, 59, 0.35);
+    }
+    .result-btn-gold:hover { background: #d99825; }
+
+    .result-btn-secondary {
+      background: var(--white);
+      color: var(--dark);
+      border: 1.5px solid var(--border);
+    }
+    .result-btn-secondary:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .result-btn:active { transform: scale(0.98); }
+
+    /* ---- Not found / locked ---- */
+    .not-found {
+      text-align: center;
+      padding: 80px 20px;
+    }
+    .not-found .icon {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: var(--soft);
+      color: var(--muted);
+      display: grid;
+      place-items: center;
+      font-size: 32px;
+      margin: 0 auto 20px;
+    }
+    .not-found h2 {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: var(--dark);
+    }
+    .not-found p {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    /* ---- Desktop ---- */
+    @media (min-width: 901px) {
+      body { padding-bottom: 0; }
+      .exam-page {
+        max-width: 720px;
+        padding-top: 40px;
+        padding-bottom: 160px;
+      }
+      .submit-bar {
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 720px;
+        width: 100%;
+        border-radius: 20px 20px 0 0;
+        border: 1px solid var(--border);
+        border-bottom: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="container exam-page" id="examPage">
+    <div id="contentMount"></div>
+  </main>
+
+  <div id="submitBarMount"></div>
+
+  <div id="tabbar"></div>
+
+  <script src="/data.js"></script>
+  <script src="/storage.js"></script>
+  <script src="/app.js"></script>
+
+  <script>
+    /* ============================================================
+       EXAM PAGE CONTROLLER
+       ============================================================ */
+    (function initExam() {
+
+      /* ---------- URL params ---------- */
+      const params = new URLSearchParams(window.location.search);
+      const moduleId = params.get("module");
+
+      const lang = STORAGE.getLanguage();
+      const isHa = lang === "ha";
+
+      const page = document.getElementById("examPage");
+      const mount = document.getElementById("contentMount");
+      const submitBarMount = document.getElementById("submitBarMount");
+
+      /* ---------- Validate ---------- */
+      const mod = DATA.modules.find((m) => m.id === moduleId);
+      if (!mod) return renderNotFound();
+
+      const exam = mod.exam || [];
+      if (exam.length === 0) return renderNotFound();
+
+      /* ---------- Guard: all lessons done? ---------- */
+      const progress = STORAGE.getModuleProgress(mod.id);
+      if (progress.percent !== 100) return renderLocked();
+
+      /* ---------- Guard: already passed? ---------- */
+      if (STORAGE.isExamPassed(mod.id)) return renderAlreadyPassed();
+
+      /* ---------- State ---------- */
+      const answers = new Array(exam.length).fill(null);
+      const passMark = mod.examPassMark || 100;
+      const moduleTitle = isHa ? mod.title_ha : mod.title_en;
+
+      document.title = (isHa ? "Jarrabawa" : "Exam") + " · " + moduleTitle + " — Fasahar Al'umma";
+
+      /* ============================================================
+         RENDER
+         ============================================================ */
+      function render() {
+        mount.innerHTML = renderTopBar() + renderHero() + renderQuestions();
+        submitBarMount.innerHTML = renderSubmitBar();
+        bindEvents();
+        requestAnimationFrame(() => page.classList.add("visible"));
+      }
+
+      /* ---------- Top bar ---------- */
+      function renderTopBar() {
+        return `
+          <div class="top-bar">
+            <a href="/module.html?id=${mod.id}" class="back-btn" aria-label="${isHa ? "Koma" : "Back"}">
+              <i class="fa-solid fa-chevron-left"></i>
+            </a>
+            <div class="breadcrumb">
+              <strong>${moduleTitle}</strong> · ${isHa ? "Jarrabawa" : "Exam"}
+            </div>
+          </div>
+        `;
+      }
+
+      /* ---------- Hero ---------- */
+      function renderHero() {
+        return `
+          <div class="exam-hero">
+            <div class="exam-hero-icon"><i class="fa-solid fa-trophy"></i></div>
+            <h1>${isHa ? "Jarrabawar Module" : "Module Exam"}</h1>
+            <p>${isHa
+              ? "Amsa duk tambayoyi a ƙasa. Za ka buƙaci " + passMark + "% don cin jarrabawar."
+              : "Answer all questions below. You need " + passMark + "% to pass."}</p>
+            <div class="exam-meta">
+              <span class="exam-meta-chip">
+                <i class="fa-solid fa-list-check"></i>
+                ${exam.length} ${isHa ? "tambayoyi" : "questions"}
+              </span>
+              <span class="exam-meta-chip">
+                <i class="fa-solid fa-bullseye"></i>
+                ${passMark}% ${isHa ? "don cin nasara" : "to pass"}
+              </span>
+            </div>
+          </div>
+        `;
+      }
+
+      /* ---------- Questions ---------- */
+      function renderQuestions() {
+        const letters = ["A", "B", "C", "D", "E"];
+        return `
+          <div class="question-list">
+            ${exam.map((q, qi) => {
+              const question = isHa ? q.question_ha : q.question_en;
+              const options = q.options.map((opt, oi) => {
+                const text = isHa ? opt.text_ha : opt.text_en;
+                return `
+                  <button class="option" data-q="${qi}" data-o="${oi}" type="button">
+                    <span class="option-letter">${letters[oi]}</span>
+                    <span class="option-text">${text}</span>
+                    <span class="option-status"><i class="fa-solid fa-circle-check"></i></span>
+                  </button>
+                `;
+              }).join("");
+              return `
+                <div class="question-card" data-q="${qi}">
+                  <div class="question-head">
+                    <div class="question-num">${qi + 1}</div>
+                    <div class="question-text">${question}</div>
+                  </div>
+                  <div class="options-list">${options}</div>
+                  <div class="explanation" id="explanation-${qi}"></div>
+                </div>
+              `;
+            }).join("")}
+          </div>
+        `;
+      }
+
+      /* ---------- Submit bar ---------- */
+      function renderSubmitBar() {
+        return `
+          <div class="submit-bar" id="submitBar">
+            <div class="submit-info">
+              <span>${isHa ? "Amsoshi" : "Answered"}</span>
+              <span><strong id="answeredCount">0</strong> / ${exam.length}</span>
+            </div>
+            <div class="submit-progress">
+              <div class="submit-progress-fill" id="submitProgressFill"></div>
+            </div>
+            <button class="submit-btn" id="submitBtn" disabled>
+              <i class="fa-solid fa-paper-plane"></i>
+              ${isHa ? "Aika Jarrabawa" : "Submit Exam"}
+            </button>
+          </div>
+        `;
+      }
+
+      /* ============================================================
+         EVENTS
+         ============================================================ */
+      function bindEvents() {
+
+        /* Option selection */
+        document.querySelectorAll(".option").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            if (btn.disabled) return;
+            const qi = parseInt(btn.dataset.q, 10);
+            const oi = parseInt(btn.dataset.o, 10);
+
+            /* Clear previous selection in this question */
+            document.querySelectorAll(`.option[data-q="${qi}"]`).forEach((b) => {
+              b.classList.remove("selected");
+            });
+
+            /* Mark new selection */
+            btn.classList.add("selected");
+            answers[qi] = oi;
+
+            APP.playSound("tap");
+            updateProgress();
+          });
+        });
+
+        /* Submit */
+        const submitBtn = document.getElementById("submitBtn");
+        submitBtn.addEventListener("click", handleSubmit);
+      }
+
+      /* ---------- Update progress bar ---------- */
+      function updateProgress() {
+        const answered = answers.filter((a) => a !== null).length;
+        const pct = (answered / exam.length) * 100;
+        document.getElementById("answeredCount").textContent = answered;
+        document.getElementById("submitProgressFill").style.width = pct + "%";
+
+        const submitBtn = document.getElementById("submitBtn");
+        submitBtn.disabled = answered < exam.length;
+      }
+
+      /* ============================================================
+         SUBMIT & GRADE
+         ============================================================ */
+      function handleSubmit() {
+        const letters = ["A", "B", "C", "D", "E"];
+        let correct = 0;
+
+        exam.forEach((q, qi) => {
+          const card = document.querySelector(`.question-card[data-q="${qi}"]`);
+          const chosen = answers[qi];
+          const chosenOpt = q.options[chosen];
+          const isCorrect = chosenOpt && chosenOpt.correct === true;
+
+          if (isCorrect) correct++;
+          card.classList.add(isCorrect ? "correct" : "incorrect");
+
+          /* Mark all options correct/incorrect */
+          q.options.forEach((opt, oi) => {
+            const optBtn = document.querySelector(`.option[data-q="${qi}"][data-o="${oi}"]`);
+            optBtn.classList.remove("selected");
+            optBtn.disabled = true;
+
+            if (opt.correct) {
+              optBtn.classList.add("correct-answer");
+            }
+            if (oi === chosen && !opt.correct) {
+              optBtn.classList.add("wrong-answer");
+              /* Swap the check icon for an X on wrong user picks */
+              const status = optBtn.querySelector(".option-status");
+              status.innerHTML = '<i class="fa-solid fa-circle-xmark"></i>';
+            }
+          });
+
+          /* Show explanation */
+          const expl = document.getElementById(`explanation-${qi}`);
+          const explText = isHa ? q.explanation_ha : q.explanation_en;
+          if (explText) {
+            expl.innerHTML = `<strong>${isHa ? "Bayani" : "Explanation"}</strong>${explText}`;
+            expl.classList.add("show");
+          }
+        });
+
+        const scorePct = Math.round((correct / exam.length) * 100);
+        const passed = scorePct >= passMark;
+
+        /* Sound */
+        APP.playSound(passed ? "success" : "incorrect");
+
+        /* If passed, save */
+        if (passed) {
+          STORAGE.markExamPassed(mod.id);
+        }
+
+        /* Hide submit bar, show result */
+        submitBarMount.innerHTML = "";
+        renderResult(correct, exam.length, scorePct, passed);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      /* ============================================================
+         RESULT VIEW
+         ============================================================ */
+      function renderResult(correct, total, scorePct, passed) {
+        const resultHtml = `
+          <div class="result-view show">
+            <div class="result-card ${passed ? "pass" : "fail"}">
+              <div class="result-icon">
+                <i class="fa-solid ${passed ? "fa-trophy" : "fa-rotate-right"}"></i>
+              </div>
+              <div class="result-title">
+                ${passed
+                  ? (isHa ? "Ka ci jarrabawar!" : "You passed!")
+                  : (isHa ? "Ba ka ci ba" : "Not quite")}
+              </div>
+              <div class="result-sub">
+                ${passed
+                  ? (isHa
+                      ? "Madalla! Ka kammala wannan module. Za ka iya duba takardar shaidarka."
+                      : "Well done! You completed this module. You can now view your certificate.")
+                  : (isHa
+                      ? "Kada ka damu. Duba bayanan da ke ƙasa sannan ka sake gwadawa."
+                      : "Don't worry. Review the explanations below and try again.")}
+              </div>
+
+              <div class="score-ring" style="--score: ${scorePct}%">
+                <div class="score-inner">
+                  <div class="score-value">${scorePct}%</div>
+                  <div class="score-label">${correct}/${total}</div>
+                </div>
+              </div>
+
+              <div class="result-actions">
+                ${passed ? `
+                  <a href="/certificate.html?module=${mod.id}" class="result-btn result-btn-gold">
+                    <i class="fa-solid fa-award"></i>
+                    ${isHa ? "Duba Takardar Shaida" : "View Certificate"}
+                  </a>
+                  <a href="/module.html?id=${mod.id}" class="result-btn result-btn-secondary">
+                    <i class="fa-solid fa-chevron-left"></i>
+                    ${isHa ? "Koma Module" : "Back to Module"}
+                  </a>
+                ` : `
+                  <button class="result-btn result-btn-primary" id="retryBtn">
+                    <i class="fa-solid fa-rotate-right"></i>
+                    ${isHa ? "Sake Gwadawa" : "Try Again"}
+                  </button>
+                  <a href="/module.html?id=${mod.id}" class="result-btn result-btn-secondary">
+                    <i class="fa-solid fa-chevron-left"></i>
+                    ${isHa ? "Koma Module" : "Back to Module"}
+                  </a>
+                `}
+              </div>
+            </div>
+          </div>
+        `;
+
+        /* Insert above the questions */
+        mount.insertAdjacentHTML("afterbegin", resultHtml);
+
+        /* Retry handler */
+        const retryBtn = document.getElementById("retryBtn");
+        if (retryBtn) {
+          retryBtn.addEventListener("click", () => {
+            window.location.reload();
+          });
+        }
+      }
+
+      /* ============================================================
+         NOT FOUND / LOCKED / PASSED
+         ============================================================ */
+      function renderNotFound() {
+        page.classList.add("visible");
+        mount.innerHTML = `
+          <div class="not-found">
+            <div class="icon"><i class="fa-solid fa-circle-question"></i></div>
+            <h2>${isHa ? "Ba a samu ba" : "Not found"}</h2>
+            <p>${isHa ? "Wannan jarrabawar ba ta nan." : "This exam doesn't exist."}</p>
+            <a href="/home.html" class="result-btn result-btn-primary" style="display:inline-flex;max-width:240px;margin:0 auto;">
+              <i class="fa-solid fa-house"></i>
+              ${isHa ? "Koma Gida" : "Back home"}
+            </a>
+          </div>
+        `;
+      }
+
+      function renderLocked() {
+        page.classList.add("visible");
+        mount.innerHTML = `
+          <div class="not-found">
+            <div class="icon"><i class="fa-solid fa-lock"></i></div>
+            <h2>${isHa ? "A kulle" : "Locked"}</h2>
+            <p>${isHa
+              ? "Kammala duk darussan module ɗin kafin ka yi jarrabawa."
+              : "Complete all lessons in this module before taking the exam."}</p>
+            <a href="/module.html?id=${mod.id}" class="result-btn result-btn-primary" style="display:inline-flex;max-width:240px;margin:0 auto;">
+              <i class="fa-solid fa-chevron-left"></i>
+              ${isHa ? "Koma Module" : "Back to Module"}
+            </a>
+          </div>
+        `;
+      }
+
+      function renderAlreadyPassed() {
+        page.classList.add("visible");
+        mount.innerHTML = `
+          <div class="not-found">
+            <div class="icon" style="background:linear-gradient(135deg,#e8f5ed 0%,#d8ede2 100%);color:var(--primary);">
+              <i class="fa-solid fa-trophy"></i>
+            </div>
+            <h2>${isHa ? "Ka riga ka ci!" : "Already passed!"}</h2>
+            <p>${isHa
+              ? "Ka riga ka kammala wannan module."
+              : "You've already completed this module."}</p>
+            <div style="display:flex;flex-direction:column;gap:10px;max-width:280px;margin:0 auto;">
+              <a href="/certificate.html?module=${mod.id}" class="result-btn result-btn-gold">
+                <i class="fa-solid fa-award"></i>
+                ${isHa ? "Duba Takardar Shaida" : "View Certificate"}
+              </a>
+              <a href="/module.html?id=${mod.id}" class="result-btn result-btn-secondary">
+                <i class="fa-solid fa-chevron-left"></i>
+                ${isHa ? "Koma Module" : "Back to Module"}
+              </a>
+            </div>
+          </div>
+        `;
+      }
+
+      /* ============================================================
+         BOOT
+         ============================================================ */
+      render();
+    })();
+  </script>
+
+</body>
+</html>

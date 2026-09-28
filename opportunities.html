@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="ha">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#176b4d" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
+  <title>Dama da Tallafi — Fasahar Al'umma</title>
+  <meta name="description" content="Dama, tallafi, da shirye-shiryen koyarwa ga al'umma. Koyi yadda ake gane dama ta gaskiya." />
+
+  <link rel="manifest" href="/manifest.json" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <link rel="stylesheet" href="/css/style.css" />
+
+  <style>
+    /* ============================================================
+       OPPORTUNITIES PAGE
+       ============================================================ */
+    .opps-page {
+      padding: 24px 0 100px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .opps-page.visible { opacity: 1; }
+
+    /* ---- Header ---- */
+    .opps-head {
+      margin-bottom: 20px;
+    }
+
+    .opps-head .label {
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 8px;
+    }
+
+    .opps-head h1 {
+      font-size: clamp(24px, 6vw, 32px);
+      font-weight: 800;
+      letter-spacing: -1.2px;
+      line-height: 1.15;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+
+    .opps-head p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ============================================================
+       TOGGLE (two tabs at top)
+       ============================================================ */
+    .opps-toggle {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      padding: 6px;
+      background: var(--soft);
+      border-radius: 16px;
+      margin-bottom: 24px;
+      position: sticky;
+      top: 12px;
+      z-index: 50;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+    }
+
+    .opps-tab {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 10px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--muted);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .opps-tab i {
+      font-size: 14px;
+    }
+
+    .opps-tab.active {
+      background: var(--white);
+      color: var(--primary);
+      box-shadow: 0 4px 14px rgba(20, 50, 38, 0.08);
+    }
+
+    .opps-tab.active i {
+      color: var(--primary);
+    }
+
+    /* ============================================================
+       VIEWS (each tab shows one)
+       ============================================================ */
+    .opps-view {
+      display: none;
+      animation: viewIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .opps-view.active { display: block; }
+
+    @keyframes viewIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================================================
+       VIEW 1: HOW TO FIND OPPORTUNITIES (guide)
+       ============================================================ */
+    .guide-card {
+      background: linear-gradient(135deg, #176b4d 0%, #0f4d38 100%);
+      border-radius: var(--radius);
+      padding: 24px;
+      color: #fff;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .guide-card::before {
+      content: "";
+      position: absolute;
+      top: -40%; right: -20%;
+      width: 240px; height: 240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(231,168,59,0.20), transparent 70%);
+      pointer-events: none;
+    }
+
+    .guide-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.14);
+      color: var(--accent);
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+      margin-bottom: 16px;
+      backdrop-filter: blur(8px);
+      position: relative;
+    }
+
+    .guide-card h2 {
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 10px;
+      position: relative;
+      color: #fff;
+    }
+
+    .guide-card p {
+      font-size: 13.5px;
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.65;
+      margin-bottom: 14px;
+      position: relative;
+    }
+
+    .guide-card p:last-child { margin-bottom: 0; }
+
+    .guide-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+    }
+
+    .guide-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.92);
+      line-height: 1.55;
+    }
+
+    .guide-list li i {
+      color: var(--accent);
+      font-size: 14px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* Danger callout */
+    .danger-callout {
+      background: linear-gradient(135deg, #fdf3dd 0%, #fff6e3 100%);
+      border: 1.5px solid #f0e0b8;
+      border-radius: 16px;
+      padding: 18px;
+      margin-bottom: 20px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .danger-callout i {
+      color: var(--accent-dark);
+      font-size: 20px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .danger-callout h3 {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+
+    .danger-callout p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    /* Guide video */
+    .guide-video {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 30px rgba(20, 50, 38, 0.06);
+    }
+
+    .guide-video-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #17231e;
+    }
+
+    .guide-video-frame iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .guide-video-caption {
+      padding: 14px 18px;
+      font-size: 12.5px;
+      color: var(--muted);
+      background: var(--soft);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .guide-video-caption i {
+      color: var(--primary);
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    /* ============================================================
+       VIEW 2: OPPORTUNITIES LIST
+       ============================================================ */
+    .opps-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .opp-card {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .opp-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-3px);
+      box-shadow: 0 14px 36px rgba(23, 107, 77, 0.12);
+    }
+
+    .opp-card:active { transform: scale(0.99); }
+
+    .opp-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .opp-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      background: #fdf3dd;
+      color: var(--accent-dark);
+    }
+
+    .opp-verified {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .opp-verified i { font-size: 12px; }
+
+    .opp-title {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      line-height: 1.3;
+      color: var(--dark);
+      margin-bottom: 4px;
+    }
+
+    .opp-org {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .opp-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    .opp-deadline {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .opp-deadline i {
+      color: var(--primary);
+      font-size: 12px;
+    }
+
+    .opp-deadline.rolling {
+      color: var(--primary);
+    }
+
+    .opp-visit {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12.5px;
+      font-weight: 800;
+      color: var(--primary);
+      transition: gap 0.2s;
+    }
+
+    .opp-card:hover .opp-visit {
+      gap: 10px;
+    }
+
+    /* ---- Empty state ---- */
+    .opps-empty {
+      text-align: center;
+      padding: 60px 20px;
+      background: var(--soft);
+      border-radius: var(--radius);
+    }
+
+    .opps-empty .icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--white);
+      color: var(--muted);
+      display: grid;
+      place-items: center;
+      font-size: 28px;
+      margin: 0 auto 18px;
+    }
+
+    .opps-empty h3 {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 6px;
+      color: var(--dark);
+    }
+
+    .opps-empty p {
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 320px;
+      margin: 0 auto;
+    }
+
+    /* ---- Desktop ---- */
+    @media (min-width: 901px) {
+      body { padding-bottom: 0; }
+      .opps-page {
+        max-width: 800px;
+        padding-top: 60px;
+        padding-bottom: 60px;
+      }
+      .opps-toggle {
+        top: 20px;
+      }
+      .opps-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .guide-video {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="container opps-page" id="oppsPage">
+    <div id="contentMount"></div>
+  </main>
+
+  <div id="tabbar"></div>
+
+  <script src="/data.js"></script>
+  <script src="/storage.js"></script>
+  <script src="/app.js"></script>
+
+  <script>
+    /* ============================================================
+       OPPORTUNITIES PAGE
+       ============================================================ */
+    (function initOpps() {
+      const lang = STORAGE.getLanguage();
+      const isHa = lang === "ha";
+
+      const page = document.getElementById("oppsPage");
+      const mount = document.getElementById("contentMount");
+      const opps = DATA.opportunities;
+      const items = opps.items || [];
+
+      document.title = (isHa ? "Dama da Tallafi" : "Opportunities") + " — Fasahar Al'umma";
+
+      /* ---------- Markdown renderer ---------- */
+      function renderGuideText(md) {
+        if (!md) return "";
+        const escaped = md
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;");
+
+        const blocks = escaped.split(/\n\s*\n/);
+
+        return blocks.map((block) => {
+          const lines = block.split("\n").map((l) => l.trim()).filter(Boolean);
+
+          if (lines.every((l) => l.startsWith("- "))) {
+            const listItems = lines
+              .map((l) => `<li><i class="fa-solid fa-circle-check"></i><span>${inlineFormat(l.slice(2))}</span></li>`)
+              .join("");
+            return `<ul class="guide-list">${listItems}</ul>`;
+          }
+
+          const listStart = lines.findIndex((l) => l.startsWith("- "));
+          if (listStart > 0) {
+            const para = lines.slice(0, listStart).map(inlineFormat).join(" ");
+            const listItems = lines
+              .slice(listStart)
+              .filter((l) => l.startsWith("- "))
+              .map((l) => `<li><i class="fa-solid fa-circle-check"></i><span>${inlineFormat(l.slice(2))}</span></li>`)
+              .join("");
+            return `<p>${para}</p><ul class="guide-list">${listItems}</ul>`;
+          }
+
+          return `<p>${inlineFormat(lines.join(" "))}</p>`;
+        }).join("");
+      }
+
+      function inlineFormat(text) {
+        return text.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+      }
+
+      /* ---------- Deadline formatting ---------- */
+      function formatDeadline(iso) {
+        if (!iso) {
+          return {
+            text: isHa ? "Kullum buɗe" : "Always open",
+            cls: "opp-deadline rolling",
+            icon: "fa-solid fa-infinity"
+          };
+        }
+        const d = new Date(iso);
+        if (isNaN(d.getTime())) {
+          return {
+            text: isHa ? "Kullum buɗe" : "Always open",
+            cls: "opp-deadline rolling",
+            icon: "fa-solid fa-infinity"
+          };
+        }
+        const monthsHa = ["Jan", "Fab", "Mar", "Afir", "May", "Yun", "Yul", "Agu", "Sat", "Okt", "Nuw", "Dis"];
+        const monthsEn = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        const month = isHa ? monthsHa[d.getMonth()] : monthsEn[d.getMonth()];
+        return {
+          text: `${d.getDate()} ${month} ${d.getFullYear()}`,
+          cls: "opp-deadline",
+          icon: "fa-solid fa-calendar-day"
+        };
+      }
+
+      /* ---------- Header ---------- */
+      const headHtml = `
+        <div class="opps-head">
+          <div class="label">${isHa ? "Dama da Tallafi" : "Opportunities & Grants"}</div>
+          <h1>${isHa ? "Abubuwan da za ka iya nema" : "Things you can apply for"}</h1>
+          <p>${isHa
+            ? "Zaɓi tsakanin kallon damar da ke akwai, ko koyon yadda za ka gane dama ta gaskiya."
+            : "Choose between browsing current opportunities or learning how to verify them."}</p>
+        </div>
+      `;
+
+      /* ---------- Toggle ---------- */
+      const toggleHtml = `
+        <div class="opps-toggle" role="tablist" aria-label="Opportunities view">
+          <button class="opps-tab active" data-tab="list" role="tab" aria-selected="true">
+            <i class="fa-solid fa-list-check"></i>
+            ${isHa ? "Dama" : "Opportunities"}
+          </button>
+          <button class="opps-tab" data-tab="guide" role="tab" aria-selected="false">
+            <i class="fa-solid fa-shield-halved"></i>
+            ${isHa ? "Yadda ake samu" : "How to find"}
+          </button>
+        </div>
+      `;
+
+      /* ============================================================
+         VIEW 1: LIST
+         ============================================================ */
+      const listHtml = items.length === 0 ? `
+        <div class="opps-empty">
+          <div class="icon"><i class="fa-solid fa-inbox"></i></div>
+          <h3>${isHa ? "Babu dama a yanzu" : "No opportunities yet"}</h3>
+          <p>${isHa
+            ? "Duba kai a kwanaki masu zuwa don sabbin dama."
+            : "Check back in the coming days for new opportunities."}</p>
+        </div>
+      ` : `
+        <div class="opps-list">
+          ${items.map((item) => {
+            const title = isHa ? item.title_ha : item.title_en;
+            const org = isHa ? item.org_ha : item.org_en;
+            const tag = isHa ? item.tag_ha : item.tag_en;
+            const dl = formatDeadline(item.deadline);
+            const verified = item.verified;
+
+            return `
+              <a class="opp-card" href="${item.link}" target="_blank" rel="noopener noreferrer" data-id="${item.id}">
+                <div class="opp-top">
+                  <span class="opp-tag">${tag}</span>
+                  ${verified ? `
+                    <span class="opp-verified">
+                      <i class="fa-solid fa-circle-check"></i>
+                      ${isHa ? "An tabbatar" : "Verified"}
+                    </span>
+                  ` : ""}
+                </div>
+                <div class="opp-title">${title}</div>
+                <div class="opp-org">${org}</div>
+                <div class="opp-meta">
+                  <div class="${dl.cls}">
+                    <i class="${dl.icon}"></i>
+                    <span>${dl.text}</span>
+                  </div>
+                  <span class="opp-visit">
+                    ${isHa ? "Ziyarta" : "Visit"}
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  </span>
+                </div>
+              </a>
+            `;
+          }).join("")}
+        </div>
+      `;
+
+      /* ============================================================
+         VIEW 2: GUIDE
+         ============================================================ */
+      const guideMd = isHa ? opps.intro_ha : opps.intro_en;
+
+      const guideHtml = `
+        <div class="guide-card">
+          <div class="guide-icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <h2>${isHa ? "Yadda za ka gane dama ta gaskiya" : "How to spot a real opportunity"}</h2>
+          ${renderGuideText(guideMd)}
+        </div>
+
+        <div class="danger-callout">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <div>
+            <h3>${isHa ? "Ka lura da waɗannan" : "Watch out for these"}</h3>
+            <p>${isHa
+              ? "Idan dama ta nemi OTP, PIN, ko kuɗi kafin ka fara nema — zamba ce. Kada ka aika komai."
+              : "If an opportunity asks for your OTP, PIN, or money before you apply — it's a scam. Do not send anything."}</p>
+          </div>
+        </div>
+
+        ${opps.guide_video ? `
+          <div class="guide-video">
+            <div class="guide-video-frame">
+              <iframe
+                src="${opps.guide_video}"
+                title="${isHa ? "Bidiyon jagora" : "Guide video"}"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div class="guide-video-caption">
+              <i class="fa-solid fa-circle-play"></i>
+              <span>${isHa ? "Kalli bidiyon kafin ka fara nema." : "Watch the video before you start applying."}</span>
+            </div>
+          </div>
+        ` : ""}
+      `;
+
+      /* ============================================================
+         MOUNT + BEHAVIOR
+         ============================================================ */
+      mount.innerHTML = headHtml + toggleHtml + `
+        <div class="opps-view active" data-view="list">${listHtml}</div>
+        <div class="opps-view" data-view="guide">${guideHtml}</div>
+      `;
+
+      requestAnimationFrame(() => page.classList.add("visible"));
+
+      /* ---------- Tab toggle ---------- */
+      document.querySelectorAll(".opps-tab").forEach((tab) => {
+        tab.addEventListener("click", () => {
+          const target = tab.dataset.tab;
+          if (tab.classList.contains("active")) return;
+
+          /* Update tabs */
+          document.querySelectorAll(".opps-tab").forEach((t) => {
+            const active = t.dataset.tab === target;
+            t.classList.toggle("active", active);
+            t.setAttribute("aria-selected", active ? "true" : "false");
+          });
+
+          /* Update views */
+          document.querySelectorAll(".opps-view").forEach((v) => {
+            v.classList.toggle("active", v.dataset.view === target);
+          });
+
+          APP.playSound("tap");
+
+          /* Scroll to top of the toggle so user sees the switch */
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      });
+
+      /* ---------- Sound + tracking on opportunity cards ---------- */
+      document.querySelectorAll(".opp-card").forEach((card) => {
+        card.addEventListener("click", () => {
+          APP.playSound("tap");
+          const id = card.dataset.id;
+          if (id && STORAGE.markOpportunityViewed) {
+            STORAGE.markOpportunityViewed(id);
+          }
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>

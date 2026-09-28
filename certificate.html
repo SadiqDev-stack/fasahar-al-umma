@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="ha">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#176b4d" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
+  <title>Takardar Shaida — Fasahar Al'umma</title>
+  <meta name="description" content="Takardar shaidar kammala module daga Fasahar Al'umma." />
+
+  <link rel="manifest" href="/manifest.json" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <link rel="stylesheet" href="/css/style.css" />
+
+  <style>
+    .cert-page {
+      padding: 20px 0 100px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .cert-page.visible { opacity: 1; }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+    .back-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      color: var(--dark);
+      display: grid;
+      place-items: center;
+      font-size: 15px;
+      flex-shrink: 0;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+    .back-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    .top-bar-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .cert-intro {
+      text-align: center;
+      margin-bottom: 26px;
+    }
+    .cert-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: #e8f3ed;
+      color: var(--primary);
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 14px;
+    }
+    .cert-intro h1 {
+      font-size: clamp(24px, 6vw, 32px);
+      font-weight: 800;
+      letter-spacing: -1.1px;
+      line-height: 1.15;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+    .cert-intro p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .cert-preview-wrap {
+      background: var(--soft);
+      border-radius: var(--radius);
+      padding: 14px;
+      margin-bottom: 22px;
+      overflow: hidden;
+    }
+    #certPreviewCanvas {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 12px 36px rgba(20, 50, 38, 0.12);
+      background: var(--white);
+    }
+    #certExportCanvas {
+      position: fixed;
+      left: -99999px;
+      top: -99999px;
+      pointer-events: none;
+    }
+
+    .cert-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .cert-btn {
+      width: 100%;
+      min-height: 54px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border-radius: 14px;
+      font-weight: 800;
+      font-size: 15px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .cert-btn:active { transform: scale(0.98); }
+    .cert-btn-primary {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(23, 107, 77, 0.28);
+    }
+    .cert-btn-primary:hover { background: var(--primary-dark); }
+    .cert-btn-gold {
+      background: var(--accent);
+      color: var(--dark);
+      box-shadow: 0 8px 24px rgba(231, 168, 59, 0.35);
+    }
+    .cert-btn-gold:hover { background: #d99825; }
+    .cert-btn-secondary {
+      background: var(--white);
+      color: var(--dark);
+      border: 1.5px solid var(--border);
+    }
+    .cert-btn-secondary:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    .cert-btn:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
+
+    .cert-note {
+      display: flex;
+      gap: 12px;
+      padding: 16px 18px;
+      background: #fdf3dd;
+      border: 1px solid #f0e0b8;
+      border-radius: 14px;
+      font-size: 12.5px;
+      color: var(--dark);
+      line-height: 1.55;
+      margin-bottom: 20px;
+    }
+    .cert-note i {
+      color: var(--accent-dark);
+      font-size: 15px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .not-found {
+      text-align: center;
+      padding: 80px 20px;
+    }
+    .not-found .icon {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: var(--soft);
+      color: var(--muted);
+      display: grid;
+      place-items: center;
+      font-size: 32px;
+      margin: 0 auto 20px;
+    }
+    .not-found h2 {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: var(--dark);
+    }
+    .not-found p {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    @media (min-width: 901px) {
+      body { padding-bottom: 0; }
+      .cert-page {
+        max-width: 860px;
+        padding-top: 40px;
+        padding-bottom: 60px;
+      }
+      .cert-actions { flex-direction: row; }
+      .cert-actions .cert-btn { flex: 1; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="container cert-page" id="certPage">
+    <div id="contentMount"></div>
+  </main>
+
+  <canvas id="certExportCanvas" width="2480" height="1754" aria-hidden="true"></canvas>
+
+  <div id="tabbar"></div>
+
+  <script src="/data.js"></script>
+  <script src="/storage.js"></script>
+  <script src="/app.js"></script>
+
+  <script>
+    (function initCertificate() {
+      const params = new URLSearchParams(window.location.search);
+      const moduleId = params.get("module");
+
+      const lang = STORAGE.getLanguage();
+      const isHa = lang === "ha";
+
+      const page = document.getElementById("certPage");
+      const mount = document.getElementById("contentMount");
+      const exportCanvas = document.getElementById("certExportCanvas");
+
+      const mod = DATA.modules.find((m) => m.id === moduleId);
+      if (!mod) return renderNotFound();
+      if (!STORAGE.isExamPassed(mod.id)) return renderLocked();
+
+      const moduleTitle = isHa ? mod.title_ha : mod.title_en;
+      const moduleSub = isHa ? mod.title_en : mod.title_ha;
+
+      const learnerName = (function () {
+        try {
+          const stored = localStorage.getItem("fasahar.learnerName");
+          if (stored && stored.trim()) return stored.trim();
+        } catch (e) {}
+        return isHa ? "Ɗalibin Fasahar Al'umma" : "Fasahar Al'umma Learner";
+      })();
+
+      const now = new Date();
+      const monthsHa = ["Janairu", "Faburairu", "Maris", "Afrilu", "Mayu", "Yuni", "Yuli", "Agusta", "Satumba", "Oktoba", "Nuwamba", "Disamba"];
+      const monthsEn = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      const monthName = isHa ? monthsHa[now.getMonth()] : monthsEn[now.getMonth()];
+      const dateStr = `${now.getDate()} ${monthName}, ${now.getFullYear()}`;
+
+      const serial = "FA-" +
+        mod.id.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 6) + "-" +
+        now.getFullYear() +
+        String(now.getMonth() + 1).padStart(2, "0") +
+        String(now.getDate()).padStart(2, "0");
+
+      document.title = (isHa ? "Takardar Shaida" : "Certificate") + " · " + moduleTitle + " — Fasahar Al'umma";
+
+      /* ---------- Page markup ---------- */
+      const headHtml = `
+        <div class="top-bar">
+          <a href="/module.html?id=${mod.id}" class="back-btn" aria-label="${isHa ? "Koma" : "Back"}">
+            <i class="fa-solid fa-chevron-left"></i>
+          </a>
+          <div class="top-bar-title">${isHa ? "Takardar Shaida" : "Certificate"}</div>
+        </div>
+
+        <div class="cert-intro">
+          <div class="cert-badge">
+            <i class="fa-solid fa-award"></i>
+            ${isHa ? "An Kammala" : "Completed"}
+          </div>
+          <h1>${isHa ? "Madalla, ka yi nasara!" : "Congratulations!"}</h1>
+          <p>${isHa
+            ? "Ka kammala wannan module cikin nasara. Zaka iya sauke takardar shaidar ka a matsayin hoto."
+            : "You successfully completed this module. You can download your certificate as an image."}</p>
+        </div>
+      `;
+
+      const previewHtml = `
+        <div class="cert-preview-wrap">
+          <canvas id="certPreviewCanvas" width="1200" height="848"></canvas>
+        </div>
+      `;
+
+      const noteHtml = `
+        <div class="cert-note">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>${isHa
+            ? "Idan ka sauke hoton, za ka iya raba shi a WhatsApp ko ajiye shi a wayarka."
+            : "Once downloaded, you can share the image on WhatsApp or save it on your phone."}</span>
+        </div>
+      `;
+
+      const actionsHtml = `
+        <div class="cert-actions">
+          <button class="cert-btn cert-btn-primary" id="downloadBtn">
+            <i class="fa-solid fa-download"></i>
+            ${isHa ? "Sauke Hoton" : "Download Image"}
+          </button>
+          <button class="cert-btn cert-btn-gold" id="shareBtn" style="display:none">
+            <i class="fa-solid fa-share-nodes"></i>
+            ${isHa ? "Raba" : "Share"}
+          </button>
+          <a href="/home.html" class="cert-btn cert-btn-secondary">
+            <i class="fa-solid fa-house"></i>
+            ${isHa ? "Koma Gida" : "Back Home"}
+          </a>
+        </div>
+      `;
+
+      mount.innerHTML = headHtml + previewHtml + noteHtml + actionsHtml;
+      requestAnimationFrame(() => page.classList.add("visible"));
+
+      /* ============================================================
+         CANVAS DRAWING
+         ============================================================ */
+      const COLORS = {
+        primary: "#176b4d",
+        primaryDark: "#0f4d38",
+        accent: "#e7a83b",
+        dark: "#17231e",
+        muted: "#68756f",
+        border: "#e6ebe7",
+        white: "#ffffff",
+        red: "#c0392b",
+        redDark: "#8b2020"
+      };
+
+      const logoImg = new Image();
+      logoImg.crossOrigin = "anonymous";
+      logoImg.src = "/images/logo.png";
+
+      logoImg.onload = () => {
+        const previewCanvas = document.getElementById("certPreviewCanvas");
+        drawCertificate(previewCanvas);
+        drawCertificate(exportCanvas);
+        bindActions();
+      };
+
+      logoImg.onerror = () => {
+        /* Draw anyway with a fallback text mark if logo fails to load */
+        const previewCanvas = document.getElementById("certPreviewCanvas");
+        drawCertificate(previewCanvas);
+        drawCertificate(exportCanvas);
+        bindActions();
+      };
+
+      function drawCertificate(canvas) {
+        const baseW = 1200;
+        const baseH = 848;
+        const scale = canvas.width / baseW;
+        canvas.height = Math.round(baseH * scale);
+
+        const ctx = canvas.getContext("2d");
+        const W = canvas.width;
+        const H = canvas.height;
+
+        /* ---------- helpers ---------- */
+        function roundRect(x, y, w, h, r) {
+          ctx.beginPath();
+          ctx.moveTo(x + r, y);
+          ctx.arcTo(x + w, y, x + w, y + h, r);
+          ctx.arcTo(x + w, y + h, x, y + h, r);
+          ctx.arcTo(x, y + h, x, y, r);
+          ctx.arcTo(x, y, x + w, y, r);
+          ctx.closePath();
+        }
+
+        function wrapCentered(text, x, y, maxWidth, lineHeight) {
+          const words = text.split(" ");
+          let line = "";
+          let lineY = y;
+          for (let i = 0; i < words.length; i++) {
+            const testLine = line + words[i] + " ";
+            if (ctx.measureText(testLine).width > maxWidth && i > 0) {
+              ctx.fillText(line.trim(), x, lineY);
+              line = words[i] + " ";
+              lineY += lineHeight;
+            } else {
+              line = testLine;
+            }
+          }
+          ctx.fillText(line.trim(), x, lineY);
+          return lineY;
+        }
+
+        /* ---------- Rosette / red badge with many edges ---------- */
+        function drawRosette(cx, cy, outerR, innerR, spikes, fill, stroke) {
+          ctx.beginPath();
+          for (let i = 0; i < spikes * 2; i++) {
+            const r = i % 2 === 0 ? outerR : innerR;
+            const angle = (Math.PI / spikes) * i - Math.PI / 2;
+            const x = cx + Math.cos(angle) * r;
+            const y = cy + Math.sin(angle) * r;
+            if (i === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+          }
+          ctx.closePath();
+          ctx.fillStyle = fill;
+          ctx.fill();
+          if (stroke) {
+            ctx.strokeStyle = stroke;
+            ctx.lineWidth = 1.5 * scale;
+            ctx.stroke();
+          }
+        }
+
+        /* ---------- Background ---------- */
+        ctx.fillStyle = COLORS.white;
+        ctx.fillRect(0, 0, W, H);
+
+        const wash = ctx.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, Math.max(W, H) * 0.7);
+        wash.addColorStop(0, "rgba(23,107,77,0)");
+        wash.addColorStop(1, "rgba(23,107,77,0.05)");
+        ctx.fillStyle = wash;
+        ctx.fillRect(0, 0, W, H);
+
+        /* ---------- Outer border ---------- */
+        const pad = 36 * scale;
+        ctx.strokeStyle = COLORS.primary;
+        ctx.lineWidth = 3 * scale;
+        ctx.strokeRect(pad, pad, W - pad * 2, H - pad * 2);
+
+        const pad2 = pad + 8 * scale;
+        ctx.strokeStyle = COLORS.accent;
+        ctx.lineWidth = 1.5 * scale;
+        ctx.strokeRect(pad2, pad2, W - pad2 * 2, H - pad2 * 2);
+
+        /* ---------- Corner accents ---------- */
+        const cornerLen = 34 * scale;
+        const cornerInset = pad + 4 * scale;
+        ctx.strokeStyle = COLORS.accent;
+        ctx.lineWidth = 4 * scale;
+        ctx.lineCap = "square";
+
+        ctx.beginPath();
+        ctx.moveTo(cornerInset, cornerInset + cornerLen);
+        ctx.lineTo(cornerInset, cornerInset);
+        ctx.lineTo(cornerInset + cornerLen, cornerInset);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(W - cornerInset - cornerLen, cornerInset);
+        ctx.lineTo(W - cornerInset, cornerInset);
+        ctx.lineTo(W - cornerInset, cornerInset + cornerLen);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(cornerInset, H - cornerInset - cornerLen);
+        ctx.lineTo(cornerInset, H - cornerInset);
+        ctx.lineTo(cornerInset + cornerLen, H - cornerInset);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(W - cornerInset - cornerLen, H - cornerInset);
+        ctx.lineTo(W - cornerInset, H - cornerInset);
+        ctx.lineTo(W - cornerInset, H - cornerInset - cornerLen);
+        ctx.stroke();
+
+        /* ---------- HEADER: logo + app name ---------- */
+        const centerX = W / 2;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "top";
+
+        const logoSize = 58 * scale;
+        const logoX = centerX - logoSize / 2;
+        const logoY = pad + 34 * scale;
+
+        /* White rounded card behind the logo for a clean look */
+        roundRect(logoX - 6 * scale, logoY - 6 * scale, logoSize + 12 * scale, logoSize + 12 * scale, 14 * scale);
+        ctx.fillStyle = COLORS.white;
+        ctx.fill();
+        ctx.strokeStyle = COLORS.border;
+        ctx.lineWidth = 1 * scale;
+        ctx.stroke();
+
+        /* Draw the actual logo image */
+        if (logoImg.complete && logoImg.naturalWidth > 0) {
+          ctx.drawImage(logoImg, logoX, logoY, logoSize, logoSize);
+        } else {
+          /* Fallback — green box with "F" if image failed */
+          roundRect(logoX, logoY, logoSize, logoSize, 12 * scale);
+          ctx.fillStyle = COLORS.primary;
+          ctx.fill();
+          ctx.fillStyle = COLORS.white;
+          ctx.font = `900 ${28 * scale}px Inter, Arial, sans-serif`;
+          ctx.textBaseline = "middle";
+          ctx.fillText("F", centerX, logoY + logoSize / 2 + 2 * scale);
+          ctx.textBaseline = "top";
+        }
+
+        ctx.fillStyle = COLORS.dark;
+        ctx.font = `800 ${22 * scale}px Inter, Arial, sans-serif`;
+        ctx.fillText("Fasahar Al'umma", centerX, logoY + logoSize + 20 * scale);
+
+        ctx.fillStyle = COLORS.muted;
+        ctx.font = `500 ${10.5 * scale}px Inter, Arial, sans-serif`;
+        const tagline = isHa
+          ? "Fasahar zamani ga al'umma baki ɗaya"
+          : "Digital skills for the whole community";
+        ctx.fillText(tagline, centerX, logoY + logoSize + 50 * scale);
+
+        /* ---------- Divider ---------- */
+        const dividerY = logoY + logoSize + 84 * scale;
+        ctx.strokeStyle = COLORS.accent;
+        ctx.lineWidth = 2 * scale;
+        ctx.beginPath();
+        ctx.moveTo(centerX - 26 * scale, dividerY);
+        ctx.lineTo(centerX + 26 * scale, dividerY);
+        ctx.stroke();
+
+        /* ---------- PRESENTED TO ---------- */
+        const presentedY = dividerY + 28 * scale;
+        ctx.fillStyle = COLORS.muted;
+        ctx.font = `800 ${10 * scale}px Inter, Arial, sans-serif`;
+        ctx.fillText(isHa ? "AN BAYAR WA" : "PRESENTED TO", centerX, presentedY);
+
+        /* Learner name */
+        const nameY = presentedY + 22 * scale;
+        let nameFontSize = 42 * scale;
+        ctx.font = `800 ${nameFontSize}px Inter, Arial, sans-serif`;
+        while (ctx.measureText(learnerName).width > W - 240 * scale && nameFontSize > 20 * scale) {
+          nameFontSize -= 2 * scale;
+          ctx.font = `800 ${nameFontSize}px Inter, Arial, sans-serif`;
+        }
+        ctx.fillStyle = COLORS.primaryDark;
+        ctx.fillText(learnerName, centerX, nameY);
+
+        const nameWidth = ctx.measureText(learnerName).width;
+        const underlineY = nameY + nameFontSize + 8 * scale;
+        ctx.strokeStyle = COLORS.accent;
+        ctx.lineWidth = 2 * scale;
+        ctx.beginPath();
+        ctx.moveTo(centerX - nameWidth / 2, underlineY);
+        ctx.lineTo(centerX + nameWidth / 2, underlineY);
+        ctx.stroke();
+
+        /* ---------- FOR COMPLETING ---------- */
+        const forY = underlineY + 22 * scale;
+        ctx.fillStyle = COLORS.muted;
+        ctx.font = `500 ${11 * scale}px Inter, Arial, sans-serif`;
+        ctx.fillText(isHa ? "saboda kammala" : "for completing", centerX, forY);
+
+        /* ---------- Module title ---------- */
+        const titleY = forY + 26 * scale;
+        let titleFontSize = 30 * scale;
+        ctx.font = `800 ${titleFontSize}px Inter, Arial, sans-serif`;
+        while (ctx.measureText(moduleTitle).width > W - 240 * scale && titleFontSize > 16 * scale) {
+          titleFontSize -= 2 * scale;
+          ctx.font = `800 ${titleFontSize}px Inter, Arial, sans-serif`;
+        }
+        ctx.fillStyle = COLORS.dark;
+        ctx.fillText(moduleTitle, centerX, titleY);
+
+        const subtitleY = titleY + titleFontSize + 12 * scale;
+        ctx.fillStyle = COLORS.primary;
+        ctx.font = `700 ${12 * scale}px Inter, Arial, sans-serif`;
+        ctx.fillText(moduleSub, centerX, subtitleY);
+
+        /* ---------- RICH BOTTOM CONTENT ---------- */
+        /* Long descriptive paragraph that fills the space */
+        const msgY = subtitleY + 34 * scale;
+        ctx.fillStyle = COLORS.muted;
+        ctx.font = `400 ${10.5 * scale}px Inter, Arial, sans-serif`;
+        const message = isHa
+          ? "Da wannan takarda, Fasahar Al'umma na tabbatar da cewa wanda aka ba shi ya kammala duk darussa da jarrabawar wannan module. " +
+            "Ya nuna ƙwarewa a fannin fasahar zamani, kuma yana da damar yin amfani da ilimin da ya samu wajen bunƙasa kansa, iyalinsa, da al'umma baki ɗaya."
+          : "This certificate confirms that the named individual has successfully completed all lessons and the final exam of this module. " +
+            "It recognises demonstrated competence in modern digital skills, and confirms readiness to apply this knowledge for personal growth, " +
+            "for family, and for the wider community.";
+        const lastLineY = wrapCentered(message, centerX, msgY, W - 260 * scale, 15 * scale);
+
+        /* ---------- ROSETTE BADGE + SIGNATURE ROW ---------- */
+        const bottomSectionY = Math.max(lastLineY + 40 * scale, H - pad - 190 * scale);
+
+        /* --- Rosette badge on the left --- */
+        const rosetteCX = pad + 140 * scale;
+        const rosetteCY = bottomSectionY + 10 * scale;
+        const outerR = 56 * scale;
+        const innerR = 46 * scale;
+
+        /* Outer starburst (many edges) in red */
+        drawRosette(rosetteCX, rosetteCY, outerR, innerR, 24, COLORS.red, COLORS.redDark);
+
+        /* Inner white circle */
+        ctx.beginPath();
+        ctx.arc(rosetteCX, rosetteCY, 36 * scale, 0, Math.PI * 2);
+        ctx.fillStyle = COLORS.white;
+        ctx.fill();
+        ctx.strokeStyle = COLORS.redDark;
+        ctx.lineWidth = 1.5 * scale;
+        ctx.stroke();
+
+        /* Ribbon tails at bottom of rosette */
+        ctx.fillStyle = COLORS.redDark;
+        ctx.beginPath();
+        ctx.moveTo(rosetteCX - 18 * scale, rosetteCY + outerR * 0.75);
+        ctx.lineTo(rosetteCX - 26 * scale, rosetteCY + outerR + 34 * scale);
+        ctx.lineTo(rosetteCX - 6 * scale, rosetteCY + outerR + 20 * scale);
+        ctx.lineTo(rosetteCX + 6 * scale, rosetteCY + outerR + 34 * scale);
+        ctx.lineTo(rosetteCX + 18 * scale, rosetteCY + outerR * 0.75);
+        ctx.closePath();
+        ctx.fill();
+
+        /* Text inside rosette */
+        ctx.fillStyle = COLORS.redDark;
+        ctx.font = `900 ${9 * scale}px Inter, Arial, sans-serif`;
+        ctx.textBaseline = "middle";
+        ctx.fillText(isHa ? "AN" : "CERTIFIED", rosetteCX, rosetteCY - 8 * scale);
+        ctx.font = `900 ${11 * scale}px Inter, Arial, sans-serif`;
+        ctx.fillText(isHa ? "TABBATAR" : "OFFICIAL", rosetteCX, rosetteCY + 8 * scale);
+        ctx.textBaseline = "top";
+
+        /* --- Signature block on the right --- */
+        const sigCX = W - pad - 220 * scale;
+        const sigBaseY = bottomSectionY + 20 * scale;
+
+        /* Signature line */
+        ctx.strokeStyle = COLORS.dark;
+        ctx.lineWidth = 1.5 * scale;
+        ctx.beginPath();
+        ctx.moveTo(sigCX - 120 * scale, sigBaseY + 30 * scale);
+        ctx.lineTo(sigCX + 120 * scale, sigBaseY + 30 * scale);
+        ctx.stroke();
+
+        /* Handwritten-style signature above the line */
+        ctx.strokeStyle = COLORS.primaryDark;
+        ctx.lineWidth = 2 * scale;
+        ctx.lineCap = "round";
+        ctx.beginPath();
+        ctx.moveTo(sigCX - 90 * scale, sigBaseY + 20 * scale);
+        ctx.bezierCurveTo(
+          sigCX - 70 * scale, sigBaseY - 10 * scale,
+          sigCX - 40 * scale, sigBaseY + 34 * scale,
+          sigCX - 10 * scale, sigBaseY + 4 * scale
+        );
+        ctx.bezierCurveTo(
+          sigCX + 10 * scale, sigBaseY - 10 * scale,
+          sigCX + 30 * scale, sigBaseY + 24 * scale,
+          sigCX + 70 * scale, sigBaseY + 6 * scale
+        );
+        ctx.stroke();
+        ctx.lineCap = "butt";
+
+        /* Signature label */
+        ctx.fillStyle = COLORS.muted;
+        ctx.font = `800 ${9 * scale}px Inter, Arial, sans-serif`;
+        ctx.fillText(isHa ? "SA HANNU" : "SIGNATURE", sigCX, sigBaseY + 40 * scale);
+
+        /* Title under signature */
+        ctx.fillStyle = COLORS.dark;
+        ctx.font = `700 ${11 * scale}px Inter, Arial, sans-serif`;
+        ctx.fillText(isHa ? "Daraktan Fasahar Al'umma" : "Director, Fasahar Al'umma", sigCX, sigBaseY + 56 * scale);
+
+        /* --- Center between badge and signature: "Verify" line --- */
+        ctx.fillStyle = COLORS.muted;
+        ctx.font = `500 ${9.5 * scale}px Inter, Arial, sans-serif`;
+        ctx.fillText(
+          isHa
+            ? "Tabbatar da wannan takarda a: fasaharalumma.app/verify"
+            : "Verify this certificate at: fasaharalumma.app/verify",
+          centerX,
+          bottomSectionY + 10 * scale
+        );
+
+        /* ---------- FOOTER: date + serial ---------- */
+        const footerLineY = H - pad - 42 * scale;
+
+        ctx.strokeStyle = COLORS.border;
+        ctx.lineWidth = 1 * scale;
+        ctx.beginPath();
+        ctx.moveTo(pad + 40 * scale, footerLineY);
+        ctx.lineTo(W - pad - 40 * scale, footerLineY);
+        ctx.stroke();
+
+        const footerTopY = footerLineY + 12 * scale;
+
+        ctx.textAlign = "left";
+        ctx.fillStyle = COLORS.muted;
+        ctx.font = `800 ${9 * scale}px Inter, Arial, sans-serif`;
+        ctx.fillText(isHa ? "RANAR" : "DATE", pad + 56 * scale, footerTopY);
+
+        ctx.fillStyle = COLORS.dark;
+        ctx.font = `700 ${12 * scale}px Inter, Arial, sans-serif`;
+        ctx.fillText(dateStr, pad + 56 * scale, footerTopY + 13 * scale);
+
+        ctx.textAlign = "right";
+        ctx.fillStyle = COLORS.muted;
+        ctx.font = `800 ${9 * scale}px Inter, Arial, sans-serif`;
+        ctx.fillText(isHa ? "LAMBAR SHAIDA" : "CERTIFICATE ID", W - pad - 56 * scale, footerTopY);
+
+        ctx.fillStyle = COLORS.dark;
+        ctx.font = `700 ${12 * scale}px Inter, Arial, sans-serif`;
+        ctx.fillText(serial, W - pad - 56 * scale, footerTopY + 13 * scale);
+
+        ctx.textAlign = "center";
+      }
+
+      /* ============================================================
+         ACTIONS
+         ============================================================ */
+      function bindActions() {
+        const downloadBtn = document.getElementById("downloadBtn");
+        const shareBtn = document.getElementById("shareBtn");
+
+        downloadBtn.addEventListener("click", () => {
+          APP.playSound("tap");
+          downloadBtn.disabled = true;
+          const originalHtml = downloadBtn.innerHTML;
+          downloadBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> ${isHa ? "Ana shirya..." : "Preparing..."}`;
+
+          setTimeout(() => {
+            try {
+              exportCanvas.toBlob((blob) => {
+                if (!blob) throw new Error("no blob");
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = `fasahar-alumma-${mod.id}.png`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                setTimeout(() => URL.revokeObjectURL(url), 2000);
+
+                downloadBtn.disabled = false;
+                downloadBtn.innerHTML = originalHtml;
+                APP.playSound("success");
+
+                if (navigator.share && navigator.canShare) {
+                  shareBtn.style.display = "inline-flex";
+                }
+              }, "image/png", 0.95);
+            } catch (err) {
+              downloadBtn.disabled = false;
+              downloadBtn.innerHTML = originalHtml;
+              alert(isHa
+                ? "An kasa sauke hoton. Sake gwadawa."
+                : "Could not download the image. Please try again.");
+            }
+          }, 30);
+        });
+
+        if (navigator.share && navigator.canShare) {
+          shareBtn.addEventListener("click", async () => {
+            APP.playSound("tap");
+            try {
+              const blob = await new Promise((res) => exportCanvas.toBlob(res, "image/png", 0.95));
+              if (!blob) return;
+              const file = new File([blob], `fasahar-alumma-${mod.id}.png`, { type: "image/png" });
+              if (navigator.canShare({ files: [file] })) {
+                await navigator.share({
+                  files: [file],
+                  title: isHa ? "Takardar Shaidata" : "My Certificate",
+                  text: isHa
+                    ? `Na kammala ${moduleTitle} a Fasahar Al'umma!`
+                    : `I completed ${moduleTitle} on Fasahar Al'umma!`
+                });
+              }
+            } catch (err) {}
+          });
+        }
+      }
+
+      /* ============================================================
+         NOT FOUND / LOCKED
+         ============================================================ */
+      function renderNotFound() {
+        page.classList.add("visible");
+        mount.innerHTML = `
+          <div class="not-found">
+            <div class="icon"><i class="fa-solid fa-circle-question"></i></div>
+            <h2>${isHa ? "Ba a samu ba" : "Not found"}</h2>
+            <p>${isHa ? "Wannan takardar ba ta nan." : "This certificate doesn't exist."}</p>
+            <a href="/home.html" class="cert-btn cert-btn-primary" style="display:inline-flex;max-width:240px;margin:0 auto;">
+              <i class="fa-solid fa-house"></i>
+              ${isHa ? "Koma Gida" : "Back Home"}
+            </a>
+          </div>
+        `;
+      }
+
+      function renderLocked() {
+        page.classList.add("visible");
+        mount.innerHTML = `
+          <div class="not-found">
+            <div class="icon"><i class="fa-solid fa-lock"></i></div>
+            <h2>${isHa ? "A kulle" : "Locked"}</h2>
+            <p>${isHa
+              ? "Kammala jarrabawar module ɗin kafin ka sami takardar shaidar."
+              : "Pass the module exam before you can get the certificate."}</p>
+            <a href="/module.html?id=${mod.id}" class="cert-btn cert-btn-primary" style="display:inline-flex;max-width:240px;margin:0 auto;">
+              <i class="fa-solid fa-chevron-left"></i>
+              ${isHa ? "Koma Module" : "Back to Module"}
+            </a>
+          </div>
+        `;
+      }
+
+    })();
+  </script>
+
+</body>
+</html>

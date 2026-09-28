@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="ha">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#176b4d" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
+  <title>Game da Mu — Fasahar Al'umma</title>
+  <meta name="description" content="Fasahar Al'umma — fasahar zamani ga al'umma baki ɗaya. Koyi labarinmu da manufarmu." />
+
+  <link rel="manifest" href="/manifest.json" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <link rel="stylesheet" href="/css/style.css" />
+
+  <style>
+    /* ============================================================
+       ABOUT PAGE
+       ============================================================ */
+    .about-page {
+      padding: 24px 0 100px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .about-page.visible { opacity: 1; }
+
+    /* ---- Top bar ---- */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 26px;
+    }
+
+    .back-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      color: var(--dark);
+      display: grid;
+      place-items: center;
+      font-size: 15px;
+      flex-shrink: 0;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .back-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .top-bar-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    /* ---- Hero ---- */
+    .about-hero {
+      text-align: center;
+      margin-bottom: 44px;
+      padding: 12px 0;
+    }
+
+    .about-logo {
+      width: 88px;
+      height: 88px;
+      border-radius: 24px;
+      background: var(--soft);
+      display: grid;
+      place-items: center;
+      margin: 0 auto 20px;
+      padding: 14px;
+      box-shadow: 0 12px 32px rgba(23, 107, 77, 0.12);
+    }
+
+    .about-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .about-hero h1 {
+      font-size: clamp(26px, 6.5vw, 36px);
+      font-weight: 800;
+      letter-spacing: -1.2px;
+      line-height: 1.15;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+
+    .about-hero .tagline {
+      font-size: 15px;
+      color: var(--primary);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .about-hero .version {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    /* ---- Sections ---- */
+    .about-section {
+      margin-bottom: 36px;
+    }
+
+    .about-section h2 {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--dark);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .about-section h2 i {
+      color: var(--primary);
+      font-size: 18px;
+    }
+
+    .about-section p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 14px;
+    }
+
+    .about-section p:last-child { margin-bottom: 0; }
+
+    .about-section strong {
+      color: var(--dark);
+      font-weight: 700;
+    }
+
+    /* ---- Highlight card ---- */
+    .highlight-card {
+      background: linear-gradient(135deg, #176b4d 0%, #0f4d38 100%);
+      border-radius: var(--radius);
+      padding: 26px 24px;
+      color: #fff;
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .highlight-card::before {
+      content: "";
+      position: absolute;
+      top: -50%; right: -20%;
+      width: 240px; height: 240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(231,168,59,0.20), transparent 70%);
+      pointer-events: none;
+    }
+
+    .highlight-card .h-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.14);
+      color: var(--accent);
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+      margin-bottom: 14px;
+      backdrop-filter: blur(8px);
+      position: relative;
+    }
+
+    .highlight-card h3 {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+      margin-bottom: 8px;
+      color: #fff;
+      position: relative;
+    }
+
+    .highlight-card p {
+      font-size: 13.5px;
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.65;
+      position: relative;
+      margin: 0;
+    }
+
+    /* ---- Feature grid ---- */
+    .features {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-bottom: 36px;
+    }
+
+    .feature {
+      display: flex;
+      gap: 14px;
+      padding: 18px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      transition: all 0.2s;
+    }
+
+    .feature:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(23, 107, 77, 0.08);
+    }
+
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: #e8f3ed;
+      color: var(--primary);
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .feature-body { flex: 1; min-width: 0; }
+
+    .feature h3 {
+      font-size: 14.5px;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 3px;
+    }
+
+    .feature p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    /* ---- Contact / credits ---- */
+    .credits {
+      text-align: center;
+      padding: 24px 16px;
+      background: var(--soft);
+      border-radius: 16px;
+      margin-bottom: 24px;
+    }
+
+    .credits p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 4px;
+    }
+
+    .credits p:last-child { margin-bottom: 0; }
+
+    .credits .heart {
+      color: var(--primary);
+      font-size: 14px;
+    }
+
+    /* ---- CTA ---- */
+    .about-cta {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .about-btn {
+      width: 100%;
+      min-height: 54px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border-radius: 14px;
+      font-weight: 800;
+      font-size: 15px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .about-btn:active { transform: scale(0.98); }
+
+    .about-btn-primary {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(23, 107, 77, 0.28);
+    }
+    .about-btn-primary:hover { background: var(--primary-dark); }
+
+    .about-btn-secondary {
+      background: var(--white);
+      color: var(--dark);
+      border: 1.5px solid var(--border);
+    }
+    .about-btn-secondary:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* ---- Desktop ---- */
+    @media (min-width: 901px) {
+      body { padding-bottom: 0; }
+      .about-page {
+        max-width: 720px;
+        padding-top: 60px;
+        padding-bottom: 60px;
+      }
+      .features {
+        grid-template-columns: 1fr 1fr;
+      }
+      .about-cta {
+        flex-direction: row;
+      }
+      .about-cta .about-btn { flex: 1; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="container about-page" id="aboutPage">
+    <div id="contentMount"></div>
+  </main>
+
+  <div id="tabbar"></div>
+
+  <script src="/data.js"></script>
+  <script src="/storage.js"></script>
+  <script src="/app.js"></script>
+
+  <script>
+    /* ============================================================
+       ABOUT PAGE
+       ============================================================ */
+    (function initAbout() {
+      const lang = STORAGE.getLanguage();
+      const isHa = lang === "ha";
+
+      const page = document.getElementById("aboutPage");
+      const mount = document.getElementById("contentMount");
+
+      document.title = (isHa ? "Game da Mu" : "About") + " — Fasahar Al'umma";
+
+      /* ---------- Content ---------- */
+      const headHtml = `
+        <div class="top-bar">
+          <a href="/home.html" class="back-btn" aria-label="${isHa ? "Koma" : "Back"}">
+            <i class="fa-solid fa-chevron-left"></i>
+          </a>
+          <div class="top-bar-title">${isHa ? "Game da Mu" : "About"}</div>
+        </div>
+      `;
+
+      const heroHtml = `
+        <div class="about-hero">
+          <div class="about-logo">
+            <img src="/images/logo.png" alt="Fasahar Al'umma" />
+          </div>
+          <h1>Fasahar Al'umma</h1>
+          <div class="tagline">${isHa
+            ? "Fasahar zamani ga al'umma baki ɗaya"
+            : "Digital skills for the whole community"}</div>
+          <div class="version">${isHa ? "Sigar" : "Version"} ${DATA.meta.version}</div>
+        </div>
+      `;
+
+      const introHtml = `
+        <div class="about-section">
+          <h2>
+            <i class="fa-solid fa-seedling"></i>
+            ${isHa ? "Me ya sa muka gina wannan" : "Why we built this"}
+          </h2>
+          <p>${isHa
+            ? "A yawancin al'ummominmu, fasahar zamani har yanzu ba ta isa kowa ba. Akwai mutane da yawa waɗanda suke da hazaka, suna da sha'awa, amma ba su sami damar koyon yadda ake amfani da waya da intanet don amfanin rayuwarsu ba."
+            : "In many of our communities, modern technology still hasn't reached everyone. There are many people with talent and curiosity who simply have never had the chance to learn how to use a phone and the internet to improve their own lives."}</p>
+          <p>${isHa
+            ? "Fasahar Al'umma an gina ta domin wannan mutane. Ba don keɓancewar waɗanda suka riga suka iya ba, amma don buɗe kofa ga kowa — maza da mata, matasa da manya, masu karatu da marasa karatu."
+            : "Fasahar Al'umma was built for those people. Not to serve only those who already know, but to open the door for everyone — men and women, young and old, readers and non-readers."}</p>
+        </div>
+      `;
+
+      const highlightHtml = `
+        <div class="highlight-card">
+          <div class="h-icon"><i class="fa-solid fa-bullseye"></i></div>
+          <h3>${isHa ? "Manufarmu" : "Our mission"}</h3>
+          <p>${isHa
+            ? "Koyar da fasahar zamani cikin sauƙi, cikin harshen gida, kuma cikin yanayin da kowa zai ji daɗi. Ba fasaha mai rikitarwa ba — fasaha mai amfani."
+            : "To teach digital skills simply, in the local language, and in a way that everyone can feel comfortable with. Not complex technology — useful technology."}</p>
+        </div>
+      `;
+
+      const featuresHtml = `
+        <div class="about-section">
+          <h2>
+            <i class="fa-solid fa-star"></i>
+            ${isHa ? "Abin da muke bayarwa" : "What we offer"}
+          </h2>
+        </div>
+
+        <div class="features">
+          <div class="feature">
+            <div class="feature-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+            <div class="feature-body">
+              <h3>${isHa ? "Darussa 6 masu amfani" : "6 practical modules"}</h3>
+              <p>${isHa
+                ? "Daga tushen waya zuwa kasuwanci na zamani — duk abin da kuke buƙata."
+                : "From phone basics to digital business — everything you need."}</p>
+            </div>
+          </div>
+
+          <div class="feature">
+            <div class="feature-icon"><i class="fa-solid fa-language"></i></div>
+            <div class="feature-body">
+              <h3>${isHa ? "Hausa da Turanci" : "Hausa and English"}</h3>
+              <p>${isHa
+                ? "Koyi a harshen da kuka fi fahimta, ba dole ba ku iya Turanci."
+                : "Learn in the language you understand best — no English required."}</p>
+            </div>
+          </div>
+
+          <div class="feature">
+            <div class="feature-icon"><i class="fa-solid fa-wifi"></i></div>
+            <div class="feature-body">
+              <h3>${isHa ? "Yana aiki ba tare da intanet ba" : "Works offline"}</h3>
+              <p>${isHa
+                ? "Sauke sau ɗaya, sannan ku ci gaba da koyo koda ba a haɗa ku ba."
+                : "Download once, then keep learning even when you're not connected."}</p>
+            </div>
+          </div>
+
+          <div class="feature">
+            <div class="feature-icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
+            <div class="feature-body">
+              <h3>${isHa ? "Dama ta gaske" : "Real opportunities"}</h3>
+              <p>${isHa
+                ? "Tarin tallafi da shirye-shirye da aka tabbatar, a wuri ɗaya."
+                : "A verified collection of grants and programs, all in one place."}</p>
+            </div>
+          </div>
+
+          <div class="feature">
+            <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="feature-body">
+              <h3>${isHa ? "Tsaro da farko" : "Safety first"}</h3>
+              <p>${isHa
+                ? "Koyi gane zamba da kare kanka a yanar gizo."
+                : "Learn to spot scams and protect yourself online."}</p>
+            </div>
+          </div>
+
+          <div class="feature">
+            <div class="feature-icon"><i class="fa-solid fa-award"></i></div>
+            <div class="feature-body">
+              <h3>${isHa ? "Takardar shaida" : "Certificates"}</h3>
+              <p>${isHa
+                ? "Kammala kowane module, sami takardar shaidar da za ka iya rabawa."
+                : "Finish each module, get a certificate you can share."}</p>
+            </div>
+          </div>
+        </div>
+      `;
+
+      const howHtml = `
+        <div class="about-section">
+          <h2>
+            <i class="fa-solid fa-circle-question"></i>
+            ${isHa ? "Yadda yake aiki" : "How it works"}
+          </h2>
+          <p>${isHa
+            ? "Kowane module yana da gajerun darussa. Kowace darasi tana da matakai uku: <strong>Kalla</strong> bidiyo, <strong>Karanta</strong> rubutu, sannan <strong>Tabbatar</strong> da tambaya ɗaya."
+            : "Each module has short lessons. Every lesson has three steps: <strong>Watch</strong> a video, <strong>Read</strong> the text, then <strong>Verify</strong> with a quick question."}</p>
+          <p>${isHa
+            ? "Idan ka amsa daidai, darasi na gaba zai buɗe. Idan ka kammala duk darussan wani module, za a buɗe jarrabawa. Idan ka ci jarrabawar, za ka sami takardar shaida."
+            : "Answer correctly and the next lesson unlocks. Complete all lessons in a module and the exam unlocks. Pass the exam and you get your certificate."}</p>
+          <p>${isHa
+            ? "Babu wani abu da zai ɓace. Duk ci gaban da ka yi ana adana shi a wayarka kai tsaye."
+            : "Nothing is lost. All your progress is saved on your phone automatically."}</p>
+        </div>
+      `;
+
+      const creditsHtml = `
+        <div class="credits">
+          <p>${isHa
+            ? "An gina wannan manhaja da <span class=\"heart\">♥</span> don al'umma."
+            : "Built with <span class=\"heart\">♥</span> for the community."}</p>
+          <p>${isHa
+            ? "Hausa da Turanci · Offline-first · Kyauta gaba ɗaya"
+            : "Hausa and English · Offline-first · Free for everyone"}</p>
+        </div>
+      `;
+
+      const ctaHtml = `
+        <div class="about-cta">
+          <a href="/home.html" class="about-btn about-btn-primary">
+            <i class="fa-solid fa-house"></i>
+            ${isHa ? "Koma Gida" : "Back to Home"}
+          </a>
+          <a href="/opportunities.html" class="about-btn about-btn-secondary">
+            <i class="fa-solid fa-hand-holding-heart"></i>
+            ${isHa ? "Duba Dama" : "See Opportunities"}
+          </a>
+        </div>
+      `;
+
+      mount.innerHTML = headHtml + heroHtml + introHtml + highlightHtml +
+        featuresHtml + howHtml + creditsHtml + ctaHtml;
+
+      requestAnimationFrame(() => page.classList.add("visible"));
+    })();
+  </script>
+
+</body>
+</html>

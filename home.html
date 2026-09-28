@@ -13,7 +13,6 @@
 
   <link rel="manifest" href="/manifest.json" />
 
-  <!-- Font Awesome -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -26,7 +25,7 @@
 
   <style>
     /* ============================================================
-       SPLASH SCREEN — rich green, feels premium
+       SPLASH — deep green, logo image, premium
        ============================================================ */
     .splash {
       position: fixed;
@@ -47,25 +46,20 @@
       pointer-events: none;
     }
 
-    /* Soft decorative glow behind logo */
     .splash::before {
       content: "";
       position: absolute;
-      top: 24%;
-      left: 50%;
+      top: 24%; left: 50%;
       transform: translate(-50%, -50%);
-      width: 320px;
-      height: 320px;
+      width: 320px; height: 320px;
       border-radius: 50%;
       background: radial-gradient(circle, rgba(255,255,255,0.12), transparent 70%);
       pointer-events: none;
     }
 
-    /* Faint grid pattern for texture */
     .splash::after {
       content: "";
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       background-image:
         radial-gradient(circle at 20% 80%, rgba(231,168,59,0.12), transparent 40%),
         radial-gradient(circle at 85% 15%, rgba(255,255,255,0.06), transparent 35%);
@@ -86,8 +80,7 @@
     }
 
     .splash-logo {
-      width: 120px;
-      height: 120px;
+      width: 120px; height: 120px;
       border-radius: 28px;
       background: var(--white);
       display: grid;
@@ -102,8 +95,7 @@
     }
 
     .splash-logo img {
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       object-fit: contain;
       display: block;
     }
@@ -132,8 +124,7 @@
     }
 
     .splash-divider {
-      width: 40px;
-      height: 3px;
+      width: 40px; height: 3px;
       background: var(--accent);
       border-radius: 100px;
       margin: 20px auto;
@@ -147,8 +138,7 @@
     }
 
     .splash-dot {
-      width: 8px;
-      height: 8px;
+      width: 8px; height: 8px;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.85);
       animation: dotPulse 1.4s ease-in-out infinite;
@@ -163,8 +153,7 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .splash-logo,
-      .splash-dot { animation: none; }
+      .splash-logo, .splash-dot { animation: none; }
     }
 
     /* ============================================================
@@ -178,10 +167,16 @@
 
     .home.visible { opacity: 1; }
 
-    /* ---- Greeting ---- */
+    /* ---- Greeting row (with mobile lang toggle) ---- */
     .greeting {
       padding: 24px 0 28px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
     }
+
+    .greeting-text { flex: 1; min-width: 0; }
 
     .greeting-hello {
       font-size: 14px;
@@ -198,6 +193,41 @@
       line-height: 1.15;
     }
 
+    /* Mobile-only language pill */
+    .mobile-lang {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 3px;
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+
+    .mobile-lang span {
+      padding: 6px 12px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .mobile-lang span.active {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(23, 107, 77, 0.25);
+    }
+
+    @media (min-width: 901px) {
+      .mobile-lang { display: none; }
+    }
+
     /* ---- Overall progress ---- */
     .overall {
       background: linear-gradient(135deg, #e8f3ed 0%, #f2f7f3 100%);
@@ -211,8 +241,7 @@
     }
 
     .overall-ring {
-      width: 56px;
-      height: 56px;
+      width: 56px; height: 56px;
       border-radius: 50%;
       background: conic-gradient(var(--primary) var(--progress, 0%), #d9e4dd 0);
       display: grid;
@@ -223,8 +252,7 @@
 
     .overall-ring::before {
       content: "";
-      width: 44px;
-      height: 44px;
+      width: 44px; height: 44px;
       border-radius: 50%;
       background: var(--white);
       position: absolute;
@@ -271,8 +299,7 @@
     }
 
     .resume-icon {
-      width: 44px;
-      height: 44px;
+      width: 44px; height: 44px;
       border-radius: 12px;
       background: rgba(255, 255, 255, 0.16);
       color: #fff;
@@ -335,9 +362,11 @@
       gap: 12px;
     }
 
+    /* Card style inspired by the Curriculum/Quiz mockup:
+       light mint background, solid green circular icon, no border */
     .module-card {
-      background: var(--white);
-      border: 1px solid var(--border);
+      background: #eef7f2;
+      border: 1px solid transparent;
       border-radius: 18px;
       padding: 16px;
       text-decoration: none;
@@ -345,43 +374,40 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
       position: relative;
       overflow: hidden;
-      min-height: 156px;
+      min-height: 160px;
       -webkit-tap-highlight-color: transparent;
     }
 
     .module-card:hover {
       transform: translateY(-3px);
-      box-shadow: var(--shadow);
-      border-color: #d6e2da;
+      box-shadow: 0 14px 36px rgba(23, 107, 77, 0.15);
+      background: #e4f2ea;
     }
 
-    .module-card:active {
-      transform: scale(0.98);
-    }
+    .module-card:active { transform: scale(0.98); }
 
     .module-card.completed {
-      background: linear-gradient(135deg, #e8f3ed 0%, #f2f7f3 100%);
-      border-color: #c8e6d3;
+      background: linear-gradient(135deg, #d8ede2 0%, #e8f3ed 100%);
     }
 
     .module-card-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: #e8f3ed;
-      color: var(--primary);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
       display: grid;
       place-items: center;
       font-size: 20px;
       flex-shrink: 0;
+      box-shadow: 0 6px 16px rgba(23, 107, 77, 0.28);
     }
 
     .module-card.completed .module-card-icon {
-      background: var(--primary);
-      color: #fff;
+      background: var(--primary-dark);
     }
 
     .module-card-body { flex: 1; }
@@ -408,7 +434,7 @@
 
     .module-card-progress .bar {
       height: 4px;
-      background: #e8eeea;
+      background: #cfe4d9;
       border-radius: 100px;
       overflow: hidden;
       margin-bottom: 6px;
@@ -438,9 +464,15 @@
       border-color: #f0e0b8;
     }
 
+    .module-card.opportunities:hover {
+      background: linear-gradient(135deg, #fdeec8 0%, #fff6e3 100%);
+      box-shadow: 0 14px 36px rgba(231, 168, 59, 0.18);
+    }
+
     .module-card.opportunities .module-card-icon {
-      background: #fdeec8;
-      color: var(--accent-dark);
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 6px 16px rgba(231, 168, 59, 0.3);
     }
 
     /* ============================================================
@@ -448,10 +480,8 @@
        ============================================================ */
     .hamburger {
       position: fixed;
-      top: 20px;
-      right: 20px;
-      width: 48px;
-      height: 48px;
+      top: 20px; right: 20px;
+      width: 48px; height: 48px;
       border-radius: 14px;
       background: var(--primary);
       color: #fff;
@@ -472,8 +502,7 @@
 
     .drawer {
       position: fixed;
-      top: 0;
-      right: 0;
+      top: 0; right: 0;
       width: 320px;
       max-width: 85vw;
       height: 100dvh;
@@ -491,10 +520,8 @@
 
     .drawer-close {
       position: absolute;
-      top: 18px;
-      right: 18px;
-      width: 36px;
-      height: 36px;
+      top: 18px; right: 18px;
+      width: 36px; height: 36px;
       border-radius: 10px;
       background: var(--soft);
       color: var(--dark);
@@ -517,8 +544,7 @@
     }
 
     .drawer-brand img {
-      width: 42px;
-      height: 42px;
+      width: 42px; height: 42px;
       object-fit: contain;
       flex-shrink: 0;
     }
@@ -645,7 +671,7 @@
         grid-template-columns: repeat(3, 1fr);
         gap: 20px;
       }
-      .module-card { min-height: 180px; padding: 20px; }
+      .module-card { min-height: 184px; padding: 20px; }
       .module-card-title { font-size: 15px; }
       .greeting-title { font-size: 40px; }
     }
@@ -654,9 +680,7 @@
 
 <body>
 
-  <!-- ============================================================
-       SPLASH
-       ============================================================ -->
+  <!-- SPLASH -->
   <div class="splash" id="splash" aria-hidden="true">
     <div class="splash-inner">
       <div class="splash-logo">
@@ -673,9 +697,7 @@
     </div>
   </div>
 
-  <!-- ============================================================
-       DESKTOP HAMBURGER + DRAWER
-       ============================================================ -->
+  <!-- DESKTOP HAMBURGER + DRAWER -->
   <button class="hamburger" id="hamburger" aria-label="Menu">
     <i class="fa-solid fa-bars"></i>
   </button>
@@ -695,26 +717,26 @@
     <nav class="drawer-nav">
       <a href="/home.html">
         <i class="fa-solid fa-house"></i>
-        <span>Gida</span>
+        <span class="drawer-text" data-key="home">Gida</span>
       </a>
       <a href="#modules">
         <i class="fa-solid fa-book-open"></i>
-        <span>Darussa</span>
+        <span class="drawer-text" data-key="modules">Darussa</span>
       </a>
       <a href="/opportunities.html">
         <i class="fa-solid fa-hand-holding-heart"></i>
-        <span>Dama</span>
+        <span class="drawer-text" data-key="opportunities">Dama</span>
       </a>
       <a href="/profile.html">
         <i class="fa-solid fa-user"></i>
-        <span>Bayani</span>
+        <span class="drawer-text" data-key="profile">Bayani</span>
       </a>
     </nav>
 
-    <div class="drawer-section-label">Saituna</div>
+    <div class="drawer-section-label drawer-text" data-key="settings">Saituna</div>
 
     <div class="drawer-toggle-row">
-      <span>Harshe</span>
+      <span class="drawer-text" data-key="language">Harshe</span>
       <div class="drawer-lang" id="drawerLang">
         <span data-lang="ha" class="active">HA</span>
         <span data-lang="en">EN</span>
@@ -722,21 +744,27 @@
     </div>
 
     <div class="drawer-toggle-row">
-      <span>Sauti</span>
+      <span class="drawer-text" data-key="sound">Sauti</span>
       <button id="drawerSound" style="background:none;border:none;color:var(--primary);font-size:16px;cursor:pointer;">
         <i class="fa-solid fa-volume-high"></i>
       </button>
     </div>
   </aside>
 
-  <!-- ============================================================
-       HOME CONTENT
-       ============================================================ -->
+  <!-- HOME CONTENT -->
   <main class="container home" id="home">
 
     <section class="greeting">
-      <p class="greeting-hello" id="greetingHello">Sannu 👋</p>
-      <h1 class="greeting-title" id="greetingTitle">Ci gaba da koyo</h1>
+      <div class="greeting-text">
+        <p class="greeting-hello" id="greetingHello">Sannu 👋</p>
+        <h1 class="greeting-title" id="greetingTitle">Ci gaba da koyo</h1>
+      </div>
+
+      <!-- Mobile language toggle -->
+      <div class="mobile-lang" id="mobileLang">
+        <span data-lang="ha" class="active">HA</span>
+        <span data-lang="en">EN</span>
+      </div>
     </section>
 
     <div class="overall" id="overallBox">
@@ -752,7 +780,7 @@
     <div id="resumeMount"></div>
 
     <div class="section-head" id="modules">
-      <h3>Hanyoyin karatunka</h3>
+      <h3 id="modulesHead">Hanyoyin karatunka</h3>
       <span id="modulesCount">0 / 6</span>
     </div>
 
@@ -768,24 +796,22 @@
 
   <script>
     /* ============================================================
-       SPLASH → HOME
+       SPLASH
        ============================================================ */
     (function initSplash() {
       const splash = document.getElementById("splash");
       const home = document.getElementById("home");
-      const DELAY = 2000;
-
       setTimeout(() => {
         splash.classList.add("hidden");
         home.classList.add("visible");
         setTimeout(() => { splash.style.display = "none"; }, 800);
-      }, DELAY);
+      }, 2000);
     })();
 
     /* ============================================================
-       HOME RENDERING
+       HOME RENDERING (re-renderable on language change)
        ============================================================ */
-    (function renderHome() {
+    function renderHome() {
       const lang = STORAGE.getLanguage();
       const isHa = lang === "ha";
 
@@ -812,6 +838,9 @@
       ring.style.setProperty("--progress", overall.percent + "%");
       pct.textContent = overall.percent + "%";
 
+      document.getElementById("overallTitle").textContent =
+        isHa ? "Ci gaban gaba ɗaya" : "Overall progress";
+
       const overallSub = document.getElementById("overallSub");
       if (overall.completed === 0) {
         overallSub.textContent = isHa
@@ -823,9 +852,14 @@
           : `${overall.completed} of ${overall.total} lessons completed.`;
       }
 
+      /* Section head */
+      document.getElementById("modulesHead").textContent =
+        isHa ? "Hanyoyin karatunka" : "Your learning paths";
+
       /* Resume card */
       const session = STORAGE.getSession();
       const resumeMount = document.getElementById("resumeMount");
+      resumeMount.innerHTML = "";
 
       if (session) {
         const mod = DATA.modules.find((m) => m.id === session.moduleId);
@@ -847,6 +881,7 @@
 
       /* Module grid */
       const grid = document.getElementById("moduleGrid");
+      grid.innerHTML = "";
       let completedModules = 0;
 
       DATA.modules.forEach((mod) => {
@@ -900,18 +935,90 @@
       document.getElementById("modulesCount").textContent =
         `${completedModules} / ${DATA.modules.length}`;
 
-      function iconKeyFor(id) {
-        const map = {
-          "phone-internet": "phone",
-          "email-work": "email",
-          "whatsapp-social": "chat",
-          "digital-safety": "safety",
-          "ai-basics": "ai",
-          "digital-business": "business"
-        };
-        return map[id] || "modules";
-      }
-    })();
+      /* Update drawer text */
+      updateDrawerText(isHa);
+    }
+
+    function iconKeyFor(id) {
+      const map = {
+        "phone-internet": "phone",
+        "email-work": "email",
+        "whatsapp-social": "chat",
+        "digital-safety": "safety",
+        "ai-basics": "ai",
+        "digital-business": "business"
+      };
+      return map[id] || "modules";
+    }
+
+    function updateDrawerText(isHa) {
+      const dict = {
+        home: isHa ? "Gida" : "Home",
+        modules: isHa ? "Darussa" : "Modules",
+        opportunities: isHa ? "Dama" : "Opportunities",
+        profile: isHa ? "Bayani" : "Profile",
+        settings: isHa ? "Saituna" : "Settings",
+        language: isHa ? "Harshe" : "Language",
+        sound: isHa ? "Sauti" : "Sound"
+      };
+      document.querySelectorAll(".drawer-text").forEach((el) => {
+        const key = el.dataset.key;
+        if (dict[key]) el.textContent = dict[key];
+      });
+    }
+
+    /* ============================================================
+       LANGUAGE SYNC — real-time, no reload
+       ============================================================ */
+    function syncLangUI() {
+      const current = STORAGE.getLanguage();
+
+      /* Mobile pill */
+      document.querySelectorAll("#mobileLang [data-lang]").forEach((s) => {
+        s.classList.toggle("active", s.dataset.lang === current);
+      });
+
+      /* Drawer pill */
+      document.querySelectorAll("#drawerLang [data-lang]").forEach((s) => {
+        s.classList.toggle("active", s.dataset.lang === current);
+      });
+    }
+
+    function onLangChange(lang) {
+      APP.setLanguage(lang);         /* updates STORAGE + fires event */
+      renderHome();                   /* re-render dynamic content */
+      syncLangUI();
+    }
+
+    /* Mobile pill */
+    document.getElementById("mobileLang").addEventListener("click", (e) => {
+      const target = e.target.closest("[data-lang]");
+      if (!target) return;
+      if (target.dataset.lang === STORAGE.getLanguage()) return;
+      APP.playSound("tap");
+      onLangChange(target.dataset.lang);
+    });
+
+    /* Drawer pill */
+    document.getElementById("drawerLang").addEventListener("click", (e) => {
+      const target = e.target.closest("[data-lang]");
+      if (!target) return;
+      if (target.dataset.lang === STORAGE.getLanguage()) return;
+      APP.playSound("tap");
+      onLangChange(target.dataset.lang);
+    });
+
+    /* If any other part of the app changes the language, keep in sync */
+    document.addEventListener("languagechange", () => {
+      renderHome();
+      syncLangUI();
+    });
+
+    /* ============================================================
+       INITIAL RENDER
+       ============================================================ */
+    renderHome();
+    syncLangUI();
 
     /* ============================================================
        DRAWER
@@ -921,7 +1028,6 @@
       const drawer = document.getElementById("drawer");
       const overlay = document.getElementById("drawerOverlay");
       const close = document.getElementById("drawerClose");
-      const langToggle = document.getElementById("drawerLang");
       const soundBtn = document.getElementById("drawerSound");
 
       function open() {
@@ -939,18 +1045,6 @@
       close.addEventListener("click", closeDrawer);
       overlay.addEventListener("click", closeDrawer);
 
-      langToggle.addEventListener("click", (e) => {
-        const target = e.target.closest("[data-lang]");
-        if (!target) return;
-        const lang = target.dataset.lang;
-        if (lang === STORAGE.getLanguage()) return;
-        APP.setLanguage(lang);
-        APP.playSound("tap");
-        langToggle.querySelectorAll("span").forEach((s) => {
-          s.classList.toggle("active", s.dataset.lang === lang);
-        });
-      });
-
       function updateSoundIcon() {
         const on = STORAGE.getSoundEnabled();
         soundBtn.innerHTML = on
@@ -963,12 +1057,6 @@
         STORAGE.setSoundEnabled(next);
         updateSoundIcon();
         if (next) APP.playSound("tap");
-      });
-
-      document.addEventListener("languagechange", (e) => {
-        langToggle.querySelectorAll("span").forEach((s) => {
-          s.classList.toggle("active", s.dataset.lang === e.detail.lang);
-        });
       });
     })();
   </script>

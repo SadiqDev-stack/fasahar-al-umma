@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="ha">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#176b4d" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
+  <title>Darasi — Fasahar Al'umma</title>
+  <meta name="description" content="Koyi darasi cikin sauƙi a Hausa da Turanci." />
+
+  <link rel="manifest" href="/manifest.json" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <link rel="stylesheet" href="/css/style.css" />
+
+  <style>
+    /* ============================================================
+       LESSON PAGE
+       ============================================================ */
+    .lesson-page {
+      padding: 20px 0 120px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .lesson-page.visible { opacity: 1; }
+
+    /* ---- Top bar ---- */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .back-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      color: var(--dark);
+      display: grid;
+      place-items: center;
+      font-size: 15px;
+      flex-shrink: 0;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .back-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .breadcrumb {
+      flex: 1;
+      min-width: 0;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .breadcrumb strong {
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    /* ---- Progress strip (step indicator) ---- */
+    .steps {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .step-pill {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 8px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 800;
+      background: var(--soft);
+      color: var(--muted);
+      transition: all 0.3s ease;
+      border: 1.5px solid transparent;
+    }
+
+    .step-pill i {
+      font-size: 12px;
+    }
+
+    .step-pill.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+      box-shadow: 0 6px 16px rgba(23, 107, 77, 0.28);
+    }
+
+    .step-pill.done {
+      background: #e8f3ed;
+      color: var(--primary);
+      border-color: #c8e6d3;
+    }
+
+    /* ---- Lesson header ---- */
+    .lesson-head {
+      margin-bottom: 22px;
+    }
+
+    .lesson-title {
+      font-size: clamp(22px, 5.5vw, 30px);
+      font-weight: 800;
+      letter-spacing: -0.9px;
+      line-height: 1.2;
+      color: var(--dark);
+      margin-bottom: 6px;
+    }
+
+    .lesson-sub {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    /* ============================================================
+       STEP CONTENT
+       ============================================================ */
+    .step-content {
+      display: none;
+      animation: stepIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .step-content.active { display: block; }
+
+    @keyframes stepIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---- Watch step: video card ---- */
+    .video-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 30px rgba(20, 50, 38, 0.06);
+    }
+
+    .video-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #17231e;
+    }
+
+    .video-frame iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .video-note {
+      padding: 14px 18px;
+      font-size: 12px;
+      color: var(--muted);
+      background: var(--soft);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .video-note i {
+      color: var(--primary);
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    /* ---- No video placeholder ---- */
+    .no-video {
+      background: linear-gradient(135deg, #eef7f2 0%, #e0f0e7 100%);
+      border-radius: var(--radius);
+      padding: 40px 24px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .no-video-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--white);
+      color: var(--primary);
+      display: grid;
+      place-items: center;
+      font-size: 26px;
+      margin: 0 auto 14px;
+      box-shadow: 0 8px 20px rgba(23, 107, 77, 0.15);
+    }
+
+    .no-video h3 {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 6px;
+    }
+
+    .no-video p {
+      font-size: 13px;
+      color: var(--muted);
+      max-width: 320px;
+      margin: 0 auto;
+      line-height: 1.55;
+    }
+
+    /* ---- Read step: markdown card ---- */
+    .read-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      margin-bottom: 20px;
+      line-height: 1.75;
+      font-size: 15px;
+      color: var(--dark);
+      box-shadow: 0 10px 30px rgba(20, 50, 38, 0.04);
+    }
+
+    .read-card p {
+      margin-bottom: 14px;
+      color: var(--dark);
+    }
+
+    .read-card p:last-child { margin-bottom: 0; }
+
+    .read-card strong {
+      color: var(--primary-dark);
+      font-weight: 800;
+    }
+
+    .read-card ul {
+      margin: 12px 0 16px;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .read-card li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin-bottom: 8px;
+      font-size: 14.5px;
+      color: #3b4a42;
+    }
+
+    .read-card li::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--primary);
+      flex-shrink: 0;
+      margin-top: 9px;
+    }
+
+    /* ---- Quiz step ---- */
+    .quiz-question {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 20px;
+      line-height: 1.45;
+      letter-spacing: -0.3px;
+    }
+
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .quiz-option {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+      padding: 15px 16px;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      text-align: left;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--dark);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .quiz-option:hover {
+      border-color: var(--primary);
+      background: #f7fbf9;
+    }
+
+    .quiz-option:active { transform: scale(0.99); }
+
+    .quiz-option-letter {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--soft);
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 13px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+
+    .quiz-option .option-text { flex: 1; }
+
+    .quiz-option .option-status {
+      flex-shrink: 0;
+      font-size: 18px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .quiz-option.correct {
+      border-color: var(--primary);
+      background: #e8f5ed;
+    }
+    .quiz-option.correct .quiz-option-letter {
+      background: var(--primary);
+      color: #fff;
+    }
+    .quiz-option.correct .option-status {
+      color: var(--primary);
+      opacity: 1;
+    }
+
+    .quiz-option.incorrect {
+      border-color: #e8b4b4;
+      background: #fdf1f1;
+    }
+    .quiz-option.incorrect .quiz-option-letter {
+      background: #c94a4a;
+      color: #fff;
+    }
+    .quiz-option.incorrect .option-status {
+      color: #c94a4a;
+      opacity: 1;
+    }
+
+    .quiz-option:disabled { cursor: default; }
+
+    /* Feedback */
+    .quiz-feedback {
+      display: none;
+      padding: 16px 18px;
+      border-radius: 14px;
+      font-size: 13.5px;
+      font-weight: 600;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .quiz-feedback.show { display: block; animation: stepIn 0.3s ease both; }
+
+    .quiz-feedback.success {
+      background: #e8f5ed;
+      border: 1px solid #c8e6d3;
+      color: var(--primary-dark);
+    }
+
+    .quiz-feedback.error {
+      background: #fdf1f1;
+      border: 1px solid #e8b4b4;
+      color: #8b2020;
+    }
+
+    .quiz-feedback-title {
+      font-weight: 800;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ============================================================
+       BOTTOM ACTION BAR
+       ============================================================ */
+    .action-bar {
+      position: fixed;
+      left: 0; right: 0;
+      bottom: calc(68px + env(safe-area-inset-bottom, 0px));
+      padding: 14px 16px;
+      background: linear-gradient(to top, rgba(255,255,255,0.98) 60%, rgba(255,255,255,0.85) 100%);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 10px;
+      z-index: 100;
+    }
+
+    .action-btn {
+      flex: 1;
+      min-height: 54px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-radius: 14px;
+      font-weight: 800;
+      font-size: 14px;
+      transition: all 0.2s;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .action-btn-secondary {
+      background: var(--white);
+      color: var(--dark);
+      border: 1.5px solid var(--border);
+      flex: 0 0 auto;
+      padding: 0 20px;
+    }
+
+    .action-btn-secondary:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .action-btn-primary {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(23, 107, 77, 0.28);
+    }
+
+    .action-btn-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .action-btn:active { transform: scale(0.98); }
+
+    /* Desktop: no tab bar, action bar sits at bottom of the container */
+    @media (min-width: 901px) {
+      body { padding-bottom: 0; }
+      .lesson-page {
+        max-width: 720px;
+        padding-top: 40px;
+        padding-bottom: 140px;
+      }
+      .action-bar {
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 720px;
+        width: 100%;
+        border-radius: 20px 20px 0 0;
+        border: 1px solid var(--border);
+        border-bottom: none;
+      }
+    }
+
+    /* ---- Not found ---- */
+    .not-found {
+      text-align: center;
+      padding: 80px 20px;
+    }
+    .not-found .icon {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: var(--soft);
+      color: var(--muted);
+      display: grid;
+      place-items: center;
+      font-size: 32px;
+      margin: 0 auto 20px;
+    }
+    .not-found h2 {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .not-found p {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="container lesson-page" id="lessonPage">
+    <div id="contentMount"></div>
+  </main>
+
+  <div id="actionBarMount"></div>
+
+  <div id="tabbar"></div>
+
+  <script src="/data.js"></script>
+  <script src="/storage.js"></script>
+  <script src="/app.js"></script>
+
+  <script>
+    /* ============================================================
+       LESSON PAGE CONTROLLER
+       ============================================================ */
+    (function initLesson() {
+
+      /* ---------- URL params ---------- */
+      const params = new URLSearchParams(window.location.search);
+      const moduleId = params.get("module");
+      const lessonId = params.get("lesson");
+      let currentStep = params.get("step") || "watch";
+
+      const lang = STORAGE.getLanguage();
+      const isHa = lang === "ha";
+
+      const page = document.getElementById("lessonPage");
+      const mount = document.getElementById("contentMount");
+      const actionBarMount = document.getElementById("actionBarMount");
+
+      /* ---------- Validate ---------- */
+      const mod = DATA.modules.find((m) => m.id === moduleId);
+      if (!mod) return renderNotFound();
+
+      const lesson = mod.lessons.find((l) => l.id === lessonId);
+      if (!lesson) return renderNotFound();
+
+      /* ---------- Guard: is this lesson unlocked? ---------- */
+      if (!STORAGE.isLessonUnlocked(mod.id, lesson.id)) {
+        return renderLocked();
+      }
+
+      /* ---------- Step order ---------- */
+      const steps = lesson.video ? ["watch", "read", "verify"] : ["read", "verify"];
+      if (!steps.includes(currentStep)) currentStep = steps[0];
+
+      /* ---------- Title ---------- */
+      const lessonTitle = isHa ? lesson.title_ha : lesson.title_en;
+      const moduleTitle = isHa ? mod.title_ha : mod.title_en;
+      document.title = lessonTitle + " — Fasahar Al'umma";
+
+      /* ============================================================
+         RENDER
+         ============================================================ */
+      function render() {
+        mount.innerHTML =
+          renderTopBar() +
+          renderHeader() +
+          renderStepIndicator() +
+          renderStepContent();
+        renderActionBar();
+        bindEvents();
+        requestAnimationFrame(() => page.classList.add("visible"));
+      }
+
+      /* ---------- Top bar ---------- */
+      function renderTopBar() {
+        return `
+          <div class="top-bar">
+            <a href="/module.html?id=${mod.id}" class="back-btn" aria-label="${isHa ? "Koma" : "Back"}">
+              <i class="fa-solid fa-chevron-left"></i>
+            </a>
+            <div class="breadcrumb">
+              <strong>${moduleTitle}</strong> · ${lessonTitle}
+            </div>
+          </div>
+        `;
+      }
+
+      /* ---------- Header ---------- */
+      function renderHeader() {
+        const stepIndex = steps.indexOf(currentStep) + 1;
+        return `
+          <div class="lesson-head">
+            <h1 class="lesson-title">${lessonTitle}</h1>
+            <div class="lesson-sub">${isHa ? "Darasi" : "Lesson"} ${lesson.order} · ${stepIndex}/${steps.length}</div>
+          </div>
+        `;
+      }
+
+      /* ---------- Step indicator ---------- */
+      function renderStepIndicator() {
+        const labels = {
+          watch:  { ha: "Kalla",    en: "Watch",  icon: "fa-solid fa-circle-play" },
+          read:   { ha: "Karanta",  en: "Read",   icon: "fa-solid fa-book-open" },
+          verify: { ha: "Tabbatar", en: "Verify", icon: "fa-solid fa-circle-check" }
+        };
+        const currentIdx = steps.indexOf(currentStep);
+        return `
+          <div class="steps">
+            ${steps.map((s, i) => {
+              let cls = "step-pill";
+              if (i === currentIdx) cls += " active";
+              else if (i < currentIdx) cls += " done";
+              const label = isHa ? labels[s].ha : labels[s].en;
+              return `<div class="${cls}"><i class="${labels[s].icon}"></i> ${label}</div>`;
+            }).join("")}
+          </div>
+        `;
+      }
+
+      /* ---------- Step content ---------- */
+      function renderStepContent() {
+        if (currentStep === "watch")  return renderWatchStep();
+        if (currentStep === "read")   return renderReadStep();
+        if (currentStep === "verify") return renderVerifyStep();
+        return "";
+      }
+
+      /* ---- Watch ---- */
+      function renderWatchStep() {
+        if (!lesson.video) return renderReadStep(); /* safety */
+        return `
+          <div class="step-content active" data-step="watch">
+            <div class="video-card">
+              <div class="video-frame">
+                <iframe
+                  src="${lesson.video}"
+                  title="${lessonTitle}"
+                  loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                ></iframe>
+              </div>
+              <div class="video-note">
+                <i class="fa-solid fa-circle-info"></i>
+                <span>${isHa ? "Kalli bidiyon kafin ka ci gaba." : "Watch the video before continuing."}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      /* ---- Read ---- */
+      function renderReadStep() {
+        const md = isHa ? lesson.read_ha : lesson.read_en;
+        return `
+          <div class="step-content active" data-step="read">
+            <div class="read-card">
+              ${renderMarkdown(md)}
+            </div>
+          </div>
+        `;
+      }
+
+      /* ---- Verify (quiz) ---- */
+      function renderVerifyStep() {
+        const q = lesson.quiz;
+        const question = isHa ? q.question_ha : q.question_en;
+        const letters = ["A", "B", "C", "D", "E"];
+        const options = q.options.map((opt, i) => {
+          const text = isHa ? opt.text_ha : opt.text_en;
+          return `
+            <button class="quiz-option" data-index="${i}" data-correct="${opt.correct}">
+              <span class="quiz-option-letter">${letters[i]}</span>
+              <span class="option-text">${text}</span>
+              <span class="option-status">
+                <i class="fa-solid fa-circle-check"></i>
+              </span>
+            </button>
+          `;
+        }).join("");
+
+        return `
+          <div class="step-content active" data-step="verify">
+            <div class="quiz-question">${question}</div>
+            <div class="quiz-options">${options}</div>
+            <div class="quiz-feedback" id="quizFeedback"></div>
+          </div>
+        `;
+      }
+
+      /* ============================================================
+         ACTION BAR
+         ============================================================ */
+      function renderActionBar() {
+        const currentIdx = steps.indexOf(currentStep);
+        const isLast = currentIdx === steps.length - 1;
+        const isVerify = currentStep === "verify";
+        const alreadyComplete = STORAGE.isLessonComplete(lesson.id);
+
+        let primaryBtn;
+
+        if (isLast) {
+          /* On verify step: button is hidden until user answers correctly */
+          primaryBtn = `
+            <button class="action-btn action-btn-primary" id="finishBtn" style="display:none">
+              <i class="fa-solid fa-check"></i>
+              ${isHa ? "Kammala Darasi" : "Finish Lesson"}
+            </button>
+          `;
+        } else {
+          primaryBtn = `
+            <button class="action-btn action-btn-primary" id="nextBtn">
+              ${isHa ? "Na gaba" : "Next"}
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          `;
+        }
+
+        const showBack = currentIdx > 0;
+
+        actionBarMount.innerHTML = `
+          <div class="action-bar">
+            ${showBack ? `
+              <button class="action-btn action-btn-secondary" id="backBtn" aria-label="${isHa ? "Baya" : "Back"}">
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+            ` : ""}
+            ${primaryBtn}
+          </div>
+        `;
+      }
+
+      /* ============================================================
+         EVENTS
+         ============================================================ */
+      function bindEvents() {
+
+        /* Next / Back */
+        const nextBtn = document.getElementById("nextBtn");
+        if (nextBtn) {
+          nextBtn.addEventListener("click", () => {
+            const idx = steps.indexOf(currentStep);
+            if (idx < steps.length - 1) {
+              currentStep = steps[idx + 1];
+              APP.playSound("page");
+              window.__currentStep = currentStep;
+              render();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+          });
+        }
+
+        const backBtn = document.getElementById("backBtn");
+        if (backBtn) {
+          backBtn.addEventListener("click", () => {
+            const idx = steps.indexOf(currentStep);
+            if (idx > 0) {
+              currentStep = steps[idx - 1];
+              APP.playSound("tap");
+              window.__currentStep = currentStep;
+              render();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+          });
+        }
+
+        /* Quiz options */
+        document.querySelectorAll(".quiz-option").forEach((btn) => {
+          btn.addEventListener("click", () => handleQuizAnswer(btn));
+        });
+
+        /* Finish button */
+        const finishBtn = document.getElementById("finishBtn");
+        if (finishBtn) {
+          finishBtn.addEventListener("click", finishLesson);
+        }
+
+        /* Remember current step for the resume feature */
+        window.__currentStep = currentStep;
+      }
+
+      /* ---------- Quiz handling ---------- */
+      function handleQuizAnswer(btn) {
+        const isCorrect = btn.dataset.correct === "true";
+        const feedback = document.getElementById("quizFeedback");
+        const q = lesson.quiz;
+
+        if (isCorrect) {
+          /* Correct: mark, lock all options, show feedback, reveal finish button */
+          btn.classList.add("correct");
+          document.querySelectorAll(".quiz-option").forEach((b) => (b.disabled = true));
+
+          const title = isHa ? "Madalla!" : "Well done!";
+          const body = isHa ? (q.explanation_ha || "") : (q.explanation_en || "");
+          feedback.className = "quiz-feedback success show";
+          feedback.innerHTML = `
+            <div class="quiz-feedback-title">
+              <i class="fa-solid fa-circle-check"></i> ${title}
+            </div>
+            ${body}
+          `;
+
+          APP.playSound("correct");
+
+          const finishBtn = document.getElementById("finishBtn");
+          if (finishBtn) {
+            finishBtn.style.display = "inline-flex";
+            finishBtn.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          }
+        } else {
+          /* Wrong: shake-style feedback, let them try again */
+          btn.classList.add("incorrect");
+          btn.disabled = true;
+
+          const title = isHa ? "Ba daidai ba" : "Not quite";
+          const body = isHa
+            ? "Sake gwadawa. Za ka iya."
+            : "Try again. You can do it.";
+          feedback.className = "quiz-feedback error show";
+          feedback.innerHTML = `
+            <div class="quiz-feedback-title">
+              <i class="fa-solid fa-circle-xmark"></i> ${title}
+            </div>
+            ${body}
+          `;
+
+          APP.playSound("incorrect");
+        }
+      }
+
+      /* ---------- Finish lesson ---------- */
+      function finishLesson() {
+        STORAGE.markLessonComplete(lesson.id);
+        STORAGE.clearSession();
+        APP.playSound("unlock");
+
+        /* Find next lesson in the module */
+        const idx = mod.lessons.findIndex((l) => l.id === lesson.id);
+        const nextLesson = mod.lessons[idx + 1];
+
+        if (nextLesson) {
+          /* Go to next lesson */
+          setTimeout(() => {
+            window.location.href = `/lesson.html?module=${mod.id}&lesson=${nextLesson.id}`;
+          }, 500);
+        } else {
+          /* Last lesson done → back to module (exam now unlocked) */
+          setTimeout(() => {
+            window.location.href = `/module.html?id=${mod.id}`;
+          }, 500);
+        }
+      }
+
+      /* ============================================================
+         MARKDOWN RENDERER (tiny)
+         Supports:
+           **bold**
+           - bullet list
+           blank line = paragraph
+         ============================================================ */
+      function renderMarkdown(md) {
+        if (!md) return "";
+        /* Escape HTML to prevent injection */
+        const escaped = md
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;");
+
+        /* Split into blocks by blank lines */
+        const blocks = escaped.split(/\n\s*\n/);
+
+        return blocks.map((block) => {
+          const lines = block.split("\n").map((l) => l.trim()).filter(Boolean);
+
+          /* List block? */
+          if (lines.every((l) => l.startsWith("- "))) {
+            const items = lines
+              .map((l) => `<li>${inlineFormat(l.slice(2))}</li>`)
+              .join("");
+            return `<ul>${items}</ul>`;
+          }
+
+          /* Mixed: paragraph with bullet lines following */
+          const listStart = lines.findIndex((l) => l.startsWith("- "));
+          if (listStart > 0) {
+            const para = lines.slice(0, listStart).map(inlineFormat).join(" ");
+            const items = lines
+              .slice(listStart)
+              .filter((l) => l.startsWith("- "))
+              .map((l) => `<li>${inlineFormat(l.slice(2))}</li>`)
+              .join("");
+            return `<p>${para}</p><ul>${items}</ul>`;
+          }
+
+          /* Regular paragraph */
+          return `<p>${inlineFormat(lines.join(" "))}</p>`;
+        }).join("");
+      }
+
+      function inlineFormat(text) {
+        return text.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+      }
+
+      /* ============================================================
+         NOT FOUND / LOCKED
+         ============================================================ */
+      function renderNotFound() {
+        page.classList.add("visible");
+        mount.innerHTML = `
+          <div class="not-found">
+            <div class="icon"><i class="fa-solid fa-circle-question"></i></div>
+            <h2>${isHa ? "Ba a samu ba" : "Not found"}</h2>
+            <p>${isHa ? "Wannan darasin ba ya nan." : "This lesson doesn't exist."}</p>
+            <a href="/home.html" class="btn btn-primary" style="display:inline-flex;min-height:52px;padding:0 24px;border-radius:12px;background:var(--primary);color:#fff;text-decoration:none;font-weight:700;align-items:center;gap:8px;">
+              <i class="fa-solid fa-house"></i>
+              ${isHa ? "Koma Gida" : "Back home"}
+            </a>
+          </div>
+        `;
+      }
+
+      function renderLocked() {
+        page.classList.add("visible");
+        mount.innerHTML = `
+          <div class="not-found">
+            <div class="icon"><i class="fa-solid fa-lock"></i></div>
+            <h2>${isHa ? "A kulle" : "Locked"}</h2>
+            <p>${isHa ? "Kammala darasin da ya gabata kafin wannan." : "Complete the previous lesson first."}</p>
+            <a href="/module.html?id=${mod.id}" class="btn btn-primary" style="display:inline-flex;min-height:52px;padding:0 24px;border-radius:12px;background:var(--primary);color:#fff;text-decoration:none;font-weight:700;align-items:center;gap:8px;">
+              <i class="fa-solid fa-chevron-left"></i>
+              ${isHa ? "Koma" : "Back"}
+            </a>
+          </div>
+        `;
+      }
+
+      /* ============================================================
+         BOOT
+         ============================================================ */
+      render();
+    })();
+  </script>
+
+</body>
+</html>
