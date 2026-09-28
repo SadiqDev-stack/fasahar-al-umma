@@ -1,0 +1,68 @@
+{
+  "name": "Fasahar Al'umma",
+  "short_name": "Fasahar",
+  "description": "Fasahar zamani ga al'umma baki ɗaya. Koyi ƙwarewar dijital a Hausa da Turanci — a kan layi ko a wajen layi.",
+  "lang": "ha",
+  "dir": "ltr",
+  "start_url": "/home.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#176b4d",
+  "categories": ["education", "productivity"],
+  "icons": [
+    {
+      "src": "/images/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/images/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Fara Koyo",
+      "short_name": "Koyo",
+      "description": "Koma zuwa dashboard ɗinka",
+      "url": "/home.html",
+      "icons": [
+        {
+          "src": "/images/logo.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Dama & Tallafi",
+      "short_name": "Dama",
+      "description": "Duba damar tallafi da shirye-shirye",
+      "url": "/opportunities.html",
+      "icons": [
+        {
+          "src": "/images/logo.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ]
+}
