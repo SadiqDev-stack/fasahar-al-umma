@@ -13,14 +13,11 @@
    • Runs the scroll-reveal animation
    • Provides small helpers pages can call (APP.t, APP.playSound)
 
-   HOW TO USE ON A PAGE:
+   ICONS:
    ------------------------------------------------------------
-   1. Include this script last, after data.js and storage.js.
-   2. In the HTML add: <div id="navbar"></div> and <div id="tabbar"></div>
-      at the top of <body> — the script fills them in.
-   3. Anywhere on the page, add data-i18n="ui.buttons.start_ha"
-      and the correct translation appears automatically.
-   4. Call APP.playSound("correct") to play a sound.
+   All icons are Font Awesome 6 Free. Every page must load the
+   Font Awesome stylesheet in <head>. This file only outputs
+   <i class="fa-solid ..."></i> markup — no SVG, no inline paths.
    ============================================================ */
 
 const APP = (() => {
@@ -38,13 +35,11 @@ const APP = (() => {
     offline: "/audio/offline.mp3"
   };
 
-  /* Cache audio instances so we don't re-fetch */
   const audioCache = {};
 
   /* ---------- 1. PLAY SOUND ---------- */
   function playSound(name) {
     if (!STORAGE.getSoundEnabled()) return;
-
     const src = SOUNDS[name];
     if (!src) return;
 
@@ -56,102 +51,61 @@ const APP = (() => {
       }
       const audio = audioCache[name];
       audio.currentTime = 0;
-      audio.play().catch(() => {
-        /* Browsers block autoplay until first user gesture — ignore */
-      });
-    } catch (e) {
-      /* Silent fail — sound is a nice-to-have */
-    }
+      audio.play().catch(() => {});
+    } catch (e) {}
   }
 
   /* ---------- 2. TRANSLATION LOOKUP ---------- */
-  /* Returns the string for a ui key based on the current language.
-     Example: APP.t("buttons.start") returns either ui.buttons.start_ha
-     or ui.buttons.start_en automatically. */
   function t(path) {
     const lang = STORAGE.getLanguage();
     const parts = path.split(".");
     let node = DATA.ui;
-
-    for (const part of parts) {
-      if (node[part] === undefined) node = null;
-      else node = node[part];
-      if (node === null) break;
+    for (const p of parts) {
+      if (node === undefined || node === null) return path;
+      node = node[p];
     }
-
-    if (node === null) {
-      return path;
+    if (typeof node === "object" && node !== null) {
+      return node["_" + lang] || node[lang] || path;
     }
-
-    /* If we landed on an object with _ha / _en keys, pick the right one */
-    if (typeof node === "object") {
-      const key = lang === "ha" ? "_ha" : "_en";
-      if (node[part + key]) return node[part + key];
-      if (node["_" + lang]) return node["_" + lang];
-      /* Fallback: try to find a matching key */
-      return node[lang] || Object.values(node)[0] || path;
-    }
-
     return node;
   }
 
   /* ---------- 3. APPLY TRANSLATIONS ---------- */
-  /* Walks the page and replaces textContent for every data-i18n element.
-     Supports two forms:
-       data-i18n="ui.buttons.start"        → reads DATA.ui.buttons.start_ha / _en
-       data-i18n-attr="placeholder"        → sets an attribute instead of text */
   function applyTranslations() {
     const lang = STORAGE.getLanguage();
 
     document.querySelectorAll("[data-i18n]").forEach((el) => {
       const key = el.getAttribute("data-i18n");
-      const value = resolveKey(key, lang);
+      const parts = key.split(".");
+      let node = DATA.ui;
+      for (const p of parts) {
+        if (node === undefined || node === null) return;
+        node = node[p];
+      }
+      if (node === undefined || node === null) return;
 
+      let value = null;
+      if (typeof node === "object") {
+        value = node["_" + lang] || node[lang] || null;
+      } else {
+        value = node;
+      }
       if (value === null) return;
 
       const attr = el.getAttribute("data-i18n-attr");
-      if (attr) {
-        el.setAttribute(attr, value);
-      } else if (value.includes("<")) {
-        el.innerHTML = value;
-      } else {
-        el.textContent = value;
-      }
+      if (attr) el.setAttribute(attr, value);
+      else if (value.includes("<")) el.innerHTML = value;
+      else el.textContent = value;
     });
 
-    /* Update html lang attribute */
     document.documentElement.lang = lang;
   }
-
-  /* Resolve a dotted key like "ui.buttons.start" to the right language string */
-  function resolveKey(path, lang) {
-    const parts = path.split(".");
-    let node = DATA;
-
-    for (const part of parts) {
-      if (node === undefined || node === null) return null;
-      node = node[part];
-    }
-
-    /* node is now the final object like { start_ha: "...", start_en: "..." } */
-    if (typeof node === "object" && node !== null) {
-      if (node[part_last(parts) + "_" + lang]) return node[part_last(parts) + "_" + lang];
-      if (node["_" + lang] !== undefined) return node["_" + lang];
-      if (node[lang] !== undefined) return node[lang];
-      return null;
-    }
-
-    return node;
-  }
-
-  function part_last(arr) { return arr[arr.length - 1]; }
 
   /* ---------- 4. LANGUAGE TOGGLE ---------- */
   function setLanguage(lang) {
     STORAGE.setLanguage(lang);
     applyTranslations();
     updateLangToggleUI();
-    /* Let the current page know language changed */
     document.dispatchEvent(new CustomEvent("languagechange", { detail: { lang } }));
   }
 
@@ -172,8 +126,7 @@ const APP = (() => {
         setLanguage(target.dataset.lang);
         playSound("tap");
       } else {
-        const next = STORAGE.getLanguage() === "ha" ? "en" : "ha";
-        setLanguage(next);
+        setLanguage(STORAGE.getLanguage() === "ha" ? "en" : "ha");
         playSound("tap");
       }
     });
@@ -186,13 +139,53 @@ const APP = (() => {
     });
   }
 
-  /* ---------- 5. RENDER NAVBAR ---------- */
+  /* ---------- 5. FONT AWESOME ICONS ---------- */
+  /* All icons are FA6 Free solid. Every page must load the FA stylesheet. */
+  const ICONS = {
+    // Bottom tab bar
+    home:          '<i class="fa-solid fa-house"></i>',
+    modules:       '<i class="fa-solid fa-book-open"></i>',
+    opportunities: '<i class="fa-solid fa-hand-holding-heart"></i>',
+    profile:       '<i class="fa-solid fa-user"></i>',
+
+    // Status
+    check:         '<i class="fa-solid fa-check"></i>',
+    xmark:         '<i class="fa-solid fa-xmark"></i>',
+    lock:          '<i class="fa-solid fa-lock"></i>',
+    complete:      '<i class="fa-solid fa-circle-check"></i>',
+
+    // Actions
+    play:          '<i class="fa-solid fa-circle-play"></i>',
+    back:          '<i class="fa-solid fa-chevron-left"></i>',
+    next:          '<i class="fa-solid fa-chevron-right"></i>',
+    external:      '<i class="fa-solid fa-arrow-up-right-from-square"></i>',
+
+    // Module icons
+    phone:         '<i class="fa-solid fa-mobile-screen"></i>',
+    email:         '<i class="fa-solid fa-envelope"></i>',
+    chat:          '<i class="fa-solid fa-comment-dots"></i>',
+    safety:        '<i class="fa-solid fa-shield-halved"></i>',
+    ai:            '<i class="fa-solid fa-robot"></i>',
+    business:      '<i class="fa-solid fa-coins"></i>',
+
+    // Misc
+    globe:         '<i class="fa-solid fa-globe"></i>',
+    soundOn:       '<i class="fa-solid fa-volume-high"></i>',
+    soundOff:      '<i class="fa-solid fa-volume-xmark"></i>',
+    award:         '<i class="fa-solid fa-award"></i>',
+    wifi:          '<i class="fa-solid fa-wifi"></i>'
+  };
+
+  function icon(name) {
+    return ICONS[name] || "";
+  }
+
+  /* ---------- 6. RENDER NAVBAR ---------- */
   function renderNavbar() {
     const mount = document.getElementById("navbar");
     if (!mount) return;
 
     const lang = STORAGE.getLanguage();
-    const progress = STORAGE.getOverallProgress();
 
     mount.outerHTML = `
       <nav class="navbar" role="navigation" aria-label="Main">
@@ -218,7 +211,7 @@ const APP = (() => {
     wireLangToggle();
   }
 
-  /* ---------- 6. RENDER BOTTOM TAB BAR ---------- */
+  /* ---------- 7. RENDER BOTTOM TAB BAR ---------- */
   function renderTabbar() {
     const mount = document.getElementById("tabbar");
     if (!mount) return;
@@ -262,25 +255,12 @@ const APP = (() => {
     return labels[tab][lang];
   }
 
-  function icon(name) {
-    const icons = {
-      home: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>',
-      modules: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="4" rx="1"/><rect x="3" y="10" width="18" height="4" rx="1"/><rect x="3" y="16" width="18" height="4" rx="1"/></svg>',
-      opportunities: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
-      profile: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>'
-    };
-    return icons[name] || "";
-  }
-
-  /* ---------- 7. TAB TAP HANDLER ---------- */
-  /* When user taps a tab from inside a lesson or exam, we save the session
-     first so they can resume from Home. */
+  /* ---------- 8. TAB TAP HANDLER ---------- */
   function wireTabbar() {
     document.querySelectorAll(".tabbar .tab").forEach((tab) => {
       tab.addEventListener("click", () => {
         playSound("tap");
 
-        /* If we're on lesson.html, save the current step before leaving */
         if (window.location.pathname.includes("lesson.html")) {
           const params = new URLSearchParams(window.location.search);
           const moduleId = params.get("module");
@@ -295,17 +275,15 @@ const APP = (() => {
     });
   }
 
-  /* ---------- 8. SERVICE WORKER ---------- */
+  /* ---------- 9. SERVICE WORKER ---------- */
   function registerServiceWorker() {
     if (!("serviceWorker" in navigator)) return;
     window.addEventListener("load", () => {
-      navigator.serviceWorker.register("/sw.js").catch(() => {
-        /* Silent fail — offline still works after first successful registration */
-      });
+      navigator.serviceWorker.register("/sw.js").catch(() => {});
     });
   }
 
-  /* ---------- 9. SCROLL REVEAL ---------- */
+  /* ---------- 10. SCROLL REVEAL ---------- */
   function initReveal() {
     if (!("IntersectionObserver" in window)) {
       document.querySelectorAll(".reveal").forEach((el) => el.classList.add("visible"));
@@ -324,33 +302,26 @@ const APP = (() => {
     document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
   }
 
-  /* ---------- 10. ONLINE / OFFLINE ---------- */
+  /* ---------- 11. ONLINE / OFFLINE ---------- */
   function wireOnlineOffline() {
     window.addEventListener("offline", () => {
       playSound("offline");
     });
   }
 
-  /* ---------- 11. INIT ---------- */
+  /* ---------- 12. INIT ---------- */
   function init() {
-    /* Inject shared chrome */
     renderNavbar();
     renderTabbar();
-
-    /* Wire behavior */
     wireTabbar();
     applyTranslations();
     initReveal();
     wireOnlineOffline();
     registerServiceWorker();
 
-    /* Mark first visit */
-    if (STORAGE.isFirstVisit()) {
-      STORAGE.markVisited();
-    }
+    if (STORAGE.isFirstVisit()) STORAGE.markVisited();
   }
 
-  /* Run when DOM is ready */
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);
   } else {
@@ -363,19 +334,8 @@ const APP = (() => {
     applyTranslations,
     setLanguage,
     getLanguage: STORAGE.getLanguage,
-    t: (path) => {
-      const lang = STORAGE.getLanguage();
-      const parts = path.split(".");
-      let node = DATA.ui;
-      for (const p of parts) {
-        if (node === undefined) return path;
-        node = node[p];
-      }
-      if (typeof node === "object" && node !== null) {
-        return node["_" + lang] || node[lang] || path;
-      }
-      return node;
-    }
+    icon,
+    t
   };
 
 })();

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ha">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#176b4d" />
+  <meta name="robots" content="noindex" />
+
+  <title>Ba a Haɗa Ba — Fasahar Al'umma</title>
+  <meta name="description" content="Ba a haɗa ka da yanar gizo ba. Darussanka na nan." />
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <style>
+    /* ---------- TOKENS (match index.html + app.js theme) ---------- */
+    :root {
+      --primary: #176b4d;
+      --primary-dark: #0f4d38;
+      --accent: #e7a83b;
+      --cream: #fffaf0;
+      --white: #ffffff;
+      --dark: #17231e;
+      --muted: #68756f;
+      --border: #e6ebe7;
+      --soft: #f2f7f3;
+      --radius: 22px;
+      --radius-sm: 12px;
+      --shadow: 0 20px 60px rgba(20, 50, 38, 0.1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+
+    body {
+      font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+      background:
+        radial-gradient(circle at 85% 10%, rgba(231,168,59,.10), transparent 32%),
+        radial-gradient(circle at 10% 90%, rgba(23,107,77,.05), transparent 35%),
+        linear-gradient(180deg, #fbfdfc 0%, #ffffff 100%);
+      color: var(--dark);
+      line-height: 1.6;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(16px, 5vw, 40px);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 460px;
+      text-align: center;
+    }
+
+    /* ---------- ICON ---------- */
+    .icon {
+      width: clamp(80px, 22vw, 108px);
+      height: clamp(80px, 22vw, 108px);
+      border-radius: 28px;
+      background: var(--soft);
+      color: var(--primary);
+      display: grid;
+      place-items: center;
+      font-size: clamp(32px, 9vw, 44px);
+      margin: 0 auto clamp(24px, 5vw, 32px);
+      position: relative;
+    }
+
+    .icon::after {
+      content: "";
+      position: absolute;
+      inset: -14px;
+      border-radius: 38px;
+      border: 1.5px dashed var(--border);
+      animation: spin 24s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @media (prefers-reduced-motion: reduce) {
+      .icon::after { animation: none; }
+    }
+
+    /* ---------- HEADINGS ---------- */
+    h1 {
+      font-size: clamp(24px, 6vw, 34px);
+      font-weight: 800;
+      letter-spacing: -1.2px;
+      line-height: 1.15;
+      color: var(--dark);
+      margin-bottom: clamp(10px, 2vw, 14px);
+    }
+
+    .sub {
+      font-size: clamp(15px, 4vw, 17px);
+      color: var(--muted);
+      margin-bottom: clamp(8px, 2vw, 12px);
+      max-width: 42ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .sub strong { color: var(--primary); font-weight: 700; }
+
+    .sub-en {
+      font-size: clamp(13px, 3.5vw, 14px);
+      color: var(--muted);
+      opacity: 0.75;
+      margin-bottom: clamp(28px, 6vw, 36px);
+      max-width: 42ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ---------- CARD ---------- */
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: clamp(20px, 5vw, 28px);
+      text-align: left;
+      margin-bottom: clamp(24px, 5vw, 28px);
+      box-shadow: 0 4px 20px rgba(20, 50, 38, 0.04);
+    }
+
+    .card h2 {
+      font-size: clamp(11px, 3vw, 12px);
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: clamp(14px, 3vw, 18px);
+    }
+
+    .card ul { list-style: none; }
+
+    .card li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: clamp(8px, 2vw, 10px) 0;
+      font-size: clamp(13px, 3.8vw, 15px);
+      color: var(--dark);
+      line-height: 1.55;
+    }
+
+    .card li i {
+      color: var(--primary);
+      font-size: 15px;
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+
+    .card li i.x { color: #c94a4a; }
+
+    /* ---------- BUTTONS ---------- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      min-height: clamp(52px, 13vw, 58px);
+      padding: 0 clamp(20px, 5vw, 28px);
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      font-size: clamp(14px, 4vw, 16px);
+      background: var(--primary);
+      color: #fff;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.15s ease, background 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 16px rgba(23, 107, 77, 0.2);
+    }
+
+    .btn:hover {
+      background: var(--primary-dark);
+      box-shadow: 0 6px 22px rgba(23, 107, 77, 0.3);
+    }
+
+    .btn:active { transform: scale(0.98); }
+
+    .btn-secondary {
+      background: var(--white);
+      color: var(--dark);
+      border: 1px solid var(--border);
+      box-shadow: none;
+      margin-top: 12px;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: var(--white);
+      box-shadow: none;
+    }
+
+    /* ---------- FOOTER NOTE ---------- */
+    .footer-note {
+      margin-top: clamp(28px, 6vw, 36px);
+      font-size: clamp(11px, 3vw, 12px);
+      color: var(--muted);
+      opacity: 0.85;
+      line-height: 1.6;
+    }
+
+    /* ---------- VERY SMALL PHONES ---------- */
+    @media (max-width: 360px) {
+      .card { padding: 18px; }
+      .card li { font-size: 13px; }
+    }
+
+    /* ---------- LANDSCAPE PHONES ---------- */
+    @media (max-height: 560px) and (orientation: landscape) {
+      body { align-items: flex-start; padding-top: 24px; }
+      .icon { margin-bottom: 16px; }
+      .sub-en { margin-bottom: 18px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="wrap">
+
+    <div class="icon" aria-hidden="true">
+      <i class="fa-solid fa-wifi"></i>
+    </div>
+
+    <h1>Ba a Haɗa Ba</h1>
+
+    <p class="sub">
+      Ka rasa haɗin yanar gizo. Amma kada ka damu — <strong>darussanka na nan</strong>.
+    </p>
+
+    <p class="sub-en">
+      You're offline. But don't worry — your lessons are still here.
+    </p>
+
+    <div class="card">
+      <h2>Abin da za ka iya yi</h2>
+      <ul>
+        <li>
+          <i class="fa-solid fa-circle-check"></i>
+          <span>Ci gaba da koyon darussan da ka riga ka buɗe.</span>
+        </li>
+        <li>
+          <i class="fa-solid fa-circle-check"></i>
+          <span>Duba ci gabanka a shafin <strong>Bayani</strong>.</span>
+        </li>
+        <li>
+          <i class="fa-solid fa-circle-check"></i>
+          <span>Sake gwada tambayoyin da ka kammala.</span>
+        </li>
+        <li>
+          <i class="fa-solid fa-circle-xmark x"></i>
+          <span>Sabbin darussa za su buɗe idan ka dawo kan layi.</span>
+        </li>
+      </ul>
+    </div>
+
+    <a href="/home.html" class="btn">
+      <i class="fa-solid fa-house"></i>
+      Koma Gida
+    </a>
+
+    <button class="btn btn-secondary" onclick="window.location.reload()">
+      <i class="fa-solid fa-rotate-right"></i>
+      Sake Gwadawa
+    </button>
+
+    <p class="footer-note">
+      Fasahar Al'umma — Fasahar zamani ga al'umma baki ɗaya
+    </p>
+
+  </div>
+
+  <script>
+    window.addEventListener("online", () => {
+      window.location.href = "/home.html";
+    });
+  </script>
+
+</body>
+</html>

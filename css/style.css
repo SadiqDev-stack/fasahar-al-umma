@@ -19,10 +19,10 @@
   --border: #e6ebe7;
   --soft: #f2f7f3;
 
-  /* Button role tokens (gold CTA, matching mockup) */
-  --btn-bg: #e7a83b;
-  --btn-bg-hover: #d99825;
-  --btn-text: #17231e;
+  /* Button role tokens (green CTA, white theme) */
+  --btn-bg: #176b4d;
+  --btn-bg-hover: #0f4d38;
+  --btn-text: #ffffff;
   --btn-secondary-bg: #ffffff;
   --btn-secondary-border: #e6ebe7;
 
