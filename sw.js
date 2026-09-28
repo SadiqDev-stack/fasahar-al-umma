@@ -29,6 +29,16 @@ const PRE_CACHE = [
   "/images",
 
   "/images/logo.png",
+
+  "/audio/correct.mp3",
+  "/audio/incorrect.mp3",
+  "/audio/unlock.mp3",
+  "/audio/success.mp3",
+  "/audio/levelup.mp3",
+  "/audio/tap.mp3",
+  "/audio/page.mp3",
+  "/audio/notify.mp3",
+  "/audio/offline.mp3",
 ];
 
 /* ============================================================
