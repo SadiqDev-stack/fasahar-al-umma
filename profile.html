@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="ha">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#176b4d" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
+  <title>Bayani na — Fasahar Al'umma</title>
+  <meta name="description" content="Ci gabanka, saitunanka, da bayanan ka a Fasahar Al'umma." />
+
+  <link rel="manifest" href="/manifest.json" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <link rel="stylesheet" href="/css/style.css" />
+
+  <style>
+    /* ============================================================
+       PROFILE PAGE
+       ============================================================ */
+    .profile-page {
+      padding: 24px 0 100px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .profile-page.visible { opacity: 1; }
+
+    /* ---- Header ---- */
+    .profile-head {
+      margin-bottom: 24px;
+    }
+
+    .profile-head .label {
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 8px;
+    }
+
+    .profile-head h1 {
+      font-size: clamp(24px, 6vw, 32px);
+      font-weight: 800;
+      letter-spacing: -1.2px;
+      line-height: 1.15;
+      color: var(--dark);
+      margin-bottom: 6px;
+    }
+
+    .profile-head p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ---- User card ---- */
+    .user-card {
+      background: linear-gradient(135deg, #176b4d 0%, #0f4d38 100%);
+      border-radius: var(--radius);
+      padding: 22px;
+      color: #fff;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .user-card::before {
+      content: "";
+      position: absolute;
+      top: -50%; right: -20%;
+      width: 240px; height: 240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(231,168,59,0.20), transparent 70%);
+      pointer-events: none;
+    }
+
+    .user-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.18);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      font-size: 24px;
+      flex-shrink: 0;
+      backdrop-filter: blur(8px);
+      position: relative;
+      overflow: hidden;
+      text-transform: uppercase;
+    }
+
+    .user-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .user-info { flex: 1; min-width: 0; position: relative; }
+    .user-info h2 {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      color: #fff;
+      margin-bottom: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .user-info p {
+      font-size: 12.5px;
+      color: rgba(255, 255, 255, 0.78);
+      font-weight: 600;
+    }
+
+    .user-edit-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.16);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 14px;
+      flex-shrink: 0;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+      backdrop-filter: blur(8px);
+      position: relative;
+    }
+
+    .user-edit-btn:hover {
+      background: rgba(255, 255, 255, 0.24);
+    }
+
+    /* ---- Section ---- */
+    .profile-section {
+      margin-bottom: 26px;
+    }
+
+    .section-title {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 12px;
+      padding-left: 4px;
+    }
+
+    /* ---- Stats grid ---- */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .stat-card {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 18px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .stat-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(23, 107, 77, 0.08);
+    }
+
+    .stat-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: #e8f3ed;
+      color: var(--primary);
+      display: grid;
+      place-items: center;
+      font-size: 15px;
+    }
+
+    .stat-value {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      color: var(--dark);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--muted);
+      line-height: 1.3;
+    }
+
+    /* ---- Overall progress card ---- */
+    .overall-card {
+      background: linear-gradient(135deg, #eef7f2 0%, #e0f0e7 100%);
+      border: 1px solid #d6e2da;
+      border-radius: var(--radius);
+      padding: 22px;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .overall-ring {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      background: conic-gradient(var(--primary) var(--progress, 0%), #d9e4dd 0);
+      display: grid;
+      place-items: center;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .overall-ring::before {
+      content: "";
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: var(--white);
+      position: absolute;
+    }
+
+    .overall-ring span {
+      position: relative;
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--primary-dark);
+    }
+
+    .overall-info { flex: 1; min-width: 0; }
+    .overall-info h3 {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 4px;
+      letter-spacing: -0.3px;
+    }
+    .overall-info p {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.5;
+      font-weight: 600;
+    }
+
+    /* ---- Settings list ---- */
+    .settings-list {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .setting-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+
+    .setting-row:last-child { border-bottom: none; }
+
+    .setting-row:hover {
+      background: var(--soft);
+    }
+
+    .setting-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: #e8f3ed;
+      color: var(--primary);
+      display: grid;
+      place-items: center;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+
+    .setting-body { flex: 1; min-width: 0; }
+    .setting-body h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 2px;
+    }
+    .setting-body p {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    /* Language pill inside setting */
+    .lang-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      background: var(--soft);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 3px;
+      flex-shrink: 0;
+    }
+
+    .lang-pill span {
+      padding: 6px 12px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s;
+      user-select: none;
+    }
+
+    .lang-pill span.active {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(23, 107, 77, 0.25);
+    }
+
+    /* Toggle switch */
+    .toggle {
+      position: relative;
+      width: 48px;
+      height: 28px;
+      border-radius: 100px;
+      background: #cfe0d6;
+      cursor: pointer;
+      transition: background 0.2s;
+      flex-shrink: 0;
+      border: none;
+      padding: 0;
+    }
+
+    .toggle::after {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+      transition: transform 0.25s ease;
+    }
+
+    .toggle.on {
+      background: var(--primary);
+    }
+
+    .toggle.on::after {
+      transform: translateX(20px);
+    }
+
+    /* ---- Danger zone ---- */
+    .danger-card {
+      background: #fdf6f6;
+      border: 1.5px solid #f0d6d6;
+      border-radius: 16px;
+      padding: 18px;
+    }
+
+    .danger-card h4 {
+      font-size: 14px;
+      font-weight: 800;
+      color: #8b2020;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .danger-card h4 i {
+      font-size: 15px;
+    }
+
+    .danger-card p {
+      font-size: 12.5px;
+      color: #8b2020;
+      opacity: 0.85;
+      line-height: 1.55;
+      margin-bottom: 14px;
+    }
+
+    .danger-btn {
+      width: 100%;
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 13.5px;
+      background: #fff;
+      color: #c94a4a;
+      border: 1.5px solid #e8b4b4;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .danger-btn:hover {
+      background: #c94a4a;
+      color: #fff;
+      border-color: #c94a4a;
+    }
+
+    .danger-btn:active { transform: scale(0.98); }
+
+    /* ---- App info ---- */
+    .app-info {
+      text-align: center;
+      padding: 24px 16px;
+      background: var(--soft);
+      border-radius: 16px;
+    }
+
+    .app-info img {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+
+    .app-info h4 {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 3px;
+    }
+
+    .app-info p {
+      font-size: 11.5px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    /* ---- Modal ---- */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(23, 35, 30, 0.4);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 1000;
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+      animation: fadeIn 0.25s ease both;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    .modal {
+      background: var(--white);
+      border-radius: 24px 24px 20px 20px;
+      padding: 24px;
+      width: 100%;
+      max-width: 460px;
+      animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to   { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal h3 {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--dark);
+      letter-spacing: -0.4px;
+      margin-bottom: 6px;
+    }
+
+    .modal p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.55;
+      margin-bottom: 18px;
+    }
+
+    .modal-input {
+      width: 100%;
+      min-height: 52px;
+      padding: 0 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--dark);
+      background: var(--white);
+      margin-bottom: 16px;
+      outline: none;
+      transition: border-color 0.2s;
+      font-family: inherit;
+    }
+
+    .modal-input:focus {
+      border-color: var(--primary);
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .modal-btn {
+      flex: 1;
+      min-height: 48px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: inherit;
+    }
+
+    .modal-btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+    .modal-btn-primary:hover { background: var(--primary-dark); }
+
+    .modal-btn-secondary {
+      background: var(--soft);
+      color: var(--dark);
+    }
+    .modal-btn-secondary:hover { background: var(--border); }
+
+    .modal-btn-danger {
+      background: #c94a4a;
+      color: #fff;
+    }
+    .modal-btn-danger:hover { background: #a83a3a; }
+
+    .modal-btn:active { transform: scale(0.98); }
+
+    /* ---- Toast ---- */
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 90px;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--dark);
+      color: #fff;
+      padding: 14px 20px;
+      border-radius: 12px;
+      font-size: 13.5px;
+      font-weight: 700;
+      z-index: 1100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      max-width: 90%;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .toast i {
+      color: var(--primary);
+      font-size: 15px;
+    }
+
+    /* ---- Desktop ---- */
+    @media (min-width: 901px) {
+      body { padding-bottom: 0; }
+      .profile-page {
+        max-width: 720px;
+        padding-top: 60px;
+        padding-bottom: 60px;
+      }
+      .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .modal-overlay {
+        align-items: center;
+      }
+      .modal {
+        border-radius: 24px;
+      }
+      .toast {
+        bottom: 30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="container profile-page" id="profilePage">
+    <div id="contentMount"></div>
+  </main>
+
+  <div id="tabbar"></div>
+
+  <script src="/data.js"></script>
+  <script src="/storage.js"></script>
+  <script src="/app.js"></script>
+
+  <script>
+    /* ============================================================
+       PROFILE PAGE
+       ============================================================ */
+    (function initProfile() {
+      const lang = STORAGE.getLanguage();
+      const isHa = lang === "ha";
+
+      const page = document.getElementById("profilePage");
+      const mount = document.getElementById("contentMount");
+
+      document.title = (isHa ? "Bayani na" : "Profile") + " — Fasahar Al'umma";
+
+      /* ---------- Helpers ---------- */
+      function getLearnerName() {
+        try {
+          const stored = localStorage.getItem("fasahar.learnerName");
+          if (stored && stored.trim()) return stored.trim();
+        } catch (e) {}
+        return isHa ? "Ɗalibin Fasahar Al'umma" : "Fasahar Al'umma Learner";
+      }
+
+      function setLearnerName(name) {
+        try {
+          localStorage.setItem("fasahar.learnerName", name.trim());
+          return true;
+        } catch (e) {
+          return false;
+        }
+      }
+
+      function getInitials(name) {
+        const parts = name.trim().split(/\s+/);
+        if (parts.length === 1) return parts[0].slice(0, 2);
+        return (parts[0][0] + parts[parts.length - 1][0]);
+      }
+
+      function getDaysActive() {
+        try {
+          const first = localStorage.getItem("fasahar.firstVisitDate");
+          if (!first) {
+            localStorage.setItem("fasahar.firstVisitDate", new Date().toISOString());
+            return 1;
+          }
+          const firstDate = new Date(first);
+          const now = new Date();
+          const diff = Math.floor((now - firstDate) / (1000 * 60 * 60 * 24)) + 1;
+          return diff;
+        } catch (e) {
+          return 1;
+        }
+      }
+
+      /* ---------- Data ---------- */
+      const learnerName = getLearnerName();
+      const initials = getInitials(learnerName);
+      const overall = STORAGE.getOverallProgress();
+      const passedExams = DATA.modules.filter((m) => STORAGE.isExamPassed(m.id)).length;
+      const viewedOpps = (STORAGE.getViewedOpportunities && STORAGE.getViewedOpportunities().length) || 0;
+      const daysActive = getDaysActive();
+      const soundOn = STORAGE.getSoundEnabled();
+
+      /* ---------- Render ---------- */
+      function render() {
+        const currentLang = STORAGE.getLanguage();
+        const ha = currentLang === "ha";
+        const currentSound = STORAGE.getSoundEnabled();
+
+        const html = `
+          <div class="profile-head">
+            <div class="label">${ha ? "Bayani na" : "Profile"}</div>
+            <h1>${ha ? "Ci gabanka da saitunanka" : "Your progress and settings"}</h1>
+            <p>${ha
+              ? "Duk ci gaban da ka yi ana adana shi a wayarka kai tsaye."
+              : "All your progress is saved on your phone automatically."}</p>
+          </div>
+
+          <!-- USER CARD -->
+          <div class="user-card">
+            <div class="user-avatar">${initials}</div>
+            <div class="user-info">
+              <h2>${learnerName}</h2>
+              <p>${ha ? "Ɗalibin Fasahar Al'umma" : "Fasahar Al'umma Learner"}</p>
+            </div>
+            <button class="user-edit-btn" id="editNameBtn" aria-label="${ha ? "Gyara suna" : "Edit name"}">
+              <i class="fa-solid fa-pen"></i>
+            </button>
+          </div>
+
+          <!-- OVERALL PROGRESS -->
+          <div class="overall-card">
+            <div class="overall-ring" style="--progress: ${overall.percent}%">
+              <span>${overall.percent}%</span>
+            </div>
+            <div class="overall-info">
+              <h3>${ha ? "Ci gaban gaba ɗaya" : "Overall progress"}</h3>
+              <p>${ha
+                ? `${overall.completed} daga cikin ${overall.total} darussa an kammala.`
+                : `${overall.completed} of ${overall.total} lessons completed.`}</p>
+            </div>
+          </div>
+
+          <!-- STATS GRID -->
+          <div class="profile-section">
+            <div class="section-title">${ha ? "Ƙididdiga" : "Statistics"}</div>
+            <div class="stats-grid">
+              <div class="stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-book-open"></i></div>
+                <div class="stat-value">${overall.completed}</div>
+                <div class="stat-label">${ha ? "Darussa da aka kammala" : "Lessons completed"}</div>
+              </div>
+
+              <div class="stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-trophy"></i></div>
+                <div class="stat-value">${passedExams}</div>
+                <div class="stat-label">${ha ? "Modules da aka ci" : "Modules passed"}</div>
+              </div>
+
+              <div class="stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
+                <div class="stat-value">${viewedOpps}</div>
+                <div class="stat-label">${ha ? "Dama da aka duba" : "Opportunities viewed"}</div>
+              </div>
+
+              <div class="stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-calendar-day"></i></div>
+                <div class="stat-value">${daysActive}</div>
+                <div class="stat-label">${ha ? "Kwanaki da ka yi amfani" : "Days active"}</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SETTINGS -->
+          <div class="profile-section">
+            <div class="section-title">${ha ? "Saituna" : "Settings"}</div>
+
+            <div class="settings-list">
+              <div class="setting-row">
+                <div class="setting-icon"><i class="fa-solid fa-language"></i></div>
+                <div class="setting-body">
+                  <h4>${ha ? "Harshe" : "Language"}</h4>
+                  <p>${ha ? "Zaɓi harshen da kuka fi fahimta" : "Choose your preferred language"}</p>
+                </div>
+                <div class="lang-pill" id="langPill">
+                  <span data-lang="ha" class="${ha ? "active" : ""}">HA</span>
+                  <span data-lang="en" class="${!ha ? "active" : ""}">EN</span>
+                </div>
+              </div>
+
+              <div class="setting-row">
+                <div class="setting-icon"><i class="fa-solid ${currentSound ? "fa-volume-high" : "fa-volume-xmark"}"></i></div>
+                <div class="setting-body">
+                  <h4>${ha ? "Sauti" : "Sound"}</h4>
+                  <p>${ha
+                    ? (currentSound ? "Ana kunna sautin" : "An kashe sautin")
+                    : (currentSound ? "Sound is on" : "Sound is off")}</p>
+                </div>
+                <button class="toggle ${currentSound ? "on" : ""}" id="soundToggle" aria-label="${ha ? "Kunna ko kashe sauti" : "Toggle sound"}"></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- DANGER -->
+          <div class="profile-section">
+            <div class="section-title">${ha ? "Yankin haɗari" : "Danger zone"}</div>
+            <div class="danger-card">
+              <h4><i class="fa-solid fa-triangle-exclamation"></i> ${ha ? "Sake farawa" : "Start over"}</h4>
+              <p>${ha
+                ? "Wannan zai share duk ci gaban ka — darussa, jarrabawa, komai. Ba za a iya dawo da su ba."
+                : "This will erase all your progress — lessons, exams, everything. It cannot be undone."}</p>
+              <button class="danger-btn" id="resetBtn">
+                <i class="fa-solid fa-rotate-left"></i>
+                ${ha ? "Share Duk Ci Gaban" : "Reset All Progress"}
+              </button>
+            </div>
+          </div>
+
+          <!-- APP INFO -->
+          <div class="app-info">
+            <img src="/images/logo.png" alt="Fasahar Al'umma" />
+            <h4>Fasahar Al'umma</h4>
+            <p>${ha ? "Sigar" : "Version"} ${DATA.meta.version}</p>
+            <p style="margin-top:6px;font-size:11px;opacity:.7;">${ha
+              ? "Fasahar zamani ga al'umma baki ɗaya"
+              : "Digital skills for the whole community"}</p>
+          </div>
+        `;
+
+        mount.innerHTML = html;
+        bindEvents();
+        page.classList.add("visible");
+      }
+
+      /* ---------- Events ---------- */
+      function bindEvents() {
+
+        /* Language pill */
+        const langPill = document.getElementById("langPill");
+        if (langPill) {
+          langPill.addEventListener("click", (e) => {
+            const target = e.target.closest("[data-lang]");
+            if (!target) return;
+            const newLang = target.dataset.lang;
+            if (newLang === STORAGE.getLanguage()) return;
+            APP.setLanguage(newLang);
+            APP.playSound("tap");
+            /* Full page re-render for language */
+            const newIsHa = newLang === "ha";
+            document.title = (newIsHa ? "Bayani na" : "Profile") + " — Fasahar Al'umma";
+            /* Update internal isHa flag */
+            render();
+          });
+        }
+
+        /* Sound toggle */
+        const soundToggle = document.getElementById("soundToggle");
+        if (soundToggle) {
+          soundToggle.addEventListener("click", () => {
+            const next = !STORAGE.getSoundEnabled();
+            STORAGE.setSoundEnabled(next);
+            if (next) APP.playSound("tap");
+            render();
+            showToast(
+              next
+                ? (STORAGE.getLanguage() === "ha" ? "An kunna sautin" : "Sound turned on")
+                : (STORAGE.getLanguage() === "ha" ? "An kashe sautin" : "Sound turned off")
+            );
+          });
+        }
+
+        /* Edit name */
+        const editBtn = document.getElementById("editNameBtn");
+        if (editBtn) {
+          editBtn.addEventListener("click", () => {
+            APP.playSound("tap");
+            openNameModal();
+          });
+        }
+
+        /* Reset */
+        const resetBtn = document.getElementById("resetBtn");
+        if (resetBtn) {
+          resetBtn.addEventListener("click", () => {
+            APP.playSound("tap");
+            openResetModal();
+          });
+        }
+      }
+
+      /* ---------- Modal: Edit Name ---------- */
+      function openNameModal() {
+        const ha = STORAGE.getLanguage() === "ha";
+        const current = getLearnerName();
+
+        const overlay = document.createElement("div");
+        overlay.className = "modal-overlay";
+        overlay.innerHTML = `
+          <div class="modal">
+            <h3>${ha ? "Gyara Suna" : "Edit Name"}</h3>
+            <p>${ha
+              ? "Wannan sunan zai bayyana a takardar shaidarka."
+              : "This name will appear on your certificate."}</p>
+            <input
+              type="text"
+              class="modal-input"
+              id="nameInput"
+              value="${current.replace(/"/g, "&quot;")}"
+              placeholder="${ha ? "Rubuta sunanka" : "Enter your name"}"
+              maxlength="60"
+              autocomplete="name"
+            />
+            <div class="modal-actions">
+              <button class="modal-btn modal-btn-secondary" id="nameCancel">
+                ${ha ? "Soke" : "Cancel"}
+              </button>
+              <button class="modal-btn modal-btn-primary" id="nameSave">
+                <i class="fa-solid fa-check"></i>
+                ${ha ? "Ajiye" : "Save"}
+              </button>
+            </div>
+          </div>
+        `;
+
+        document.body.appendChild(overlay);
+        requestAnimationFrame(() => overlay.classList.add("open"));
+
+        const input = overlay.querySelector("#nameInput");
+        setTimeout(() => input.focus(), 100);
+
+        function close() {
+          overlay.classList.remove("open");
+          setTimeout(() => overlay.remove(), 250);
+        }
+
+        overlay.querySelector("#nameCancel").addEventListener("click", close);
+        overlay.addEventListener("click", (e) => {
+          if (e.target === overlay) close();
+        });
+
+        overlay.querySelector("#nameSave").addEventListener("click", () => {
+          const newName = input.value.trim();
+          if (!newName) {
+            input.focus();
+            return;
+          }
+          setLearnerName(newName);
+          APP.playSound("correct");
+          close();
+          showToast(ha ? "An ajiye sunan" : "Name saved");
+          /* Re-render to update user card */
+          setTimeout(() => window.location.reload(), 600);
+        });
+
+        /* Enter key saves */
+        input.addEventListener("keydown", (e) => {
+          if (e.key === "Enter") {
+            overlay.querySelector("#nameSave").click();
+          }
+        });
+      }
+
+      /* ---------- Modal: Reset Confirm ---------- */
+      function openResetModal() {
+        const ha = STORAGE.getLanguage() === "ha";
+
+        const overlay = document.createElement("div");
+        overlay.className = "modal-overlay";
+        overlay.innerHTML = `
+          <div class="modal">
+            <h3>${ha ? "Share duk ci gaban?" : "Reset all progress?"}</h3>
+            <p>${ha
+              ? "Wannan ba za a iya dawo da shi ba. Za a share duk darussa, jarrabawa, da sunan da ka ajiye."
+              : "This cannot be undone. All lessons, exams, and your saved name will be erased."}</p>
+            <div class="modal-actions">
+              <button class="modal-btn modal-btn-secondary" id="resetCancel">
+                ${ha ? "Soke" : "Cancel"}
+              </button>
+              <button class="modal-btn modal-btn-danger" id="resetConfirm">
+                <i class="fa-solid fa-trash"></i>
+                ${ha ? "Share" : "Reset"}
+              </button>
+            </div>
+          </div>
+        `;
+
+        document.body.appendChild(overlay);
+        requestAnimationFrame(() => overlay.classList.add("open"));
+
+        function close() {
+          overlay.classList.remove("open");
+          setTimeout(() => overlay.remove(), 250);
+        }
+
+        overlay.querySelector("#resetCancel").addEventListener("click", close);
+        overlay.addEventListener("click", (e) => {
+          if (e.target === overlay) close();
+        });
+
+        overlay.querySelector("#resetConfirm").addEventListener("click", () => {
+          STORAGE.resetAll();
+          try {
+            localStorage.removeItem("fasahar.learnerName");
+            localStorage.removeItem("fasahar.firstVisitDate");
+          } catch (e) {}
+
+          APP.playSound("incorrect");
+          close();
+
+          setTimeout(() => {
+            window.location.href = "/home.html";
+          }, 500);
+        });
+      }
+
+      /* ---------- Toast ---------- */
+      function showToast(text) {
+        const existing = document.querySelector(".toast");
+        if (existing) existing.remove();
+
+        const toast = document.createElement("div");
+        toast.className = "toast";
+        toast.innerHTML = `<i class="fa-solid fa-circle-check"></i><span>${text}</span>`;
+        document.body.appendChild(toast);
+
+        requestAnimationFrame(() => toast.classList.add("show"));
+        setTimeout(() => {
+          toast.classList.remove("show");
+          setTimeout(() => toast.remove(), 300);
+        }, 2400);
+      }
+
+      /* ---------- Go ---------- */
+      render();
+    })();
+  </script>
+
+</body>
+</html>

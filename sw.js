@@ -3,8 +3,8 @@
    Offline-first PWA for community digital literacy
    ============================================================ */
 
-const CACHE_VERSION = "fasahar-alumma-v1";
-const RUNTIME_CACHE = "fasahar-alumma-runtime-v1";
+const CACHE_VERSION = "fasahar-alumma-v2";
+const RUNTIME_CACHE = "fasahar-alumma-runtime-v3";
 
 /* ---------- Files to pre-cache on install ---------- */
 const PRE_CACHE = [
@@ -20,6 +20,7 @@ const PRE_CACHE = [
   "/app.js",
   "/offline.html",
   "/css/style.css",
+  "/profile.html",
 
   "/data.js",
   "/storage.js",
@@ -29,6 +30,8 @@ const PRE_CACHE = [
   "/images",
 
   "/images/logo.png",
+
+  "/audio",
 
   "/audio/correct.mp3",
   "/audio/incorrect.mp3",

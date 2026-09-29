@@ -37,11 +37,18 @@ const APP = (() => {
 
   const audioCache = {};
 
-  /* ---------- 1. PLAY SOUND ---------- */
+   /* ---------- 1. PLAY SOUND ---------- */
+  let soundLock = 0;
+
   function playSound(name) {
     if (!STORAGE.getSoundEnabled()) return;
     const src = SOUNDS[name];
     if (!src) return;
+
+    /* Debounce: avoid stacking the same sound within 120ms */
+    const now = Date.now();
+    if (now - soundLock < 120 && name === "tap") return;
+    soundLock = now;
 
     try {
       if (!audioCache[name]) {
@@ -53,6 +60,36 @@ const APP = (() => {
       audio.currentTime = 0;
       audio.play().catch(() => {});
     } catch (e) {}
+  }
+
+  /* ---------- GLOBAL TAP SOUND ----------
+     Catches taps on any button, link, card, or element marked as clickable.
+     Skips elements that handle their own sound (marked data-no-tap). */
+  function wireGlobalTap() {
+    const SELECTOR = [
+      "button",
+      "a",
+      "[role='button']",
+      "[role='tab']",
+      ".module-card",
+      ".lesson-row",
+      ".option",
+      ".opp-card",
+      ".tab",
+      ".choice"
+    ].join(",");
+
+    document.addEventListener("click", (e) => {
+      const el = e.target.closest(SELECTOR);
+      if (!el) return;
+      if (el.hasAttribute("data-no-tap")) return;
+      if (el.disabled) return;
+
+      /* Skip lang toggle — handled inline */
+      if (el.closest("#langToggle") || el.closest("#mobileLang") || el.closest("#drawerLang")) return;
+
+      playSound("tap");
+    }, true);
   }
 
   /* ---------- 2. TRANSLATION LOOKUP ---------- */
@@ -211,26 +248,21 @@ const APP = (() => {
     wireLangToggle();
   }
 
-  /* ---------- 7. RENDER BOTTOM TAB BAR ---------- */
-  function renderTabbar() {
+    function renderTabbar() {
     const mount = document.getElementById("tabbar");
     if (!mount) return;
 
     const path = window.location.pathname;
-    const isHome = path.endsWith("home.html") || path === "/";
-    const isModule = path.includes("module.html") || path.includes("lesson.html") || path.includes("exam.html");
+    const isHome = path.endsWith("home.html") || path === "/" || path === "/index.html";
     const isOpps = path.includes("opportunities.html");
     const isProfile = path.includes("profile.html");
+    const isAbout = path.includes("about.html");
 
     mount.outerHTML = `
       <nav class="tabbar" role="navigation" aria-label="Bottom">
         <a href="/home.html" class="tab ${isHome ? "active" : ""}" data-tab="home">
           ${icon("home")}
           <span>${labelFor("home")}</span>
-        </a>
-        <a href="/home.html#modules" class="tab ${isModule ? "active" : ""}" data-tab="modules">
-          ${icon("modules")}
-          <span>${labelFor("modules")}</span>
         </a>
         <a href="/opportunities.html" class="tab ${isOpps ? "active" : ""}" data-tab="opportunities">
           ${icon("opportunities")}
@@ -240,17 +272,20 @@ const APP = (() => {
           ${icon("profile")}
           <span>${labelFor("profile")}</span>
         </a>
+        <a href="/about.html" class="tab ${isAbout ? "active" : ""}" data-tab="about">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>${labelFor("about")}</span>
+        </a>
       </nav>
     `;
   }
-
   function labelFor(tab) {
     const lang = STORAGE.getLanguage();
     const labels = {
       home: { ha: "Gida", en: "Home" },
-      modules: { ha: "Darussa", en: "Modules" },
       opportunities: { ha: "Dama", en: "Opportunities" },
-      profile: { ha: "Bayani", en: "Profile" }
+      profile: { ha: "Bayani", en: "Profile" },
+      about: { ha: "Game da Mu", en: "About" }
     };
     return labels[tab][lang];
   }
@@ -309,11 +344,11 @@ const APP = (() => {
     });
   }
 
-  /* ---------- 12. INIT ---------- */
-  function init() {
+   function init() {
     renderNavbar();
     renderTabbar();
     wireTabbar();
+    wireGlobalTap();
     applyTranslations();
     initReveal();
     wireOnlineOffline();
@@ -337,5 +372,5 @@ const APP = (() => {
     icon,
     t
   };
-
+  
 })();

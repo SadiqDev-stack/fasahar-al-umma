@@ -719,10 +719,6 @@
         <i class="fa-solid fa-house"></i>
         <span class="drawer-text" data-key="home">Gida</span>
       </a>
-      <a href="#modules">
-        <i class="fa-solid fa-book-open"></i>
-        <span class="drawer-text" data-key="modules">Darussa</span>
-      </a>
       <a href="/opportunities.html">
         <i class="fa-solid fa-hand-holding-heart"></i>
         <span class="drawer-text" data-key="opportunities">Dama</span>
@@ -730,6 +726,10 @@
       <a href="/profile.html">
         <i class="fa-solid fa-user"></i>
         <span class="drawer-text" data-key="profile">Bayani</span>
+      </a>
+      <a href="/about.html">
+        <i class="fa-solid fa-circle-info"></i>
+        <span class="drawer-text" data-key="about">Game da Mu</span>
       </a>
     </nav>
 
@@ -743,11 +743,11 @@
       </div>
     </div>
 
-    <div class="drawer-toggle-row">
+    <div class="drawer-toggle-row" id="drawerSoundRow" role="button" tabindex="0" style="cursor:pointer;">
       <span class="drawer-text" data-key="sound">Sauti</span>
-      <button id="drawerSound" style="background:none;border:none;color:var(--primary);font-size:16px;cursor:pointer;">
+      <span id="drawerSound" style="color:var(--primary);font-size:16px;display:inline-flex;">
         <i class="fa-solid fa-volume-high"></i>
-      </button>
+      </span>
     </div>
   </aside>
 
@@ -954,9 +954,9 @@
     function updateDrawerText(isHa) {
       const dict = {
         home: isHa ? "Gida" : "Home",
-        modules: isHa ? "Darussa" : "Modules",
         opportunities: isHa ? "Dama" : "Opportunities",
         profile: isHa ? "Bayani" : "Profile",
+        about: isHa ? "Game da Mu" : "About",
         settings: isHa ? "Saituna" : "Settings",
         language: isHa ? "Harshe" : "Language",
         sound: isHa ? "Sauti" : "Sound"
@@ -965,6 +965,13 @@
         const key = el.dataset.key;
         if (dict[key]) el.textContent = dict[key];
       });
+      const soundLabel = document.querySelector('[data-key="sound"]');
+      if (soundLabel) {
+        const on = STORAGE.getSoundEnabled();
+        soundLabel.textContent = isHa
+          ? (on ? "Sauti: Kunne" : "Sauti: Kashe")
+          : (on ? "Sound: On" : "Sound: Off");
+      }
     }
 
     /* ============================================================
@@ -1028,7 +1035,6 @@
       const drawer = document.getElementById("drawer");
       const overlay = document.getElementById("drawerOverlay");
       const close = document.getElementById("drawerClose");
-      const soundBtn = document.getElementById("drawerSound");
 
       function open() {
         drawer.classList.add("open");
@@ -1045,19 +1051,39 @@
       close.addEventListener("click", closeDrawer);
       overlay.addEventListener("click", closeDrawer);
 
-      function updateSoundIcon() {
+      const soundRow = document.getElementById("drawerSoundRow");
+      const soundBtn = document.getElementById("drawerSound");
+
+      function updateSoundUI() {
         const on = STORAGE.getSoundEnabled();
-        soundBtn.innerHTML = on
-          ? '<i class="fa-solid fa-volume-high"></i>'
-          : '<i class="fa-solid fa-volume-xmark"></i>';
+        const lang = STORAGE.getLanguage();
+        const label = drawer.querySelector('[data-key="sound"]');
+        if (soundBtn) {
+          soundBtn.innerHTML = on
+            ? '<i class="fa-solid fa-volume-high"></i>'
+            : '<i class="fa-solid fa-volume-xmark"></i>';
+          soundBtn.style.color = on ? "var(--primary)" : "var(--muted)";
+        }
+        if (label) {
+          label.textContent = lang === "ha"
+            ? (on ? "Sauti: Kunne" : "Sauti: Kashe")
+            : (on ? "Sound: On" : "Sound: Off");
+        }
       }
-      updateSoundIcon();
-      soundBtn.addEventListener("click", () => {
-        const next = !STORAGE.getSoundEnabled();
-        STORAGE.setSoundEnabled(next);
-        updateSoundIcon();
-        if (next) APP.playSound("tap");
-      });
+
+      updateSoundUI();
+
+      if (soundRow) {
+        soundRow.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const next = !STORAGE.getSoundEnabled();
+          STORAGE.setSoundEnabled(next);
+          updateSoundUI();
+          if (next) APP.playSound("tap");
+        });
+      }
+
+      document.addEventListener("languagechange", updateSoundUI);
     })();
   </script>
 
