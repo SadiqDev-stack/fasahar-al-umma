@@ -156,19 +156,7 @@
 
     .about-hero-btn-ios { background: #17231e; }
     .about-hero-btn-ios:hover { background: #0d1512; }
-
-    .about-hero-btn-coming {
-      background: #e8eeea;
-      color: var(--muted);
-      cursor: not-allowed;
-      pointer-events: none;
-    }
-
-    .about-hero-btn-coming i {
-      opacity: 0.6;
-    }
-
-    @media (max-width: 560px) {
+@media (max-width: 560px) {
       .about-hero-btn { flex: 1; justify-content: center; min-width: 140px; }
     }
 
@@ -448,10 +436,10 @@
               <i class="fa-brands fa-android"></i>
               <span>${isHa ? "Sauke don Android" : "Download for Android"}</span>
             </a>
-            <span class="about-hero-btn about-hero-btn-coming">
+            <a href="/download-ios.html" class="about-hero-btn about-hero-btn-ios">
               <i class="fa-brands fa-apple"></i>
-              <span>${isHa ? "iOS — Nan gaba" : "iOS — Coming soon"}</span>
-            </span>
+              <span>${isHa ? "iPhone — Yadda ake" : "iPhone — How to install"}</span>
+            </a>
           </div>
         </div>
       `;
