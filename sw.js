@@ -1,13 +1,26 @@
 /* ============================================================
    Fasahar Al'umma — Service Worker
    Offline-first PWA for community digital literacy
+   ============================================================
+
+   CACHE VERSIONS:
+   Bump CACHE_VERSION when you change any cached file so browsers
+   fetch the new copies on next load.
+
+   VERSION HISTORY:
+   v1 — initial
+   v2 — added audio, images, profile page
+   v3 — added download endpoints, files folder check, final polish
    ============================================================ */
 
-const CACHE_VERSION = "fasahar-alumma-v2";
+const CACHE_VERSION = "fasahar-alumma-v3";
 const RUNTIME_CACHE = "fasahar-alumma-runtime-v3";
 
-/* ---------- Files to pre-cache on install ---------- */
+/* ============================================================
+   PRE-CACHE — every file the app needs to work offline
+   ============================================================ */
 const PRE_CACHE = [
+  /* Root + pages */
   "/",
   "/index.html",
   "/home.html",
@@ -16,32 +29,34 @@ const PRE_CACHE = [
   "/exam.html",
   "/opportunities.html",
   "/certificate.html",
-  "/about.html",
-  "/app.js",
-  "/offline.html",
-  "/css/style.css",
   "/profile.html",
+  "/about.html",
+  "/offline.html",
 
+  /* Styles */
+  "/css/style.css",
+
+  /* Scripts */
   "/data.js",
   "/storage.js",
+  "/app.js",
 
+  /* PWA manifest */
   "/manifest.json",
 
-  "/images",
-
+  /* Logo + icons */
   "/images/logo.png",
 
-  "/audio",
-
+  /* Audio — UI feedback sounds */
+  "/audio/tap.mp3",
   "/audio/correct.mp3",
   "/audio/incorrect.mp3",
   "/audio/unlock.mp3",
   "/audio/success.mp3",
   "/audio/levelup.mp3",
-  "/audio/tap.mp3",
   "/audio/page.mp3",
   "/audio/notify.mp3",
-  "/audio/offline.mp3",
+  "/audio/offline.mp3"
 ];
 
 /* ============================================================
@@ -52,9 +67,16 @@ self.addEventListener("install", (event) => {
     caches
       .open(CACHE_VERSION)
       .then((cache) => {
-        return cache.addAll(PRE_CACHE);
+        /* Use individual adds so a single 404 doesn't break install */
+        return Promise.all(
+          PRE_CACHE.map((url) =>
+            cache.add(url).catch((err) => {
+              console.warn("[SW] Failed to cache:", url, err);
+            })
+          )
+        );
       })
-      .then(() => self.skipWaiting()),
+      .then(() => self.skipWaiting())
   );
 });
 
@@ -69,10 +91,10 @@ self.addEventListener("activate", (event) => {
         return Promise.all(
           keys
             .filter((key) => key !== CACHE_VERSION && key !== RUNTIME_CACHE)
-            .map((key) => caches.delete(key)),
+            .map((key) => caches.delete(key))
         );
       })
-      .then(() => self.clients.claim()),
+      .then(() => self.clients.claim())
   );
 });
 
@@ -82,22 +104,26 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("fetch", (event) => {
   const { request } = event;
 
-  // Only handle GET requests
+  /* Only handle GET */
   if (request.method !== "GET") return;
 
-  // Skip cross-origin requests we don't control
+  /* Skip cross-origin (YouTube embeds, Font Awesome CDN, external links) */
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) {
-    // YouTube embeds, external opportunity links, etc — just pass through
     return;
   }
 
-  // ---- HTML navigation requests: network first, cache fallback, offline page ----
+  /* ---- Skip the download endpoints from caching ----
+     APK/IPA files are large and shouldn't be auto-cached. */
+  if (url.pathname.startsWith("/files/")) {
+    return;
+  }
+
+  /* ---- HTML navigation: network-first, then cache, then offline page ---- */
   if (request.mode === "navigate") {
     event.respondWith(
       fetch(request)
         .then((response) => {
-          // Cache a fresh copy
           const copy = response.clone();
           caches.open(RUNTIME_CACHE).then((cache) => cache.put(request, copy));
           return response;
@@ -106,24 +132,20 @@ self.addEventListener("fetch", (event) => {
           return caches.match(request).then((cached) => {
             return cached || caches.match("/offline.html");
           });
-        }),
+        })
     );
     return;
   }
 
-  // ---- Static assets (CSS, JS, icons, manifest): cache first ----
+  /* ---- Static assets: cache-first, then network ---- */
   event.respondWith(
     caches.match(request).then((cached) => {
       if (cached) return cached;
 
       return fetch(request)
         .then((response) => {
-          // Don't cache bad responses
-          if (
-            !response ||
-            response.status !== 200 ||
-            response.type !== "basic"
-          ) {
+          /* Don't cache bad responses */
+          if (!response || response.status !== 200 || response.type !== "basic") {
             return response;
           }
 
@@ -132,18 +154,18 @@ self.addEventListener("fetch", (event) => {
           return response;
         })
         .catch(() => {
-          // If it's an image, fall back to a placeholder if available
+          /* Fallback for missing images */
           if (request.destination === "image") {
-            return caches.match("/icons/icon-192.png");
+            return caches.match("/images/logo.png");
           }
           return new Response("", { status: 503, statusText: "Offline" });
         });
-    }),
+    })
   );
 });
 
 /* ============================================================
-   MESSAGE — allow pages to trigger cache updates or skip waiting
+   MESSAGE — allow pages to trigger updates
    ============================================================ */
 self.addEventListener("message", (event) => {
   if (event.data === "SKIP_WAITING") {

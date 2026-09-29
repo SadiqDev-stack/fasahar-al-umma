@@ -2,20 +2,83 @@
 <html lang="ha">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#ffffff" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#176b4d" />
 
+  <!-- ===== SEO ===== -->
   <title>Fasahar Al'umma — Fasahar Zamani ga Al'umma Baki Ɗaya</title>
-  <meta
-    name="description"
-    content="Fasahar Al'umma na ba da ilimin fasahar zamani ga al'umma baki ɗaya. Koyi a Hausa ko Turanci, ka gina ƙwarewar da za ka yi amfani da ita kowace rana."
+  <meta name="description" content="Fasahar Al'umma na koyar da ƙwarewar fasahar zamani ga al'umma baki ɗaya — a Hausa da Turanci, kyauta, kuma tana aiki ba tare da intanet ba. Darussa 6, jarrabawa, da takardar shaida." />
+  <meta name="keywords" content="fasahar, dijital, Hausa, koyon fasaha, Nigeria, digital literacy, Hausa learning, offline learning, community education" />
+  <meta name="author" content="Fasahar Al'umma" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fasaharalumma.app/" />
+
+  <!-- ===== Open Graph ===== -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fasahar Al'umma" />
+  <meta property="og:title" content="Fasahar Al'umma — Fasahar Zamani ga Al'umma Baki Ɗaya" />
+  <meta property="og:description" content="Koyi ƙwarewar fasahar zamani a Hausa ko Turanci. Kyauta, offline, kuma don kowa." />
+  <meta property="og:url" content="https://fasaharalumma.app/" />
+  <meta property="og:image" content="https://fasaharalumma.app/images/logo.png" />
+  <meta property="og:image:alt" content="Fasahar Al'umma logo" />
+  <meta property="og:locale" content="ha_NG" />
+  <meta property="og:locale:alternate" content="en_NG" />
+
+  <!-- ===== Twitter Card ===== -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Fasahar Al'umma — Fasahar Zamani ga Al'umma" />
+  <meta name="twitter:description" content="Darussa 6 na fasahar zamani, a Hausa da Turanci. Kyauta, offline, don kowa." />
+  <meta name="twitter:image" content="https://fasaharalumma.app/images/logo.png" />
+
+  <!-- ===== Favicon / PWA ===== -->
+  <link rel="icon" type="image/png" href="/images/logo.png" />
+  <link rel="apple-touch-icon" href="/images/logo.png" />
+  <link rel="manifest" href="/manifest.json" />
+
+  <!-- ===== Fonts / Icons ===== -->
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
   />
 
+  <!-- ===== JSON-LD Structured Data ===== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "Fasahar Al'umma",
+    "alternateName": "Digital Skills for the Community",
+    "url": "https://fasaharalumma.app/",
+    "logo": "https://fasaharalumma.app/images/logo.png",
+    "description": "A bilingual, offline-first digital literacy platform for Hausa-speaking communities in Nigeria.",
+    "areaServed": {
+      "@type": "Country",
+      "name": "Nigeria"
+    },
+    "inLanguage": ["ha", "en"],
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "NGN"
+    }
+  }
+  </script>
+
   <style>
+    /* ============================================================
+       TOKENS (aligned with the app)
+       ============================================================ */
     :root {
       --primary: #176b4d;
       --primary-dark: #0f4d38;
       --accent: #e7a83b;
+      --accent-dark: #d99825;
       --cream: #fffaf0;
       --white: #ffffff;
       --dark: #17231e;
@@ -23,26 +86,31 @@
       --border: #e6ebe7;
       --soft: #f2f7f3;
       --radius: 22px;
+      --radius-sm: 12px;
       --shadow: 0 20px 60px rgba(20, 50, 38, 0.1);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
     body {
-      font-family: Inter, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
       color: var(--dark);
       background: var(--white);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
     a { color: inherit; text-decoration: none; }
     button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+    img { max-width: 100%; display: block; }
 
     .container { width: min(1120px, 92%); margin: auto; }
 
-    /* ===== NAVBAR ===== */
+    /* ============================================================
+       NAVBAR
+       ============================================================ */
     nav {
       position: fixed;
       top: 0; left: 0; width: 100%;
@@ -66,20 +134,15 @@
       align-items: center;
       gap: 10px;
       font-weight: 800;
-      font-size: 20px;
+      font-size: 18px;
       letter-spacing: -0.4px;
       white-space: nowrap;
     }
 
-    .logo-mark {
-      width: 38px; height: 38px;
-      border-radius: 12px;
-      background: var(--primary);
-      color: #fff;
-      display: grid;
-      place-items: center;
-      font-weight: 900;
-      font-size: 18px;
+    .logo img {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
       flex-shrink: 0;
     }
 
@@ -94,7 +157,6 @@
 
     .nav-actions { display: flex; align-items: center; gap: 12px; }
 
-    /* Language Toggle */
     .lang-toggle {
       display: flex;
       align-items: center;
@@ -128,27 +190,36 @@
       background: var(--primary);
       color: #fff;
       padding: 12px 22px;
-      border-radius: 12px;
+      border-radius: var(--radius-sm);
       font-weight: 700;
       font-size: 14px;
-      transition: background 0.2s;
+      transition: all 0.2s;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       white-space: nowrap;
     }
-    .nav-btn:hover, .hero-btn:hover { background: var(--primary-dark); }
+    .nav-btn:hover, .hero-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
 
     .menu-btn {
       display: none;
       border: 0;
       background: transparent;
-      font-size: 26px;
+      font-size: 22px;
       color: var(--dark);
       padding: 8px;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
     }
+    .menu-btn:hover { background: var(--soft); }
 
-    /* ===== HERO ===== */
+    /* ============================================================
+       HERO
+       ============================================================ */
     .hero {
       padding: 150px 0 90px;
       background:
@@ -167,6 +238,8 @@
 
     .eyebrow {
       display: inline-flex;
+      align-items: center;
+      gap: 8px;
       padding: 8px 14px;
       background: #e8f3ed;
       color: var(--primary);
@@ -202,15 +275,15 @@
     .secondary-btn {
       padding: 12px 22px;
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: var(--radius-sm);
       font-weight: 700;
       font-size: 14px;
       background: #fff;
       color: var(--dark);
-      transition: border-color 0.2s, color 0.2s;
+      transition: all 0.2s;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
     }
     .secondary-btn:hover {
       border-color: var(--primary);
@@ -239,7 +312,9 @@
       50% { opacity: 0.4; }
     }
 
-    /* ===== PHONE MOCKUP ===== */
+    /* ============================================================
+       PHONE MOCKUP
+       ============================================================ */
     .visual { position: relative; display: flex; justify-content: center; }
 
     .phone {
@@ -279,70 +354,73 @@
       align-items: center;
       gap: 7px;
       font-weight: 800;
-      font-size: 14px;
+      font-size: 13px;
     }
 
-    .mini-mark {
-      width: 27px; height: 27px;
-      background: var(--primary);
-      color: #fff;
-      display: grid;
-      place-items: center;
-      border-radius: 8px;
-      font-size: 12px;
-      font-weight: 900;
+    .app-logo img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      border-radius: 6px;
     }
 
     .profile {
-      width: 30px; height: 30px;
+      width: 28px; height: 28px;
       background: #dce8e1;
       border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--primary);
+      font-size: 11px;
     }
 
     .welcome {
       background: var(--primary);
       color: #fff;
-      padding: 18px;
-      border-radius: 18px;
-      margin-bottom: 18px;
+      padding: 16px;
+      border-radius: 16px;
+      margin-bottom: 16px;
     }
-    .welcome small { opacity: 0.85; font-size: 12px; }
-    .welcome h3 { margin-top: 4px; font-size: 17px; }
+    .welcome small { opacity: 0.85; font-size: 11px; display: block; }
+    .welcome h3 { margin-top: 4px; font-size: 15px; font-weight: 800; }
 
     .phone-section-title {
-      font-size: 13px;
+      font-size: 11px;
       font-weight: 800;
-      margin-bottom: 10px;
-      color: var(--dark);
+      margin-bottom: 8px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .lesson {
       background: #fff;
       border: 1px solid var(--border);
-      padding: 13px;
-      border-radius: 14px;
-      margin-bottom: 9px;
+      padding: 11px;
+      border-radius: 12px;
+      margin-bottom: 8px;
       display: flex;
       gap: 10px;
       align-items: center;
     }
 
     .lesson-icon {
-      width: 38px; height: 38px;
+      width: 32px; height: 32px;
       background: #eef6f1;
-      border-radius: 11px;
+      border-radius: 9px;
       display: grid;
       place-items: center;
-      font-size: 17px;
+      font-size: 13px;
+      color: var(--primary);
       flex-shrink: 0;
     }
 
     .lesson-info { flex: 1; min-width: 0; }
-    .lesson strong { font-size: 12px; display: block; }
+    .lesson strong { font-size: 11px; display: block; font-weight: 800; }
     .lesson span { color: #849089; font-size: 10px; }
 
     .progress {
-      height: 5px;
+      height: 4px;
       background: #e8eeea;
       border-radius: 10px;
       margin-top: 5px;
@@ -371,10 +449,11 @@
     .floating-card .badge {
       display: inline-flex;
       align-items: center;
-      gap: 4px;
-      color: var(--accent);
+      gap: 6px;
+      color: var(--accent-dark);
       font-size: 11px;
       margin-bottom: 4px;
+      font-weight: 800;
     }
     .floating-card span {
       display: block;
@@ -383,42 +462,96 @@
       margin-top: 2px;
     }
 
-    /* ===== TRUST ===== */
-    .trust {
-      padding: 30px 0;
+    /* ============================================================
+       STATS STRIP
+       ============================================================ */
+    .stats {
+      padding: 28px 0;
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
       background: var(--soft);
     }
-    .trust p {
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .stat {
       text-align: center;
-      color: #53615b;
-      font-size: 14px;
-      font-weight: 600;
+    }
+
+    .stat-value {
+      font-size: clamp(22px, 3vw, 28px);
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: -0.8px;
+      line-height: 1.1;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    .trust .sep {
-      width: 5px; height: 5px;
-      border-radius: 50%;
-      background: #c8d4cc;
+      gap: 6px;
     }
 
-    /* ===== SECTIONS ===== */
+    .stat-value i {
+      font-size: 16px;
+      color: var(--accent-dark);
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 700;
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ============================================================
+       QUOTE DIVIDER
+       ============================================================ */
+    .quote-divider {
+      text-align: center;
+      padding: 60px 0 40px;
+    }
+
+    .quote-divider blockquote {
+      font-size: clamp(18px, 2.4vw, 24px);
+      font-weight: 700;
+      color: var(--primary-dark);
+      letter-spacing: -0.5px;
+      line-height: 1.4;
+      max-width: 640px;
+      margin: 0 auto 12px;
+      font-style: italic;
+    }
+
+    .quote-divider cite {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-style: normal;
+    }
+
+    /* ============================================================
+       SECTIONS
+       ============================================================ */
     section { padding: 100px 0; }
 
     .section-heading { max-width: 700px; margin-bottom: 48px; }
+
     .section-heading .label {
       color: var(--primary);
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 1.2px;
       margin-bottom: 12px;
     }
+
     .section-heading h2 {
       font-size: clamp(32px, 4vw, 46px);
       line-height: 1.1;
@@ -426,12 +559,15 @@
       margin-bottom: 15px;
       font-weight: 800;
     }
+
     .section-heading p {
       color: var(--muted);
       font-size: 17px;
     }
 
-    /* ===== INCLUSIVITY ===== */
+    /* ============================================================
+       INCLUSIVITY
+       ============================================================ */
     .inclusivity { background: var(--white); }
 
     .inclusivity-grid {
@@ -449,6 +585,7 @@
       font-weight: 800;
     }
     .inclusivity-text h2 span { color: var(--primary); }
+
     .inclusivity-text p {
       color: var(--muted);
       margin-bottom: 15px;
@@ -462,12 +599,15 @@
       border-radius: var(--radius);
       border: 1px solid var(--border);
     }
+
     .inclusivity-box h3 {
       margin-bottom: 18px;
-      font-size: 20px;
+      font-size: 19px;
       font-weight: 800;
     }
+
     .inclusivity-box ul { list-style: none; }
+
     .inclusivity-box li {
       margin-bottom: 16px;
       display: flex;
@@ -478,11 +618,13 @@
       line-height: 1.6;
     }
     .inclusivity-box li:last-child { margin-bottom: 0; }
+
     .inclusivity-box li::before {
-      content: "✕";
+      content: "\f00d";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
       color: #c94a4a;
-      font-weight: bold;
-      font-size: 13px;
+      font-size: 11px;
       background: #fce8e8;
       width: 22px; height: 22px;
       display: grid;
@@ -491,6 +633,7 @@
       flex-shrink: 0;
       margin-top: 2px;
     }
+
     .inclusivity-box li strong {
       display: block;
       color: var(--dark);
@@ -498,50 +641,9 @@
       margin-bottom: 3px;
     }
 
-    /* ===== LANGUAGE SECTION ===== */
-    .language-section {
-      text-align: center;
-      background: #f7faf8;
-      padding: 80px 0;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    .language-section h2 {
-      font-size: clamp(28px, 4vw, 40px);
-      margin-bottom: 15px;
-      font-weight: 800;
-      letter-spacing: -1px;
-    }
-    .language-section p {
-      color: var(--muted);
-      max-width: 600px;
-      margin: auto;
-      font-size: 17px;
-    }
-    .language-pills {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin-top: 25px;
-      flex-wrap: wrap;
-    }
-    .pill {
-      padding: 12px 24px;
-      border-radius: 100px;
-      background: #fff;
-      border: 1px solid var(--border);
-      font-weight: 700;
-      font-size: 15px;
-      color: var(--muted);
-    }
-    .pill.active {
-      background: var(--primary);
-      color: #fff;
-      border-color: var(--primary);
-      box-shadow: 0 4px 16px rgba(23, 107, 77, 0.25);
-    }
-
-    /* ===== MODULES ===== */
+    /* ============================================================
+       MODULES
+       ============================================================ */
     .modules { background: var(--cream); }
 
     .module-grid {
@@ -560,18 +662,23 @@
     .module:hover {
       transform: translateY(-5px);
       box-shadow: var(--shadow);
+      border-color: #e0d9c8;
     }
 
     .module-icon {
       width: 48px; height: 48px;
-      border-radius: 14px;
-      background: #edf6f0;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
       display: grid;
       place-items: center;
-      font-size: 22px;
+      font-size: 18px;
       margin-bottom: 18px;
+      box-shadow: 0 6px 16px rgba(23, 107, 77, 0.24);
     }
-    .module h3 { margin-bottom: 4px; font-size: 18px; font-weight: 800; }
+
+    .module h3 { margin-bottom: 4px; font-size: 17px; font-weight: 800; }
+
     .module .hausa-title {
       font-size: 13px;
       color: var(--primary);
@@ -579,28 +686,33 @@
       margin-bottom: 12px;
       display: block;
     }
+
     .module p {
       color: var(--muted);
       font-size: 14px;
       margin-bottom: 16px;
       line-height: 1.6;
     }
+
     .module ul {
       list-style: none;
       color: #59655f;
       font-size: 13px;
     }
+
     .module li {
       margin: 8px 0;
       display: flex;
       align-items: center;
       gap: 8px;
     }
+
     .module li::before {
-      content: "✓";
+      content: "\f00c";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
       color: var(--primary);
-      font-weight: bold;
-      font-size: 12px;
+      font-size: 10px;
       width: 18px; height: 18px;
       background: #e8f3ed;
       border-radius: 50%;
@@ -609,13 +721,17 @@
       flex-shrink: 0;
     }
 
-    /* ===== HOW IT WORKS ===== */
+    /* ============================================================
+       HOW IT WORKS
+       ============================================================ */
     .steps {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 30px;
     }
+
     .step { position: relative; }
+
     .step-number {
       width: 44px; height: 44px;
       border-radius: 50%;
@@ -624,37 +740,46 @@
       display: grid;
       place-items: center;
       font-weight: 800;
-      font-size: 18px;
+      font-size: 16px;
       margin-bottom: 18px;
+      box-shadow: 0 6px 16px rgba(23, 107, 77, 0.24);
     }
-    .step h3 { margin-bottom: 8px; font-size: 19px; font-weight: 800; }
-    .step p { color: var(--muted); font-size: 14px; line-height: 1.7; }
 
-    /* ===== CHALLENGE ===== */
+    .step h3 { margin-bottom: 8px; font-size: 18px; font-weight: 800; }
+    .step p { color: var(--muted); font-size: 14.5px; line-height: 1.7; }
+
+    /* ============================================================
+       CHALLENGE
+       ============================================================ */
     .feature {
       background: var(--primary);
       color: #fff;
     }
+
     .feature-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 70px;
       align-items: center;
     }
+
     .feature h2 {
-      font-size: clamp(34px, 4vw, 50px);
+      font-size: clamp(32px, 4vw, 48px);
       line-height: 1.08;
       margin-bottom: 18px;
       letter-spacing: -1.5px;
       font-weight: 800;
     }
+
     .feature h2 span { color: var(--accent); }
+
     .feature p {
       color: rgba(255, 255, 255, 0.82);
       margin-bottom: 25px;
       font-size: 16px;
       line-height: 1.75;
     }
+
     .feature-tagline {
       display: inline-flex;
       align-items: center;
@@ -664,16 +789,17 @@
       padding: 10px 18px;
       border-radius: 100px;
       font-weight: 700;
-      font-size: 14px;
+      font-size: 13.5px;
     }
 
     .challenge {
       background: #fff;
       color: var(--dark);
-      padding: 28px;
-      border-radius: 22px;
+      padding: 26px;
+      border-radius: var(--radius);
       box-shadow: 0 30px 70px rgba(0, 0, 0, 0.18);
     }
+
     .challenge-label {
       font-size: 11px;
       color: var(--primary);
@@ -681,8 +807,13 @@
       text-transform: uppercase;
       letter-spacing: 1px;
       margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
-    .challenge h3 { margin-bottom: 16px; font-size: 18px; font-weight: 800; }
+
+    .challenge h3 { margin-bottom: 16px; font-size: 17px; font-weight: 800; }
+
     .challenge .message {
       background: #f6f8f7;
       border: 1px solid var(--border);
@@ -693,10 +824,13 @@
       color: #4a5a52;
       line-height: 1.6;
     }
+
     .choice {
-      display: block;
+      display: flex;
+      align-items: center;
+      gap: 10px;
       width: 100%;
-      padding: 14px 16px;
+      padding: 13px 16px;
       background: #f6f8f7;
       border: 1px solid var(--border);
       border-radius: 11px;
@@ -712,6 +846,7 @@
       background: #edf6f0;
       transform: translateX(3px);
     }
+
     .result {
       display: none;
       margin-top: 15px;
@@ -725,8 +860,57 @@
       line-height: 1.6;
     }
 
-    /* ===== CTA ===== */
+    /* ============================================================
+       SECONDARY CTA — Opportunities
+       ============================================================ */
+    .opps-cta {
+      background: linear-gradient(135deg, #fff6e3 0%, #fffaf0 100%);
+      border: 1px solid #f0e0b8;
+      border-radius: var(--radius);
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .opps-cta-body { flex: 1; min-width: 260px; }
+
+    .opps-cta .label {
+      font-size: 11px;
+      color: var(--accent-dark);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .opps-cta h3 {
+      font-size: clamp(20px, 3vw, 26px);
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      margin-bottom: 8px;
+      color: var(--dark);
+    }
+
+    .opps-cta p {
+      font-size: 14.5px;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 520px;
+    }
+
+    .opps-cta .hero-btn { flex-shrink: 0; }
+
+    /* ============================================================
+       FINAL CTA
+       ============================================================ */
     .cta { padding: 90px 0; }
+
     .cta-box {
       background: var(--cream);
       border: 1px solid #eee7d7;
@@ -734,27 +918,196 @@
       border-radius: 30px;
       text-align: center;
     }
+
     .cta-box h2 {
-      font-size: clamp(32px, 4vw, 46px);
+      font-size: clamp(30px, 4vw, 44px);
       margin-bottom: 15px;
       font-weight: 800;
       letter-spacing: -1.5px;
     }
+
     .cta-box p {
       color: var(--muted);
       max-width: 560px;
       margin: 0 auto 28px;
-      font-size: 17px;
+      font-size: 16.5px;
       line-height: 1.7;
     }
+
     .cta-box .hero-btn { padding: 14px 28px; font-size: 15px; }
 
-    /* ===== FOOTER ===== */
+    /* ============================================================
+       DOWNLOAD APP SECTION
+       ============================================================ */
+    .download-section {
+      padding: 40px 0 40px;
+    }
+
+    .download-box {
+      background: linear-gradient(135deg, #eef7f2 0%, #e0f0e7 100%);
+      border: 1px solid #d6e2da;
+      border-radius: var(--radius);
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+    }
+
+    .download-head {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    .download-icon {
+      width: 64px; height: 64px;
+      border-radius: 18px;
+      background: var(--primary);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 26px;
+      flex-shrink: 0;
+      box-shadow: 0 10px 26px rgba(23, 107, 77, 0.28);
+    }
+
+    .download-head-text { flex: 1; min-width: 0; }
+
+    .download-head-text .label {
+      font-size: 11px;
+      color: var(--primary);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 6px;
+    }
+
+    .download-head-text h3 {
+      font-size: clamp(20px, 3vw, 26px);
+      font-weight: 800;
+      color: var(--dark);
+      letter-spacing: -0.6px;
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+
+    .download-head-text p {
+      font-size: 14.5px;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 520px;
+    }
+
+    .download-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      min-height: 60px;
+      padding: 12px 22px;
+      border-radius: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      color: #fff;
+      transition: all 0.2s;
+      flex: 1;
+      min-width: 200px;
+      max-width: 260px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .download-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(20, 50, 38, 0.18);
+    }
+
+    .download-btn i {
+      font-size: 26px;
+      flex-shrink: 0;
+    }
+
+    .download-btn-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+      text-align: left;
+    }
+
+    .download-btn-small {
+      font-size: 10.5px;
+      font-weight: 700;
+      opacity: 0.85;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .download-btn-big {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: -0.2px;
+    }
+
+    .download-btn-android { background: #176b4d; }
+    .download-btn-android:hover { background: #0f4d38; }
+
+    .download-btn-ios { background: #17231e; }
+    .download-btn-ios:hover { background: #0d1512; }
+
+    .download-btn-coming {
+      background: #e8eeea;
+      color: var(--muted);
+      cursor: not-allowed;
+      pointer-events: none;
+      box-shadow: none;
+    }
+
+    .download-btn-coming .download-btn-big {
+      font-size: 13.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .download-btn-coming i {
+      opacity: 0.6;
+    }
+
+    .download-note {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12.5px;
+      color: var(--muted);
+      padding-top: 6px;
+      border-top: 1px solid rgba(23, 107, 77, 0.12);
+    }
+
+    .download-note i {
+      color: var(--primary);
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 560px) {
+      .download-box { padding: 26px 20px; gap: 20px; }
+      .download-head { flex-direction: column; gap: 14px; }
+      .download-btn { min-width: 100%; max-width: 100%; }
+    }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
     footer {
       background: #101b16;
       color: #fff;
-      padding: 50px 0 30px;
+      padding: 55px 0 30px;
     }
+
     .footer-inner {
       display: flex;
       justify-content: space-between;
@@ -762,25 +1115,50 @@
       align-items: flex-start;
       flex-wrap: wrap;
     }
-    .footer-brand { max-width: 320px; }
-    .footer-brand .logo { color: #fff; margin-bottom: 12px; }
+
+    .footer-brand { max-width: 340px; }
+
+    .footer-brand .logo {
+      color: #fff;
+      margin-bottom: 14px;
+      font-size: 17px;
+    }
+
+    .footer-brand .logo img {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 4px;
+      border-radius: 10px;
+    }
+
     footer p { color: #9ba7a1; font-size: 13px; line-height: 1.7; }
-    .footer-links { display: flex; gap: 50px; flex-wrap: wrap; }
+
+    .footer-links { display: flex; gap: 55px; flex-wrap: wrap; }
+
     .footer-col h4 {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 1.2px;
       color: #fff;
       margin-bottom: 16px;
     }
+
     .footer-col a {
       display: block;
       color: #c7d0cb;
       font-size: 13px;
       margin-bottom: 10px;
       transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
+
+    .footer-col a i {
+      font-size: 11px;
+      opacity: 0.7;
+    }
+
     .footer-col a:hover { color: var(--accent); }
 
     .footer-bottom {
@@ -793,9 +1171,18 @@
       flex-wrap: wrap;
       gap: 16px;
     }
+
     .footer-bottom p { font-size: 12px; }
 
-    /* ===== ANIMATION ===== */
+    .footer-bottom .made {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ============================================================
+       ANIMATION
+       ============================================================ */
     .reveal {
       opacity: 0;
       transform: translateY(25px);
@@ -803,7 +1190,14 @@
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    /* ===== MOBILE ===== */
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .hero-note .dot { animation: none; }
+    }
+
+    /* ============================================================
+       MOBILE
+       ============================================================ */
     @media (max-width: 900px) {
       .nav-links { display: none; }
       .nav-links.mobile-open {
@@ -831,10 +1225,13 @@
       .visual { margin-top: 20px; }
       .module-grid { grid-template-columns: 1fr 1fr; }
       .steps { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+
+      .opps-cta { flex-direction: column; align-items: flex-start; }
     }
 
     @media (max-width: 560px) {
-      .hero h1 { font-size: 40px; letter-spacing: -2px; }
+      .hero h1 { font-size: 38px; letter-spacing: -2px; }
       .hero p { font-size: 16px; }
       .module-grid { grid-template-columns: 1fr; }
       .phone { width: 270px; height: 535px; }
@@ -842,25 +1239,27 @@
       .cta-box { padding: 45px 24px; }
       .footer-inner { flex-direction: column; }
       .footer-links { gap: 30px; }
+      .section-heading h2 { letter-spacing: -1px; }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- ===== NAVIGATION ===== -->
+  <!-- ===== NAVBAR ===== -->
   <nav>
     <div class="container nav-inner">
 
-      <a href="/" class="logo">
-        <div class="logo-mark">F</div>
+      <a href="/" class="logo" aria-label="Fasahar Al'umma home">
+        <img src="/images/logo.png" alt="Fasahar Al'umma" width="38" height="38" />
         <span data-i18n="brand">Fasahar Al'umma</span>
       </a>
 
       <div class="nav-links" id="navLinks">
         <a href="#learn" data-i18n="nav_learn">Abin da za ka koya</a>
         <a href="#how" data-i18n="nav_how">Yadda yake aiki</a>
-        <a href="#challenge" data-i18n="nav_challenge">Gwada ƙalubale</a>
+        <a href="/about.html" data-i18n="nav_about">Game da Mu</a>
+        <a href="/opportunities.html" data-i18n="nav_opps">Dama</a>
       </div>
 
       <div class="nav-actions">
@@ -869,10 +1268,15 @@
           <span class="lang-option" data-lang="en">EN</span>
         </div>
 
-        <a href="/home.html" class="nav-btn" data-i18n="nav_start">Fara Koyo</a>
+        <a href="/home.html" class="nav-btn" data-i18n="nav_start">
+          <i class="fa-solid fa-play"></i>
+          Fara Koyo
+        </a>
       </div>
 
-      <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
+      <button class="menu-btn" id="menuBtn" aria-label="Menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
 
     </div>
   </nav>
@@ -884,8 +1288,9 @@
 
       <div class="reveal">
 
-        <div class="eyebrow" data-i18n="hero_eyebrow">
-          Fasahar zamani ga al'umma baki ɗaya
+        <div class="eyebrow">
+          <i class="fa-solid fa-star"></i>
+          <span data-i18n="hero_eyebrow">Fasahar zamani ga al'umma baki ɗaya</span>
         </div>
 
         <h1 data-i18n="hero_title">
@@ -898,17 +1303,23 @@
         </p>
 
         <div class="hero-actions">
-          <a href="/home.html" class="hero-btn" data-i18n="hero_cta">
-            Fara Koyo →
+          <a href="/home.html" class="hero-btn">
+            <i class="fa-solid fa-play"></i>
+            <span data-i18n="hero_cta">Fara Koyo</span>
           </a>
-          <a href="#learn" class="secondary-btn" data-i18n="hero_secondary">
-            Duba ƙwarewa
+          <a href="#learn" class="secondary-btn">
+            <i class="fa-solid fa-book-open"></i>
+            <span data-i18n="hero_secondary">Duba ƙwarewa</span>
           </a>
-        </div>
+                  <a href="#download" class="secondary-btn" id="hero_cta_download">
+            <i class="fa-solid fa-download"></i>
+            <span data-i18n="hero_download">Sauke Manhajar</span>
+          </a>
+</div>
 
         <div class="hero-note">
           <span class="dot"></span>
-          <span data-i18n="hero_note">🇳🇬 Akwai a Hausa da Turanci. An gina don rayuwar yau da kullum.</span>
+          <span data-i18n="hero_note">Akwai a Hausa da Turanci. An gina don rayuwar yau da kullum.</span>
         </div>
 
       </div>
@@ -925,10 +1336,12 @@
 
             <div class="app-top">
               <div class="app-logo">
-                <div class="mini-mark">F</div>
+                <img src="/images/logo.png" alt="" width="24" height="24" />
                 Fasahar Al'umma
               </div>
-              <div class="profile"></div>
+              <div class="profile">
+                <i class="fa-solid fa-user"></i>
+              </div>
             </div>
 
             <div class="welcome">
@@ -941,7 +1354,7 @@
             </div>
 
             <div class="lesson">
-              <div class="lesson-icon">🌐</div>
+              <div class="lesson-icon"><i class="fa-solid fa-mobile-screen"></i></div>
               <div class="lesson-info">
                 <strong data-i18n="lesson_internet">Tushen Waya da Yanar Gizo</strong>
                 <span data-i18n="lesson_left">Darasi 3 suka rage</span>
@@ -950,7 +1363,7 @@
             </div>
 
             <div class="lesson">
-              <div class="lesson-icon">💬</div>
+              <div class="lesson-icon"><i class="fa-solid fa-comment-dots"></i></div>
               <div class="lesson-info">
                 <strong data-i18n="lesson_whatsapp">Sifirin WhatsApp da Soshiyal</strong>
                 <span data-i18n="lesson_start">Fara koyo</span>
@@ -958,7 +1371,7 @@
             </div>
 
             <div class="lesson">
-              <div class="lesson-icon">🔐</div>
+              <div class="lesson-icon"><i class="fa-solid fa-shield-halved"></i></div>
               <div class="lesson-info">
                 <strong data-i18n="lesson_safety">Kariya da Tsaron Asusu</strong>
                 <span data-i18n="lesson_count">Darasi 5</span>
@@ -966,7 +1379,7 @@
             </div>
 
             <div class="lesson">
-              <div class="lesson-icon">🤖</div>
+              <div class="lesson-icon"><i class="fa-solid fa-robot"></i></div>
               <div class="lesson-info">
                 <strong data-i18n="lesson_ai">Amfani da Basirar Wucin Gadi</strong>
                 <span data-i18n="lesson_count2">Darasi 4</span>
@@ -978,7 +1391,10 @@
         </div>
 
         <div class="floating-card">
-          <div class="badge">🏅 <span data-i18n="badge_new">Sabon lambar yabo</span></div>
+          <div class="badge">
+            <i class="fa-solid fa-award"></i>
+            <span data-i18n="badge_new">Sabon lambar yabo</span>
+          </div>
           <span data-i18n="badge_name">Mafarin Fasahar Al'umma</span>
         </div>
 
@@ -988,20 +1404,42 @@
   </header>
 
 
-  <!-- ===== TRUST ===== -->
-  <div class="trust">
+  <!-- ===== STATS STRIP ===== -->
+  <div class="stats">
+    <div class="container stats-grid">
+      <div class="stat reveal">
+        <div class="stat-value"><i class="fa-solid fa-book-open"></i>6</div>
+        <div class="stat-label" data-i18n="stat_modules">Modules</div>
+      </div>
+      <div class="stat reveal">
+        <div class="stat-value"><i class="fa-solid fa-list-check"></i>24</div>
+        <div class="stat-label" data-i18n="stat_lessons">Darussa</div>
+      </div>
+      <div class="stat reveal">
+        <div class="stat-value"><i class="fa-solid fa-language"></i>2</div>
+        <div class="stat-label" data-i18n="stat_languages">Harsuna</div>
+      </div>
+      <div class="stat reveal">
+        <div class="stat-value"><i class="fa-solid fa-wifi"></i>100%</div>
+        <div class="stat-label" data-i18n="stat_offline">Offline</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===== QUOTE ===== -->
+  <div class="quote-divider reveal">
     <div class="container">
-      <p>
-        <span data-i18n="trust_1">Koyi tare. Ci gaba tare.</span>
-        <span class="sep"></span>
-        <span data-i18n="trust_2">Gina gobe mai haske ga al'umma baki ɗaya.</span>
-      </p>
+      <blockquote data-i18n="quote_text">
+        "Ilimi ba ya keɓe kowa. Fasaha ma ba ta keɓe kowa."
+      </blockquote>
+      <cite data-i18n="quote_cite">— Fasahar Al'umma</cite>
     </div>
   </div>
 
 
   <!-- ===== INCLUSIVITY ===== -->
-  <section class="inclusivity" id="inclusivity">
+  <section class="inclusivity">
     <div class="container inclusivity-grid">
 
       <div class="inclusivity-text reveal">
@@ -1054,24 +1492,6 @@
   </section>
 
 
-  <!-- ===== LANGUAGE SECTION ===== -->
-  <section class="language-section reveal">
-    <div class="container">
-      <div class="section-heading" style="margin: auto; text-align: center;">
-        <div class="label" data-i18n="lang_label">An gina don al'ummarmu</div>
-        <h2 data-i18n="lang_title">Koyi cikin harshenka.</h2>
-        <p data-i18n="lang_desc">
-          Koyi fasahar zamani a harshen da ya fi kusanci da zuciyarka. Kowane darasi akwai shi a Hausa da Turanci, domin babu abin da zai tsaya tsakaninka da ci gabanka.
-        </p>
-      </div>
-      <div class="language-pills">
-        <div class="pill active">🇳🇬 Hausa</div>
-        <div class="pill">🇬🇧 English</div>
-      </div>
-    </div>
-  </section>
-
-
   <!-- ===== MODULES ===== -->
   <section class="modules" id="learn">
     <div class="container">
@@ -1087,7 +1507,7 @@
       <div class="module-grid">
 
         <div class="module reveal">
-          <div class="module-icon">📱</div>
+          <div class="module-icon"><i class="fa-solid fa-mobile-screen"></i></div>
           <h3 data-i18n="mod1_title">Phone & Internet Basics</h3>
           <span class="hausa-title" data-i18n="mod1_hausa">Tushen Waya da Yanar Gizo</span>
           <p data-i18n="mod1_desc">Samun kwanciyar hankali da wayarka da yanar gizo, mataki-mataki.</p>
@@ -1100,7 +1520,7 @@
         </div>
 
         <div class="module reveal">
-          <div class="module-icon">📧</div>
+          <div class="module-icon"><i class="fa-solid fa-envelope"></i></div>
           <h3 data-i18n="mod2_title">Email & Digital Work</h3>
           <span class="hausa-title" data-i18n="mod2_hausa">Ofis Na Waya da Wasiku</span>
           <p data-i18n="mod2_desc">Sadarwa cikin sana'a da neman dama a kan layi.</p>
@@ -1113,7 +1533,7 @@
         </div>
 
         <div class="module reveal">
-          <div class="module-icon">💬</div>
+          <div class="module-icon"><i class="fa-solid fa-comment-dots"></i></div>
           <h3 data-i18n="mod3_title">WhatsApp & Social Media</h3>
           <span class="hausa-title" data-i18n="mod3_hausa">Sifirin WhatsApp da Soshiyal</span>
           <p data-i18n="mod3_desc">Haɗa kai da mutane da gina kasancewarka a kan layi.</p>
@@ -1126,7 +1546,7 @@
         </div>
 
         <div class="module reveal">
-          <div class="module-icon">🔐</div>
+          <div class="module-icon"><i class="fa-solid fa-shield-halved"></i></div>
           <h3 data-i18n="mod4_title">Digital Safety</h3>
           <span class="hausa-title" data-i18n="mod4_hausa">Kariya da Tsaron Asusu</span>
           <p data-i18n="mod4_desc">Gane zamba da kare asusunka da bayananka.</p>
@@ -1139,7 +1559,7 @@
         </div>
 
         <div class="module reveal">
-          <div class="module-icon">🤖</div>
+          <div class="module-icon"><i class="fa-solid fa-robot"></i></div>
           <h3 data-i18n="mod5_title">AI Basics</h3>
           <span class="hausa-title" data-i18n="mod5_hausa">Amfani da Basirar Wucin Gadi</span>
           <p data-i18n="mod5_desc">Koyi yadda za ka yi amfani da AI cikin alhaki don ayyukan yau da kullum.</p>
@@ -1152,7 +1572,7 @@
         </div>
 
         <div class="module reveal">
-          <div class="module-icon">💰</div>
+          <div class="module-icon"><i class="fa-solid fa-coins"></i></div>
           <h3 data-i18n="mod6_title">Digital Business</h3>
           <span class="hausa-title" data-i18n="mod6_hausa">Kasuwancin Zamani ta Waya</span>
           <p data-i18n="mod6_desc">Yi amfani da kayan aikin zamani don sadarwa da abokan ciniki da sayarwa a kan layi.</p>
@@ -1209,7 +1629,7 @@
 
 
   <!-- ===== CHALLENGE ===== -->
-  <section class="feature" id="challenge">
+  <section class="feature">
     <div class="container feature-grid">
 
       <div class="reveal">
@@ -1225,8 +1645,9 @@
       </div>
 
       <div class="challenge reveal">
-        <div class="challenge-label" data-i18n="chal_label">
-          Ƙalubalen Tsaron Dijital
+        <div class="challenge-label">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span data-i18n="chal_label">Ƙalubalen Tsaron Dijital</span>
         </div>
         <h3 data-i18n="chal_q">Ka karɓi wannan saƙo:</h3>
         <div class="message" data-i18n="chal_msg">
@@ -1244,7 +1665,7 @@
         </button>
 
         <div class="result" id="result" data-i18n="chal_result">
-          ✅ Zaɓi mai kyau. Kada ka taɓa raba OTP ɗinka. Kyaututtuka kwatsam da neman bayanai masu mahimmanci alamun zamba ne.
+          Zaɓi mai kyau. Kada ka taɓa raba OTP ɗinka. Kyaututtuka kwatsam da neman bayanai masu mahimmanci alamun zamba ne.
         </div>
       </div>
 
@@ -1252,16 +1673,80 @@
   </section>
 
 
-  <!-- ===== CTA ===== -->
-  <section class="cta" id="start">
+  <!-- ===== OPPORTUNITIES CTA ===== -->
+  <section>
+    <div class="container">
+      <div class="opps-cta reveal">
+        <div class="opps-cta-body">
+          <div class="label">
+            <i class="fa-solid fa-hand-holding-heart"></i>
+            <span data-i18n="opps_label">Dama da Tallafi</span>
+          </div>
+          <h3 data-i18n="opps_title">Nemi tallafi da shirye-shiryen koyarwa</h3>
+          <p data-i18n="opps_desc">
+            Duba jerin damar da aka tabbatar — tallafin gwamnati, shirye-shiryen koyarwa, da sauransu. Koyi yadda ake gane dama ta gaskiya kafin ka aika komai.
+          </p>
+        </div>
+        <a href="/opportunities.html" class="hero-btn">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          <span data-i18n="opps_btn">Duba Dama</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== DOWNLOAD APP ===== -->
+  <section class="download-section" id="download">
+    <div class="container">
+      <div class="download-box reveal">
+        <div class="download-head">
+          <div class="download-icon">
+            <i class="fa-solid fa-mobile-screen-button"></i>
+          </div>
+          <div class="download-head-text">
+            <div class="label" data-i18n="download_label">Sauke Manhajar</div>
+            <h3 data-i18n="download_title">Sauke Fasahar Al'umma a wayarka</h3>
+            <p data-i18n="download_desc">Yi amfani da manhajar a kowane lokaci, ko da ba ka da intanet. Kyauta gaba ɗaya.</p>
+          </div>
+        </div>
+
+        <div class="download-buttons">
+          <a href="/files/androidapp.apk" download class="download-btn download-btn-android">
+            <i class="fa-brands fa-android"></i>
+            <span class="download-btn-text">
+              <span class="download-btn-small" data-i18n="download_android_small">Sauke don</span>
+              <span class="download-btn-big">Android APK</span>
+            </span>
+          </a>
+
+          <div class="download-btn download-btn-coming">
+            <i class="fa-brands fa-apple"></i>
+            <span class="download-btn-text">
+              <span class="download-btn-small" data-i18n="download_ios_small">Sauke don</span>
+              <span class="download-btn-big" data-i18n="download_ios_soon">iOS — Nan gaba</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="download-note">
+          <i class="fa-solid fa-circle-info"></i>
+          <span data-i18n="download_note">Za ka iya kuma amfani da manhajar kai tsaye a burauzarka ba tare da saukewa ba.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FINAL CTA ===== -->
+  <section class="cta">
     <div class="container">
       <div class="cta-box reveal">
         <h2 data-i18n="cta_title">Tafiyarka ta dijital ta fara nan.</h2>
         <p data-i18n="cta_desc">
           Koyi ƙwarewar da kake buƙata don kewaya intanet, kasance cikin aminci, yi aiki, koyi da bunƙasa damar dijital. Gano abin da za ka iya yi da gaske.
         </p>
-        <a href="/home.html" class="hero-btn" data-i18n="cta_btn">
-          Fara koyo →
+        <a href="/home.html" class="hero-btn">
+          <i class="fa-solid fa-play"></i>
+          <span data-i18n="cta_btn">Fara koyo</span>
         </a>
       </div>
     </div>
@@ -1275,8 +1760,8 @@
 
         <div class="footer-brand">
           <div class="logo">
-            <div class="logo-mark">F</div>
-            Fasahar Al'umma
+            <img src="/images/logo.png" alt="Fasahar Al'umma" width="38" height="38" />
+            <span>Fasahar Al'umma</span>
           </div>
           <p data-i18n="footer_tagline">
             Fasahar zamani ga al'umma baki ɗaya. Koyi, bunƙasa, ci gaba.
@@ -1286,14 +1771,34 @@
         <div class="footer-links">
           <div class="footer-col">
             <h4 data-i18n="footer_col1">Koyo</h4>
-            <a href="#learn" data-i18n="footer_learn">Ƙwarewa</a>
-            <a href="#how" data-i18n="footer_how">Yadda yake aiki</a>
-            <a href="#challenge" data-i18n="footer_challenge">Ƙalubale</a>
+            <a href="#learn">
+              <i class="fa-solid fa-book-open"></i>
+              <span data-i18n="footer_learn">Ƙwarewa</span>
+            </a>
+            <a href="#how">
+              <i class="fa-solid fa-circle-play"></i>
+              <span data-i18n="footer_how">Yadda yake aiki</span>
+            </a>
+            <a href="/home.html">
+              <i class="fa-solid fa-play"></i>
+              <span data-i18n="footer_start">Fara Koyo</span>
+            </a>
           </div>
+
           <div class="footer-col">
-            <h4 data-i18n="footer_col2">App</h4>
-            <a href="/home.html" data-i18n="footer_start">Fara Koyo</a>
-            <a href="/home.html" data-i18n="footer_dashboard">Dashbord</a>
+            <h4 data-i18n="footer_col2">Game da Mu</h4>
+            <a href="/about.html">
+              <i class="fa-solid fa-circle-info"></i>
+              <span data-i18n="footer_about">Labarinmu</span>
+            </a>
+            <a href="/opportunities.html">
+              <i class="fa-solid fa-hand-holding-heart"></i>
+              <span data-i18n="footer_opps">Dama da Tallafi</span>
+            </a>
+            <a href="/profile.html">
+              <i class="fa-solid fa-user"></i>
+              <span data-i18n="footer_profile">Bayani na</span>
+            </a>
           </div>
         </div>
 
@@ -1301,7 +1806,10 @@
 
       <div class="footer-bottom">
         <p data-i18n="footer_copy">© 2026 Fasahar Al'umma. Duk haƙƙin an tanade su.</p>
-        <p data-i18n="footer_made">An gina don al'umma 🇳🇬</p>
+        <p class="made" data-i18n="footer_made">
+          <i class="fa-solid fa-heart" style="color: var(--accent)"></i>
+          An gina don al'umma 🇳🇬
+        </p>
       </div>
     </div>
   </footer>
@@ -1309,22 +1817,32 @@
 
   <script>
     /* ============================================================
-       i18n — Bilingual Text System (Hausa default, English toggle)
+       i18n — bilingual, standalone
        ============================================================ */
     const translations = {
       ha: {
         brand: "Fasahar Al'umma",
         nav_learn: "Abin da za ka koya",
         nav_how: "Yadda yake aiki",
-        nav_challenge: "Gwada ƙalubale",
+        nav_about: "Game da Mu",
+        nav_opps: "Dama",
         nav_start: "Fara Koyo",
 
         hero_eyebrow: "Fasahar zamani ga al'umma baki ɗaya",
         hero_title: "Gina al'umma mai ƙarfi da <span>ƙarfin fasaha.</span>",
         hero_desc: "Fasahar Al'umma na kawo ilimin fasahar zamani ga kowa a cikin al'umma — maza da mata, matasa da manya. Koyi a naka lokaci, a harshenka, ka mai da kayan yau da kullum zuwa dama ta gaske.",
-        hero_cta: "Fara Koyo →",
+        hero_cta: "Fara Koyo",
         hero_secondary: "Duba ƙwarewa",
-        hero_note: "🇳🇬 Akwai a Hausa da Turanci. An gina don rayuwar yau da kullum.",
+        hero_download: "Sauke Manhajar",
+        hero_note: "Akwai a Hausa da Turanci. An gina don rayuwar yau da kullum.",
+
+        stat_modules: "Modules",
+        stat_lessons: "Darussa",
+        stat_languages: "Harsuna",
+        stat_offline: "Offline",
+
+        quote_text: "\"Ilimi ba ya keɓe kowa. Fasaha ma ba ta keɓe kowa.\"",
+        quote_cite: "— Fasahar Al'umma",
 
         phone_greeting: "Sannu, Aminu 👋",
         phone_continue: "Ci gaba da koyo",
@@ -1340,9 +1858,6 @@
         badge_new: "Sabon lambar yabo",
         badge_name: "Mafarin Fasahar Al'umma",
 
-        trust_1: "Koyi tare. Ci gaba tare.",
-        trust_2: "Gina gobe mai haske ga al'umma baki ɗaya.",
-
         inc_label: "Gano abin da zai yiwu",
         inc_title: "Ilimin fasaha na <span>kowa ne.</span>",
         inc_p1: "An daɗe ana gaya wa mutane a al'ummarmu cewa fasaha ba tasu ba ce — cewa tana da wahala, ba ta gida ba, ko kuma an keɓe ta ga wasu kaɗan. Waɗannan ra'ayoyin sun hana hazikan mutane ci gaba.",
@@ -1357,10 +1872,6 @@
         inc_li3_desc: "Muna koyarwa a Hausa da Turanci, domin ka koyi a harshen da kake tunani da mafarki da shi.",
         inc_li4_title: "\"AI ta yi wahala ga talakawa.\"",
         inc_li4_desc: "AI kayan aiki ne kawai. Muna nuna maka yadda za ka yi amfani da ita don ayyuka na gaske — babu wani abin tsoro.",
-
-        lang_label: "An gina don al'ummarmu",
-        lang_title: "Koyi cikin harshenka.",
-        lang_desc: "Koyi fasahar zamani a harshen da ya fi kusanci da zuciyarka. Kowane darasi akwai shi a Hausa da Turanci, domin babu abin da zai tsaya tsakaninka da ci gabanka.",
 
         mod_label: "Abin da za ka koya",
         mod_title: "Ƙwarewar da za ka yi amfani da ita nan take.",
@@ -1433,20 +1944,34 @@
         chal_opt1: "🚨 Kai rahoto ka toshe saƙon",
         chal_opt2: "🔗 Danna hanyar",
         chal_opt3: "🔑 Aika OTP",
-        chal_result: "✅ Zaɓi mai kyau. Kada ka taɓa raba OTP ɗinka. Kyaututtuka kwatsam da neman bayanai masu mahimmanci alamun zamba ne.",
+        chal_result: "Zaɓi mai kyau. Kada ka taɓa raba OTP ɗinka. Kyaututtuka kwatsam da neman bayanai masu mahimmanci alamun zamba ne.",
+
+        opps_label: "Dama da Tallafi",
+        opps_title: "Nemi tallafi da shirye-shiryen koyarwa",
+        opps_desc: "Duba jerin damar da aka tabbatar — tallafin gwamnati, shirye-shiryen koyarwa, da sauransu. Koyi yadda ake gane dama ta gaskiya kafin ka aika komai.",
+        opps_btn: "Duba Dama",
+
+        download_label: "Sauke Manhajar",
+        download_title: "Sauke Fasahar Al'umma a wayarka",
+        download_desc: "Yi amfani da manhajar a kowane lokaci, ko da ba ka da intanet. Kyauta gaba ɗaya.",
+        download_android_small: "Sauke don",
+        download_ios_small: "Sauke don",
+        download_ios_soon: "iOS — Nan gaba",
+        download_note: "Za ka iya kuma amfani da manhajar kai tsaye a burauzarka ba tare da saukewa ba.",
 
         cta_title: "Tafiyarka ta dijital ta fara nan.",
         cta_desc: "Koyi ƙwarewar da kake buƙata don kewaya intanet, kasance cikin aminci, yi aiki, koyi da bunƙasa damar dijital. Gano abin da za ka iya yi da gaske.",
-        cta_btn: "Fara koyo →",
+        cta_btn: "Fara koyo",
 
         footer_tagline: "Fasahar zamani ga al'umma baki ɗaya. Koyi, bunƙasa, ci gaba.",
         footer_col1: "Koyo",
         footer_learn: "Ƙwarewa",
         footer_how: "Yadda yake aiki",
-        footer_challenge: "Ƙalubale",
-        footer_col2: "App",
+        footer_col2: "Game da Mu",
+        footer_about: "Labarinmu",
+        footer_opps: "Dama da Tallafi",
+        footer_profile: "Bayani na",
         footer_start: "Fara Koyo",
-        footer_dashboard: "Dashbord",
         footer_copy: "© 2026 Fasahar Al'umma. Duk haƙƙin an tanade su.",
         footer_made: "An gina don al'umma 🇳🇬"
       },
@@ -1455,15 +1980,25 @@
         brand: "Fasahar Al'umma",
         nav_learn: "What you'll learn",
         nav_how: "How it works",
-        nav_challenge: "Try a challenge",
+        nav_about: "About",
+        nav_opps: "Opportunities",
         nav_start: "Start Learning",
 
         hero_eyebrow: "Digital skills for the whole community",
         hero_title: "Build a stronger community with <span>digital confidence.</span>",
         hero_desc: "Fasahar Al'umma brings practical digital literacy to everyone in the community — men and women, young and old. Learn at your own pace, in your local language, and turn everyday tools into real opportunity.",
-        hero_cta: "Start Learning →",
+        hero_cta: "Start Learning",
         hero_secondary: "Explore skills",
-        hero_note: "🇳🇬 Available in Hausa and English. Built for everyday community life.",
+        hero_download: "Download App",
+        hero_note: "Available in Hausa and English. Built for everyday community life.",
+
+        stat_modules: "Modules",
+        stat_lessons: "Lessons",
+        stat_languages: "Languages",
+        stat_offline: "Offline",
+
+        quote_text: "\"Education excludes no one. Neither should technology.\"",
+        quote_cite: "— Fasahar Al'umma",
 
         phone_greeting: "Hello, Aminu 👋",
         phone_continue: "Continue learning",
@@ -1479,9 +2014,6 @@
         badge_new: "New badge unlocked",
         badge_name: "Community Digital Starter",
 
-        trust_1: "Learn together. Grow together.",
-        trust_2: "Build a brighter future for the whole community.",
-
         inc_label: "Discover what's possible",
         inc_title: "Digital skills belong to <span>everyone.</span>",
         inc_p1: "For too long, people in our community have been told that technology is not for them — that it's too hard, too foreign, or reserved for a select few. Those ideas have held talented people back.",
@@ -1496,10 +2028,6 @@
         inc_li3_desc: "We teach in Hausa and English, so you can learn in the language you think and dream in.",
         inc_li4_title: "\"AI is too complicated for everyday people.\"",
         inc_li4_desc: "AI is simply a tool. We show you how to use it for real, practical tasks — nothing intimidating.",
-
-        lang_label: "Built for our community",
-        lang_title: "Koyi cikin harshenka. (Learn in your language.)",
-        lang_desc: "Learn digital skills in a language that feels like home. Every lesson is available in both Hausa and English, so nothing stands between you and your progress.",
 
         mod_label: "What you'll learn",
         mod_title: "Skills you can use the same day.",
@@ -1572,26 +2100,40 @@
         chal_opt1: "🚨 Report and block the message",
         chal_opt2: "🔗 Click the link",
         chal_opt3: "🔑 Send the OTP",
-        chal_result: "✅ Good choice. Never share your OTP. Unexpected prizes and requests for sensitive information are common signs of a scam.",
+        chal_result: "Good choice. Never share your OTP. Unexpected prizes and requests for sensitive information are common signs of a scam.",
+
+        opps_label: "Opportunities & Grants",
+        opps_title: "Find grants and training programs",
+        opps_desc: "Browse a verified list of opportunities — government grants, training programs, and more. Learn how to spot a real opportunity before you apply.",
+        opps_btn: "See Opportunities",
+
+        download_label: "Download App",
+        download_title: "Get Fasahar Al'umma on your phone",
+        download_desc: "Use the app anytime, even without internet. Completely free.",
+        download_android_small: "Download for",
+        download_ios_small: "Download for",
+        download_ios_soon: "iOS — Coming soon",
+        download_note: "You can also use the app directly in your browser without downloading.",
 
         cta_title: "Your digital journey starts here.",
         cta_desc: "Learn the skills you need to navigate the internet, stay safe, work, learn and grow your digital opportunities. Discover what you are truly capable of.",
-        cta_btn: "Start learning →",
+        cta_btn: "Start learning",
 
         footer_tagline: "Digital skills for the whole community. Learn, grow, progress.",
         footer_col1: "Learn",
         footer_learn: "Skills",
         footer_how: "How it works",
-        footer_challenge: "Challenge",
-        footer_col2: "App",
+        footer_col2: "About",
+        footer_about: "Our story",
+        footer_opps: "Opportunities",
+        footer_profile: "Profile",
         footer_start: "Start Learning",
-        footer_dashboard: "Dashboard",
         footer_copy: "© 2026 Fasahar Al'umma. All rights reserved.",
         footer_made: "Built for the community 🇳🇬"
       }
     };
 
-    let currentLang = "ha"; // Hausa default
+    let currentLang = "ha";
 
     function setLanguage(lang) {
       currentLang = lang;

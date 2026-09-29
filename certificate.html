@@ -30,6 +30,7 @@
     }
     .cert-page.visible { opacity: 1; }
 
+    /* ---- Top bar ---- */
     .top-bar {
       display: flex;
       align-items: center;
@@ -37,8 +38,7 @@
       margin-bottom: 22px;
     }
     .back-btn {
-      width: 42px;
-      height: 42px;
+      width: 42px; height: 42px;
       border-radius: 12px;
       background: var(--white);
       border: 1px solid var(--border);
@@ -55,6 +55,7 @@
       color: var(--primary);
     }
     .top-bar-title {
+      flex: 1;
       font-size: 13px;
       font-weight: 700;
       color: var(--muted);
@@ -62,9 +63,10 @@
       letter-spacing: 0.8px;
     }
 
+    /* ---- Intro ---- */
     .cert-intro {
       text-align: center;
-      margin-bottom: 26px;
+      margin-bottom: 22px;
     }
     .cert-badge {
       display: inline-flex;
@@ -81,7 +83,7 @@
       margin-bottom: 14px;
     }
     .cert-intro h1 {
-      font-size: clamp(24px, 6vw, 32px);
+      font-size: clamp(22px, 5.5vw, 30px);
       font-weight: 800;
       letter-spacing: -1.1px;
       line-height: 1.15;
@@ -96,6 +98,67 @@
       margin: 0 auto;
     }
 
+    /* ---- Name banner (change name button) ---- */
+    .name-banner {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      background: linear-gradient(135deg, #eef7f2 0%, #e0f0e7 100%);
+      border: 1px solid #d6e2da;
+      border-radius: 14px;
+      margin-bottom: 16px;
+    }
+    .name-banner-icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      background: var(--primary);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .name-banner-body { flex: 1; min-width: 0; }
+    .name-banner-label {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 2px;
+    }
+    .name-banner-name {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--dark);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .name-banner-btn {
+      flex-shrink: 0;
+      min-height: 38px;
+      padding: 0 14px;
+      border-radius: 10px;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      color: var(--dark);
+      font-weight: 700;
+      font-size: 12.5px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: inherit;
+    }
+    .name-banner-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* ---- Canvas preview ---- */
     .cert-preview-wrap {
       background: var(--soft);
       border-radius: var(--radius);
@@ -118,6 +181,7 @@
       pointer-events: none;
     }
 
+    /* ---- Actions ---- */
     .cert-actions {
       display: flex;
       flex-direction: column;
@@ -139,6 +203,7 @@
       transition: all 0.2s;
       text-decoration: none;
       -webkit-tap-highlight-color: transparent;
+      font-family: inherit;
     }
     .cert-btn:active { transform: scale(0.98); }
     .cert-btn-primary {
@@ -186,6 +251,147 @@
       margin-top: 2px;
     }
 
+    /* ---- Modal ---- */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(23, 35, 30, 0.45);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 1100;
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 16px;
+    }
+    .modal-overlay.open {
+      display: flex;
+      animation: fadeIn 0.25s ease both;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal {
+      background: var(--white);
+      border-radius: 24px 24px 20px 20px;
+      padding: 26px 22px;
+      width: 100%;
+      max-width: 460px;
+      animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal-icon {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: #e8f3ed;
+      color: var(--primary);
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+      margin: 0 auto 16px;
+    }
+    .modal h3 {
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--dark);
+      letter-spacing: -0.4px;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    .modal p {
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .modal-label {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 8px;
+      display: block;
+    }
+    .modal-input {
+      width: 100%;
+      min-height: 54px;
+      padding: 0 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--dark);
+      background: var(--white);
+      margin-bottom: 16px;
+      outline: none;
+      transition: border-color 0.2s;
+      font-family: inherit;
+    }
+    .modal-input:focus { border-color: var(--primary); }
+
+    .modal-hint {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 20px;
+      padding: 10px 12px;
+      background: var(--soft);
+      border-radius: 10px;
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+    .modal-hint i {
+      color: var(--primary);
+      font-size: 13px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+    }
+    .modal-btn {
+      flex: 1;
+      min-height: 50px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 14.5px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: inherit;
+    }
+    .modal-btn-primary {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 6px 18px rgba(23, 107, 77, 0.28);
+    }
+    .modal-btn-primary:hover { background: var(--primary-dark); }
+    .modal-btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+    .modal-btn-secondary {
+      background: var(--soft);
+      color: var(--dark);
+    }
+    .modal-btn-secondary:hover { background: var(--border); }
+    .modal-btn:active { transform: scale(0.98); }
+
+    /* ---- Not found / locked ---- */
     .not-found {
       text-align: center;
       padding: 80px 20px;
@@ -213,6 +419,7 @@
       line-height: 1.6;
     }
 
+    /* ---- Desktop ---- */
     @media (min-width: 901px) {
       body { padding-bottom: 0; }
       .cert-page {
@@ -222,6 +429,8 @@
       }
       .cert-actions { flex-direction: row; }
       .cert-actions .cert-btn { flex: 1; }
+      .modal-overlay { align-items: center; }
+      .modal { border-radius: 24px; }
     }
   </style>
 </head>
@@ -242,6 +451,10 @@
 
   <script>
     (function initCertificate() {
+
+      /* ============================================================
+         SETUP
+         ============================================================ */
       const params = new URLSearchParams(window.location.search);
       const moduleId = params.get("module");
 
@@ -259,14 +472,25 @@
       const moduleTitle = isHa ? mod.title_ha : mod.title_en;
       const moduleSub = isHa ? mod.title_en : mod.title_ha;
 
-      const learnerName = (function () {
+      /* ---------- Name helpers ---------- */
+      function getLearnerName() {
         try {
           const stored = localStorage.getItem("fasahar.learnerName");
           if (stored && stored.trim()) return stored.trim();
         } catch (e) {}
-        return isHa ? "Ɗalibin Fasahar Al'umma" : "Fasahar Al'umma Learner";
-      })();
+        return "";
+      }
 
+      function setLearnerName(name) {
+        try {
+          localStorage.setItem("fasahar.learnerName", name.trim());
+          return true;
+        } catch (e) {
+          return false;
+        }
+      }
+
+      /* ---------- Dates + serial ---------- */
       const now = new Date();
       const monthsHa = ["Janairu", "Faburairu", "Maris", "Afrilu", "Mayu", "Yuni", "Yuli", "Agusta", "Satumba", "Oktoba", "Nuwamba", "Disamba"];
       const monthsEn = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -281,61 +505,216 @@
 
       document.title = (isHa ? "Takardar Shaida" : "Certificate") + " · " + moduleTitle + " — Fasahar Al'umma";
 
-      /* ---------- Page markup ---------- */
-      const headHtml = `
-        <div class="top-bar">
-          <a href="/module.html?id=${mod.id}" class="back-btn" aria-label="${isHa ? "Koma" : "Back"}">
-            <i class="fa-solid fa-chevron-left"></i>
-          </a>
-          <div class="top-bar-title">${isHa ? "Takardar Shaida" : "Certificate"}</div>
-        </div>
+      /* ============================================================
+         PAGE RENDER
+         ============================================================ */
+      let previewCanvas = null;
 
-        <div class="cert-intro">
-          <div class="cert-badge">
-            <i class="fa-solid fa-award"></i>
-            ${isHa ? "An Kammala" : "Completed"}
+      function renderPage() {
+        const learnerName = getLearnerName();
+        const hasName = learnerName.length > 0;
+
+        const headHtml = `
+          <div class="top-bar">
+            <a href="/module.html?id=${mod.id}" class="back-btn" aria-label="${isHa ? "Koma" : "Back"}">
+              <i class="fa-solid fa-chevron-left"></i>
+            </a>
+            <div class="top-bar-title">${isHa ? "Takardar Shaida" : "Certificate"}</div>
           </div>
-          <h1>${isHa ? "Madalla, ka yi nasara!" : "Congratulations!"}</h1>
-          <p>${isHa
-            ? "Ka kammala wannan module cikin nasara. Zaka iya sauke takardar shaidar ka a matsayin hoto."
-            : "You successfully completed this module. You can download your certificate as an image."}</p>
-        </div>
-      `;
 
-      const previewHtml = `
-        <div class="cert-preview-wrap">
-          <canvas id="certPreviewCanvas" width="1200" height="848"></canvas>
-        </div>
-      `;
+          <div class="cert-intro">
+            <div class="cert-badge">
+              <i class="fa-solid fa-award"></i>
+              ${isHa ? "An Kammala" : "Completed"}
+            </div>
+            <h1>${isHa ? "Madalla, ka yi nasara!" : "Congratulations!"}</h1>
+            <p>${isHa
+              ? "Ka kammala wannan module cikin nasara. Zaka iya sauke takardar shaidar ka a matsayin hoto."
+              : "You successfully completed this module. You can download your certificate as an image."}</p>
+          </div>
+        `;
 
-      const noteHtml = `
-        <div class="cert-note">
-          <i class="fa-solid fa-circle-info"></i>
-          <span>${isHa
-            ? "Idan ka sauke hoton, za ka iya raba shi a WhatsApp ko ajiye shi a wayarka."
-            : "Once downloaded, you can share the image on WhatsApp or save it on your phone."}</span>
-        </div>
-      `;
+        const nameBannerHtml = hasName ? `
+          <div class="name-banner">
+            <div class="name-banner-icon"><i class="fa-solid fa-user"></i></div>
+            <div class="name-banner-body">
+              <div class="name-banner-label">${isHa ? "Sunan da zai bayyana" : "Name that will appear"}</div>
+              <div class="name-banner-name">${learnerName}</div>
+            </div>
+            <button class="name-banner-btn" id="changeNameBtn">
+              <i class="fa-solid fa-pen"></i>
+              ${isHa ? "Gyara" : "Change"}
+            </button>
+          </div>
+        ` : "";
 
-      const actionsHtml = `
-        <div class="cert-actions">
-          <button class="cert-btn cert-btn-primary" id="downloadBtn">
-            <i class="fa-solid fa-download"></i>
-            ${isHa ? "Sauke Hoton" : "Download Image"}
-          </button>
-          <button class="cert-btn cert-btn-gold" id="shareBtn" style="display:none">
-            <i class="fa-solid fa-share-nodes"></i>
-            ${isHa ? "Raba" : "Share"}
-          </button>
-          <a href="/home.html" class="cert-btn cert-btn-secondary">
-            <i class="fa-solid fa-house"></i>
-            ${isHa ? "Koma Gida" : "Back Home"}
-          </a>
-        </div>
-      `;
+        const previewHtml = `
+          <div class="cert-preview-wrap">
+            <canvas id="certPreviewCanvas" width="1200" height="848"></canvas>
+          </div>
+        `;
 
-      mount.innerHTML = headHtml + previewHtml + noteHtml + actionsHtml;
-      requestAnimationFrame(() => page.classList.add("visible"));
+        const noteHtml = `
+          <div class="cert-note">
+            <i class="fa-solid fa-circle-info"></i>
+            <span>${isHa
+              ? "Idan ka sauke hoton, za ka iya raba shi a WhatsApp ko ajiye shi a wayarka."
+              : "Once downloaded, you can share the image on WhatsApp or save it on your phone."}</span>
+          </div>
+        `;
+
+        const actionsHtml = `
+          <div class="cert-actions">
+            <button class="cert-btn cert-btn-primary" id="downloadBtn">
+              <i class="fa-solid fa-download"></i>
+              ${isHa ? "Sauke Hoton" : "Download Image"}
+            </button>
+            <button class="cert-btn cert-btn-gold" id="shareBtn" style="display:none">
+              <i class="fa-solid fa-share-nodes"></i>
+              ${isHa ? "Raba" : "Share"}
+            </button>
+            <a href="/home.html" class="cert-btn cert-btn-secondary">
+              <i class="fa-solid fa-house"></i>
+              ${isHa ? "Koma Gida" : "Back Home"}
+            </a>
+          </div>
+        `;
+
+        mount.innerHTML = headHtml + nameBannerHtml + previewHtml + noteHtml + actionsHtml;
+
+        /* Draw the certificate */
+        previewCanvas = document.getElementById("certPreviewCanvas");
+        drawBoth();
+
+        /* Wire the "change name" button */
+        const changeBtn = document.getElementById("changeNameBtn");
+        if (changeBtn) {
+          changeBtn.addEventListener("click", () => {
+            APP.playSound("tap");
+            openNameModal({ required: false });
+          });
+        }
+
+        /* If no name yet, force the modal — cannot dismiss */
+        if (!hasName) {
+          openNameModal({ required: true });
+        }
+
+        requestAnimationFrame(() => page.classList.add("visible"));
+      }
+
+      /* ============================================================
+         NAME MODAL
+         ============================================================ */
+      function openNameModal({ required }) {
+        const existing = getLearnerName();
+
+        const overlay = document.createElement("div");
+        overlay.className = "modal-overlay";
+        overlay.innerHTML = `
+          <div class="modal">
+            <div class="modal-icon"><i class="fa-solid fa-user-pen"></i></div>
+            <h3>${isHa ? "Rubuta sunanka" : "Enter your name"}</h3>
+            <p>${isHa
+              ? "Wannan sunan zai bayyana a takardar shaidarka. Za ka iya gyara shi daga baya."
+              : "This name will appear on your certificate. You can change it later."}</p>
+
+            <label class="modal-label" for="certNameInput">
+              ${isHa ? "Sunan cikakke" : "Full name"}
+            </label>
+            <input
+              type="text"
+              class="modal-input"
+              id="certNameInput"
+              value="${existing.replace(/"/g, "&quot;")}"
+              placeholder="${isHa ? "Misali: Aminu Bello" : "e.g. Aminu Bello"}"
+              maxlength="60"
+              autocomplete="name"
+              autocapitalize="words"
+            />
+
+            <div class="modal-hint">
+              <i class="fa-solid fa-circle-info"></i>
+              <span>${isHa
+                ? "Yi amfani da sunan da kake so ya bayyana a takardar shaida."
+                : "Use the name you want shown on your certificate."}</span>
+            </div>
+
+            <div class="modal-actions">
+              ${required ? "" : `
+                <button class="modal-btn modal-btn-secondary" id="certNameCancel">
+                  ${isHa ? "Soke" : "Cancel"}
+                </button>
+              `}
+              <button class="modal-btn modal-btn-primary" id="certNameSave" disabled>
+                <i class="fa-solid fa-check"></i>
+                ${isHa ? "Ajiye" : "Save"}
+              </button>
+            </div>
+          </div>
+        `;
+
+        document.body.appendChild(overlay);
+        requestAnimationFrame(() => overlay.classList.add("open"));
+
+        const input = overlay.querySelector("#certNameInput");
+        const saveBtn = overlay.querySelector("#certNameSave");
+        const cancelBtn = overlay.querySelector("#certNameCancel");
+
+        /* Live toggle of Save button */
+        function updateSaveState() {
+          saveBtn.disabled = input.value.trim().length < 2;
+        }
+        updateSaveState();
+        input.addEventListener("input", updateSaveState);
+
+        /* Autofocus (deferred so mobile keyboards behave) */
+        setTimeout(() => input.focus(), 250);
+
+        /* Save */
+        function save() {
+          const value = input.value.trim();
+          if (value.length < 2) return;
+          setLearnerName(value);
+          APP.playSound("correct");
+          close();
+          /* Re-render the whole page with the new name */
+          renderPage();
+        }
+
+        saveBtn.addEventListener("click", save);
+
+        input.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" && !saveBtn.disabled) save();
+        });
+
+        /* Cancel (only when not required) */
+        if (cancelBtn) {
+          cancelBtn.addEventListener("click", () => {
+            close();
+          });
+        }
+
+        /* Block outside click when required */
+        overlay.addEventListener("click", (e) => {
+          if (e.target === overlay && !required) close();
+        });
+
+        /* Block escape when required */
+        function onEsc(e) {
+          if (e.key === "Escape" && !required) {
+            close();
+            document.removeEventListener("keydown", onEsc);
+          }
+        }
+        document.addEventListener("keydown", onEsc);
+
+        function close() {
+          overlay.classList.remove("open");
+          setTimeout(() => overlay.remove(), 250);
+          document.removeEventListener("keydown", onEsc);
+        }
+      }
 
       /* ============================================================
          CANVAS DRAWING
@@ -355,23 +734,16 @@
       const logoImg = new Image();
       logoImg.crossOrigin = "anonymous";
       logoImg.src = "/images/logo.png";
+      logoImg.onload = drawBoth;
+      logoImg.onerror = drawBoth;
 
-      logoImg.onload = () => {
-        const previewCanvas = document.getElementById("certPreviewCanvas");
-        drawCertificate(previewCanvas);
-        drawCertificate(exportCanvas);
-        bindActions();
-      };
+      function drawBoth() {
+        if (!previewCanvas) return;
+        drawCertificate(previewCanvas, getLearnerName());
+        drawCertificate(exportCanvas, getLearnerName());
+      }
 
-      logoImg.onerror = () => {
-        /* Draw anyway with a fallback text mark if logo fails to load */
-        const previewCanvas = document.getElementById("certPreviewCanvas");
-        drawCertificate(previewCanvas);
-        drawCertificate(exportCanvas);
-        bindActions();
-      };
-
-      function drawCertificate(canvas) {
+      function drawCertificate(canvas, learnerName) {
         const baseW = 1200;
         const baseH = 848;
         const scale = canvas.width / baseW;
@@ -380,6 +752,10 @@
         const ctx = canvas.getContext("2d");
         const W = canvas.width;
         const H = canvas.height;
+
+        const displayName = learnerName && learnerName.trim()
+          ? learnerName.trim()
+          : (isHa ? "Ɗalibin Fasahar Al'umma" : "Fasahar Al'umma Learner");
 
         /* ---------- helpers ---------- */
         function roundRect(x, y, w, h, r) {
@@ -410,7 +786,6 @@
           return lineY;
         }
 
-        /* ---------- Rosette / red badge with many edges ---------- */
         function drawRosette(cx, cy, outerR, innerR, spikes, fill, stroke) {
           ctx.beginPath();
           for (let i = 0; i < spikes * 2; i++) {
@@ -441,7 +816,7 @@
         ctx.fillStyle = wash;
         ctx.fillRect(0, 0, W, H);
 
-        /* ---------- Outer border ---------- */
+        /* ---------- Borders ---------- */
         const pad = 36 * scale;
         ctx.strokeStyle = COLORS.primary;
         ctx.lineWidth = 3 * scale;
@@ -483,7 +858,7 @@
         ctx.lineTo(W - cornerInset, H - cornerInset - cornerLen);
         ctx.stroke();
 
-        /* ---------- HEADER: logo + app name ---------- */
+        /* ---------- Header ---------- */
         const centerX = W / 2;
         ctx.textAlign = "center";
         ctx.textBaseline = "top";
@@ -492,7 +867,6 @@
         const logoX = centerX - logoSize / 2;
         const logoY = pad + 34 * scale;
 
-        /* White rounded card behind the logo for a clean look */
         roundRect(logoX - 6 * scale, logoY - 6 * scale, logoSize + 12 * scale, logoSize + 12 * scale, 14 * scale);
         ctx.fillStyle = COLORS.white;
         ctx.fill();
@@ -500,11 +874,9 @@
         ctx.lineWidth = 1 * scale;
         ctx.stroke();
 
-        /* Draw the actual logo image */
         if (logoImg.complete && logoImg.naturalWidth > 0) {
           ctx.drawImage(logoImg, logoX, logoY, logoSize, logoSize);
         } else {
-          /* Fallback — green box with "F" if image failed */
           roundRect(logoX, logoY, logoSize, logoSize, 12 * scale);
           ctx.fillStyle = COLORS.primary;
           ctx.fill();
@@ -535,24 +907,24 @@
         ctx.lineTo(centerX + 26 * scale, dividerY);
         ctx.stroke();
 
-        /* ---------- PRESENTED TO ---------- */
+        /* ---------- Presented to ---------- */
         const presentedY = dividerY + 28 * scale;
         ctx.fillStyle = COLORS.muted;
         ctx.font = `800 ${10 * scale}px Inter, Arial, sans-serif`;
         ctx.fillText(isHa ? "AN BAYAR WA" : "PRESENTED TO", centerX, presentedY);
 
-        /* Learner name */
+        /* Name */
         const nameY = presentedY + 22 * scale;
         let nameFontSize = 42 * scale;
         ctx.font = `800 ${nameFontSize}px Inter, Arial, sans-serif`;
-        while (ctx.measureText(learnerName).width > W - 240 * scale && nameFontSize > 20 * scale) {
+        while (ctx.measureText(displayName).width > W - 240 * scale && nameFontSize > 20 * scale) {
           nameFontSize -= 2 * scale;
           ctx.font = `800 ${nameFontSize}px Inter, Arial, sans-serif`;
         }
         ctx.fillStyle = COLORS.primaryDark;
-        ctx.fillText(learnerName, centerX, nameY);
+        ctx.fillText(displayName, centerX, nameY);
 
-        const nameWidth = ctx.measureText(learnerName).width;
+        const nameWidth = ctx.measureText(displayName).width;
         const underlineY = nameY + nameFontSize + 8 * scale;
         ctx.strokeStyle = COLORS.accent;
         ctx.lineWidth = 2 * scale;
@@ -561,7 +933,7 @@
         ctx.lineTo(centerX + nameWidth / 2, underlineY);
         ctx.stroke();
 
-        /* ---------- FOR COMPLETING ---------- */
+        /* ---------- For completing ---------- */
         const forY = underlineY + 22 * scale;
         ctx.fillStyle = COLORS.muted;
         ctx.font = `500 ${11 * scale}px Inter, Arial, sans-serif`;
@@ -583,8 +955,7 @@
         ctx.font = `700 ${12 * scale}px Inter, Arial, sans-serif`;
         ctx.fillText(moduleSub, centerX, subtitleY);
 
-        /* ---------- RICH BOTTOM CONTENT ---------- */
-        /* Long descriptive paragraph that fills the space */
+        /* ---------- Message ---------- */
         const msgY = subtitleY + 34 * scale;
         ctx.fillStyle = COLORS.muted;
         ctx.font = `400 ${10.5 * scale}px Inter, Arial, sans-serif`;
@@ -596,19 +967,16 @@
             "for family, and for the wider community.";
         const lastLineY = wrapCentered(message, centerX, msgY, W - 260 * scale, 15 * scale);
 
-        /* ---------- ROSETTE BADGE + SIGNATURE ROW ---------- */
+        /* ---------- Rosette + signature row ---------- */
         const bottomSectionY = Math.max(lastLineY + 40 * scale, H - pad - 190 * scale);
 
-        /* --- Rosette badge on the left --- */
         const rosetteCX = pad + 140 * scale;
         const rosetteCY = bottomSectionY + 10 * scale;
         const outerR = 56 * scale;
         const innerR = 46 * scale;
 
-        /* Outer starburst (many edges) in red */
         drawRosette(rosetteCX, rosetteCY, outerR, innerR, 24, COLORS.red, COLORS.redDark);
 
-        /* Inner white circle */
         ctx.beginPath();
         ctx.arc(rosetteCX, rosetteCY, 36 * scale, 0, Math.PI * 2);
         ctx.fillStyle = COLORS.white;
@@ -617,7 +985,6 @@
         ctx.lineWidth = 1.5 * scale;
         ctx.stroke();
 
-        /* Ribbon tails at bottom of rosette */
         ctx.fillStyle = COLORS.redDark;
         ctx.beginPath();
         ctx.moveTo(rosetteCX - 18 * scale, rosetteCY + outerR * 0.75);
@@ -628,7 +995,6 @@
         ctx.closePath();
         ctx.fill();
 
-        /* Text inside rosette */
         ctx.fillStyle = COLORS.redDark;
         ctx.font = `900 ${9 * scale}px Inter, Arial, sans-serif`;
         ctx.textBaseline = "middle";
@@ -637,11 +1003,9 @@
         ctx.fillText(isHa ? "TABBATAR" : "OFFICIAL", rosetteCX, rosetteCY + 8 * scale);
         ctx.textBaseline = "top";
 
-        /* --- Signature block on the right --- */
         const sigCX = W - pad - 220 * scale;
         const sigBaseY = bottomSectionY + 20 * scale;
 
-        /* Signature line */
         ctx.strokeStyle = COLORS.dark;
         ctx.lineWidth = 1.5 * scale;
         ctx.beginPath();
@@ -649,7 +1013,6 @@
         ctx.lineTo(sigCX + 120 * scale, sigBaseY + 30 * scale);
         ctx.stroke();
 
-        /* Handwritten-style signature above the line */
         ctx.strokeStyle = COLORS.primaryDark;
         ctx.lineWidth = 2 * scale;
         ctx.lineCap = "round";
@@ -668,17 +1031,14 @@
         ctx.stroke();
         ctx.lineCap = "butt";
 
-        /* Signature label */
         ctx.fillStyle = COLORS.muted;
         ctx.font = `800 ${9 * scale}px Inter, Arial, sans-serif`;
         ctx.fillText(isHa ? "SA HANNU" : "SIGNATURE", sigCX, sigBaseY + 40 * scale);
 
-        /* Title under signature */
         ctx.fillStyle = COLORS.dark;
         ctx.font = `700 ${11 * scale}px Inter, Arial, sans-serif`;
         ctx.fillText(isHa ? "Daraktan Fasahar Al'umma" : "Director, Fasahar Al'umma", sigCX, sigBaseY + 56 * scale);
 
-        /* --- Center between badge and signature: "Verify" line --- */
         ctx.fillStyle = COLORS.muted;
         ctx.font = `500 ${9.5 * scale}px Inter, Arial, sans-serif`;
         ctx.fillText(
@@ -689,9 +1049,8 @@
           bottomSectionY + 10 * scale
         );
 
-        /* ---------- FOOTER: date + serial ---------- */
+        /* ---------- Footer ---------- */
         const footerLineY = H - pad - 42 * scale;
-
         ctx.strokeStyle = COLORS.border;
         ctx.lineWidth = 1 * scale;
         ctx.beginPath();
@@ -723,11 +1082,12 @@
       }
 
       /* ============================================================
-         ACTIONS
+         DOWNLOAD + SHARE
          ============================================================ */
       function bindActions() {
         const downloadBtn = document.getElementById("downloadBtn");
         const shareBtn = document.getElementById("shareBtn");
+        if (!downloadBtn) return;
 
         downloadBtn.addEventListener("click", () => {
           APP.playSound("tap");
@@ -787,6 +1147,13 @@
         }
       }
 
+      /* Hook bindActions after every render */
+      const originalRenderPage = renderPage;
+      renderPage = function () {
+        originalRenderPage();
+        bindActions();
+      };
+
       /* ============================================================
          NOT FOUND / LOCKED
          ============================================================ */
@@ -821,6 +1188,11 @@
           </div>
         `;
       }
+
+      /* ============================================================
+         BOOT
+         ============================================================ */
+      renderPage();
 
     })();
   </script>

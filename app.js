@@ -79,17 +79,19 @@ const APP = (() => {
       ".choice"
     ].join(",");
 
-    document.addEventListener("click", (e) => {
+    function handle(e) {
       const el = e.target.closest(SELECTOR);
       if (!el) return;
       if (el.hasAttribute("data-no-tap")) return;
       if (el.disabled) return;
-
-      /* Skip lang toggle — handled inline */
       if (el.closest("#langToggle") || el.closest("#mobileLang") || el.closest("#drawerLang")) return;
-
       playSound("tap");
-    }, true);
+    }
+
+    /* pointerdown fires instantly on both touch + mouse */
+    document.addEventListener("pointerdown", handle, true);
+    /* click as a fallback for older browsers */
+    document.addEventListener("click", handle, true);
   }
 
   /* ---------- 2. TRANSLATION LOOKUP ---------- */

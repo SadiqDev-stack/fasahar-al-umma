@@ -1,0 +1,70 @@
+cd ~/OneDrive/Desktop/code\ project/fasahar\ alumma
+
+# robots.txt
+cat > robots.txt << 'EOF'
+# ============================================================
+# Fasahar Al'umma — robots.txt
+# ============================================================
+
+User-agent: *
+Allow: /
+
+# Do not index the offline fallback or certificate verify stub
+Disallow: /offline.html
+Disallow: /certificate.html
+
+# Sitemap
+Sitemap: https://fasaharalumma.app/sitemap.xml
+EOF
+
+# sitemap.xml
+cat > sitemap.xml << 'EOF'
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+    <loc>https://fasaharalumma.app/</loc>
+    <xhtml:link rel="alternate" hreflang="ha" href="https://fasaharalumma.app/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://fasaharalumma.app/" />
+    <lastmod>2026-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://fasaharalumma.app/home.html</loc>
+    <lastmod>2026-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://fasaharalumma.app/about.html</loc>
+    <lastmod>2026-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://fasaharalumma.app/opportunities.html</loc>
+    <lastmod>2026-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://fasaharalumma.app/profile.html</loc>
+    <lastmod>2026-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+</urlset>
+EOF
+
+# Ensure /files/ folder exists for the app downloads
+mkdir -p files
+
+echo "✅ robots.txt, sitemap.xml, and /files/ folder created"
+ls -la robots.txt sitemap.xml files/

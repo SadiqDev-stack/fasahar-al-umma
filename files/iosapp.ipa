@@ -1,0 +1,238 @@
+cd ~/OneDrive/Desktop/code\ project/fasahar\ alumma && node << 'NODEEOF'
+const fs = require("fs");
+let html = fs.readFileSync("index.html", "utf8");
+let changed = 0;
+
+/* --- 1. Insert download section before the final CTA --- */
+if (!html.includes('id="downloadSection"') && !html.includes('class="download-section"')) {
+  /* Match the FINAL CTA section comment + opening tag, regardless of whitespace */
+  const finalCtaRegex = /(\s*<!--\s*=+\s*FINAL CTA\s*=+\s*-->\s*<section class="cta">)/;
+
+  if (finalCtaRegex.test(html)) {
+    const downloadSection = `
+
+  <!-- ===== DOWNLOAD APP ===== -->
+  <section class="download-section">
+    <div class="container">
+      <div class="download-box reveal">
+        <div class="download-head">
+          <div class="download-icon">
+            <i class="fa-solid fa-mobile-screen-button"></i>
+          </div>
+          <div class="download-head-text">
+            <div class="label" data-i18n="download_label">Sauke Manhajar</div>
+            <h3 data-i18n="download_title">Sauke Fasahar Al'umma a wayarka</h3>
+            <p data-i18n="download_desc">Yi amfani da manhajar a kowane lokaci, ko da ba ka da intanet. Kyauta gaba ɗaya.</p>
+          </div>
+        </div>
+
+        <div class="download-buttons">
+          <a href="/files/androidapp.apk" download class="download-btn download-btn-android">
+            <i class="fa-brands fa-android"></i>
+            <span class="download-btn-text">
+              <span class="download-btn-small" data-i18n="download_android_small">Sauke don</span>
+              <span class="download-btn-big">Android APK</span>
+            </span>
+          </a>
+
+          <a href="/files/iosapp.ipa" download class="download-btn download-btn-ios">
+            <i class="fa-brands fa-apple"></i>
+            <span class="download-btn-text">
+              <span class="download-btn-small" data-i18n="download_ios_small">Sauke don</span>
+              <span class="download-btn-big">iOS</span>
+            </span>
+          </a>
+        </div>
+
+        <div class="download-note">
+          <i class="fa-solid fa-circle-info"></i>
+          <span data-i18n="download_note">Za ka iya kuma amfani da manhajar kai tsaye a burauzarka ba tare da saukewa ba.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FINAL CTA ===== -->
+  <section class="cta">`;
+
+    html = html.replace(finalCtaRegex, downloadSection);
+    changed++;
+    console.log("✅ 1/2 Download section inserted");
+  } else {
+    console.log("⚠️  1/2 FINAL CTA section not found — check index.html");
+  }
+} else {
+  console.log("ℹ️  1/2 Download section already present — skipped");
+  changed++;
+}
+
+/* --- 2. Insert download CSS before the FOOTER styles --- */
+if (!html.includes(".download-box")) {
+  const footerCssRegex = /(\s*\/\*\s*=+\s*\n\s*FOOTER\s*\n\s*=+\s*\*\/)/;
+
+  if (footerCssRegex.test(html)) {
+    const downloadCss = `
+
+    /* ============================================================
+       DOWNLOAD APP SECTION
+       ============================================================ */
+    .download-section {
+      padding: 40px 0 40px;
+    }
+
+    .download-box {
+      background: linear-gradient(135deg, #eef7f2 0%, #e0f0e7 100%);
+      border: 1px solid #d6e2da;
+      border-radius: var(--radius);
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+    }
+
+    .download-head {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    .download-icon {
+      width: 64px; height: 64px;
+      border-radius: 18px;
+      background: var(--primary);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 26px;
+      flex-shrink: 0;
+      box-shadow: 0 10px 26px rgba(23, 107, 77, 0.28);
+    }
+
+    .download-head-text { flex: 1; min-width: 0; }
+
+    .download-head-text .label {
+      font-size: 11px;
+      color: var(--primary);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 6px;
+    }
+
+    .download-head-text h3 {
+      font-size: clamp(20px, 3vw, 26px);
+      font-weight: 800;
+      color: var(--dark);
+      letter-spacing: -0.6px;
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+
+    .download-head-text p {
+      font-size: 14.5px;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 520px;
+    }
+
+    .download-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      min-height: 60px;
+      padding: 12px 22px;
+      border-radius: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      color: #fff;
+      transition: all 0.2s;
+      flex: 1;
+      min-width: 200px;
+      max-width: 260px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .download-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(20, 50, 38, 0.18);
+    }
+
+    .download-btn i {
+      font-size: 26px;
+      flex-shrink: 0;
+    }
+
+    .download-btn-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+      text-align: left;
+    }
+
+    .download-btn-small {
+      font-size: 10.5px;
+      font-weight: 700;
+      opacity: 0.85;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .download-btn-big {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: -0.2px;
+    }
+
+    .download-btn-android { background: #176b4d; }
+    .download-btn-android:hover { background: #0f4d38; }
+
+    .download-btn-ios { background: #17231e; }
+    .download-btn-ios:hover { background: #0d1512; }
+
+    .download-note {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12.5px;
+      color: var(--muted);
+      padding-top: 6px;
+      border-top: 1px solid rgba(23, 107, 77, 0.12);
+    }
+
+    .download-note i {
+      color: var(--primary);
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 560px) {
+      .download-box { padding: 26px 20px; gap: 20px; }
+      .download-head { flex-direction: column; gap: 14px; }
+      .download-btn { min-width: 100%; max-width: 100%; }
+    }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */`;
+
+    html = html.replace(footerCssRegex, downloadCss);
+    changed++;
+    console.log("✅ 2/2 Download CSS inserted");
+  } else {
+    console.log("⚠️  2/2 FOOTER CSS marker not found");
+  }
+} else {
+  console.log("ℹ️  2/2 Download CSS already present — skipped");
+  changed++;
+}
+
+fs.writeFileSync("index.html", html, "utf8");
+console.log("\n📝 index.html updated — " + changed + "/2 patches");
+console.log("   Open index.html and scroll down — download section should appear before the final CTA");
+NODEEOF

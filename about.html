@@ -118,6 +118,60 @@
       font-weight: 600;
     }
 
+    /* ---- Hero download CTA ---- */
+    .about-hero-cta {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 22px;
+    }
+
+    .about-hero-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 50px;
+      padding: 0 20px;
+      border-radius: 14px;
+      font-weight: 800;
+      font-size: 14px;
+      text-decoration: none;
+      color: #fff;
+      transition: all 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .about-hero-btn i {
+      font-size: 20px;
+    }
+
+    .about-hero-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(20, 50, 38, 0.18);
+    }
+
+    .about-hero-btn-android { background: #176b4d; }
+    .about-hero-btn-android:hover { background: #0f4d38; }
+
+    .about-hero-btn-ios { background: #17231e; }
+    .about-hero-btn-ios:hover { background: #0d1512; }
+
+    .about-hero-btn-coming {
+      background: #e8eeea;
+      color: var(--muted);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .about-hero-btn-coming i {
+      opacity: 0.6;
+    }
+
+    @media (max-width: 560px) {
+      .about-hero-btn { flex: 1; justify-content: center; min-width: 140px; }
+    }
+
     /* ---- Sections ---- */
     .about-section {
       margin-bottom: 36px;
@@ -378,7 +432,7 @@
         </div>
       `;
 
-      const heroHtml = `
+            const heroHtml = `
         <div class="about-hero">
           <div class="about-logo">
             <img src="/images/logo.png" alt="Fasahar Al'umma" />
@@ -388,6 +442,17 @@
             ? "Fasahar zamani ga al'umma baki ɗaya"
             : "Digital skills for the whole community"}</div>
           <div class="version">${isHa ? "Sigar" : "Version"} ${DATA.meta.version}</div>
+
+          <div class="about-hero-cta">
+            <a href="/files/androidapp.apk" download class="about-hero-btn about-hero-btn-android">
+              <i class="fa-brands fa-android"></i>
+              <span>${isHa ? "Sauke don Android" : "Download for Android"}</span>
+            </a>
+            <span class="about-hero-btn about-hero-btn-coming">
+              <i class="fa-brands fa-apple"></i>
+              <span>${isHa ? "iOS — Nan gaba" : "iOS — Coming soon"}</span>
+            </span>
+          </div>
         </div>
       `;
 

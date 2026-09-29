@@ -169,14 +169,53 @@
 
     /* ---- Greeting row (with mobile lang toggle) ---- */
     .greeting {
-      padding: 24px 0 28px;
+      padding: 22px 0 26px;
       display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 14px;
+      flex-direction: column;
+      gap: 20px;
     }
 
-    .greeting-text { flex: 1; min-width: 0; }
+    /* Top row: logo + app name + tagline + lang pill */
+    .greeting-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .greeting-logo {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      object-fit: contain;
+      flex-shrink: 0;
+      background: var(--soft);
+      padding: 6px;
+      box-shadow: 0 4px 14px rgba(23, 107, 77, 0.10);
+    }
+
+    .greeting-brand-text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .greeting-app-name {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--dark);
+      letter-spacing: -0.3px;
+      line-height: 1.2;
+    }
+
+    .greeting-app-tagline {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      line-height: 1.3;
+      margin-top: 2px;
+    }
+
+    /* Bottom row: hello + title */
+    .greeting-text { min-width: 0; }
 
     .greeting-hello {
       font-size: 14px;
@@ -755,15 +794,21 @@
   <main class="container home" id="home">
 
     <section class="greeting">
+      <div class="greeting-brand">
+        <img src="/images/logo.png" alt="Fasahar Al'umma" class="greeting-logo" />
+        <div class="greeting-brand-text">
+          <div class="greeting-app-name">Fasahar Al'umma</div>
+          <div class="greeting-app-tagline" data-i18n="app_tagline">Fasahar zamani ga al'umma baki ɗaya</div>
+        </div>
+        <div class="mobile-lang" id="mobileLang">
+          <span data-lang="ha" class="active">HA</span>
+          <span data-lang="en">EN</span>
+        </div>
+      </div>
+
       <div class="greeting-text">
         <p class="greeting-hello" id="greetingHello">Sannu 👋</p>
         <h1 class="greeting-title" id="greetingTitle">Ci gaba da koyo</h1>
-      </div>
-
-      <!-- Mobile language toggle -->
-      <div class="mobile-lang" id="mobileLang">
-        <span data-lang="ha" class="active">HA</span>
-        <span data-lang="en">EN</span>
       </div>
     </section>
 
@@ -1026,6 +1071,55 @@
        ============================================================ */
     renderHome();
     syncLangUI();
+
+    /* ============================================================
+       NAV DELAY — let the tap sound finish before navigating
+       ============================================================ */
+    (function initNavDelay() {
+      const DELAY = 100; // ms
+
+      function shouldIntercept(link) {
+        if (!link || !link.href) return false;
+        const url = new URL(link.href, window.location.href);
+        if (url.pathname === window.location.pathname && url.hash) return false;
+        if (url.origin !== window.location.origin) return false;
+        if (link.getAttribute("href")?.startsWith("#")) return false;
+        return true;
+      }
+
+      function intercept(e) {
+        const link = e.target.closest("a");
+        if (!link) return;
+        if (!shouldIntercept(link)) return;
+
+        e.preventDefault();
+        if (window.APP && window.APP.playSound) APP.playSound("tap");
+
+        const href = link.href;
+        setTimeout(() => {
+          window.location.href = href;
+        }, DELAY);
+      }
+
+      function wire() {
+        const drawer = document.getElementById("drawer");
+        if (drawer && !drawer.dataset.navDelayWired) {
+          drawer.addEventListener("click", intercept);
+          drawer.dataset.navDelayWired = "1";
+        }
+
+        const tabbar = document.querySelector(".tabbar");
+        if (tabbar && !tabbar.dataset.navDelayWired) {
+          tabbar.addEventListener("click", intercept);
+          tabbar.dataset.navDelayWired = "1";
+        }
+      }
+
+      wire();
+      const mo = new MutationObserver(wire);
+      mo.observe(document.body, { childList: true, subtree: true });
+      setTimeout(() => mo.disconnect(), 3000);
+    })();
 
     /* ============================================================
        DRAWER

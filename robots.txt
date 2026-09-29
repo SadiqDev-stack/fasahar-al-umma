@@ -1,0 +1,13 @@
+# ============================================================
+# Fasahar Al'umma — robots.txt
+# ============================================================
+
+User-agent: *
+Allow: /
+
+# Do not index the offline fallback or certificate verify stub
+Disallow: /offline.html
+Disallow: /certificate.html
+
+# Sitemap
+Sitemap: https://fasaharalumma.app/sitemap.xml
