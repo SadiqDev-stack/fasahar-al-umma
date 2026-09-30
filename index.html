@@ -2228,5 +2228,486 @@
     setLanguage("ha");
   </script>
 
+  <!-- ===== AI ASSISTANT (standalone for landing) ===== -->
+  <style>
+    .lai-fab {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 200;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+      box-shadow: 0 10px 28px rgba(23, 107, 77, 0.34);
+      cursor: pointer;
+      transition: transform 0.15s ease, background 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
+      border: none;
+      padding: 0;
+      font-family: inherit;
+    }
+    .lai-fab:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px) scale(1.05);
+    }
+    .lai-fab:active { transform: scale(0.94); }
+    .lai-fab .lai-pulse {
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 2px solid var(--primary);
+      opacity: 0;
+      animation: laiPulse 2.4s ease-out infinite;
+      pointer-events: none;
+    }
+    @keyframes laiPulse {
+      0%   { opacity: 0.6; transform: scale(0.85); }
+      100% { opacity: 0;   transform: scale(1.35); }
+    }
+    @media (min-width: 901px) {
+      .lai-fab { bottom: 32px; right: 32px; width: 62px; height: 62px; font-size: 24px; }
+    }
+
+    .lai-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(23, 35, 30, 0.42);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+    .lai-backdrop.open { opacity: 1; visibility: visible; }
+
+    .lai-panel {
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      height: min(85dvh, 720px);
+      max-height: calc(100dvh - 32px);
+      background: #fff;
+      border-radius: 24px 24px 0 0;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      transform: translateY(100%);
+      transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 -20px 60px rgba(20, 50, 38, 0.22);
+      overflow: hidden;
+    }
+    .lai-panel.open { transform: translateY(0); }
+    @media (min-width: 901px) {
+      .lai-panel {
+        left: auto; right: 32px;
+        top: 50%; bottom: auto;
+        width: 420px;
+        height: min(80vh, 640px);
+        max-height: calc(100vh - 80px);
+        border-radius: 24px;
+        transform: translateY(calc(-50% + 20px));
+        opacity: 0; visibility: hidden;
+        transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+      }
+      .lai-panel.open {
+        transform: translateY(-50%);
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
+    .lai-head {
+      display: flex; align-items: center; gap: 12px;
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--border);
+      background: #fff;
+      flex-shrink: 0;
+    }
+    .lai-head-icon {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff;
+      display: grid; place-items: center;
+      font-size: 16px; flex-shrink: 0;
+    }
+    .lai-head-body { flex: 1; min-width: 0; }
+    .lai-head-title {
+      font-size: 15px; font-weight: 800;
+      color: var(--dark); line-height: 1.2;
+    }
+    .lai-head-sub {
+      font-size: 11.5px; color: var(--muted);
+      font-weight: 600; display: flex; align-items: center;
+      gap: 6px; margin-top: 2px;
+    }
+    .lai-head-sub .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--primary); flex-shrink: 0;
+    }
+    .lai-close {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: var(--soft); color: var(--dark);
+      display: grid; place-items: center;
+      border: none; cursor: pointer;
+      font-size: 14px; flex-shrink: 0;
+      transition: background 0.15s;
+    }
+    .lai-close:hover { background: var(--border); }
+
+    .lai-messages {
+      flex: 1; overflow-y: auto;
+      padding: 18px;
+      display: flex; flex-direction: column;
+      gap: 12px;
+      background: #fafcfb;
+    }
+    .lai-messages::-webkit-scrollbar { width: 6px; }
+    .lai-messages::-webkit-scrollbar-thumb {
+      background: var(--border); border-radius: 100px;
+    }
+
+    .lai-msg {
+      max-width: 84%;
+      padding: 12px 14px;
+      border-radius: 16px;
+      font-size: 14px; line-height: 1.55;
+      word-wrap: break-word;
+      white-space: pre-wrap;
+    }
+    .lai-msg-user {
+      align-self: flex-end;
+      background: var(--primary); color: #fff;
+      border-bottom-right-radius: 4px;
+    }
+    .lai-msg-ai {
+      align-self: flex-start;
+      background: #fff; color: var(--dark);
+      border: 1px solid var(--border);
+      border-bottom-left-radius: 4px;
+    }
+    .lai-msg-error {
+      align-self: center;
+      background: #fdf1f1; color: #8b2020;
+      border: 1px solid #e8b4b4;
+      font-size: 12.5px; font-weight: 600;
+      padding: 10px 14px; text-align: center;
+      max-width: 90%; border-radius: 12px;
+    }
+    .lai-typing {
+      align-self: flex-start;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-bottom-left-radius: 4px;
+      padding: 14px 18px;
+      display: inline-flex; gap: 5px; align-items: center;
+    }
+    .lai-typing span {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--muted); opacity: 0.4;
+      animation: laiBounce 1.2s infinite ease-in-out both;
+    }
+    .lai-typing span:nth-child(2) { animation-delay: 0.15s; }
+    .lai-typing span:nth-child(3) { animation-delay: 0.3s; }
+    @keyframes laiBounce {
+      0%, 80%, 100% { opacity: 0.35; transform: scale(0.9); }
+      40% { opacity: 1; transform: scale(1.1); }
+    }
+
+    .lai-suggestions {
+      display: flex; flex-wrap: wrap;
+      gap: 8px; margin-top: 8px;
+    }
+    .lai-suggestion {
+      padding: 8px 14px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 12.5px; font-weight: 600;
+      color: var(--primary);
+      cursor: pointer; transition: all 0.15s;
+      font-family: inherit;
+    }
+    .lai-suggestion:hover {
+      border-color: var(--primary);
+      background: #e8f3ed;
+    }
+
+    .lai-input-wrap {
+      padding: 12px 14px calc(12px + env(safe-area-inset-bottom, 0px));
+      border-top: 1px solid var(--border);
+      background: #fff;
+      display: flex; gap: 8px; align-items: flex-end;
+      flex-shrink: 0;
+    }
+    .lai-input {
+      flex: 1; min-height: 46px; max-height: 120px;
+      padding: 12px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      font-size: 15px; font-family: inherit;
+      color: var(--dark);
+      background: #fff; resize: none;
+      outline: none; transition: border-color 0.2s;
+      line-height: 1.4;
+    }
+    .lai-input:focus { border-color: var(--primary); }
+    .lai-input::placeholder { color: var(--muted); }
+
+    .lai-send {
+      width: 46px; height: 46px;
+      border-radius: 14px;
+      background: var(--primary);
+      color: #fff; border: none; cursor: pointer;
+      display: grid; place-items: center;
+      font-size: 15px;
+      transition: background 0.15s, transform 0.15s;
+      flex-shrink: 0;
+    }
+    .lai-send:hover:not(:disabled) { background: var(--primary-dark); }
+    .lai-send:active:not(:disabled) { transform: scale(0.95); }
+    .lai-send:disabled { opacity: 0.45; cursor: not-allowed; }
+  </style>
+
+  <button class="lai-fab" id="laiFab" aria-label="Tambaya AI">
+    <span class="lai-pulse"></span>
+    <i class="fa-solid fa-robot"></i>
+  </button>
+
+  <div class="lai-backdrop" id="laiBackdrop"></div>
+
+  <div class="lai-panel" id="laiPanel" role="dialog" aria-modal="true">
+    <div class="lai-head">
+      <div class="lai-head-icon"><i class="fa-solid fa-robot"></i></div>
+      <div class="lai-head-body">
+        <div class="lai-head-title" id="laiHeadTitle">Mataimakin AI</div>
+        <div class="lai-head-sub">
+          <span class="dot"></span>
+          <span id="laiHeadSub">Tambaye ni game da Fasahar Al'umma</span>
+        </div>
+      </div>
+      <button class="lai-close" id="laiClose" aria-label="Rufe">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div class="lai-messages" id="laiMessages"></div>
+    <div class="lai-input-wrap">
+      <textarea class="lai-input" id="laiInput" placeholder="Rubuta tambayarka..." rows="1" maxlength="500"></textarea>
+      <button class="lai-send" id="laiSend" disabled aria-label="Aika">
+        <i class="fa-solid fa-paper-plane"></i>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    /* ============================================================
+       LANDING AI — standalone chat widget
+       No dependencies on app.js, data.js, or storage.js.
+       Reads language from localStorage directly.
+       ============================================================ */
+    (function initLandingAI() {
+      const AI_ENDPOINT = "https://fasahar-alumma-server-eosin.vercel.app/api/ai";
+      const AI_SECRET = "b7392d8c799d7c0c93c9c8c9f9db4a09e114e21151f5a797961db4fe299a0e3d";
+
+      const fab = document.getElementById("laiFab");
+      const backdrop = document.getElementById("laiBackdrop");
+      const panel = document.getElementById("laiPanel");
+      const closeBtn = document.getElementById("laiClose");
+      const messagesEl = document.getElementById("laiMessages");
+      const inputEl = document.getElementById("laiInput");
+      const sendBtn = document.getElementById("laiSend");
+      const headTitle = document.getElementById("laiHeadTitle");
+      const headSub = document.getElementById("laiHeadSub");
+
+      /* Detect language from localStorage, fall back to Hausa */
+      let lang = "ha";
+      try {
+        const stored = localStorage.getItem("fasahar.language");
+        if (stored === "en" || stored === "ha") lang = stored;
+      } catch (e) {}
+      let isHa = lang === "ha";
+
+      /* Play tap sound — optional, uses the shared audio if available */
+      function tap() {
+        try {
+          const a = new Audio("/audio/tap.mp3");
+          a.volume = 0.5;
+          a.play().catch(() => {});
+        } catch (e) {}
+      }
+      function notify() {
+        try {
+          const a = new Audio("/audio/notify.mp3");
+          a.volume = 0.5;
+          a.play().catch(() => {});
+        } catch (e) {}
+      }
+
+      const history = [];
+      let sending = false;
+
+      /* ---------- Open / close ---------- */
+      function open() {
+        backdrop.classList.add("open");
+        panel.classList.add("open");
+        document.body.style.overflow = "hidden";
+        if (messagesEl.children.length === 0) renderWelcome();
+        setTimeout(() => inputEl.focus(), 220);
+      }
+      function close() {
+        backdrop.classList.remove("open");
+        panel.classList.remove("open");
+        document.body.style.overflow = "";
+      }
+
+      fab.addEventListener("click", () => { tap(); open(); });
+      closeBtn.addEventListener("click", close);
+      backdrop.addEventListener("click", close);
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && panel.classList.contains("open")) close();
+      });
+
+      /* ---------- Welcome ---------- */
+      function renderWelcome() {
+        const hello = isHa
+          ? "Sannu! Ni ne mataimakin Fasahar Al'umma. Tambaye ni komai game da manhajar — me take yi, wa take taimakawa, ko yadda za ka fara."
+          : "Hi! I'm the Fasahar Al'umma helper. Ask me anything about the app — what it does, who it helps, or how to get started.";
+
+        appendBubble("ai", hello);
+
+        const suggestions = isHa
+          ? ["Menene Fasahar Al'umma?", "Wa zai iya amfani da ita?", "Yaya ake amfani da ita?"]
+          : ["What is Fasahar Al'umma?", "Who is it for?", "How do I use it?"];
+
+        const chips = document.createElement("div");
+        chips.className = "lai-suggestions";
+        suggestions.forEach((text) => {
+          const chip = document.createElement("button");
+          chip.className = "lai-suggestion";
+          chip.textContent = text;
+          chip.addEventListener("click", () => {
+            inputEl.value = text;
+            updateSendState();
+            send();
+          });
+          chips.appendChild(chip);
+        });
+        messagesEl.appendChild(chips);
+        scrollBottom();
+      }
+
+      function appendBubble(role, text, isError) {
+        const el = document.createElement("div");
+        el.className = "lai-msg " + (isError ? "lai-msg-error" : (role === "user" ? "lai-msg-user" : "lai-msg-ai"));
+        el.textContent = text;
+        messagesEl.appendChild(el);
+        scrollBottom();
+        return el;
+      }
+
+      function appendTyping() {
+        const el = document.createElement("div");
+        el.className = "lai-typing";
+        el.innerHTML = "<span></span><span></span><span></span>";
+        messagesEl.appendChild(el);
+        scrollBottom();
+        return el;
+      }
+
+      function scrollBottom() {
+        requestAnimationFrame(() => {
+          messagesEl.scrollTop = messagesEl.scrollHeight;
+        });
+      }
+
+      function updateSendState() {
+        sendBtn.disabled = sending || inputEl.value.trim().length === 0;
+      }
+
+      inputEl.addEventListener("input", () => {
+        inputEl.style.height = "auto";
+        inputEl.style.height = Math.min(inputEl.scrollHeight, 120) + "px";
+        updateSendState();
+      });
+      inputEl.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+          e.preventDefault();
+          send();
+        }
+      });
+      sendBtn.addEventListener("click", send);
+
+      async function send() {
+        const text = inputEl.value.trim();
+        if (!text || sending) return;
+
+        sending = true;
+        updateSendState();
+
+        const chips = messagesEl.querySelector(".lai-suggestions");
+        if (chips) chips.remove();
+
+        appendBubble("user", text);
+        history.push({ role: "user", content: text });
+
+        inputEl.value = "";
+        inputEl.style.height = "auto";
+
+        const typing = appendTyping();
+        tap();
+
+        try {
+          const res = await fetch(AI_ENDPOINT, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "X-Fasahar-Auth": AI_SECRET
+            },
+            body: JSON.stringify({
+              messages: history.slice(-10),
+              context: { page: "landing" }
+            })
+          });
+
+          typing.remove();
+
+          if (!res.ok) {
+            appendBubble("ai", isHa
+              ? "An sami matsala. Sake gwadawa."
+              : "Something went wrong. Try again.", true);
+            return;
+          }
+
+          const data = await res.json();
+          const reply = (data && data.reply) ? data.reply : "";
+
+          if (!reply) {
+            appendBubble("ai", isHa
+              ? "Ba ni da amsa a yanzu. Sake tambaya."
+              : "No answer right now. Try again.", true);
+            return;
+          }
+
+          appendBubble("ai", reply);
+          history.push({ role: "assistant", content: reply });
+          notify();
+        } catch (err) {
+          typing.remove();
+          appendBubble("ai", isHa
+            ? "Ba a haɗa ka da intanet ba. Duba haɗin ka."
+            : "You're not connected. Check your internet.", true);
+        } finally {
+          sending = false;
+          updateSendState();
+        }
+      }
+    })();
+  </script>
+
 </body>
 </html>

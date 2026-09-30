@@ -76,8 +76,26 @@ const APP = (() => {
       ".option",
       ".opp-card",
       ".tab",
-      ".choice"
+      ".choice",
+      ".ai-fab",
+      ".ai-suggestion",
+      ".ai-send",
+      ".ai-close"
     ].join(",");
+
+    /* Track where the pointer started. If it moves too far,
+       the user was scrolling — don't play the tap sound. */
+    let downX = 0;
+    let downY = 0;
+    let downTime = 0;
+    const MOVE_THRESHOLD = 12;   /* px — anything more is a drag */
+    const TIME_THRESHOLD = 800;  /* ms — anything slower is a long-press */
+
+    document.addEventListener("pointerdown", (e) => {
+      downX = e.clientX;
+      downY = e.clientY;
+      downTime = Date.now();
+    }, true);
 
     function handle(e) {
       const el = e.target.closest(SELECTOR);
@@ -85,12 +103,19 @@ const APP = (() => {
       if (el.hasAttribute("data-no-tap")) return;
       if (el.disabled) return;
       if (el.closest("#langToggle") || el.closest("#mobileLang") || el.closest("#drawerLang")) return;
+
+      /* Was this a real tap or a scroll/swipe? */
+      const dx = Math.abs(e.clientX - downX);
+      const dy = Math.abs(e.clientY - downY);
+      const dt = Date.now() - downTime;
+
+      if (dx > MOVE_THRESHOLD || dy > MOVE_THRESHOLD) return;  /* dragged */
+      if (dt > TIME_THRESHOLD) return;                          /* held too long */
+
       playSound("tap");
     }
 
-    /* pointerdown fires instantly on both touch + mouse */
-    document.addEventListener("pointerdown", handle, true);
-    /* click as a fallback for older browsers */
+    /* click is the safest event — it only fires on real taps */
     document.addEventListener("click", handle, true);
   }
 
@@ -386,8 +411,7 @@ const APP = (() => {
 
   function shouldShowAI() {
     const path = window.location.pathname;
-    if (path.includes("index.html")) return false;
-    if (path === "/" || path === "") return false;
+    /* Hide only on the offline fallback and the iOS tutorial page */
     if (path.includes("offline.html")) return false;
     if (path.includes("download-ios.html")) return false;
     return true;
@@ -458,8 +482,8 @@ const APP = (() => {
       .ai-panel {
         position: fixed;
         left: 0; right: 0; bottom: 0;
-        height: 78dvh;
-        max-height: 720px;
+        height: min(85dvh, 720px);
+        max-height: calc(100dvh - 32px);
         background: #fff;
         border-radius: 24px 24px 0 0;
         z-index: 1000;
@@ -473,14 +497,21 @@ const APP = (() => {
       .ai-panel.open { transform: translateY(0); }
       @media (min-width: 901px) {
         .ai-panel {
-          left: auto; right: 32px; bottom: 32px;
-          width: 420px; height: 620px;
+          left: auto; right: 32px;
+          top: 50%; bottom: auto;
+          width: 420px;
+          height: min(80vh, 640px);
+          max-height: calc(100vh - 80px);
           border-radius: 24px;
-          transform: translateY(20px);
+          transform: translateY(calc(-50% + 20px));
           opacity: 0; visibility: hidden;
           transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
         }
-        .ai-panel.open { transform: translateY(0); opacity: 1; visibility: visible; }
+        .ai-panel.open {
+          transform: translateY(-50%);
+          opacity: 1;
+          visibility: visible;
+        }
       }
 
       .ai-head {
