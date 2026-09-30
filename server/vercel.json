@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "functions": {
+    "api/ai.js": {
+      "runtime": "nodejs20.x"
+    }
+  },
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "https://fasahar-alumma.vercel.app" },
+        { "key": "Access-Control-Allow-Methods", "value": "POST, OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Content-Type, X-Fasahar-Auth" },
+        { "key": "Access-Control-Max-Age", "value": "86400" }
+      ]
+    }
+  ]
+}
