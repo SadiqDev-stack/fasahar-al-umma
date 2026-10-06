@@ -160,7 +160,7 @@ const DATA = {
           order: 1,
           title_ha: "Menene Wayar Zamani?",
           title_en: "What is a Smartphone?",
-          video: "https://youtu.be/9Tk1jNWQx3o?si=K9dl-jGAAECr3nZu",
+          video: "https://youtu.be/9Tk1jNWQx3o?si=0PSHJ3czmkxQRJaUhttps://youtu.be/9Tk1jNWQx3o?si=0PSHJ3czmkxQRJaU",
           read_ha:
             "Wayar zamani (smartphone) kayan aiki ne mai ƙarfi da ke cikin aljihunka.\n\n" +
             "**Abin da take iya yi:**\n" +
