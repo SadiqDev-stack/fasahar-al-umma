@@ -281,6 +281,35 @@
       margin-top: 9px;
     }
 
+    /* ---- Multi-quiz progress header ---- */
+    .quiz-progress-header {
+      margin-bottom: 18px;
+    }
+    .quiz-progress-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 8px;
+    }
+    .quiz-progress-bar {
+      height: 5px;
+      background: var(--soft);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+    .quiz-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      border-radius: inherit;
+      transition: width 0.4s ease;
+    }
+    .quiz-next-btn {
+      width: 100%;
+    }
+
     /* ---- Quiz step ---- */
     .quiz-question {
       font-size: 17px;
@@ -486,6 +515,11 @@
       }
     }
 
+
+    /* Hide AI button on quiz step */
+    body.quiz-active .ai-fab,
+    body.quiz-active .lai-fab { display: none !important; }
+
     /* ---- Not found ---- */
     .not-found {
       text-align: center;
@@ -579,6 +613,7 @@
           renderStepContent();
         renderActionBar();
         bindEvents();
+        updateAIButtonVisibility();
         requestAnimationFrame(() => page.classList.add("visible"));
       }
 
@@ -673,10 +708,34 @@
       }
 
       /* ---- Verify (quiz) ---- */
+      /* Normalises quiz OR quizzes into an array.
+         Tracks progress through the array.
+         Only reveals Finish after ALL are answered correctly. */
+      let quizIndex = 0;
+      let quizAnswered = {}; /* { [index]: true } when answered correctly */
+
+      function getQuizzes() {
+        if (Array.isArray(lesson.quizzes) && lesson.quizzes.length > 0) {
+          return lesson.quizzes;
+        }
+        if (lesson.quiz) return [lesson.quiz];
+        return [];
+      }
+
       function renderVerifyStep() {
-        const q = lesson.quiz;
+        const quizzes = getQuizzes();
+        if (quizzes.length === 0) {
+          return `
+            <div class="step-content active" data-step="verify">
+              <div class="quiz-question">${isHa ? "Babu tambaya a wannan darasi." : "No quiz for this lesson."}</div>
+            </div>
+          `;
+        }
+
+        const q = quizzes[quizIndex];
         const question = isHa ? q.question_ha : q.question_en;
         const letters = ["A", "B", "C", "D", "E"];
+
         const options = q.options.map((opt, i) => {
           const text = isHa ? opt.text_ha : opt.text_en;
           return `
@@ -690,11 +749,34 @@
           `;
         }).join("");
 
+        /* Multi-question header — only show if more than 1 */
+        const progressHeader = quizzes.length > 1 ? `
+          <div class="quiz-progress-header">
+            <span class="quiz-progress-label">
+              ${isHa ? "Tambaya" : "Question"} ${quizIndex + 1} / ${quizzes.length}
+            </span>
+            <div class="quiz-progress-bar">
+              <div class="quiz-progress-fill" style="width: ${((quizIndex) / quizzes.length) * 100}%"></div>
+            </div>
+          </div>
+        ` : "";
+
+        /* Show "Next question" button if this is not the last question */
+        const isLastQuestion = quizIndex === quizzes.length - 1;
+        const nextQuestionBtn = !isLastQuestion ? `
+          <button class="action-btn action-btn-primary quiz-next-btn" id="nextQuestionBtn" style="display:none;margin-top:14px;">
+            ${isHa ? "Tambaya ta gaba" : "Next question"}
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        ` : "";
+
         return `
           <div class="step-content active" data-step="verify">
+            ${progressHeader}
             <div class="quiz-question">${question}</div>
             <div class="quiz-options">${options}</div>
             <div class="quiz-feedback" id="quizFeedback"></div>
+            ${nextQuestionBtn}
           </div>
         `;
       }
@@ -786,6 +868,12 @@
           finishBtn.addEventListener("click", finishLesson);
         }
 
+        /* Next question button (multi-quiz only) */
+        const nextQBtn = document.getElementById("nextQuestionBtn");
+        if (nextQBtn) {
+          nextQBtn.addEventListener("click", goToNextQuestion);
+        }
+
         /* Remember current step for the resume feature */
         window.__currentStep = currentStep;
       }
@@ -794,12 +882,14 @@
       function handleQuizAnswer(btn) {
         const isCorrect = btn.dataset.correct === "true";
         const feedback = document.getElementById("quizFeedback");
-        const q = lesson.quiz;
+        const quizzes = getQuizzes();
+        const q = quizzes[quizIndex];
+        if (!q) return;
 
         if (isCorrect) {
-          /* Correct: mark, lock all options, show feedback, reveal finish button */
           btn.classList.add("correct");
           document.querySelectorAll(".quiz-option").forEach((b) => (b.disabled = true));
+          quizAnswered[quizIndex] = true;
 
           const title = isHa ? "Madalla!" : "Well done!";
           const body = isHa ? (q.explanation_ha || "") : (q.explanation_en || "");
@@ -813,20 +903,27 @@
 
           APP.playSound("correct");
 
-          const finishBtn = document.getElementById("finishBtn");
-          if (finishBtn) {
-            finishBtn.style.display = "inline-flex";
-            finishBtn.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          const isLastQuestion = quizIndex === quizzes.length - 1;
+
+          if (isLastQuestion) {
+            const finishBtn = document.getElementById("finishBtn");
+            if (finishBtn) {
+              finishBtn.style.display = "inline-flex";
+              finishBtn.scrollIntoView({ behavior: "smooth", block: "nearest" });
+            }
+          } else {
+            const nextQBtn = document.getElementById("nextQuestionBtn");
+            if (nextQBtn) {
+              nextQBtn.style.display = "inline-flex";
+              nextQBtn.scrollIntoView({ behavior: "smooth", block: "nearest" });
+            }
           }
         } else {
-          /* Wrong: shake-style feedback, let them try again */
           btn.classList.add("incorrect");
           btn.disabled = true;
 
           const title = isHa ? "Ba daidai ba" : "Not quite";
-          const body = isHa
-            ? "Sake gwadawa. Za ka iya."
-            : "Try again. You can do it.";
+          const body = isHa ? "Sake gwadawa. Za ka iya." : "Try again. You can do it.";
           feedback.className = "quiz-feedback error show";
           feedback.innerHTML = `
             <div class="quiz-feedback-title">
@@ -836,6 +933,16 @@
           `;
 
           APP.playSound("incorrect");
+        }
+      }
+
+      function goToNextQuestion() {
+        const quizzes = getQuizzes();
+        if (quizIndex < quizzes.length - 1) {
+          quizIndex++;
+          APP.playSound("page");
+          render();
+          window.scrollTo({ top: 0, behavior: "smooth" });
         }
       }
 
@@ -943,6 +1050,26 @@
             </a>
           </div>
         `;
+      }
+
+
+      /* ---- Toggle AI button visibility based on step ---- */
+      function updateAIButtonVisibility() {
+        const hideAI = currentStep === "verify";
+        document.body.classList.toggle("quiz-active", hideAI);
+
+        const fab = document.getElementById("aiFab");
+        const panel = document.getElementById("aiPanel");
+        const backdrop = document.getElementById("aiBackdrop");
+
+        if (fab) fab.style.display = hideAI ? "none" : "";
+
+        /* If the panel was open when we hide it, close it cleanly */
+        if (hideAI && panel && panel.classList.contains("open")) {
+          panel.classList.remove("open");
+          if (backdrop) backdrop.classList.remove("open");
+          document.body.style.overflow = "";
+        }
       }
 
       /* ============================================================

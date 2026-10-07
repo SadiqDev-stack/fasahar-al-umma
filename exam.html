@@ -584,6 +584,17 @@
 
     .result-btn:active { transform: scale(0.98); }
 
+
+    /* Hide AI assistant during exam */
+    body.exam-mode .ai-fab,
+    body.exam-mode .lai-fab {
+      display: none !important;
+    }
+    body.exam-mode .ai-panel,
+    body.exam-mode .lai-panel {
+      display: none !important;
+    }
+
     /* ---- Not found / locked ---- */
     .not-found {
       text-align: center;
@@ -1017,6 +1028,7 @@
       /* ============================================================
          BOOT
          ============================================================ */
+      document.body.classList.add("exam-mode");
       render();
     })();
   </script>

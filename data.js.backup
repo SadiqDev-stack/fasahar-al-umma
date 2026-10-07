@@ -253,148 +253,34 @@ const DATA = {
 
             "The important lesson is that your phone is a tool. You can use it to learn, find opportunities, communicate, work, and build a business — not only for entertainment.",
 
-          quizzes: [
-      {
-        question_ha: "Wanne daga cikin waɗannan ya fi bayyana smartphone?",
-        question_en: "Which of these best describes a smartphone?",
-        options: [
-        {
-          text_ha: "Ƙaramar kwamfuta ce da ke iya yin ayyuka da yawa",
-          text_en: "A small computer that can perform many tasks",
-          correct: true
-        },
-        {
-          text_ha: "Na'urar kira kawai ce",
-          text_en: "A device only for calls",
-          correct: false
-        },
-        {
-          text_ha: "Na'urar wasa kawai ce",
-          text_en: "A device only for games",
-          correct: false
-        },
-        {
-          text_ha: "Na'urar ajiye SIM kawai ce",
-          text_en: "A device only for holding a SIM card",
-          correct: false
-        }
-        ],
-        explanation_ha: "Smartphone waya ce mai iya gudanar da manhajoji da ayyuka daban-daban kamar sadarwa, koyo, bincike da aiki.",
-        explanation_en: "A smartphone can run apps and perform different tasks such as communication, learning, searching and work."
-      },
-      {
-        question_ha: "Me ke taimakawa wajen kare waya idan ka bar ta a wani wuri?",
-        question_en: "What helps protect your phone when you leave it somewhere?",
-        options: [
-        {
-          text_ha: "Ɗaga sautin waya",
-          text_en: "Increasing the volume",
-          correct: false
-        },
-        {
-          text_ha: "Kulle allo",
-          text_en: "A screen lock",
-          correct: true
-        },
-        {
-          text_ha: "Buɗe dukkan apps",
-          text_en: "Opening all apps",
-          correct: false
-        },
-        {
-          text_ha: "Kashe Wi-Fi kawai",
-          text_en: "Only turning off Wi-Fi",
-          correct: false
-        }
-        ],
-        explanation_ha: "Screen lock yana hana mutum shiga wayarka cikin sauƙi idan ya samu wayar.",
-        explanation_en: "A screen lock helps prevent someone from easily accessing your phone."
-      },
-      {
-        question_ha: "Wanne daga cikin waɗannan smartphone za ta iya taimaka maka ka yi?",
-        question_en: "Which of these can a smartphone help you do?",
-        options: [
-        {
-          text_ha: "Kira kawai",
-          text_en: "Make calls only",
-          correct: false
-        },
-        {
-          text_ha: "Ajiye SIM kawai",
-          text_en: "Only hold a SIM card",
-          correct: false
-        },
-        {
-          text_ha: "Koyo, bincike da sadarwa",
-          text_en: "Learn, search and communicate",
-          correct: true
-        },
-        {
-          text_ha: "Babu ɗaya daga ciki",
-          text_en: "None of these",
-          correct: false
-        }
-        ],
-        explanation_ha: "Smartphone na iya taimaka maka wajen koyo, bincike, sadarwa, aiki da sauran ayyuka.",
-        explanation_en: "A smartphone can help with learning, searching, communication, work and many other tasks."
-      },
-      {
-        question_ha: "Me ake nufi da Mobile Data?",
-        question_en: "What does Mobile Data mean?",
-        options: [
-        {
-          text_ha: "Amfani da intanet ta hanyar network na layin waya",
-          text_en: "Using internet through your mobile network",
-          correct: true
-        },
-        {
-          text_ha: "Ajiye hotuna a gallery",
-          text_en: "Saving photos in the gallery",
-          correct: false
-        },
-        {
-          text_ha: "Kulle allo",
-          text_en: "Locking the screen",
-          correct: false
-        },
-        {
-          text_ha: "Cajin waya",
-          text_en: "Charging the phone",
-          correct: false
-        }
-        ],
-        explanation_ha: "Mobile Data yana ba ka damar amfani da intanet ta hanyar network na kamfanin sadarwarka.",
-        explanation_en: "Mobile Data lets you access the internet through your mobile network."
-      },
-      {
-        question_ha: "Me zai iya faruwa idan ka kalli manyan bidiyo ta Mobile Data?",
-        question_en: "What can happen when you watch large videos using Mobile Data?",
-        options: [
-        {
-          text_ha: "Data na iya ƙarewa da sauri",
-          text_en: "Your data can be used quickly",
-          correct: true
-        },
-        {
-          text_ha: "Baturin zai zama sabon batiri",
-          text_en: "Your battery becomes new",
-          correct: false
-        },
-        {
-          text_ha: "SIM ɗinka zai canza",
-          text_en: "Your SIM will change",
-          correct: false
-        },
-        {
-          text_ha: "Wayarka za ta zama kwamfuta",
-          text_en: "Your phone becomes a computer",
-          correct: false
-        }
-        ],
-        explanation_ha: "Bidiyo masu inganci ko tsawo na iya amfani da data mai yawa.",
-        explanation_en: "High-quality or long videos can use a lot of mobile data."
-      }
-      ]
+          quiz: {
+            question_ha: "Wanne daga cikin waɗannan ya fi bayyana smartphone?",
+            question_en: "Which of these best describes a smartphone?",
+            options: [
+              {
+                text_ha: "Na'urar kira kawai",
+                text_en: "A device only for calls",
+                correct: false
+              },
+              {
+                text_ha: "Ƙaramar kwamfuta mai iya yin ayyuka da yawa",
+                text_en: "A small computer that can perform many tasks",
+                correct: true
+              },
+              {
+                text_ha: "Na'urar wasa kawai",
+                text_en: "A device only for games",
+                correct: false
+              },
+              {
+                text_ha: "Na'urar ajiye SIM kawai",
+                text_en: "A device only for holding a SIM card",
+                correct: false
+              }
+            ],
+            explanation_ha: "Smartphone tana kama da ƙaramar kwamfuta. Tana iya sadarwa, amfani da internet, gudanar da apps, ɗaukar hotuna, karatu, aiki da sauran ayyuka.",
+            explanation_en: "A smartphone is like a small computer. It can communicate, access the internet, run apps, take photos, support learning and work, and perform many other tasks."
+          }
         },
 
 
@@ -482,148 +368,34 @@ const DATA = {
 
             "Good search skills can turn the internet into a powerful learning tool. You can learn a skill, find jobs, discover education opportunities, understand difficult topics, and find useful information from almost anywhere.",
 
-          quizzes: [
-      {
-        question_ha: "Me ya kamata ka fara yi kafin bincike a Google?",
-        question_en: "What should you do first before searching on Google?",
-        options: [
-        {
-          text_ha: "Ka fayyace abin da kake son sani",
-          text_en: "Define what you want to know",
-          correct: true
-        },
-        {
-          text_ha: "Ka danna sakamako na farko",
-          text_en: "Click the first result",
-          correct: false
-        },
-        {
-          text_ha: "Ka rubuta kowace kalma da ta zo maka",
-          text_en: "Type every word that comes to mind",
-          correct: false
-        },
-        {
-          text_ha: "Ka rufe browser",
-          text_en: "Close the browser",
-          correct: false
-        }
-        ],
-        explanation_ha: "Da farko ka fahimci abin da kake son sani, sannan ka zaɓi muhimman kalmomin bincike.",
-        explanation_en: "First understand what you want to know, then choose the important search words."
-      },
-      {
-        question_ha: "Idan sakamakon farko bai taimaka ba, me za ka yi?",
-        question_en: "If the first search result is not useful, what should you do?",
-        options: [
-        {
-          text_ha: "Ka daina amfani da Google",
-          text_en: "Stop using Google",
-          correct: false
-        },
-        {
-          text_ha: "Ka canza kalmomin bincike",
-          text_en: "Change your search words",
-          correct: true
-        },
-        {
-          text_ha: "Ka yarda da sakamakon ba tare da dubawa ba",
-          text_en: "Trust it without checking",
-          correct: false
-        },
-        {
-          text_ha: "Ka share wayarka",
-          text_en: "Delete your phone",
-          correct: false
-        }
-        ],
-        explanation_ha: "Canza keywords na iya taimaka maka samun sakamakon da ya fi dacewa.",
-        explanation_en: "Changing your search words can help you find more relevant results."
-      },
-      {
-        question_ha: "Shin sakamakon farko na Google koyaushe gaskiya ne?",
-        question_en: "Is the first Google result always true?",
-        options: [
-        {
-          text_ha: "Eh, koyaushe",
-          text_en: "Yes, always",
-          correct: false
-        },
-        {
-          text_ha: "Sai idan yana da hoto",
-          text_en: "Only if it has a picture",
-          correct: false
-        },
-        {
-          text_ha: "A'a, ya kamata a tabbatar da bayanin",
-          text_en: "No, the information should be verified",
-          correct: true
-        },
-        {
-          text_ha: "Eh, idan yana sama",
-          text_en: "Yes, if it is at the top",
-          correct: false
-        }
-        ],
-        explanation_ha: "Ba duk sakamakon bincike ne gaskiya ba. Ka duba tushen bayanin kuma ka kwatanta sources.",
-        explanation_en: "Not every search result is true. Check the source and compare information."
-      },
-      {
-        question_ha: "Menene keywords?",
-        question_en: "What are keywords?",
-        options: [
-        {
-          text_ha: "Password na Google",
-          text_en: "A Google password",
-          correct: false
-        },
-        {
-          text_ha: "Hotunan da ke cikin waya",
-          text_en: "Photos on your phone",
-          correct: false
-        },
-        {
-          text_ha: "Sunan wayarka",
-          text_en: "Your phone name",
-          correct: false
-        },
-        {
-          text_ha: "Muhimman kalmomin da ake amfani da su wajen bincike",
-          text_en: "Important words used for searching",
-          correct: true
-        }
-        ],
-        explanation_ha: "Keywords su ne kalmomin da suka fi muhimmanci wajen bayyana abin da kake nema.",
-        explanation_en: "Keywords are the important words that describe what you are searching for."
-      },
-      {
-        question_ha: "Idan kana neman yadda ake gyara waya da ba ta caji, wanne bincike ya fi kyau?",
-        question_en: "If you want to fix a phone that is not charging, which search is better?",
-        options: [
-        {
-          text_ha: "waya",
-          text_en: "phone",
-          correct: false
-        },
-        {
-          text_ha: "waya ba ta caji me zan yi",
-          text_en: "phone not charging what should I do",
-          correct: true
-        },
-        {
-          text_ha: "internet",
-          text_en: "internet",
-          correct: false
-        },
-        {
-          text_ha: "Google",
-          text_en: "Google",
-          correct: false
-        }
-        ],
-        explanation_ha: "Bincike mai bayanin matsalar yana ba Google ƙarin bayani don nemo sakamakon da ya dace.",
-        explanation_en: "A more specific search gives Google more information to find relevant results."
-      }
-      ]
+          quiz: {
+            question_ha: "Me ya fi kyau ka yi idan sakamakon Google ya shafi wani muhimmin bayani?",
+            question_en: "What is best to do when a Google result contains important information?",
+            options: [
+              {
+                text_ha: "Ka gaskata shi nan take",
+                text_en: "Believe it immediately",
+                correct: false
+              },
+              {
+                text_ha: "Ka kwatanta bayanin da tushe masu aminci",
+                text_en: "Compare it with reliable sources",
+                correct: true
+              },
+              {
+                text_ha: "Ka duba sakamako na farko kawai",
+                text_en: "Only read the first result",
+                correct: false
+              },
+              {
+                text_ha: "Ka rufe Google",
+                text_en: "Close Google",
+                correct: false
+              }
+            ],
+            explanation_ha: "Google ba ta tabbatar da cewa duk sakamakon gaskiya ne. Don muhimman bayanai, ka bincika wanda ya wallafa bayanin kuma ka kwatanta shi da wasu tushe masu aminci.",
+            explanation_en: "Google does not guarantee that every result is true. For important information, check who published it and compare it with other reliable sources."
+          }
         },
 
 
@@ -713,148 +485,34 @@ const DATA = {
 
             "Downloading an app is not simply about pressing Install. The important skill is knowing **what you are installing and who created it**.",
 
-          quizzes: [
-      {
-        question_ha: "Ina ya fi dacewa a sauke app?",
-        question_en: "Where is it best to download an app?",
-        options: [
-        {
-          text_ha: "Official app store",
-          text_en: "An official app store",
-          correct: true
-        },
-        {
-          text_ha: "Random WhatsApp link",
-          text_en: "A random WhatsApp link",
-          correct: false
-        },
-        {
-          text_ha: "Duk wani website",
-          text_en: "Any website",
-          correct: false
-        },
-        {
-          text_ha: "Link ɗin da ba ka sani ba",
-          text_en: "An unknown link",
-          correct: false
-        }
-        ],
-        explanation_ha: "Official app stores kamar Google Play Store ko App Store sun fi dacewa wajen sauke apps.",
-        explanation_en: "Official app stores such as Google Play Store or App Store are safer places to get apps."
-      },
-      {
-        question_ha: "Me ya kamata ka duba kafin ka danna Install?",
-        question_en: "What should you check before pressing Install?",
-        options: [
-        {
-          text_ha: "Launin icon kawai",
-          text_en: "Only the icon color",
-          correct: false
-        },
-        {
-          text_ha: "Developer, reviews da permissions",
-          text_en: "Developer, reviews and permissions",
-          correct: true
-        },
-        {
-          text_ha: "Yawan abokanka",
-          text_en: "Number of friends",
-          correct: false
-        },
-        {
-          text_ha: "Battery percentage kawai",
-          text_en: "Only the battery percentage",
-          correct: false
-        }
-        ],
-        explanation_ha: "Duba developer, reviews, downloads da permissions kafin ka girka app.",
-        explanation_en: "Check the developer, reviews, downloads and permissions before installing an app."
-      },
-      {
-        question_ha: "Me ya kamata ka yi idan wani ya turo maka APK daga random link?",
-        question_en: "What should you do if someone sends you an APK from a random link?",
-        options: [
-        {
-          text_ha: "Ka girka shi nan take",
-          text_en: "Install it immediately",
-          correct: false
-        },
-        {
-          text_ha: "Ka tura wa wasu",
-          text_en: "Forward it to others",
-          correct: false
-        },
-        {
-          text_ha: "Ka yi hankali kuma ka tabbatar da tushen app ɗin",
-          text_en: "Be careful and verify the app source",
-          correct: true
-        },
-        {
-          text_ha: "Ka ba shi password ɗinka",
-          text_en: "Give it your password",
-          correct: false
-        }
-        ],
-        explanation_ha: "Random APK na iya kasancewa mai haɗari. Ka tabbatar da tushen app ɗin kafin ka yi install.",
-        explanation_en: "A random APK can be risky. Verify its source before installing it."
-      },
-      {
-        question_ha: "Shin share app yana nufin an share online account ɗinka ma?",
-        question_en: "Does deleting an app necessarily delete your online account?",
-        options: [
-        {
-          text_ha: "Eh, koyaushe",
-          text_en: "Yes, always",
-          correct: false
-        },
-        {
-          text_ha: "A'a, ba lallai ba",
-          text_en: "No, not necessarily",
-          correct: true
-        },
-        {
-          text_ha: "Sai idan wayar sabuwa ce",
-          text_en: "Only if the phone is new",
-          correct: false
-        },
-        {
-          text_ha: "Eh, idan kana da Wi-Fi",
-          text_en: "Yes, if you have Wi-Fi",
-          correct: false
-        }
-        ],
-        explanation_ha: "Share app daga waya ba lallai ya rufe ko share account ɗin da ka ƙirƙira a cikin service ɗin ba.",
-        explanation_en: "Removing an app does not necessarily close or delete the account you created with the service."
-      },
-      {
-        question_ha: "Me yasa ake sabunta apps?",
-        question_en: "Why should apps be updated?",
-        options: [
-        {
-          text_ha: "Domin gyaran matsaloli da tsaro",
-          text_en: "To fix problems and improve security",
-          correct: true
-        },
-        {
-          text_ha: "Domin rage girman waya",
-          text_en: "To make the phone smaller",
-          correct: false
-        },
-        {
-          text_ha: "Domin canza SIM",
-          text_en: "To change the SIM",
-          correct: false
-        },
-        {
-          text_ha: "Domin share duk hotuna",
-          text_en: "To delete all photos",
-          correct: false
-        }
-        ],
-        explanation_ha: "Updates na iya kawo gyaran bugs, inganta aiki da gyaran matsalolin tsaro.",
-        explanation_en: "Updates can fix bugs, improve performance and address security problems."
-      }
-      ]
+          quiz: {
+            question_ha: "Wanne abu ya fi muhimmanci kafin ka sauke app?",
+            question_en: "What is especially important before downloading an app?",
+            options: [
+              {
+                text_ha: "Launin icon kawai",
+                text_en: "Only the icon color",
+                correct: false
+              },
+              {
+                text_ha: "Sunan app, developer, reviews da permissions",
+                text_en: "The app name, developer, reviews, and permissions",
+                correct: true
+              },
+              {
+                text_ha: "Adadin hotunan app",
+                text_en: "The number of screenshots",
+                correct: false
+              },
+              {
+                text_ha: "Ko app ɗin tana da suna mai gajarta",
+                text_en: "Whether the app has a short name",
+                correct: false
+              }
+            ],
+            explanation_ha: "Duba sunan app, developer, reviews da permissions domin rage haɗarin sauke fake ko harmful app.",
+            explanation_en: "Checking the app name, developer, reviews, and permissions helps reduce the risk of installing a fake or harmful app."
+          }
         },
 
 
@@ -938,148 +596,34 @@ const DATA = {
 
             "That small check can prevent a serious mistake.",
 
-          quizzes: [
-      {
-        question_ha: "Me ya kamata ka tabbatar kafin aika file?",
-        question_en: "What should you confirm before sending a file?",
-        options: [
-        {
-          text_ha: "Wanda zai karɓa",
-          text_en: "Who will receive it",
-          correct: true
-        },
-        {
-          text_ha: "Launin wayar",
-          text_en: "The phone color",
-          correct: false
-        },
-        {
-          text_ha: "Yawan apps",
-          text_en: "Number of apps",
-          correct: false
-        },
-        {
-          text_ha: "Battery kawai",
-          text_en: "Only the battery",
-          correct: false
-        }
-        ],
-        explanation_ha: "Kafin ka danna Send, ka tabbatar da mutumin ko address ɗin da zai karɓi fayil.",
-        explanation_en: "Before pressing Send, confirm the person or address that will receive the file."
-      },
-      {
-        question_ha: "Me ya kamata ka yi da hoto kafin ka aika shi?",
-        question_en: "What should you do with a photo before sending it?",
-        options: [
-        {
-          text_ha: "Ka aika ba tare da dubawa ba",
-          text_en: "Send it without checking",
-          correct: false
-        },
-        {
-          text_ha: "Ka duba abin da ke cikin hoton",
-          text_en: "Check what is visible in the photo",
-          correct: true
-        },
-        {
-          text_ha: "Ka share dukkan wayarka",
-          text_en: "Delete your entire phone",
-          correct: false
-        },
-        {
-          text_ha: "Ka kashe SIM",
-          text_en: "Turn off the SIM",
-          correct: false
-        }
-        ],
-        explanation_ha: "Hoton na iya ƙunsar bayanan sirri a baya ko wani abu da ba ka son mai karɓa ya gani.",
-        explanation_en: "A photo may contain private information in the background or something you did not intend to share."
-      },
-      {
-        question_ha: "Wanne daga cikin waɗannan bai kamata ka aika wa wani ba kawai saboda ya nema?",
-        question_en: "Which should you not send to someone simply because they ask for it?",
-        options: [
-        {
-          text_ha: "Hoton abinci",
-          text_en: "A photo of food",
-          correct: false
-        },
-        {
-          text_ha: "Public flyer",
-          text_en: "A public flyer",
-          correct: false
-        },
-        {
-          text_ha: "Password, PIN ko OTP",
-          text_en: "A password, PIN or OTP",
-          correct: true
-        },
-        {
-          text_ha: "Public announcement",
-          text_en: "A public announcement",
-          correct: false
-        }
-        ],
-        explanation_ha: "Password, PIN da OTP bayanai ne masu matuƙar muhimmanci. Kada ka ba wani kawai saboda ya nema.",
-        explanation_en: "Passwords, PINs and OTPs are sensitive information. Do not share them simply because someone asks."
-      },
-      {
-        question_ha: "Me yasa sunan file yake da muhimmanci?",
-        question_en: "Why is a file name important?",
-        options: [
-        {
-          text_ha: "Yana taimaka wa mai karɓa ya gane file",
-          text_en: "It helps the recipient identify the file",
-          correct: true
-        },
-        {
-          text_ha: "Yana ƙara battery",
-          text_en: "It increases battery",
-          correct: false
-        },
-        {
-          text_ha: "Yana canza SIM",
-          text_en: "It changes the SIM",
-          correct: false
-        },
-        {
-          text_ha: "Ba shi da muhimmanci",
-          text_en: "It has no importance",
-          correct: false
-        }
-        ],
-        explanation_ha: "Sunan file mai kyau kamar CV-Sadiq-Abubakar.pdf yana taimaka wa mai karɓa ya gane abin da yake ciki.",
-        explanation_en: "A clear file name such as CV-Sadiq-Abubakar.pdf helps the recipient understand what the file is."
-      },
-      {
-        question_ha: "Me babban video zai iya yi wa Mobile Data?",
-        question_en: "What can a large video do to your Mobile Data?",
-        options: [
-        {
-          text_ha: "Zai iya cin data mai yawa",
-          text_en: "It can use a lot of data",
-          correct: true
-        },
-        {
-          text_ha: "Zai ƙara maka data",
-          text_en: "It will add data",
-          correct: false
-        },
-        {
-          text_ha: "Zai canza network",
-          text_en: "It will change your network",
-          correct: false
-        },
-        {
-          text_ha: "Zai ƙara storage kyauta",
-          text_en: "It will add free storage",
-          correct: false
-        }
-        ],
-        explanation_ha: "Manyan videos suna iya cin data sosai, musamman idan quality ɗinsu yana da girma.",
-        explanation_en: "Large videos can use a lot of data, especially at high quality."
-      }
-      ]
+          quiz: {
+            question_ha: "Me ya kamata ka yi kafin ka aika wani muhimmin fayil?",
+            question_en: "What should you do before sending an important file?",
+            options: [
+              {
+                text_ha: "Danna Send nan take",
+                text_en: "Press Send immediately",
+                correct: false
+              },
+              {
+                text_ha: "Tabbatar da recipient, fayil da bayanan da ke ciki",
+                text_en: "Check the recipient, file, and information inside it",
+                correct: true
+              },
+              {
+                text_ha: "A aika wa kowa",
+                text_en: "Send it to everyone",
+                correct: false
+              },
+              {
+                text_ha: "Canza sunan fayil kawai",
+                text_en: "Only change the file name",
+                correct: false
+              }
+            ],
+            explanation_ha: "Kafin ka aika fayil, ka tabbatar da wanda zai karɓa, fayil ɗin daidai ne, kuma ba ka aika sensitive information ba tare da dalili da tabbaci ba.",
+            explanation_en: "Before sending a file, confirm the recipient and file, and make sure you are not unnecessarily sharing sensitive information."
+          }
         }
       ],
 
@@ -1219,148 +763,18 @@ const DATA = {
 
             "Think of your email as a **digital office key**. Protect it because your email account may also be used to recover other accounts.",
 
-          quizzes: [
-      {
-        question_ha: "Wanne abu ya fi taimakawa wajen kare email account?",
-        question_en: "Which helps protect an email account?",
-        options: [
-        {
-          text_ha: "Raba password da aboki",
-          text_en: "Sharing your password with a friend",
-          correct: false
-        },
-        {
-          text_ha: "Password mai ƙarfi da 2FA",
-          text_en: "A strong password and 2FA",
-          correct: true
-        },
-        {
-          text_ha: "Amfani da 123456",
-          text_en: "Using 123456",
-          correct: false
-        },
-        {
-          text_ha: "Kashe recovery information",
-          text_en: "Removing recovery information",
-          correct: false
-        }
-        ],
-        explanation_ha: "Password mai ƙarfi da 2FA suna ƙara tsaron email account.",
-        explanation_en: "A strong password and 2FA add important protection to an email account."
-      },
-      {
-        question_ha: "Me ya sa ake buƙatar recovery information?",
-        question_en: "Why is recovery information needed?",
-        options: [
-        {
-          text_ha: "Don a dawo da account idan an samu matsala",
-          text_en: "To help recover the account when there is a problem",
-          correct: true
-        },
-        {
-          text_ha: "Don a raba shi da abokai",
-          text_en: "To share it with friends",
-          correct: false
-        },
-        {
-          text_ha: "Don ya ƙara data",
-          text_en: "To add data",
-          correct: false
-        },
-        {
-          text_ha: "Don ya canza SIM",
-          text_en: "To change the SIM",
-          correct: false
-        }
-        ],
-        explanation_ha: "Recovery phone ko email na taimaka maka wajen dawo da account idan ka manta password.",
-        explanation_en: "A recovery phone or email can help you regain access to your account if you forget your password."
-      },
-      {
-        question_ha: "Shin ya kamata ka ba wani password ɗinka idan ya ce shi support ne?",
-        question_en: "Should you give someone your password if they say they are support?",
-        options: [
-        {
-          text_ha: "Eh, idan ya ce shi support ne",
-          text_en: "Yes, if they say they are support",
-          correct: false
-        },
-        {
-          text_ha: "A'a, kada ka ba kowa password",
-          text_en: "No, never give anyone your password",
-          correct: true
-        },
-        {
-          text_ha: "Eh, idan ya gaggauta",
-          text_en: "Yes, if they are rushing",
-          correct: false
-        },
-        {
-          text_ha: "Eh, amma a sasance",
-          text_en: "Yes, but quietly",
-          correct: false
-        }
-        ],
-        explanation_ha: "Real support ba ya buƙatar password ɗinka. Kada ka ba kowa password ɗinka, koda ya ce shi daga company ne.",
-        explanation_en: "Real support never needs your password. Never give your password to anyone, even if they claim to be from the company."
-      },
-      {
-        question_ha: "Wanne email address ya fi dacewa wajen neman aiki?",
-        question_en: "Which email address is more suitable for job hunting?",
-        options: [
-        {
-          text_ha: "coolboy123@...",
-          text_en: "coolboy123@...",
-          correct: false
-        },
-        {
-          text_ha: "bigmanxxx@...",
-          text_en: "bigmanxxx@...",
-          correct: false
-        },
-        {
-          text_ha: "suna.abubakar@...",
-          text_en: "suna.abubakar@...",
-          correct: true
-        },
-        {
-          text_ha: "badguy@...",
-          text_en: "badguy@...",
-          correct: false
-        }
-        ],
-        explanation_ha: "Email mai suna mai kyau da professional yana ƙara muku girma a gaban employer.",
-        explanation_en: "A professional, clear email address improves your impression with employers."
-      },
-      {
-        question_ha: "Menene 2FA?",
-        question_en: "What is 2FA?",
-        options: [
-        {
-          text_ha: "Wani nau'in email",
-          text_en: "A type of email",
-          correct: false
-        },
-        {
-          text_ha: "Wani ƙarin mataki na tsaro bayan password",
-          text_en: "An additional security step after the password",
-          correct: true
-        },
-        {
-          text_ha: "Manhajar WhatsApp",
-          text_en: "A WhatsApp app",
-          correct: false
-        },
-        {
-          text_ha: "Nau'in network",
-          text_en: "A network type",
-          correct: false
-        }
-        ],
-        explanation_ha: "2FA yana ƙara wani mataki na tsaro, kamar code da ake aika maka don tabbatar da kai.",
-        explanation_en: "2FA adds an extra security step, such as a code sent to you to verify your identity."
-      }
-      ]
+          quiz: {
+            question_ha: "Wanne abu ya fi taimakawa wajen kare email account?",
+            question_en: "Which helps protect an email account?",
+            options: [
+              { text_ha: "Raba password da aboki", text_en: "Sharing your password with a friend", correct: false },
+              { text_ha: "Password mai ƙarfi da 2FA", text_en: "A strong password and 2FA", correct: true },
+              { text_ha: "Amfani da 123456", text_en: "Using 123456", correct: false },
+              { text_ha: "Kashe recovery information", text_en: "Removing recovery information", correct: false }
+            ],
+            explanation_ha: "Password mai ƙarfi da 2FA suna ƙara tsaron email account.",
+            explanation_en: "A strong password and 2FA add important protection to an email account."
+          }
         },
 
 
@@ -1448,148 +862,18 @@ const DATA = {
 
             "When sending a link, check its **sharing permission**. Do not give someone editing access if they only need to view or download the file.",
 
-          quizzes: [
-      {
-        question_ha: "Menene aikin Subject a email?",
-        question_en: "What is the purpose of the Subject in an email?",
-        options: [
-        {
-          text_ha: "Ajiye password",
-          text_en: "Store a password",
-          correct: false
-        },
-        {
-          text_ha: "Bayyana abin da email yake game da shi",
-          text_en: "Explain what the email is about",
-          correct: true
-        },
-        {
-          text_ha: "Ɗaukar hoto",
-          text_en: "Take a photo",
-          correct: false
-        },
-        {
-          text_ha: "Share account",
-          text_en: "Share the account",
-          correct: false
-        }
-        ],
-        explanation_ha: "Subject yana taimaka wa mai karɓa ya fahimci manufar email kafin ya karanta saƙon.",
-        explanation_en: "The subject helps the recipient understand the purpose of the email before reading it."
-      },
-      {
-        question_ha: "Wanne misalin Subject ne mai kyau ga neman aiki?",
-        question_en: "Which Subject example is best for a job application?",
-        options: [
-        {
-          text_ha: "Hello",
-          text_en: "Hello",
-          correct: false
-        },
-        {
-          text_ha: "Important",
-          text_en: "Important",
-          correct: false
-        },
-        {
-          text_ha: "Application for Frontend Developer Internship",
-          text_en: "Application for Frontend Developer Internship",
-          correct: true
-        },
-        {
-          text_ha: "Pls read",
-          text_en: "Pls read",
-          correct: false
-        }
-        ],
-        explanation_ha: "Subject da ke bayyana aikin da kake nema yana taimaka wa mai karɓa ya gane email ɗinka cikin sauri.",
-        explanation_en: "A subject that names the position helps the recipient quickly understand your email."
-      },
-      {
-        question_ha: "Menene Attachment?",
-        question_en: "What is an Attachment?",
-        options: [
-        {
-          text_ha: "Fayil da ka haɗa da email",
-          text_en: "A file added to the email",
-          correct: true
-        },
-        {
-          text_ha: "Adireshin mai karɓa",
-          text_en: "The recipient address",
-          correct: false
-        },
-        {
-          text_ha: "Password",
-          text_en: "Password",
-          correct: false
-        },
-        {
-          text_ha: "SIM",
-          text_en: "SIM",
-          correct: false
-        }
-        ],
-        explanation_ha: "Attachment shi ne fayil kamar CV, PDF ko hoto da ka haɗa tare da email ɗinka.",
-        explanation_en: "An attachment is a file such as a CV, PDF or photo included with your email."
-      },
-      {
-        question_ha: "Menene ya kamata ka yi idan file ya yi girma don email?",
-        question_en: "What should you do when a file is too large for email?",
-        options: [
-        {
-          text_ha: "Ka aika sau da yawa",
-          text_en: "Send it many times",
-          correct: false
-        },
-        {
-          text_ha: "Ka aika ta Google Drive ko wani trusted service ka aika link",
-          text_en: "Upload it to Google Drive or another trusted service and send a link",
-          correct: true
-        },
-        {
-          text_ha: "Ka share password",
-          text_en: "Share your password",
-          correct: false
-        },
-        {
-          text_ha: "Ka share account",
-          text_en: "Delete the account",
-          correct: false
-        }
-        ],
-        explanation_ha: "Idan fayil ya wuce iyakar email, amfani da cloud storage kamar Google Drive yana taimakawa.",
-        explanation_en: "If a file exceeds the email limit, using cloud storage like Google Drive helps."
-      },
-      {
-        question_ha: "Kafin ka aika email, me ya kamata ka sake dubawa?",
-        question_en: "Before sending an email, what should you review?",
-        options: [
-        {
-          text_ha: "Sunan wayarka",
-          text_en: "Your phone name",
-          correct: false
-        },
-        {
-          text_ha: "Recipient, subject, attachment da message",
-          text_en: "Recipient, subject, attachment and message",
-          correct: true
-        },
-        {
-          text_ha: "Launin wayarka",
-          text_en: "Your phone color",
-          correct: false
-        },
-        {
-          text_ha: "Yawan apps",
-          text_en: "Number of apps",
-          correct: false
-        }
-        ],
-        explanation_ha: "Sake duba recipient, subject, attachment da message ɗinka kafin ka danna Send.",
-        explanation_en: "Review the recipient, subject, attachment and message before pressing Send."
-      }
-      ]
+          quiz: {
+            question_ha: "Menene aikin Subject a email?",
+            question_en: "What is the purpose of the Subject in an email?",
+            options: [
+              { text_ha: "Ajiye password", text_en: "Store a password", correct: false },
+              { text_ha: "Bayyana abin da email yake game da shi", text_en: "Explain what the email is about", correct: true },
+              { text_ha: "Ɗaukar hoto", text_en: "Take a photo", correct: false },
+              { text_ha: "Share account", text_en: "Share the account", correct: false }
+            ],
+            explanation_ha: "Subject yana taimaka wa mai karɓa ya fahimci manufar email kafin ya karanta saƙon.",
+            explanation_en: "The subject helps the recipient understand the purpose of the email before reading it."
+          }
         },
 
 
@@ -1693,148 +977,18 @@ const DATA = {
 
             "You should also adjust your CV for the type of job you are applying for. You do not always need to send exactly the same CV everywhere.",
 
-          quizzes: [
-      {
-        question_ha: "Idan ba ka da formal work experience, me za ka iya saka a CV?",
-        question_en: "If you have no formal work experience, what can you include in your CV?",
-        options: [
-        {
-          text_ha: "Ƙarya",
-          text_en: "False experience",
-          correct: false
-        },
-        {
-          text_ha: "Projects, training da skills",
-          text_en: "Projects, training and skills",
-          correct: true
-        },
-        {
-          text_ha: "Password",
-          text_en: "Password",
-          correct: false
-        },
-        {
-          text_ha: "OTP",
-          text_en: "OTP",
-          correct: false
-        }
-        ],
-        explanation_ha: "Projects, training, school work da personal projects na iya nuna abin da ka iya ko da ba ka taɓa samun formal employment ba.",
-        explanation_en: "Projects, training, school work and personal projects can demonstrate your abilities even without formal employment."
-      },
-      {
-        question_ha: "Wanne ne bai kamata ya kasance cikin CV ba?",
-        question_en: "Which should not be in a CV?",
-        options: [
-        {
-          text_ha: "Sunanka",
-          text_en: "Your name",
-          correct: false
-        },
-        {
-          text_ha: "Ƙarya ko false information",
-          text_en: "False information",
-          correct: true
-        },
-        {
-          text_ha: "Skills ɗinka",
-          text_en: "Your skills",
-          correct: false
-        },
-        {
-          text_ha: "Education ɗinka",
-          text_en: "Your education",
-          correct: false
-        }
-        ],
-        explanation_ha: "Kada ka taɓa saka ƙarya a CV ɗinka.",
-        explanation_en: "Never include false information in your CV."
-      },
-      {
-        question_ha: "Me ya sa ya kamata ka gyara CV gwargwadon aiki?",
-        question_en: "Why should you adjust your CV for each role?",
-        options: [
-        {
-          text_ha: "Don ya dace da bukatun aikin",
-          text_en: "So it matches the job requirements",
-          correct: true
-        },
-        {
-          text_ha: "Don ya fi tsawo",
-          text_en: "To make it longer",
-          correct: false
-        },
-        {
-          text_ha: "Don ya ƙara password",
-          text_en: "To add a password",
-          correct: false
-        },
-        {
-          text_ha: "Don a gaya maka sirri",
-          text_en: "To reveal secrets",
-          correct: false
-        }
-        ],
-        explanation_ha: "CV da ya dace da aikin da kake nema yana ƙara damar samun nasara.",
-        explanation_en: "A CV tailored to the role you are applying for improves your chances."
-      },
-      {
-        question_ha: "Wanne bayani bai kamata a saka a CV ba?",
-        question_en: "Which information should not be in a CV?",
-        options: [
-        {
-          text_ha: "Lambar waya",
-          text_en: "Phone number",
-          correct: false
-        },
-        {
-          text_ha: "Professional email",
-          text_en: "Professional email",
-          correct: false
-        },
-        {
-          text_ha: "Bank password ko OTP",
-          text_en: "Bank password or OTP",
-          correct: true
-        },
-        {
-          text_ha: "Education",
-          text_en: "Education",
-          correct: false
-        }
-        ],
-        explanation_ha: "Kada ka saka sirrin banki ko OTP a CV. Waɗannan ba su da alaƙa da aikin.",
-        explanation_en: "Never include banking secrets or OTP in a CV. They are unrelated to the job."
-      },
-      {
-        question_ha: "Wanne ne kyakkyawan CV?",
-        question_en: "Which makes a good CV?",
-        options: [
-        {
-          text_ha: "Dogon rubutu mara ma'ana",
-          text_en: "Long, meaningless text",
-          correct: false
-        },
-        {
-          text_ha: "Tsari mai sauƙin karantawa da bayanai na gaskiya",
-          text_en: "Clear layout with truthful information",
-          correct: true
-        },
-        {
-          text_ha: "Rubutun da ba a duba ba",
-          text_en: "Unchecked spelling",
-          correct: false
-        },
-        {
-          text_ha: "Bayanan da ba su da alaƙa",
-          text_en: "Irrelevant information",
-          correct: false
-        }
-        ],
-        explanation_ha: "CV mai kyau yana da tsari mai sauƙin karantawa, bayanai na gaskiya da skills masu dacewa.",
-        explanation_en: "A good CV is easy to read, contains truthful information and relevant skills."
-      }
-      ]
+          quiz: {
+            question_ha: "Idan ba ka da formal work experience, me za ka iya saka a CV?",
+            question_en: "If you have no formal work experience, what can you include in your CV?",
+            options: [
+              { text_ha: "Ƙarya", text_en: "False experience", correct: false },
+              { text_ha: "Projects, training da skills", text_en: "Projects, training, and skills", correct: true },
+              { text_ha: "Password", text_en: "Your password", correct: false },
+              { text_ha: "OTP", text_en: "Your OTP", correct: false }
+            ],
+            explanation_ha: "Projects, training, school work da personal projects na iya nuna abin da ka iya ko da ba ka taɓa samun formal employment ba.",
+            explanation_en: "Projects, training, school work, and personal projects can demonstrate your abilities even without formal employment."
+          }
         },
 
 
@@ -1928,148 +1082,18 @@ const DATA = {
 
             "Remember that job searching takes time. Do not give up because one application was rejected. Improve your CV, build your skills, find relevant opportunities, and keep applying.",
 
-          quizzes: [
-      {
-        question_ha: "Me ya kamata ka yi kafin ka nemi aiki online?",
-        question_en: "What should you do before applying for an online job?",
-        options: [
-        {
-          text_ha: "Ka aika bayanan sirri nan take",
-          text_en: "Send personal information immediately",
-          correct: false
-        },
-        {
-          text_ha: "Ka karanta job description kuma ka tabbatar da kamfanin",
-          text_en: "Read the job description and verify the company",
-          correct: true
-        },
-        {
-          text_ha: "Ka biya duk wanda ya nemi kuɗi",
-          text_en: "Pay anyone who asks for money",
-          correct: false
-        },
-        {
-          text_ha: "Ka aika password",
-          text_en: "Send your password",
-          correct: false
-        }
-        ],
-        explanation_ha: "Karanta job description kuma ka tabbatar da asalin employer kafin ka aika bayananka.",
-        explanation_en: "Read the job description and verify the employer before submitting your information."
-      },
-      {
-        question_ha: "Wanne alama ce ta job scam?",
-        question_en: "Which is a job-scam warning sign?",
-        options: [
-        {
-          text_ha: "An ce ka biya kuɗi don a ba ka aiki",
-          text_en: "You are told to pay before getting the job",
-          correct: true
-        },
-        {
-          text_ha: "An bayyana aikin da kyau",
-          text_en: "The job is clearly described",
-          correct: false
-        },
-        {
-          text_ha: "An ba da official website",
-          text_en: "An official website is provided",
-          correct: false
-        },
-        {
-          text_ha: "An nuna requirements",
-          text_en: "Requirements are listed",
-          correct: false
-        }
-        ],
-        explanation_ha: "Neman kuɗi kafin a ba ka aiki alama ce ta scam.",
-        explanation_en: "Asking you to pay before you are hired is a common scam sign."
-      },
-      {
-        question_ha: "Wanne ne kyakkyawan mataki a neman aiki?",
-        question_en: "Which is a good step in job hunting?",
-        options: [
-        {
-          text_ha: "Aika CV iri ɗaya ga kowane aiki",
-          text_en: "Send the same CV everywhere",
-          correct: false
-        },
-        {
-          text_ha: "Gyara CV da cover letter gwargwadon aikin",
-          text_en: "Adjust CV and cover letter to the role",
-          correct: true
-        },
-        {
-          text_ha: "Yi gaggawa ba tare da karanta ba",
-          text_en: "Rush without reading",
-          correct: false
-        },
-        {
-          text_ha: "Aika OTP",
-          text_en: "Send your OTP",
-          correct: false
-        }
-        ],
-        explanation_ha: "Gyara CV da cover letter zuwa ga takamaiman aiki yana ƙara damar samun nasara.",
-        explanation_en: "Tailoring your CV and cover letter to each role increases your chances."
-      },
-      {
-        question_ha: "Me ya kamata ka yi idan an ce ka biya kuɗi don a ba ka appointment?",
-        question_en: "What should you do if they ask you to pay for an appointment?",
-        options: [
-        {
-          text_ha: "Ka biya nan take",
-          text_en: "Pay immediately",
-          correct: false
-        },
-        {
-          text_ha: "Ka bincika sosai kafin ka biya komai",
-          text_en: "Verify carefully before paying",
-          correct: true
-        },
-        {
-          text_ha: "Ka aika OTP",
-          text_en: "Send your OTP",
-          correct: false
-        },
-        {
-          text_ha: "Ka aika password",
-          text_en: "Send your password",
-          correct: false
-        }
-        ],
-        explanation_ha: "Neman kuɗi don 'sakin albashi' ko 'tabbatar da aiki' babban warning ne. Ka bincika sosai.",
-        explanation_en: "Requests to pay to 'release a salary' or 'secure a job' are major warning signs. Verify carefully."
-      },
-      {
-        question_ha: "Me ya kamata ka yi idan application ɗaya ta ƙi?",
-        question_en: "What should you do when one application is rejected?",
-        options: [
-        {
-          text_ha: "Ka daina nema",
-          text_en: "Give up",
-          correct: false
-        },
-        {
-          text_ha: "Ka gyara CV, ƙara skills, ka ci gaba da nema",
-          text_en: "Improve your CV, build skills, keep applying",
-          correct: true
-        },
-        {
-          text_ha: "Ka share account ɗinka",
-          text_en: "Delete your account",
-          correct: false
-        },
-        {
-          text_ha: "Ka yi ƙarya a CV",
-          text_en: "Lie on your CV",
-          correct: false
-        }
-        ],
-        explanation_ha: "Neman aiki yana buƙatar haƙuri. Gyara CV, ƙara skills da ci gaba da nema.",
-        explanation_en: "Job hunting requires patience. Improve your CV, build skills and keep applying."
-      }
-      ]
+          quiz: {
+            question_ha: "Me ya kamata ka yi kafin ka nemi aiki online?",
+            question_en: "What should you do before applying for an online job?",
+            options: [
+              { text_ha: "Ka aika bayanan sirri nan take", text_en: "Send personal information immediately", correct: false },
+              { text_ha: "Ka karanta job description kuma ka tabbatar da kamfanin", text_en: "Read the job description and verify the company", correct: true },
+              { text_ha: "Ka biya duk wanda ya nemi kuɗi", text_en: "Pay anyone who asks for money", correct: false },
+              { text_ha: "Ka aika password", text_en: "Send your password", correct: false }
+            ],
+            explanation_ha: "Karanta job description kuma ka tabbatar da asalin employer kafin ka aika bayananka.",
+            explanation_en: "Read the job description and verify the employer before submitting your information."
+          }
         }
       ],
 
@@ -2211,148 +1235,18 @@ const DATA = {
 
             "WhatsApp is a powerful tool. Use it for communication while keeping privacy and security in mind.",
 
-          quizzes: [
-      {
-        question_ha: "Idan lambar da ba ka sani ba ta aiko maka da suspicious message, me ya fi kyau ka yi?",
-        question_en: "What is best to do if an unknown number sends you a suspicious message?",
-        options: [
-        {
-          text_ha: "Ka danna duk links",
-          text_en: "Click every link",
-          correct: false
-        },
-        {
-          text_ha: "Ka yi hankali, ka guji suspicious links kuma ka block/report idan ya dace",
-          text_en: "Be careful, avoid suspicious links and block/report when appropriate",
-          correct: true
-        },
-        {
-          text_ha: "Ka aika OTP",
-          text_en: "Send your OTP",
-          correct: false
-        },
-        {
-          text_ha: "Ka aika password",
-          text_en: "Send your password",
-          correct: false
-        }
-        ],
-        explanation_ha: "Unknown message na iya zama spam ko scam. Kada ka danna suspicious links ko aika bayanan sirri.",
-        explanation_en: "An unknown message may be spam or scam. Avoid suspicious links and never send sensitive credentials."
-      },
-      {
-        question_ha: "Wanne abu ba ya cikin WhatsApp?",
-        question_en: "Which of these is not part of WhatsApp?",
-        options: [
-        {
-          text_ha: "Aika voice note",
-          text_en: "Send voice notes",
-          correct: false
-        },
-        {
-          text_ha: "Yin video call",
-          text_en: "Make video calls",
-          correct: false
-        },
-        {
-          text_ha: "Aika files",
-          text_en: "Send files",
-          correct: false
-        },
-        {
-          text_ha: "Gyaran wayar da hannu",
-          text_en: "Physically repairing your phone",
-          correct: true
-        }
-        ],
-        explanation_ha: "WhatsApp ba ya gyara waya ta hannu. Akwai iyaka ga abin da manhajoji za su iya yi.",
-        explanation_en: "WhatsApp cannot physically repair your phone. There is a limit to what apps can do."
-      },
-      {
-        question_ha: "Wanne ne kyakkyawan amfani da WhatsApp group?",
-        question_en: "Which is a good use of a WhatsApp group?",
-        options: [
-        {
-          text_ha: "Raba OTP a group",
-          text_en: "Share OTP in a group",
-          correct: false
-        },
-        {
-          text_ha: "Raba labarai da bayanai masu amfani",
-          text_en: "Share useful updates and information",
-          correct: true
-        },
-        {
-          text_ha: "Aika password",
-          text_en: "Send passwords",
-          correct: false
-        },
-        {
-          text_ha: "Raba PIN na banki",
-          text_en: "Share bank PINs",
-          correct: false
-        }
-        ],
-        explanation_ha: "WhatsApp group ya fi amfani wajen raba bayanai masu amfani, ba sirri ba.",
-        explanation_en: "WhatsApp groups are best for useful updates, not secrets."
-      },
-      {
-        question_ha: "Me ya kamata ka yi kafin ka shiga WhatsApp group?",
-        question_en: "What should you do before joining a WhatsApp group?",
-        options: [
-        {
-          text_ha: "Ka shiga kai tsaye ba tare da tunani ba",
-          text_en: "Join without thinking",
-          correct: false
-        },
-        {
-          text_ha: "Ka san wanda ya ƙirƙiri group ɗin da manufarsa",
-          text_en: "Know who created it and its purpose",
-          correct: true
-        },
-        {
-          text_ha: "Ka aika OTP",
-          text_en: "Send your OTP",
-          correct: false
-        },
-        {
-          text_ha: "Ka aika password",
-          text_en: "Send your password",
-          correct: false
-        }
-        ],
-        explanation_ha: "Ka san wanda ya ƙirƙiri group ɗin da manufarsa kafin ka shiga.",
-        explanation_en: "Know who created a WhatsApp group and its purpose before joining."
-      },
-      {
-        question_ha: "Me ya sa ya kamata ka kula da abin da kake aika a WhatsApp?",
-        question_en: "Why should you be careful about what you send on WhatsApp?",
-        options: [
-        {
-          text_ha: "Saboda kowa zai iya ganin saƙo",
-          text_en: "Because everyone can see it",
-          correct: false
-        },
-        {
-          text_ha: "Saboda abin da ka aika zai iya zama saved ko forwarded",
-          text_en: "Because what you send can be saved or forwarded",
-          correct: true
-        },
-        {
-          text_ha: "Saboda WhatsApp ba ya aiki",
-          text_en: "Because WhatsApp doesn't work",
-          correct: false
-        },
-        {
-          text_ha: "Saboda babu internet",
-          text_en: "Because there is no internet",
-          correct: false
-        }
-        ],
-        explanation_ha: "WhatsApp ba ya ba ka cikakken iko kan abin da mai karɓa zai yi da saƙon.",
-        explanation_en: "WhatsApp does not give you complete control over what the recipient does with your message."
-      }
-      ]
+          quiz: {
+            question_ha: "Idan lambar da ba ka sani ba ta aiko maka da suspicious message, me ya fi kyau ka yi?",
+            question_en: "What is best to do if an unknown number sends you a suspicious message?",
+            options: [
+              { text_ha: "Ka danna duk links", text_en: "Click every link", correct: false },
+              { text_ha: "Ka yi hankali, ka guji suspicious links kuma ka block/report idan ya dace", text_en: "Be careful, avoid suspicious links, and block/report when appropriate", correct: true },
+              { text_ha: "Ka aika OTP", text_en: "Send your OTP", correct: false },
+              { text_ha: "Ka aika password", text_en: "Send your password", correct: false }
+            ],
+            explanation_ha: "Unknown message na iya zama spam ko scam. Kada ka danna suspicious links ko aika bayanan sirri.",
+            explanation_en: "An unknown message may be spam or a scam. Avoid suspicious links and never send sensitive credentials."
+          }
         },
 
 
@@ -2408,148 +1302,18 @@ const DATA = {
 
             "Review your privacy settings from time to time because apps can introduce new features or move settings.",
 
-          quizzes: [
-      {
-        question_ha: "Menene amfanin privacy settings?",
-        question_en: "What is the purpose of privacy settings?",
-        options: [
-        {
-          text_ha: "Su share WhatsApp",
-          text_en: "To delete WhatsApp",
-          correct: false
-        },
-        {
-          text_ha: "Su taimaka maka sarrafa wanda zai ga wasu bayananka",
-          text_en: "To help control who can see some of your information",
-          correct: true
-        },
-        {
-          text_ha: "Su ƙara data",
-          text_en: "To add data",
-          correct: false
-        },
-        {
-          text_ha: "Su canza SIM",
-          text_en: "To change your SIM",
-          correct: false
-        }
-        ],
-        explanation_ha: "Privacy settings suna taimaka maka ka sarrafa wanda zai iya ganin wasu bayanan profile da activities.",
-        explanation_en: "Privacy settings help you control who can access certain profile information and activities."
-      },
-      {
-        question_ha: "Wanne setting yana sarrafa wanda zai ga hotonka?",
-        question_en: "Which setting controls who can see your profile photo?",
-        options: [
-        {
-          text_ha: "Last seen",
-          text_en: "Last seen",
-          correct: false
-        },
-        {
-          text_ha: "Profile photo",
-          text_en: "Profile photo",
-          correct: true
-        },
-        {
-          text_ha: "Battery",
-          text_en: "Battery",
-          correct: false
-        },
-        {
-          text_ha: "Data",
-          text_en: "Data",
-          correct: false
-        }
-        ],
-        explanation_ha: "Profile photo setting yana sarrafa wanda zai iya ganin hotonka.",
-        explanation_en: "The Profile photo setting controls who can see your profile photo."
-      },
-      {
-        question_ha: "Me ya kamata ka yi kafin ka saka Status?",
-        question_en: "What should you do before posting a Status?",
-        options: [
-        {
-          text_ha: "Ka saka nan take",
-          text_en: "Post immediately",
-          correct: false
-        },
-        {
-          text_ha: "Ka yi tunani kan wanda zai gani da abin da ke ciki",
-          text_en: "Think about who will see it and what is in it",
-          correct: true
-        },
-        {
-          text_ha: "Ka saka OTP",
-          text_en: "Post your OTP",
-          correct: false
-        },
-        {
-          text_ha: "Ka saka password",
-          text_en: "Post your password",
-          correct: false
-        }
-        ],
-        explanation_ha: "Ka yi tunani kan wanda zai gani da abin da ke cikin Status kafin ka wallafa.",
-        explanation_en: "Think about who will see your Status and what it contains before posting."
-      },
-      {
-        question_ha: "Me ya sa ya kamata ka duba privacy settings lokaci zuwa lokaci?",
-        question_en: "Why should you review privacy settings from time to time?",
-        options: [
-        {
-          text_ha: "Saboda apps na iya ƙara features ko canza settings",
-          text_en: "Because apps may add features or move settings",
-          correct: true
-        },
-        {
-          text_ha: "Saboda dole ne",
-          text_en: "Because it's required by law",
-          correct: false
-        },
-        {
-          text_ha: "Saboda yana cin data",
-          text_en: "Because it uses data",
-          correct: false
-        },
-        {
-          text_ha: "Saboda yana share account",
-          text_en: "Because it deletes your account",
-          correct: false
-        }
-        ],
-        explanation_ha: "Apps suna canza inda settings suke, don haka duba lokaci zuwa lokaci yana da muhimmanci.",
-        explanation_en: "Apps sometimes move their settings, so reviewing them periodically is important."
-      },
-      {
-        question_ha: "Wanne zaɓi ne mafi kyau ga Last seen?",
-        question_en: "Which is a safer option for Last seen?",
-        options: [
-        {
-          text_ha: "Kowa",
-          text_en: "Everyone",
-          correct: false
-        },
-        {
-          text_ha: "My Contacts ko Nobody",
-          text_en: "My Contacts or Nobody",
-          correct: true
-        },
-        {
-          text_ha: "Abokai na kawai ba",
-          text_en: "Only strangers",
-          correct: false
-        },
-        {
-          text_ha: "Ba komai",
-          text_en: "No options",
-          correct: false
-        }
-        ],
-        explanation_ha: "Last seen zuwa My Contacts ko Nobody yana ƙara sirri.",
-        explanation_en: "Setting Last seen to My Contacts or Nobody improves privacy."
-      }
-      ]
+          quiz: {
+            question_ha: "Menene amfanin privacy settings?",
+            question_en: "What is the purpose of privacy settings?",
+            options: [
+              { text_ha: "Su share WhatsApp", text_en: "To delete WhatsApp", correct: false },
+              { text_ha: "Su taimaka maka sarrafa wanda zai ga wasu bayananka", text_en: "To help control who can see some of your information", correct: true },
+              { text_ha: "Su ƙara data", text_en: "To add data", correct: false },
+              { text_ha: "Su canza SIM", text_en: "To change your SIM", correct: false }
+            ],
+            explanation_ha: "Privacy settings suna taimaka maka ka sarrafa wanda zai iya ganin wasu bayanan profile da activities.",
+            explanation_en: "Privacy settings help you control who can access certain profile information and activities."
+          }
         },
 
 
@@ -2619,148 +1383,18 @@ const DATA = {
 
             "Use social media to build yourself and protect opportunities you may need later.",
 
-          quizzes: [
-      {
-        question_ha: "Me ya kamata ka yi idan ka ga wani muhimmin bayani a social media?",
-        question_en: "What should you do when you see important information on social media?",
-        options: [
-        {
-          text_ha: "Ka yada shi nan take",
-          text_en: "Share it immediately",
-          correct: false
-        },
-        {
-          text_ha: "Ka bincika source ɗin ka tabbatar",
-          text_en: "Check and verify the source",
-          correct: true
-        },
-        {
-          text_ha: "Ka gaskata saboda yana da likes da yawa",
-          text_en: "Believe it because it has many likes",
-          correct: false
-        },
-        {
-          text_ha: "Ka ɗauka duk gaskiya ne",
-          text_en: "Assume it is all true",
-          correct: false
-        }
-        ],
-        explanation_ha: "Likes da views ba su tabbatar da gaskiyar bayani ba. Ka bincika source.",
-        explanation_en: "Likes and views do not prove that information is true. Verify the source."
-      },
-      {
-        question_ha: "Me ya kamata ka yi idan ka ga saƙo: 'Congratulations! You have won ₦500,000. Click here to claim.'?",
-        question_en: "What should you do when you see: 'Congratulations! You have won ₦500,000. Click here to claim.'?",
-        options: [
-        {
-          text_ha: "Ka danna nan take",
-          text_en: "Click immediately",
-          correct: false
-        },
-        {
-          text_ha: "Ka bincika source ɗin kafin ka danna",
-          text_en: "Verify the source before clicking",
-          correct: true
-        },
-        {
-          text_ha: "Ka aika OTP",
-          text_en: "Send OTP",
-          correct: false
-        },
-        {
-          text_ha: "Ka aika password",
-          text_en: "Send password",
-          correct: false
-        }
-        ],
-        explanation_ha: "Neman ka danna link kwatsam domin kyauta alama ce ta phishing ko scam.",
-        explanation_en: "A sudden link about a prize is a common phishing/scam sign."
-      },
-      {
-        question_ha: "Menene digital footprint?",
-        question_en: "What is a digital footprint?",
-        options: [
-        {
-          text_ha: "Nau'in waya",
-          text_en: "A type of phone",
-          correct: false
-        },
-        {
-          text_ha: "Tarihin abubuwan da ka yi ko ka wallafa online",
-          text_en: "The history of things you post or do online",
-          correct: true
-        },
-        {
-          text_ha: "Manhajar WhatsApp",
-          text_en: "A WhatsApp app",
-          correct: false
-        },
-        {
-          text_ha: "Nau'in SIM",
-          text_en: "A type of SIM",
-          correct: false
-        }
-        ],
-        explanation_ha: "Digital footprint shi ne tarihin abubuwan da ka yi ko ka wallafa a yanar gizo.",
-        explanation_en: "A digital footprint is the history of what you post or do online."
-      },
-      {
-        question_ha: "Me ya kamata ka yi da passwords a social media?",
-        question_en: "What should you do with passwords on social media?",
-        options: [
-        {
-          text_ha: "Ka saka su a post",
-          text_en: "Post them",
-          correct: false
-        },
-        {
-          text_ha: "Ka kiyaye su sirri",
-          text_en: "Keep them private",
-          correct: true
-        },
-        {
-          text_ha: "Ka aika wa abokai",
-          text_en: "Send them to friends",
-          correct: false
-        },
-        {
-          text_ha: "Ka saka su a bio",
-          text_en: "Put them in your bio",
-          correct: false
-        }
-        ],
-        explanation_ha: "Passwords sirri ne. Kada ka saka su a public post ko aika su ga kowa.",
-        explanation_en: "Passwords are private. Never post them or send them to anyone."
-      },
-      {
-        question_ha: "Wanne irin bayani ne ya fi dacewa a post a social media?",
-        question_en: "Which type of information is more appropriate to post publicly?",
-        options: [
-        {
-          text_ha: "NIN da BVN ɗinka",
-          text_en: "Your NIN and BVN",
-          correct: false
-        },
-        {
-          text_ha: "Public announcement ko kasuwanci",
-          text_en: "Public announcements or business content",
-          correct: true
-        },
-        {
-          text_ha: "Password ɗinka",
-          text_en: "Your password",
-          correct: false
-        },
-        {
-          text_ha: "OTP ɗinka",
-          text_en: "Your OTP",
-          correct: false
-        }
-        ],
-        explanation_ha: "Ka fi wallafa bayanan da ba su da haɗari kamar kasuwanci ko sanarwa ta jama'a.",
-        explanation_en: "Prefer posting safe content like business updates or public announcements."
-      }
-      ]
+          quiz: {
+            question_ha: "Me ya kamata ka yi idan ka ga wani muhimmin bayani a social media?",
+            question_en: "What should you do when you see important information on social media?",
+            options: [
+              { text_ha: "Ka yada shi nan take", text_en: "Share it immediately", correct: false },
+              { text_ha: "Ka bincika source ɗin ka tabbatar", text_en: "Check and verify the source", correct: true },
+              { text_ha: "Ka gaskata saboda yana da likes da yawa", text_en: "Believe it because it has many likes", correct: false },
+              { text_ha: "Ka ɗauka duk gaskiya ne", text_en: "Assume it is all true", correct: false }
+            ],
+            explanation_ha: "Likes da views ba su tabbatar da gaskiyar bayani ba. Ka bincika source.",
+            explanation_en: "Likes and views do not prove that information is true. Verify the source."
+          }
         },
 
 
@@ -2832,148 +1466,18 @@ const DATA = {
 
             "Used properly, WhatsApp Business can turn your phone into a small customer-service desk for your business.",
 
-          quizzes: [
-      {
-        question_ha: "Wanne feature na WhatsApp Business zai taimaka wajen nuna kayayyaki?",
-        question_en: "Which WhatsApp Business feature can help display products?",
-        options: [
-        {
-          text_ha: "Product catalog",
-          text_en: "Product catalog",
-          correct: true
-        },
-        {
-          text_ha: "Alarm",
-          text_en: "Alarm",
-          correct: false
-        },
-        {
-          text_ha: "Calculator",
-          text_en: "Calculator",
-          correct: false
-        },
-        {
-          text_ha: "Bluetooth",
-          text_en: "Bluetooth",
-          correct: false
-        }
-        ],
-        explanation_ha: "Product catalog yana ba business damar nuna kayayyaki, farashi da bayanansu ga customers.",
-        explanation_en: "A product catalog lets a business display products, prices and descriptions to customers."
-      },
-      {
-        question_ha: "Menene amfanin Quick replies?",
-        question_en: "What is the purpose of Quick replies?",
-        options: [
-        {
-          text_ha: "Ajiye password",
-          text_en: "Store passwords",
-          correct: false
-        },
-        {
-          text_ha: "Amsa tambayoyi iri ɗaya cikin sauri",
-          text_en: "Reply to repeated questions faster",
-          correct: true
-        },
-        {
-          text_ha: "Canza SIM",
-          text_en: "Change the SIM",
-          correct: false
-        },
-        {
-          text_ha: "Share OTP",
-          text_en: "Share OTP",
-          correct: false
-        }
-        ],
-        explanation_ha: "Quick replies suna taimakawa wajen amsa tambayoyi masu maimaituwa cikin sauri da daidaito.",
-        explanation_en: "Quick replies help respond to recurring questions faster and more consistently."
-      },
-      {
-        question_ha: "Me ya kamata business ya yi game da farashi da availability?",
-        question_en: "What should a business do about prices and availability?",
-        options: [
-        {
-          text_ha: "Ya yi ƙarya",
-          text_en: "Lie",
-          correct: false
-        },
-        {
-          text_ha: "Ya kasance mai gaskiya kuma ya sanar da customer idan akwai canji",
-          text_en: "Be honest and inform customers of changes",
-          correct: true
-        },
-        {
-          text_ha: "Ya ɓoye farashi",
-          text_en: "Hide the price",
-          correct: false
-        },
-        {
-          text_ha: "Ya nemi OTP",
-          text_en: "Ask for OTP",
-          correct: false
-        }
-        ],
-        explanation_ha: "Gaskiya game da farashi da availability na gina amincewa da customer.",
-        explanation_en: "Being honest about prices and availability builds customer trust."
-      },
-      {
-        question_ha: "Menene Away messages?",
-        question_en: "What are Away messages?",
-        options: [
-        {
-          text_ha: "Saƙon da ake aika idan ba ka nan",
-          text_en: "Messages sent when you're away",
-          correct: true
-        },
-        {
-          text_ha: "Saƙon sirri",
-          text_en: "Private messages",
-          correct: false
-        },
-        {
-          text_ha: "Saƙon share account",
-          text_en: "Account deletion messages",
-          correct: false
-        },
-        {
-          text_ha: "Saƙon share waya",
-          text_en: "Phone deletion messages",
-          correct: false
-        }
-        ],
-        explanation_ha: "Away messages suna sanar da customer cewa ba ka nan a halin yanzu.",
-        explanation_en: "Away messages inform customers that you are currently unavailable."
-      },
-      {
-        question_ha: "Wanne ne kyakkyawan aiki da WhatsApp Business?",
-        question_en: "Which is a good practice with WhatsApp Business?",
-        options: [
-        {
-          text_ha: "Aika spam ga kowa",
-          text_en: "Spam everyone",
-          correct: false
-        },
-        {
-          text_ha: "Amsa da sauri kuma da gaskiya",
-          text_en: "Respond quickly and honestly",
-          correct: true
-        },
-        {
-          text_ha: "A ƙirƙiri fake reviews",
-          text_en: "Create fake reviews",
-          correct: false
-        },
-        {
-          text_ha: "A biya don a tabbatar da aiki",
-          text_en: "Pay to guarantee a job",
-          correct: false
-        }
-        ],
-        explanation_ha: "Amsa da sauri, da gaskiya, da ladabi na taimaka wajen gina business mai kyau.",
-        explanation_en: "Fast, honest and polite replies help build a strong business."
-      }
-      ]
+          quiz: {
+            question_ha: "Wanne feature na WhatsApp Business zai taimaka wajen nuna kayayyaki?",
+            question_en: "Which WhatsApp Business feature can help display products?",
+            options: [
+              { text_ha: "Product catalog", text_en: "Product catalog", correct: true },
+              { text_ha: "Alarm", text_en: "Alarm", correct: false },
+              { text_ha: "Calculator", text_en: "Calculator", correct: false },
+              { text_ha: "Bluetooth", text_en: "Bluetooth", correct: false }
+            ],
+            explanation_ha: "Product catalog yana ba business damar nuna kayayyaki, farashi da bayanansu ga customers.",
+            explanation_en: "A product catalog lets a business display products, prices, and descriptions to customers."
+          }
         }
       ],
 
@@ -3119,148 +1623,18 @@ const DATA = {
 
             "Do not be ashamed if you make a mistake. If you realize that you have shared important information with a scammer, act quickly: change the password, contact the bank or affected service, and report the incident when appropriate.",
 
-          quizzes: [
-      {
-        question_ha: "Wanne daga cikin waɗannan alama ce mai ƙarfi ta scam?",
-        question_en: "Which of these is a strong warning sign of a scam?",
-        options: [
-        {
-          text_ha: "An matsa maka ka yi gaggawa kuma an nemi OTP",
-          text_en: "You are pressured to act quickly and asked for an OTP",
-          correct: true
-        },
-        {
-          text_ha: "An gaishe ka",
-          text_en: "Someone greeted you",
-          correct: false
-        },
-        {
-          text_ha: "Ka karanta labari",
-          text_en: "You read an article",
-          correct: false
-        },
-        {
-          text_ha: "Ka kalli video",
-          text_en: "You watched a video",
-          correct: false
-        }
-        ],
-        explanation_ha: "Matsin lamba, gaggawa da neman OTP suna daga cikin manyan alamun scam.",
-        explanation_en: "Pressure, urgency and requests for OTPs are common scam warning signs."
-      },
-      {
-        question_ha: "Menene phishing?",
-        question_en: "What is phishing?",
-        options: [
-        {
-          text_ha: "Yin kifi",
-          text_en: "Fishing",
-          correct: false
-        },
-        {
-          text_ha: "Fake message ko website don satar bayananka",
-          text_en: "Fake messages or websites used to steal your information",
-          correct: true
-        },
-        {
-          text_ha: "Yin wasa",
-          text_en: "Playing games",
-          correct: false
-        },
-        {
-          text_ha: "Cin abinci",
-          text_en: "Eating",
-          correct: false
-        }
-        ],
-        explanation_ha: "Phishing yana amfani da fake message ko fake website wajen yaudarar mutane su ba da sirri.",
-        explanation_en: "Phishing uses fake messages or websites to trick people into giving away private information."
-      },
-      {
-        question_ha: "Menene STOP rule?",
-        question_en: "What is the STOP rule?",
-        options: [
-        {
-          text_ha: "Stop, Think, Observe, Proceed",
-          text_en: "Stop, Think, Observe, Proceed",
-          correct: true
-        },
-        {
-          text_ha: "Send, Talk, Open, Pay",
-          text_en: "Send, Talk, Open, Pay",
-          correct: false
-        },
-        {
-          text_ha: "Share, Tell, Open, Prove",
-          text_en: "Share, Tell, Open, Prove",
-          correct: false
-        },
-        {
-          text_ha: "Sleep, Type, Order, Post",
-          text_en: "Sleep, Type, Order, Post",
-          correct: false
-        }
-        ],
-        explanation_ha: "STOP yana tunatar da kai ka tsaya, yi tunani, duba source, sannan ka ci gaba da hankali.",
-        explanation_en: "STOP reminds you to pause, think, observe the source and only proceed carefully."
-      },
-      {
-        question_ha: "Idan ka sami saƙo: 'Akwai matsala da account ɗinka. Danna nan don gyara.' Me ya kamata ka yi?",
-        question_en: "If you receive: 'There is a problem with your account. Click here to fix it.' What should you do?",
-        options: [
-        {
-          text_ha: "Danna link ɗin",
-          text_en: "Click the link",
-          correct: false
-        },
-        {
-          text_ha: "Aika password",
-          text_en: "Send password",
-          correct: false
-        },
-        {
-          text_ha: "Buɗe app ko official website kai tsaye ba ta link ɗin ba",
-          text_en: "Open the app or official website directly, not through the link",
-          correct: true
-        },
-        {
-          text_ha: "Aika OTP",
-          text_en: "Send OTP",
-          correct: false
-        }
-        ],
-        explanation_ha: "Kada ka danna link a cikin saƙon da yake tsoratar da kai. Buɗe app ko website kai tsaye.",
-        explanation_en: "Do not click links in scary messages. Open the app or website directly."
-      },
-      {
-        question_ha: "Idan ka fahimci ka ba scammer muhimmin bayani, me ya kamata ka yi?",
-        question_en: "If you realize you gave a scammer important information, what should you do?",
-        options: [
-        {
-          text_ha: "Ka yi shiru",
-          text_en: "Stay silent",
-          correct: false
-        },
-        {
-          text_ha: "Ka canza password, ka tuntubi banki ko service, ka yi report",
-          text_en: "Change passwords, contact bank or service, and report",
-          correct: true
-        },
-        {
-          text_ha: "Ka jira",
-          text_en: "Wait",
-          correct: false
-        },
-        {
-          text_ha: "Ka aika ƙari",
-          text_en: "Send more",
-          correct: false
-        }
-        ],
-        explanation_ha: "Mataki da wuri na iya rage asara. Canza password, tuntuɓi service, sannan ka yi report.",
-        explanation_en: "Acting early can reduce damage. Change passwords, contact the service and report."
-      }
-      ]
+          quiz: {
+            question_ha: "Wanne daga cikin waɗannan alama ce mai ƙarfi ta scam?",
+            question_en: "Which of these is a strong warning sign of a scam?",
+            options: [
+              { text_ha: "An matsa maka ka yi gaggawa kuma an nemi OTP", text_en: "You are pressured to act quickly and asked for an OTP", correct: true },
+              { text_ha: "An gaishe ka", text_en: "Someone greeted you", correct: false },
+              { text_ha: "Ka karanta labari", text_en: "You read an article", correct: false },
+              { text_ha: "Ka kalli video", text_en: "You watched a video", correct: false }
+            ],
+            explanation_ha: "Matsin lamba, gaggawa da neman OTP suna daga cikin manyan alamun scam.",
+            explanation_en: "Pressure, urgency, and requests for OTPs are common scam warning signs."
+          }
         },
 
 
@@ -3336,148 +1710,18 @@ const DATA = {
 
             "Start with important accounts such as email, banking, social media, and other accounts containing sensitive information.",
 
-          quizzes: [
-      {
-        question_ha: "Menene babban amfanin 2FA?",
-        question_en: "What is the main benefit of 2FA?",
-        options: [
-        {
-          text_ha: "Yana ƙara wani mataki na tsaro",
-          text_en: "It adds another layer of security",
-          correct: true
-        },
-        {
-          text_ha: "Yana ƙara battery",
-          text_en: "It increases battery",
-          correct: false
-        },
-        {
-          text_ha: "Yana sa internet ya yi sauri",
-          text_en: "It makes internet faster",
-          correct: false
-        },
-        {
-          text_ha: "Yana share account",
-          text_en: "It deletes the account",
-          correct: false
-        }
-        ],
-        explanation_ha: "2FA yana ƙara wani mataki na tabbatar da kai bayan password.",
-        explanation_en: "2FA adds another verification step after your password."
-      },
-      {
-        question_ha: "Wanne password ne mai rauni?",
-        question_en: "Which password is weak?",
-        options: [
-        {
-          text_ha: "K@no2024!x",
-          text_en: "K@no2024!x",
-          correct: false
-        },
-        {
-          text_ha: "123456",
-          text_en: "123456",
-          correct: true
-        },
-        {
-          text_ha: "InaSoCinTuwo@2024",
-          text_en: "InaSoCinTuwo@2024",
-          correct: false
-        },
-        {
-          text_ha: "Kasuwa!BaTaDadi#",
-          text_en: "Kasuwa!BaTaDadi#",
-          correct: false
-        }
-        ],
-        explanation_ha: "123456 yana da sauƙin hasashe. Ya kamata a yi amfani da password mai tsawo da haruffa, lambobi da alamomi.",
-        explanation_en: "123456 is easy to guess. Use a longer password with letters, numbers and symbols."
-      },
-      {
-        question_ha: "Shin ya kamata ka yi amfani da password ɗaya a duk accounts?",
-        question_en: "Should you use the same password across all accounts?",
-        options: [
-        {
-          text_ha: "Eh, don sauƙi",
-          text_en: "Yes, for simplicity",
-          correct: false
-        },
-        {
-          text_ha: "A'a, kada ka sake amfani da password ɗaya",
-          text_en: "No, do not reuse the same password",
-          correct: true
-        },
-        {
-          text_ha: "Eh, idan password ɗin yana da ƙarfi",
-          text_en: "Yes, if the password is strong",
-          correct: false
-        },
-        {
-          text_ha: "Ba komai",
-          text_en: "It doesn't matter",
-          correct: false
-        }
-        ],
-        explanation_ha: "Idan ka sake amfani da password ɗaya, satar account ɗaya na iya buɗe duk sauran accounts ɗinka.",
-        explanation_en: "Reusing the same password means one breach can expose all your accounts."
-      },
-      {
-        question_ha: "Menene password manager?",
-        question_en: "What is a password manager?",
-        options: [
-        {
-          text_ha: "Manhajar da ke ajiye passwords cikin aminci",
-          text_en: "An app that stores passwords securely",
-          correct: true
-        },
-        {
-          text_ha: "Manhajar wasa",
-          text_en: "A game app",
-          correct: false
-        },
-        {
-          text_ha: "Manhajar kira",
-          text_en: "A call app",
-          correct: false
-        },
-        {
-          text_ha: "Manhajar hoto",
-          text_en: "A photo app",
-          correct: false
-        }
-        ],
-        explanation_ha: "Password manager yana taimaka maka ka adana passwords da yawa cikin aminci.",
-        explanation_en: "A password manager helps you store multiple passwords securely."
-      },
-      {
-        question_ha: "Idan wani ya ce zai taimaka maka kuma ya nemi code ɗin da aka aiko maka, me ya kamata ka yi?",
-        question_en: "If someone says they are helping you and asks for a code sent to you, what should you do?",
-        options: [
-        {
-          text_ha: "Ka ba shi code ɗin",
-          text_en: "Give them the code",
-          correct: false
-        },
-        {
-          text_ha: "Ka dakata ka tabbatar da abin da yake faruwa",
-          text_en: "Stop and verify what is happening",
-          correct: true
-        },
-        {
-          text_ha: "Ka aika shi a sasance",
-          text_en: "Send it quietly",
-          correct: false
-        },
-        {
-          text_ha: "Ka share waya",
-          text_en: "Delete your phone",
-          correct: false
-        }
-        ],
-        explanation_ha: "Kada ka ba kowa verification code. Ka dakata ka tabbatar da abin da yake faruwa.",
-        explanation_en: "Never give anyone your verification code. Stop and verify what is happening."
-      }
-      ]
+          quiz: {
+            question_ha: "Menene babban amfanin 2FA?",
+            question_en: "What is the main benefit of 2FA?",
+            options: [
+              { text_ha: "Yana ƙara wani mataki na tsaro", text_en: "It adds another layer of security", correct: true },
+              { text_ha: "Yana ƙara battery", text_en: "It increases battery", correct: false },
+              { text_ha: "Yana sa internet ya yi sauri", text_en: "It makes internet faster", correct: false },
+              { text_ha: "Yana share account", text_en: "It deletes the account", correct: false }
+            ],
+            explanation_ha: "2FA yana ƙara wani mataki na tabbatar da kai bayan password.",
+            explanation_en: "2FA adds another verification step after your password."
+          }
         },
 
 
@@ -3547,148 +1791,18 @@ const DATA = {
 
             "Your OTP and PIN belong to you. Never share them because of pressure, fear, or promises of help.",
 
-          quizzes: [
-      {
-        question_ha: "Idan ka sami OTP ba tare da ka fara wani transaction ba, me ya kamata ka yi?",
-        question_en: "If you receive an OTP without starting a transaction, what should you do?",
-        options: [
-        {
-          text_ha: "Ka aika OTP ga wanda ya tambaye ka",
-          text_en: "Send it to whoever asks",
-          correct: false
-        },
-        {
-          text_ha: "Ka kiyaye shi kuma ka bincika account ɗinka ko tuntubi service provider",
-          text_en: "Keep it private and check your account or contact the service provider",
-          correct: true
-        },
-        {
-          text_ha: "Ka saka shi a social media",
-          text_en: "Post it on social media",
-          correct: false
-        },
-        {
-          text_ha: "Ka aika wa aboki",
-          text_en: "Send it to a friend",
-          correct: false
-        }
-        ],
-        explanation_ha: "OTP ba a raba shi. Idan ka sami OTP ba tare da ka fara wani aiki ba, bincika account ɗinka kuma tuntubi service provider idan kana da shakku.",
-        explanation_en: "Never share an OTP. If you receive one unexpectedly, check your account and contact the service provider if necessary."
-      },
-      {
-        question_ha: "Menene OTP?",
-        question_en: "What is OTP?",
-        options: [
-        {
-          text_ha: "Wani nau'in email",
-          text_en: "A type of email",
-          correct: false
-        },
-        {
-          text_ha: "Lambar wucin gadi don tabbatar da wani aiki",
-          text_en: "A temporary code used to verify an action",
-          correct: true
-        },
-        {
-          text_ha: "Manhajar WhatsApp",
-          text_en: "A WhatsApp app",
-          correct: false
-        },
-        {
-          text_ha: "Password na dindindin",
-          text_en: "A permanent password",
-          correct: false
-        }
-        ],
-        explanation_ha: "OTP lamba ce ta wucin gadi da ake amfani da ita don tabbatar da wani aiki.",
-        explanation_en: "An OTP is a temporary code used to verify an action."
-      },
-      {
-        question_ha: "Idan mutum ya ce shi bank staff ne kuma ya nemi OTP ɗinka, me ya kamata ka yi?",
-        question_en: "If someone says they are bank staff and asks for your OTP, what should you do?",
-        options: [
-        {
-          text_ha: "Ka ba shi OTP",
-          text_en: "Give them the OTP",
-          correct: false
-        },
-        {
-          text_ha: "Ka ƙi, ka tuntubi banki ta official number",
-          text_en: "Refuse and contact the bank through the official number",
-          correct: true
-        },
-        {
-          text_ha: "Ka aika shi a sasance",
-          text_en: "Send it quietly",
-          correct: false
-        },
-        {
-          text_ha: "Ka saka shi a Status",
-          text_en: "Post it on Status",
-          correct: false
-        }
-        ],
-        explanation_ha: "Real bank ba ya neman OTP. Ka ƙi ka tuntubi banki ta official number.",
-        explanation_en: "A real bank never asks for your OTP. Refuse and contact the bank through the official number."
-      },
-      {
-        question_ha: "Menene PIN?",
-        question_en: "What is a PIN?",
-        options: [
-        {
-          text_ha: "Password na email",
-          text_en: "An email password",
-          correct: false
-        },
-        {
-          text_ha: "Lambar sirri don tabbatar da kai",
-          text_en: "A secret number used to verify identity",
-          correct: true
-        },
-        {
-          text_ha: "Manhajar WhatsApp",
-          text_en: "A WhatsApp app",
-          correct: false
-        },
-        {
-          text_ha: "Nau'in SIM",
-          text_en: "A type of SIM",
-          correct: false
-        }
-        ],
-        explanation_ha: "PIN lamba ce ta sirri da ake amfani da ita don tabbatar da kai.",
-        explanation_en: "A PIN is a secret number used to verify identity."
-      },
-      {
-        question_ha: "Idan ka zargi an shiga account ɗinka ba da izini ba, me ya kamata ka yi?",
-        question_en: "If you suspect your account was accessed without authorization, what should you do?",
-        options: [
-        {
-          text_ha: "Ka jira",
-          text_en: "Wait",
-          correct: false
-        },
-        {
-          text_ha: "Ka canza password, ka tuntubi banki/service, ka duba transactions",
-          text_en: "Change password, contact bank/service, review transactions",
-          correct: true
-        },
-        {
-          text_ha: "Ka aika OTP",
-          text_en: "Send OTP",
-          correct: false
-        },
-        {
-          text_ha: "Ka share account",
-          text_en: "Delete the account",
-          correct: false
-        }
-        ],
-        explanation_ha: "Mataki da wuri yana taimakawa: canza password, tuntuɓi service da duba transactions.",
-        explanation_en: "Act quickly: change the password, contact the service and review transactions."
-      }
-      ]
+          quiz: {
+            question_ha: "Idan ka sami OTP ba tare da ka fara wani transaction ba, me ya kamata ka yi?",
+            question_en: "If you receive an OTP without starting a transaction, what should you do?",
+            options: [
+              { text_ha: "Ka aika OTP ga wanda ya tambaye ka", text_en: "Send it to whoever asks", correct: false },
+              { text_ha: "Ka kiyaye shi kuma ka bincika account ɗinka ko tuntubi service provider", text_en: "Keep it private and check your account or contact the service provider", correct: true },
+              { text_ha: "Ka saka shi a social media", text_en: "Post it on social media", correct: false },
+              { text_ha: "Ka aika wa aboki", text_en: "Send it to a friend", correct: false }
+            ],
+            explanation_ha: "OTP ba a raba shi. Idan ka sami OTP ba tare da ka fara wani aiki ba, bincika account ɗinka kuma tuntubi service provider idan kana da shakku.",
+            explanation_en: "Never share an OTP. If you receive one unexpectedly, check your account and contact the service provider if necessary."
+          }
         },
 
 
@@ -3770,148 +1884,18 @@ const DATA = {
             "**Privacy starts with what you choose to share.**\n" +
             "Before sending information, ask: *Why is this needed? Who will receive it? What channel am I using to send it?*",
 
-          quizzes: [
-      {
-        question_ha: "Me ya kamata ka yi idan wani random account ya nemi NIN ɗinka?",
-        question_en: "What should you do if a random account asks for your NIN?",
-        options: [
-        {
-          text_ha: "Ka aika nan take",
-          text_en: "Send it immediately",
-          correct: false
-        },
-        {
-          text_ha: "Ka tabbatar da organization da dalilin neman bayanin",
-          text_en: "Verify the organization and reason for the request",
-          correct: true
-        },
-        {
-          text_ha: "Ka saka shi a Status",
-          text_en: "Post it on Status",
-          correct: false
-        },
-        {
-          text_ha: "Ka aika wa kowa",
-          text_en: "Send it to everyone",
-          correct: false
-        }
-        ],
-        explanation_ha: "Kada ka aika identity information ga random account. Ka tabbatar da organization da official channel kafin ka raba bayanin.",
-        explanation_en: "Do not send identity information to random accounts. Verify the organization and official channel first."
-      },
-      {
-        question_ha: "Wanne daga cikin waɗannan bayanai ne mafi muhimmanci a kiyaye?",
-        question_en: "Which of these is most sensitive to protect?",
-        options: [
-        {
-          text_ha: "Sunan ka na farko",
-          text_en: "Your first name",
-          correct: false
-        },
-        {
-          text_ha: "Password, PIN da OTP",
-          text_en: "Password, PIN and OTP",
-          correct: true
-        },
-        {
-          text_ha: "Launin da kake so",
-          text_en: "Your favorite color",
-          correct: false
-        },
-        {
-          text_ha: "Sunan wayarka",
-          text_en: "Your phone name",
-          correct: false
-        }
-        ],
-        explanation_ha: "Password, PIN da OTP sirri ne kuma suka fi buƙatar kariya.",
-        explanation_en: "Password, PIN and OTP are private and need the most protection."
-      },
-      {
-        question_ha: "Me ya sa ya kamata ka kula da wayarka?",
-        question_en: "Why should you protect your phone?",
-        options: [
-        {
-          text_ha: "Saboda yana da daraja kawai",
-          text_en: "Because it has value only",
-          correct: false
-        },
-        {
-          text_ha: "Saboda yana ɗauke da bayananka da accounts ɗinka",
-          text_en: "Because it holds your information and accounts",
-          correct: true
-        },
-        {
-          text_ha: "Saboda yana da battery",
-          text_en: "Because it has a battery",
-          correct: false
-        },
-        {
-          text_ha: "Saboda yana da SIM",
-          text_en: "Because it has a SIM",
-          correct: false
-        }
-        ],
-        explanation_ha: "Waya tana ɗauke da bayananka da accounts, don haka kare ta yana da muhimmanci.",
-        explanation_en: "Your phone contains your data and accounts, so protecting it matters."
-      },
-      {
-        question_ha: "Me ya kamata ka yi kafin ka raba wani bayani a online?",
-        question_en: "What should you do before sharing information online?",
-        options: [
-        {
-          text_ha: "Ka aika nan take",
-          text_en: "Send immediately",
-          correct: false
-        },
-        {
-          text_ha: "Ka tambayi kanka me ya sa ake buƙatar shi, wa zai karɓa, ta wace hanya",
-          text_en: "Ask why it is needed, who receives it, and through which channel",
-          correct: true
-        },
-        {
-          text_ha: "Ka share kawai",
-          text_en: "Just share",
-          correct: false
-        },
-        {
-          text_ha: "Ka saka a Status",
-          text_en: "Post on Status",
-          correct: false
-        }
-        ],
-        explanation_ha: "Kafin ka raba bayani, tambayi kanka: me ya sa, wa zai karɓa, ta wace hanya.",
-        explanation_en: "Before sharing information, ask why it is needed, who receives it and through which channel."
-      },
-      {
-        question_ha: "Wanne zaɓi ne mafi aminci ga wayarka?",
-        question_en: "Which is a safer option for your phone?",
-        options: [
-        {
-          text_ha: "Bar shi a buɗe",
-          text_en: "Leave it unlocked",
-          correct: false
-        },
-        {
-          text_ha: "Yi amfani da screen lock, PIN ko biometric",
-          text_en: "Use screen lock, PIN or biometric",
-          correct: true
-        },
-        {
-          text_ha: "Bar shi a cikin jama'a",
-          text_en: "Leave it in public",
-          correct: false
-        },
-        {
-          text_ha: "Ba kowa",
-          text_en: "Give it to strangers",
-          correct: false
-        }
-        ],
-        explanation_ha: "Screen lock, PIN ko biometric suna kare bayanan da ke cikin wayarka.",
-        explanation_en: "A screen lock, PIN or biometric protects the data on your phone."
-      }
-      ]
+          quiz: {
+            question_ha: "Me ya kamata ka yi idan wani random account ya nemi NIN ɗinka?",
+            question_en: "What should you do if a random account asks for your NIN?",
+            options: [
+              { text_ha: "Ka aika nan take", text_en: "Send it immediately", correct: false },
+              { text_ha: "Ka tabbatar da organization da dalilin neman bayanin", text_en: "Verify the organization and reason for the request", correct: true },
+              { text_ha: "Ka saka shi a Status", text_en: "Post it on Status", correct: false },
+              { text_ha: "Ka aika wa kowa", text_en: "Send it to everyone", correct: false }
+            ],
+            explanation_ha: "Kada ka aika identity information ga random account. Ka tabbatar da organization da official channel kafin ka raba bayanin.",
+            explanation_en: "Do not send identity information to random accounts. Verify the organization and official channel first."
+          }
         }
       ],
 
@@ -4053,148 +2037,18 @@ const DATA = {
             "**AI is a tool, not a replacement for your judgment.**\n" +
             "Use it for ideas, understanding, drafting, and learning, but you remain responsible for how you use its output.",
 
-          quizzes: [
-      {
-        question_ha: "Wanne bayani ya fi dacewa da AI?",
-        question_en: "Which statement best describes AI?",
-        options: [
-        {
-          text_ha: "AI ba ta taɓa yin kuskure",
-          text_en: "AI never makes mistakes",
-          correct: false
-        },
-        {
-          text_ha: "Fasaha ce da ke taimaka wa computer yin wasu ayyuka masu kama da basirar ɗan Adam",
-          text_en: "Technology that helps computers perform tasks associated with human intelligence",
-          correct: true
-        },
-        {
-          text_ha: "Robot ne kawai",
-          text_en: "It is only a robot",
-          correct: false
-        },
-        {
-          text_ha: "Waya ce kawai",
-          text_en: "It is only a phone",
-          correct: false
-        }
-        ],
-        explanation_ha: "AI fasaha ce da ke ba computer damar yin wasu ayyuka kamar fahimtar rubutu, samar da content da taimakawa wajen amsa tambayoyi.",
-        explanation_en: "AI is technology that allows computers to perform tasks such as understanding text, generating content and answering questions."
-      },
-      {
-        question_ha: "Shin ya kamata ka gaskata duk abin da AI ta faɗa?",
-        question_en: "Should you believe everything AI says?",
-        options: [
-        {
-          text_ha: "Eh, koyaushe",
-          text_en: "Yes, always",
-          correct: false
-        },
-        {
-          text_ha: "A'a, AI na iya yin kuskure",
-          text_en: "No, AI can make mistakes",
-          correct: true
-        },
-        {
-          text_ha: "Eh, idan ta amsa da sauri",
-          text_en: "Yes, if it answers quickly",
-          correct: false
-        },
-        {
-          text_ha: "Ba komai",
-          text_en: "It doesn't matter",
-          correct: false
-        }
-        ],
-        explanation_ha: "AI na iya samar da bayanin da yake kama da gaskiya amma ba daidai ba.",
-        explanation_en: "AI can produce information that sounds convincing but is wrong."
-      },
-      {
-        question_ha: "Wanne daga cikin waɗannan misalan AI ne?",
-        question_en: "Which of these is an example of AI?",
-        options: [
-        {
-          text_ha: "ChatGPT",
-          text_en: "ChatGPT",
-          correct: true
-        },
-        {
-          text_ha: "Kwalba",
-          text_en: "A bottle",
-          correct: false
-        },
-        {
-          text_ha: "Littafi",
-          text_en: "A book",
-          correct: false
-        },
-        {
-          text_ha: "Tebur",
-          text_en: "A table",
-          correct: false
-        }
-        ],
-        explanation_ha: "ChatGPT da makamantan su misalai ne na AI tools.",
-        explanation_en: "ChatGPT and similar tools are examples of AI."
-      },
-      {
-        question_ha: "Idan kana amfani da AI wajen muhimmin batu kamar health ko finance, me ya kamata ka yi?",
-        question_en: "If you use AI for important topics like health or finance, what should you do?",
-        options: [
-        {
-          text_ha: "Ka gaskata amsar kawai",
-          text_en: "Trust the answer alone",
-          correct: false
-        },
-        {
-          text_ha: "Ka tabbatar da bayanin daga reliable sources",
-          text_en: "Verify the information with reliable sources",
-          correct: true
-        },
-        {
-          text_ha: "Ka aika OTP",
-          text_en: "Send your OTP",
-          correct: false
-        },
-        {
-          text_ha: "Ka share account",
-          text_en: "Delete the account",
-          correct: false
-        }
-        ],
-        explanation_ha: "A muhimman batutuwa, ka tabbatar da amsar AI da reliable sources.",
-        explanation_en: "For important topics, verify AI answers with reliable sources."
-      },
-      {
-        question_ha: "Menene AI hallucination?",
-        question_en: "What is an AI hallucination?",
-        options: [
-        {
-          text_ha: "Mafarki",
-          text_en: "A dream",
-          correct: false
-        },
-        {
-          text_ha: "Bayanin da AI ta samar wanda ba daidai ba amma yake kama da gaskiya",
-          text_en: "AI-generated information that sounds correct but is wrong",
-          correct: true
-        },
-        {
-          text_ha: "Nau'in waya",
-          text_en: "A phone type",
-          correct: false
-        },
-        {
-          text_ha: "Nau'in SIM",
-          text_en: "A SIM type",
-          correct: false
-        }
-        ],
-        explanation_ha: "Hallucination shi ne lokacin da AI ta samar da bayani mara daidai wanda yake kama da gaskiya.",
-        explanation_en: "A hallucination is when AI produces incorrect information that sounds convincing."
-      }
-      ]
+          quiz: {
+            question_ha: "Wanne bayani ya fi dacewa da AI?",
+            question_en: "Which statement best describes AI?",
+            options: [
+              { text_ha: "AI ba ta taɓa yin kuskure", text_en: "AI never makes mistakes", correct: false },
+              { text_ha: "Fasaha ce da ke taimaka wa computer yin wasu ayyuka masu kama da basirar ɗan Adam", text_en: "Technology that helps computers perform tasks associated with human intelligence", correct: true },
+              { text_ha: "Robot ne kawai", text_en: "It is only a robot", correct: false },
+              { text_ha: "Waya ce kawai", text_en: "It is only a phone", correct: false }
+            ],
+            explanation_ha: "AI fasaha ce da ke ba computer damar yin wasu ayyuka kamar fahimtar rubutu, samar da content da taimakawa wajen amsa tambayoyi.",
+            explanation_en: "AI is technology that allows computers to perform tasks such as understanding text, generating content, and answering questions."
+          }
         },
 
 
@@ -4284,148 +2138,18 @@ const DATA = {
             "**Experiment.**\n" +
             "Change the wording, add context, provide examples, or request a different format. This is how you become better at using AI.",
 
-          quizzes: [
-      {
-        question_ha: "Me ya sa prompt mai cikakken bayani ya fi taimako?",
-        question_en: "Why is a detailed prompt often more useful?",
-        options: [
-        {
-          text_ha: "Yana ba AI ƙarin context",
-          text_en: "It gives the AI more context",
-          correct: true
-        },
-        {
-          text_ha: "Yana sa internet ya yi sauri",
-          text_en: "It makes the internet faster",
-          correct: false
-        },
-        {
-          text_ha: "Yana ƙara battery",
-          text_en: "It increases battery",
-          correct: false
-        },
-        {
-          text_ha: "Yana kashe AI",
-          text_en: "It turns off AI",
-          correct: false
-        }
-        ],
-        explanation_ha: "Ƙarin context yana taimaka wa AI ta fahimci abin da kake son samu da kuma irin amsar da ta dace.",
-        explanation_en: "More context helps the AI understand what you need and produce a more relevant answer."
-      },
-      {
-        question_ha: "Wanne prompt ne ya fi kyau?",
-        question_en: "Which prompt is better?",
-        options: [
-        {
-          text_ha: "Rubuta CV",
-          text_en: "Write a CV",
-          correct: false
-        },
-        {
-          text_ha: "Taimaka mini in tsara CV na beginner web developer mai HTML, CSS, JavaScript da Node.js don internship",
-          text_en: "Help me write a CV for a beginner web developer with HTML, CSS, JavaScript and Node.js for an internship",
-          correct: true
-        },
-        {
-          text_ha: "CV",
-          text_en: "CV",
-          correct: false
-        },
-        {
-          text_ha: "Kai",
-          text_en: "You",
-          correct: false
-        }
-        ],
-        explanation_ha: "Prompt mai bayanin role, skills da manufa yana samun amsa mafi dacewa.",
-        explanation_en: "A prompt with role, skills and purpose gets a more relevant answer."
-      },
-      {
-        question_ha: "Shin kana iya gaya wa AI harshen da kake so ta amsa da shi?",
-        question_en: "Can you tell AI which language to answer in?",
-        options: [
-        {
-          text_ha: "Eh, zaka iya",
-          text_en: "Yes, you can",
-          correct: true
-        },
-        {
-          text_ha: "A'a, ba za ka iya ba",
-          text_en: "No, you cannot",
-          correct: false
-        },
-        {
-          text_ha: "Sai idan ka biya",
-          text_en: "Only if you pay",
-          correct: false
-        },
-        {
-          text_ha: "Sai idan wayarka sabuwa ce",
-          text_en: "Only if your phone is new",
-          correct: false
-        }
-        ],
-        explanation_ha: "Za ka iya gaya wa AI harshen da kake so ta amsa da shi, kamar Hausa ko Turanci.",
-        explanation_en: "You can tell AI which language to answer in, such as Hausa or English."
-      },
-      {
-        question_ha: "Me ya kamata ka yi idan amsar farko ba ta dace ba?",
-        question_en: "What should you do if the first answer is not quite right?",
-        options: [
-        {
-          text_ha: "Ka daina",
-          text_en: "Give up",
-          correct: false
-        },
-        {
-          text_ha: "Ka gyara prompt ɗinka ka sake tambaya",
-          text_en: "Refine your prompt and try again",
-          correct: true
-        },
-        {
-          text_ha: "Ka aika OTP",
-          text_en: "Send OTP",
-          correct: false
-        },
-        {
-          text_ha: "Ka share account",
-          text_en: "Delete the account",
-          correct: false
-        }
-        ],
-        explanation_ha: "Prompting yana buƙatar gwaji. Gyara prompt ɗinka yana taimaka wa AI ta fi fahimtar bukatarka.",
-        explanation_en: "Prompting requires iteration. Refining your prompt helps AI understand your needs better."
-      },
-      {
-        question_ha: "Wanne ɗaya zai taimaka wajen amsa mai kyau daga AI?",
-        question_en: "Which helps get a better answer from AI?",
-        options: [
-        {
-          text_ha: "Ba da misalai da context",
-          text_en: "Providing examples and context",
-          correct: true
-        },
-        {
-          text_ha: "Rubuta kawai 'Yi','Just write 'Do'",
-          text_en: "false",
-          correct: undefined
-        },
-        {
-          text_ha: "Yin shiru",
-          text_en: "Being silent",
-          correct: false
-        },
-        {
-          text_ha: "Aika password",
-          text_en: "Sending your password",
-          correct: false
-        }
-        ],
-        explanation_ha: "Bayar da misalai da context yana taimaka wa AI ta samar da amsa mafi dacewa.",
-        explanation_en: "Providing examples and context helps AI produce more useful answers."
-      }
-      ]
+          quiz: {
+            question_ha: "Me ya sa prompt mai cikakken bayani ya fi taimako?",
+            question_en: "Why is a detailed prompt often more useful?",
+            options: [
+              { text_ha: "Yana ba AI ƙarin context", text_en: "It gives the AI more context", correct: true },
+              { text_ha: "Yana sa internet ya yi sauri", text_en: "It makes the internet faster", correct: false },
+              { text_ha: "Yana ƙara battery", text_en: "It increases battery", correct: false },
+              { text_ha: "Yana kashe AI", text_en: "It turns off AI", correct: false }
+            ],
+            explanation_ha: "Ƙarin context yana taimaka wa AI ta fahimci abin da kake son samu da kuma irin amsar da ta dace.",
+            explanation_en: "More context helps the AI understand what you need and produce a more relevant answer."
+          }
         },
 
 
@@ -4499,148 +2223,18 @@ const DATA = {
 
             "The goal of AI in learning is to help you **understand the subject**, not simply get an answer and forget it.",
 
-          quizzes: [
-      {
-        question_ha: "Wanne hanya ce mai kyau ta amfani da AI wajen koyo?",
-        question_en: "Which is a good way to use AI for learning?",
-        options: [
-        {
-          text_ha: "Ka kwafa duk amsar ba tare da fahimta ba",
-          text_en: "Copy everything without understanding",
-          correct: false
-        },
-        {
-          text_ha: "Ka nemi explanation, examples da practice questions",
-          text_en: "Ask for explanations, examples and practice questions",
-          correct: true
-        },
-        {
-          text_ha: "Ka daina karanta littafi",
-          text_en: "Stop reading books",
-          correct: false
-        },
-        {
-          text_ha: "Ka gaskata duk amsar AI",
-          text_en: "Trust every AI answer",
-          correct: false
-        }
-        ],
-        explanation_ha: "AI ta fi amfani wajen koyo idan kana amfani da ita wajen fahimta da practice, sannan ka tabbatar da muhimman bayanai.",
-        explanation_en: "AI is most useful for learning when you use it for understanding and practice and verify important information."
-      },
-      {
-        question_ha: "Me ya kamata ka yi idan AI ta ba ka bayani kan wani topic mai muhimmanci?",
-        question_en: "What should you do when AI explains an important topic?",
-        options: [
-        {
-          text_ha: "Ka gaskata kai tsaye",
-          text_en: "Trust it immediately",
-          correct: false
-        },
-        {
-          text_ha: "Ka kwatanta da textbook, lecturer ko official documentation",
-          text_en: "Compare with textbooks, lecturers or official documentation",
-          correct: true
-        },
-        {
-          text_ha: "Ka share a social media",
-          text_en: "Post it on social media",
-          correct: false
-        },
-        {
-          text_ha: "Ka aika OTP",
-          text_en: "Send OTP",
-          correct: false
-        }
-        ],
-        explanation_ha: "AI na iya yin kuskure. Kwatanta bayanin da reliable sources yana da muhimmanci.",
-        explanation_en: "AI can make mistakes. Comparing with reliable sources matters."
-      },
-      {
-        question_ha: "Wanne prompt ne zai fi taimakawa wajen koyo?",
-        question_en: "Which prompt best supports learning?",
-        options: [
-        {
-          text_ha: "Menene photosynthesis?",
-          text_en: "What is photosynthesis?",
-          correct: false
-        },
-        {
-          text_ha: "Bayyana photosynthesis ga ɗalibin secondary school, ka ba ni misalai uku da tambayoyi biyar",
-          text_en: "Explain photosynthesis to a secondary school student, give me three examples and five practice questions",
-          correct: true
-        },
-        {
-          text_ha: "Yi sauri",
-          text_en: "Be fast",
-          correct: false
-        },
-        {
-          text_ha: "Amsa nan take",
-          text_en: "Answer now",
-          correct: false
-        }
-        ],
-        explanation_ha: "Prompt mai cikakken bayani kan matakin learner da abin da kake son samu yana inganta amsar.",
-        explanation_en: "A prompt specifying the learner level and desired output improves the answer."
-      },
-      {
-        question_ha: "Shin ya kamata ka kwafa AI amsar kai tsaye a school assignment?",
-        question_en: "Should you copy AI answers directly into a school assignment?",
-        options: [
-        {
-          text_ha: "Eh, koyaushe",
-          text_en: "Yes, always",
-          correct: false
-        },
-        {
-          text_ha: "A'a, ka fahimci dokokin makaranta kuma ka fahimci aikin",
-          text_en: "No, understand your school's rules and understand the work",
-          correct: true
-        },
-        {
-          text_ha: "Eh, idan yana da tsayi",
-          text_en: "Yes, if it is long",
-          correct: false
-        },
-        {
-          text_ha: "Ba komai",
-          text_en: "It doesn't matter",
-          correct: false
-        }
-        ],
-        explanation_ha: "Ka fahimci dokokin makaranta kan AI, kuma ka fahimci aikin da kake gabatar.",
-        explanation_en: "Understand your school's rules about AI and understand the work you submit."
-      },
-      {
-        question_ha: "Menene manufar amfani da AI a koyo?",
-        question_en: "What is the goal of using AI for learning?",
-        options: [
-        {
-          text_ha: "Ka samu amsa kawai",
-          text_en: "Just to get answers",
-          correct: false
-        },
-        {
-          text_ha: "Ka fahimci abu",
-          text_en: "To understand the subject",
-          correct: true
-        },
-        {
-          text_ha: "Ka daina karatu",
-          text_en: "To stop studying",
-          correct: false
-        },
-        {
-          text_ha: "Ka zama AI",
-          text_en: "To become AI",
-          correct: false
-        }
-        ],
-        explanation_ha: "Manufar AI a koyo ita ce ta taimaka maka ka fahimci abu, ba kawai samun amsa ba.",
-        explanation_en: "The goal of AI in learning is to help you understand the subject, not just get answers."
-      }
-      ]
+          quiz: {
+            question_ha: "Wanne hanya ce mai kyau ta amfani da AI wajen koyo?",
+            question_en: "Which is a good way to use AI for learning?",
+            options: [
+              { text_ha: "Ka kwafa duk amsar ba tare da fahimta ba", text_en: "Copy everything without understanding", correct: false },
+              { text_ha: "Ka nemi explanation, examples da practice questions", text_en: "Ask for explanations, examples, and practice questions", correct: true },
+              { text_ha: "Ka daina karanta littafi", text_en: "Stop reading books", correct: false },
+              { text_ha: "Ka gaskata duk amsar AI", text_en: "Trust every AI answer", correct: false }
+            ],
+            explanation_ha: "AI ta fi amfani wajen koyo idan kana amfani da ita wajen fahimta da practice, sannan ka tabbatar da muhimman bayanai.",
+            explanation_en: "AI is most useful for learning when you use it for understanding and practice and verify important information."
+          }
         },
 
 
@@ -4710,148 +2304,18 @@ const DATA = {
 
             "AI can be a useful assistant, but business success still requires understanding customers, quality, pricing, trust, delivery, and real execution.",
 
-          quizzes: [
-      {
-        question_ha: "Me ya kamata business owner ya yi da amsar AI kafin ya wallafa talla?",
-        question_en: "What should a business owner do before publishing AI-generated advertising?",
-        options: [
-        {
-          text_ha: "Ya wallafa ba tare da karantawa ba",
-          text_en: "Publish without reading it",
-          correct: false
-        },
-        {
-          text_ha: "Ya duba ya gyara facts, farashi da bayanan kaya",
-          text_en: "Review and correct facts, prices and product information",
-          correct: true
-        },
-        {
-          text_ha: "Ya aika password",
-          text_en: "Send a password",
-          correct: false
-        },
-        {
-          text_ha: "Ya gaskata duk abin da AI ta ce",
-          text_en: "Believe everything AI says",
-          correct: false
-        }
-        ],
-        explanation_ha: "AI na iya yin kuskure ko ƙirƙirar bayanan da ba daidai ba. Business owner ne ke da alhakin tabbatar da bayanan.",
-        explanation_en: "AI can make mistakes or generate incorrect details. The business owner is responsible for checking the information."
-      },
-      {
-        question_ha: "Wanne aiki na AI zai taimaka wa business?",
-        question_en: "Which AI task helps a business?",
-        options: [
-        {
-          text_ha: "Rubuta product description",
-          text_en: "Writing a product description",
-          correct: true
-        },
-        {
-          text_ha: "Cire kuɗi a ATM",
-          text_en: "Withdrawing cash at an ATM",
-          correct: false
-        },
-        {
-          text_ha: "Sanya waya",
-          text_en: "Charging a phone",
-          correct: false
-        },
-        {
-          text_ha: "Share password",
-          text_en: "Sharing passwords",
-          correct: false
-        }
-        ],
-        explanation_ha: "AI na iya taimakawa wajen rubuta product description da content.",
-        explanation_en: "AI can help write product descriptions and content."
-      },
-      {
-        question_ha: "Me ya kamata business owner ya yi da sirrin customer?",
-        question_en: "What should a business owner do with customer secrets?",
-        options: [
-        {
-          text_ha: "Ya saka su a AI tool",
-          text_en: "Paste them into an AI tool",
-          correct: false
-        },
-        {
-          text_ha: "Ya kiyaye su kuma kada ya saka su a AI tools",
-          text_en: "Keep them safe and avoid pasting them into AI tools",
-          correct: true
-        },
-        {
-          text_ha: "Ya tura su ga kowa",
-          text_en: "Send them to everyone",
-          correct: false
-        },
-        {
-          text_ha: "Ya saka su a social media",
-          text_en: "Post them on social media",
-          correct: false
-        }
-        ],
-        explanation_ha: "Kada ka saka passwords, OTPs, bank login details ko sirrin customer cikin AI tool.",
-        explanation_en: "Do not paste passwords, OTPs, bank login details or customer secrets into AI tools."
-      },
-      {
-        question_ha: "Shin AI ta tabbatar da cewa business idea ɗinka zai yi nasara?",
-        question_en: "Does AI guarantee your business idea will succeed?",
-        options: [
-        {
-          text_ha: "Eh, koyaushe",
-          text_en: "Yes, always",
-          correct: false
-        },
-        {
-          text_ha: "A'a, ba guarantee ba ne",
-          text_en: "No, it is not a guarantee",
-          correct: true
-        },
-        {
-          text_ha: "Eh, idan ta amsa da sauri",
-          text_en: "Yes, if it answers quickly",
-          correct: false
-        },
-        {
-          text_ha: "Eh, idan kana da data",
-          text_en: "Yes, if you have data",
-          correct: false
-        }
-        ],
-        explanation_ha: "AI ba ta tabbatar da nasarar business. Market research da real customers sun fi muhimmanci.",
-        explanation_en: "AI does not guarantee business success. Market research and real customers matter more."
-      },
-      {
-        question_ha: "Menene kyakkyawan amfani da AI wajen customer service?",
-        question_en: "What is a good use of AI in customer service?",
-        options: [
-        {
-          text_ha: "Ka bar AI ta amsa komai ba tare da kai ba",
-          text_en: "Let AI answer everything by itself",
-          correct: false
-        },
-        {
-          text_ha: "Yi amfani da AI don tsara amsa, amma ka duba kafin aika",
-          text_en: "Use AI to draft replies, but review before sending",
-          correct: true
-        },
-        {
-          text_ha: "Ka aika OTP",
-          text_en: "Send OTP",
-          correct: false
-        },
-        {
-          text_ha: "Ka share password",
-          text_en: "Share password",
-          correct: false
-        }
-        ],
-        explanation_ha: "AI na iya taimakawa wajen tsara amsa, amma mutum ya kamata ya duba kafin aika.",
-        explanation_en: "AI can help draft replies, but a human should review before sending."
-      }
-      ]
+          quiz: {
+            question_ha: "Me ya kamata business owner ya yi da amsar AI kafin ya wallafa talla?",
+            question_en: "What should a business owner do before publishing AI-generated advertising?",
+            options: [
+              { text_ha: "Ya wallafa ba tare da karantawa ba", text_en: "Publish without reading it", correct: false },
+              { text_ha: "Ya duba ya gyara facts, farashi da bayanan kaya", text_en: "Review and correct facts, prices, and product information", correct: true },
+              { text_ha: "Ya aika password", text_en: "Send a password", correct: false },
+              { text_ha: "Ya gaskata duk abin da AI ta ce", text_en: "Believe everything AI says", correct: false }
+            ],
+            explanation_ha: "AI na iya yin kuskure ko ƙirƙirar bayanan da ba daidai ba. Business owner ne ke da alhakin tabbatar da bayanan.",
+            explanation_en: "AI can make mistakes or generate incorrect details. The business owner is responsible for checking the information."
+          }
         }
       ],
 
@@ -5003,148 +2467,18 @@ const DATA = {
 
             "Trust is extremely important in online business. A customer who trusts you is more likely to return and recommend you to others.",
 
-          quizzes: [
-      {
-        question_ha: "Me ya kamata product listing mai kyau ta ƙunsa?",
-        question_en: "What should a good product listing include?",
-        options: [
-        {
-          text_ha: "Hoto kawai",
-          text_en: "Only a photo",
-          correct: false
-        },
-        {
-          text_ha: "Bayani, farashi da muhimman details",
-          text_en: "Description, price and important details",
-          correct: true
-        },
-        {
-          text_ha: "Sunanka kawai",
-          text_en: "Only your name",
-          correct: false
-        },
-        {
-          text_ha: "Emoji kawai",
-          text_en: "Only emojis",
-          correct: false
-        }
-        ],
-        explanation_ha: "Customer yana buƙatar isasshen bayani domin fahimtar product da yanke shawarar saya.",
-        explanation_en: "Customers need enough information to understand the product and make a buying decision."
-      },
-      {
-        question_ha: "Wanne ne kyakkyawan misalin product listing?",
-        question_en: "Which is a good product listing example?",
-        options: [
-        {
-          text_ha: "Shoes available",
-          text_en: "Shoes available",
-          correct: false
-        },
-        {
-          text_ha: "Men's sneakers size 40-45, black, ₦18,000, delivery within Maiduguri",
-          text_en: "Men's sneakers size 40-45, black, ₦18,000, delivery within Maiduguri",
-          correct: true
-        },
-        {
-          text_ha: "Buy now",
-          text_en: "Buy now",
-          correct: false
-        },
-        {
-          text_ha: "Contact me",
-          text_en: "Contact me",
-          correct: false
-        }
-        ],
-        explanation_ha: "Product listing mai kyau yana da size, color, price da delivery details.",
-        explanation_en: "A good product listing includes size, color, price and delivery details."
-      },
-      {
-        question_ha: "Shin dole sai kana da babban shago kafin ka fara online business?",
-        question_en: "Must you have a large shop before starting an online business?",
-        options: [
-        {
-          text_ha: "Eh, dole",
-          text_en: "Yes, you must",
-          correct: false
-        },
-        {
-          text_ha: "A'a, za ka iya farawa da ƙaramin stock ko skill",
-          text_en: "No, you can start with a small stock or skill",
-          correct: true
-        },
-        {
-          text_ha: "Sai idan kana da mota",
-          text_en: "Only if you have a car",
-          correct: false
-        },
-        {
-          text_ha: "Sai idan kana da ofis",
-          text_en: "Only if you have an office",
-          correct: false
-        }
-        ],
-        explanation_ha: "Ba dole sai kana da babban shago. Za ka iya fara da ƙaramin stock, service ko skill.",
-        explanation_en: "You do not need a large shop. You can start with a small stock, service or skill."
-      },
-      {
-        question_ha: "Wanne ne kyakkyawan ɗabi'a a online business?",
-        question_en: "Which is a good habit in online business?",
-        options: [
-        {
-          text_ha: "Yin ƙarya kan product",
-          text_en: "Lying about the product",
-          correct: false
-        },
-        {
-          text_ha: "Bayar da bayani na gaskiya da cikakken bayani",
-          text_en: "Giving honest and complete information",
-          correct: true
-        },
-        {
-          text_ha: "Yin amfani da hoton product daban",
-          text_en: "Using a different product photo",
-          correct: false
-        },
-        {
-          text_ha: "Ƙirƙirar fake reviews",
-          text_en: "Creating fake reviews",
-          correct: false
-        }
-        ],
-        explanation_ha: "Gaskiya da bayani mai kyau suna gina trust da customer.",
-        explanation_en: "Honesty and clear information build customer trust."
-      },
-      {
-        question_ha: "Me ya sa product description yake da muhimmanci?",
-        question_en: "Why does a product description matter?",
-        options: [
-        {
-          text_ha: "Ba shi da muhimmanci",
-          text_en: "It doesn't matter",
-          correct: false
-        },
-        {
-          text_ha: "Yana taimaka wa customer fahimtar abin da kake sayarwa",
-          text_en: "It helps customers understand what you're selling",
-          correct: true
-        },
-        {
-          text_ha: "Yana ƙara battery",
-          text_en: "It increases battery",
-          correct: false
-        },
-        {
-          text_ha: "Yana canza SIM",
-          text_en: "It changes the SIM",
-          correct: false
-        }
-        ],
-        explanation_ha: "Product description yana taimaka wa customer fahimtar kayanka kafin ya tambaya.",
-        explanation_en: "A product description helps customers understand your product before they ask."
-      }
-      ]
+          quiz: {
+            question_ha: "Me ya kamata product listing mai kyau ta ƙunsa?",
+            question_en: "What should a good product listing include?",
+            options: [
+              { text_ha: "Hoto kawai", text_en: "Only a photo", correct: false },
+              { text_ha: "Bayani, farashi da muhimman details", text_en: "Description, price, and important details", correct: true },
+              { text_ha: "Sunanka kawai", text_en: "Only your name", correct: false },
+              { text_ha: "Emoji kawai", text_en: "Only emojis", correct: false }
+            ],
+            explanation_ha: "Customer yana buƙatar isasshen bayani domin fahimtar product da yanke shawarar saya.",
+            explanation_en: "Customers need enough information to understand the product and make a buying decision."
+          }
         },
 
 
@@ -5224,148 +2558,18 @@ const DATA = {
 
             "Good marketing combines **clear information + the right audience + consistency + honesty**.",
 
-          quizzes: [
-      {
-        question_ha: "Me ya fi muhimmanci wajen marketing?",
-        question_en: "What is especially important in marketing?",
-        options: [
-        {
-          text_ha: "Fahimtar customer da bayar da bayani na gaskiya",
-          text_en: "Understanding customers and providing honest information",
-          correct: true
-        },
-        {
-          text_ha: "Yawan emojis kawai",
-          text_en: "Many emojis only",
-          correct: false
-        },
-        {
-          text_ha: "Karya review",
-          text_en: "Fake reviews",
-          correct: false
-        },
-        {
-          text_ha: "Dogon rubutu koyaushe",
-          text_en: "Always writing long posts",
-          correct: false
-        }
-        ],
-        explanation_ha: "Marketing mai kyau yana magana da customer da ya dace kuma yana ba shi bayanai masu amfani da gaskiya.",
-        explanation_en: "Good marketing reaches the right customer with useful and honest information."
-      },
-      {
-        question_ha: "Me ya kamata ka yi kafin ka tallata product?",
-        question_en: "What should you do before marketing a product?",
-        options: [
-        {
-          text_ha: "Ka fahimci customer ɗinka da bukatarsu",
-          text_en: "Understand your customer and their needs",
-          correct: true
-        },
-        {
-          text_ha: "Ka ƙirƙiri fake reviews",
-          text_en: "Create fake reviews",
-          correct: false
-        },
-        {
-          text_ha: "Ka biya kowa",
-          text_en: "Pay everyone",
-          correct: false
-        },
-        {
-          text_ha: "Ka aika OTP",
-          text_en: "Send OTP",
-          correct: false
-        }
-        ],
-        explanation_ha: "Fahimtar customer yana taimaka maka rubuta message da zai yi magana da bukatarsu.",
-        explanation_en: "Understanding your customer helps you write messages that address their needs."
-      },
-      {
-        question_ha: "Shin hashtags sun isa su kaɗai wajen marketing?",
-        question_en: "Are hashtags enough on their own for marketing?",
-        options: [
-        {
-          text_ha: "Eh, koyaushe",
-          text_en: "Yes, always",
-          correct: false
-        },
-        {
-          text_ha: "A'a, quality content da audience sun fi muhimmanci",
-          text_en: "No, quality content and audience matter more",
-          correct: true
-        },
-        {
-          text_ha: "Eh, idan kana da yawa",
-          text_en: "Yes, if you use many",
-          correct: false
-        },
-        {
-          text_ha: "Eh, idan kana da followers",
-          text_en: "Yes, if you have followers",
-          correct: false
-        }
-        ],
-        explanation_ha: "Hashtags suna taimakawa wajen ganowa, amma quality content da audience suka fi muhimmanci.",
-        explanation_en: "Hashtags help discovery, but quality content and audience matter more."
-      },
-      {
-        question_ha: "Wanne irin content ne zai taimaka marketing?",
-        question_en: "Which content helps marketing?",
-        options: [
-        {
-          text_ha: "Nuna product da amfanin sa",
-          text_en: "Show the product and its usefulness",
-          correct: true
-        },
-        {
-          text_ha: "Karya game da product",
-          text_en: "Lie about the product",
-          correct: false
-        },
-        {
-          text_ha: "Hoton da ba shi da alaƙa",
-          text_en: "Unrelated photos",
-          correct: false
-        },
-        {
-          text_ha: "Emoji kawai",
-          text_en: "Only emojis",
-          correct: false
-        }
-        ],
-        explanation_ha: "Nuna product da amfanin sa yana taimaka wa customer fahimtar darajarsa.",
-        explanation_en: "Showing the product and its usefulness helps customers see its value."
-      },
-      {
-        question_ha: "Shin ya kamata ka yi alkawarin abin da ba za ka iya ba?",
-        question_en: "Should you promise something you can't deliver?",
-        options: [
-        {
-          text_ha: "Eh, don samun sale",
-          text_en: "Yes, to make a sale",
-          correct: false
-        },
-        {
-          text_ha: "A'a, kada ka yi alkawarin abin da ba za ka iya ba",
-          text_en: "No, do not promise what you cannot deliver",
-          correct: true
-        },
-        {
-          text_ha: "Eh, idan customer ya matsa",
-          text_en: "Yes, if the customer pressures you",
-          correct: false
-        },
-        {
-          text_ha: "Ba komai",
-          text_en: "It doesn't matter",
-          correct: false
-        }
-        ],
-        explanation_ha: "Yin alkawarin abin da ba za ka iya ba yana lalata trust da customer.",
-        explanation_en: "Promising what you cannot deliver damages customer trust."
-      }
-      ]
+          quiz: {
+            question_ha: "Me ya fi muhimmanci wajen marketing?",
+            question_en: "What is especially important in marketing?",
+            options: [
+              { text_ha: "Fahimtar customer da bayar da bayani na gaskiya", text_en: "Understanding customers and providing honest information", correct: true },
+              { text_ha: "Yawan emojis kawai", text_en: "Many emojis only", correct: false },
+              { text_ha: "Karya review", text_en: "Fake reviews", correct: false },
+              { text_ha: "Dogon rubutu koyaushe", text_en: "Always writing long posts", correct: false }
+            ],
+            explanation_ha: "Marketing mai kyau yana magana da customer da ya dace kuma yana ba shi bayanai masu amfani da gaskiya.",
+            explanation_en: "Good marketing reaches the right customer with useful and honest information."
+          }
         },
 
 
@@ -5445,148 +2649,18 @@ const DATA = {
 
             "A good payment process protects both you and your customers. Keep transaction records so you can track your business properly.",
 
-          quizzes: [
-      {
-        question_ha: "Customer ya turo screenshot na payment. Me ya kamata ka yi?",
-        question_en: "A customer sends a payment screenshot. What should you do?",
-        options: [
-        {
-          text_ha: "Ka aika kaya nan take",
-          text_en: "Ship immediately",
-          correct: false
-        },
-        {
-          text_ha: "Ka tabbatar da payment a account ko dashboard ɗinka",
-          text_en: "Confirm the payment in your account or dashboard",
-          correct: true
-        },
-        {
-          text_ha: "Ka tura screenshot ga kowa",
-          text_en: "Forward the screenshot to everyone",
-          correct: false
-        },
-        {
-          text_ha: "Ka nemi OTP",
-          text_en: "Ask for an OTP",
-          correct: false
-        }
-        ],
-        explanation_ha: "Screenshot ba shi kaɗai ke tabbatar da payment ba. Duba account ko payment dashboard.",
-        explanation_en: "A screenshot alone does not confirm payment. Check your account or payment dashboard."
-      },
-      {
-        question_ha: "Wanne hanyar biya ce ake amfani da ita a Najeriya?",
-        question_en: "Which payment method is used in Nigeria?",
-        options: [
-        {
-          text_ha: "Bank transfer",
-          text_en: "Bank transfer",
-          correct: true
-        },
-        {
-          text_ha: "Fax",
-          text_en: "Fax",
-          correct: false
-        },
-        {
-          text_ha: "Telegraph",
-          text_en: "Telegraph",
-          correct: false
-        },
-        {
-          text_ha: "Carrier pigeon",
-          text_en: "Carrier pigeon",
-          correct: false
-        }
-        ],
-        explanation_ha: "Bank transfer, USSD, POS da online gateways misalai ne na hanyoyin biya a Najeriya.",
-        explanation_en: "Bank transfer, USSD, POS and online gateways are examples of payment methods in Nigeria."
-      },
-      {
-        question_ha: "Me ya kamata ka yi idan wani ya turo maka fake payment link?",
-        question_en: "What should you do if someone sends you a fake payment link?",
-        options: [
-        {
-          text_ha: "Ka saka password",
-          text_en: "Enter your password",
-          correct: false
-        },
-        {
-          text_ha: "Kada ka saka password a website da ba ka tabbatar ba",
-          text_en: "Do not enter your password on unverified websites",
-          correct: true
-        },
-        {
-          text_ha: "Ka aika OTP",
-          text_en: "Send OTP",
-          correct: false
-        },
-        {
-          text_ha: "Ka share account",
-          text_en: "Delete the account",
-          correct: false
-        }
-        ],
-        explanation_ha: "Kada ka saka password a website da ba ka tabbatar da ita ba.",
-        explanation_en: "Never enter your password on a website you have not verified."
-      },
-      {
-        question_ha: "Me ya sa ya kamata ka adana transaction records?",
-        question_en: "Why should you keep transaction records?",
-        options: [
-        {
-          text_ha: "Domin bin diddigin kasuwanci",
-          text_en: "To track your business",
-          correct: true
-        },
-        {
-          text_ha: "Domin share su",
-          text_en: "To share them",
-          correct: false
-        },
-        {
-          text_ha: "Domin su ƙone",
-          text_en: "To burn them",
-          correct: false
-        },
-        {
-          text_ha: "Domin su rasa",
-          text_en: "To lose them",
-          correct: false
-        }
-        ],
-        explanation_ha: "Records suna taimaka maka wajen bin diddigin kasuwanci da magance disputes.",
-        explanation_en: "Records help you track your business and handle disputes."
-      },
-      {
-        question_ha: "Me ya kamata ka yi kafin ka aika kaya?",
-        question_en: "What should you do before shipping goods?",
-        options: [
-        {
-          text_ha: "Aika nan take",
-          text_en: "Ship immediately",
-          correct: false
-        },
-        {
-          text_ha: "Tabbatar da payment a account ɗinka",
-          text_en: "Confirm the payment in your account",
-          correct: true
-        },
-        {
-          text_ha: "Gaskata screenshot kawai",
-          text_en: "Trust only the screenshot",
-          correct: false
-        },
-        {
-          text_ha: "Jira kwana biyu",
-          text_en: "Wait two days",
-          correct: false
-        }
-        ],
-        explanation_ha: "Tabbatar da payment a account ɗinka kafin ka aika kaya.",
-        explanation_en: "Confirm the payment in your account before shipping."
-      }
-      ]
+          quiz: {
+            question_ha: "Customer ya turo screenshot na payment. Me ya kamata ka yi?",
+            question_en: "A customer sends a payment screenshot. What should you do?",
+            options: [
+              { text_ha: "Ka aika kaya nan take", text_en: "Ship immediately", correct: false },
+              { text_ha: "Ka tabbatar da payment a account ko dashboard ɗinka", text_en: "Confirm the payment in your account or dashboard", correct: true },
+              { text_ha: "Ka tura screenshot ga kowa", text_en: "Forward the screenshot to everyone", correct: false },
+              { text_ha: "Ka nemi OTP", text_en: "Ask for an OTP", correct: false }
+            ],
+            explanation_ha: "Screenshot ba shi kaɗai ke tabbatar da payment ba. Duba account ko payment dashboard.",
+            explanation_en: "A screenshot alone does not confirm payment. Check your account or payment dashboard."
+          }
         },
 
 
@@ -5664,148 +2738,18 @@ const DATA = {
 
             "A happy customer may return. Even when they do not, good communication helps build your business reputation.",
 
-          quizzes: [
-      {
-        question_ha: "Yaya ya kamata ka amsa customer mai complaint?",
-        question_en: "How should you respond to a customer complaint?",
-        options: [
-        {
-          text_ha: "Ka yi gardama nan take",
-          text_en: "Argue immediately",
-          correct: false
-        },
-        {
-          text_ha: "Ka saurara, ka bincika matsalar, sannan ka ba da mafita",
-          text_en: "Listen, investigate the problem and offer a solution",
-          correct: true
-        },
-        {
-          text_ha: "Ka yi ignore",
-          text_en: "Ignore them",
-          correct: false
-        },
-        {
-          text_ha: "Ka yi musu ƙarya",
-          text_en: "Lie to them",
-          correct: false
-        }
-        ],
-        explanation_ha: "Kyakkyawan customer service yana buƙatar sauraro, fahimta, gaskiya da ƙoƙarin samar da mafita.",
-        explanation_en: "Good customer service requires listening, understanding, honesty and trying to provide a solution."
-      },
-      {
-        question_ha: "Wanne amsa ce ta fi dacewa idan ba ka da abin da customer yake nema?",
-        question_en: "Which reply is better when you don't have what the customer wants?",
-        options: [
-        {
-          text_ha: "Babu",
-          text_en: "No",
-          correct: false
-        },
-        {
-          text_ha: "A halin yanzu wannan size ɗin ya ƙare, amma muna da size 42 da 43. Idan kana so, zan iya sanar da kai idan size 41 ya dawo",
-          text_en: "That size is currently out of stock, but we have sizes 42 and 43. Let me know if you want to be notified when 41 is back",
-          correct: true
-        },
-        {
-          text_ha: "Ka tafi",
-          text_en: "Go away",
-          correct: false
-        },
-        {
-          text_ha: "Ba komai",
-          text_en: "It doesn't matter",
-          correct: false
-        }
-        ],
-        explanation_ha: "Amsa ta biyu tana nuna kana son taimakawa ko da ba ka da abin da customer yake nema.",
-        explanation_en: "The second reply shows willingness to help even when you don't have what the customer wants."
-      },
-      {
-        question_ha: "Shin ya kamata ka yi ƙarya game da delivery time?",
-        question_en: "Should you lie about delivery time?",
-        options: [
-        {
-          text_ha: "Eh, don samun sale",
-          text_en: "Yes, to make a sale",
-          correct: false
-        },
-        {
-          text_ha: "A'a, gaskiya tana da muhimmanci",
-          text_en: "No, honesty matters",
-          correct: true
-        },
-        {
-          text_ha: "Eh, idan customer ya matsa",
-          text_en: "Yes, if the customer pressures you",
-          correct: false
-        },
-        {
-          text_ha: "Ba komai",
-          text_en: "It doesn't matter",
-          correct: false
-        }
-        ],
-        explanation_ha: "Idan delivery zai ɗauki kwana biyu, kada ka ce zai iso cikin awa ɗaya domin samun sale.",
-        explanation_en: "If delivery takes two days, do not promise one hour just to make a sale."
-      },
-      {
-        question_ha: "Me ya sa ya kamata ka adana order records?",
-        question_en: "Why should you keep order records?",
-        options: [
-        {
-          text_ha: "Don sanin abin da customer ya saya da delivery status",
-          text_en: "To know what a customer bought and delivery status",
-          correct: true
-        },
-        {
-          text_ha: "Don share su ga kowa",
-          text_en: "To share them with everyone",
-          correct: false
-        },
-        {
-          text_ha: "Don su ƙare",
-          text_en: "To run out",
-          correct: false
-        },
-        {
-          text_ha: "Don su rasa",
-          text_en: "To lose them",
-          correct: false
-        }
-        ],
-        explanation_ha: "Order records suna taimaka wajen sanin abin da customer ya saya, amount da delivery status.",
-        explanation_en: "Order records help you track what a customer bought, the amount and delivery status."
-      },
-      {
-        question_ha: "Me ya fi muhimmanci wajen customer communication?",
-        question_en: "What matters most in customer communication?",
-        options: [
-        {
-          text_ha: "Yawan magana",
-          text_en: "Talking a lot",
-          correct: false
-        },
-        {
-          text_ha: "Gaskiya, sauraro da ladabi",
-          text_en: "Honesty, listening and politeness",
-          correct: true
-        },
-        {
-          text_ha: "Yin musu sanyi",
-          text_en: "Being rude to them",
-          correct: false
-        },
-        {
-          text_ha: "Yin musu ƙarya",
-          text_en: "Lying to them",
-          correct: false
-        }
-        ],
-        explanation_ha: "Gaskiya, sauraro da ladabi suna gina customer relationship mai kyau.",
-        explanation_en: "Honesty, listening and politeness build good customer relationships."
-      }
-      ]
+          quiz: {
+            question_ha: "Yaya ya kamata ka amsa customer mai complaint?",
+            question_en: "How should you respond to a customer complaint?",
+            options: [
+              { text_ha: "Ka yi gardama nan take", text_en: "Argue immediately", correct: false },
+              { text_ha: "Ka saurara, ka bincika matsalar, sannan ka ba da mafita", text_en: "Listen, investigate the problem, and offer a solution", correct: true },
+              { text_ha: "Ka yi ignore", text_en: "Ignore them", correct: false },
+              { text_ha: "Ka yi musu ƙarya", text_en: "Lie to them", correct: false }
+            ],
+            explanation_ha: "Kyakkyawan customer service yana buƙatar sauraro, fahimta, gaskiya da ƙoƙarin samar da mafita.",
+            explanation_en: "Good customer service requires listening, understanding, honesty, and trying to provide a solution."
+          }
         }
       ],
 

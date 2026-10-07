@@ -267,6 +267,106 @@
       .mobile-lang { display: none; }
     }
 
+    /* ---- WhatsApp group join button ---- */
+    .whatsapp-join {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+      color: #fff;
+      border-radius: 100px;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 8px 20px rgba(18, 140, 126, 0.28);
+      margin-top: 14px;
+      transition: transform 0.15s ease, box-shadow 0.2s ease, padding 0.2s;
+      -webkit-tap-highlight-color: transparent;
+      width: fit-content;
+      max-width: 100%;
+    }
+    .whatsapp-join:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 26px rgba(18, 140, 126, 0.4);
+      color: #fff;
+    }
+    .whatsapp-join:active { transform: scale(0.98); }
+    .whatsapp-join i {
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .whatsapp-join .wj-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
+      text-align: left;
+      min-width: 0;
+    }
+    .whatsapp-join .wj-small {
+      font-size: 10px;
+      opacity: 0.85;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .whatsapp-join .wj-big {
+      font-size: 13px;
+      font-weight: 800;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* ---- Responsive tiers ---- */
+
+    /* Tiny phones (< 360px): icon-only, round button */
+    @media (max-width: 359px) {
+      .whatsapp-join {
+        padding: 12px;
+        border-radius: 50%;
+        width: 44px;
+        height: 44px;
+        justify-content: center;
+        gap: 0;
+      }
+      .whatsapp-join .wj-text { display: none; }
+      .whatsapp-join i { font-size: 20px; }
+    }
+
+    /* Small phones (360px - 479px): icon + short label */
+    @media (min-width: 360px) and (max-width: 479px) {
+      .whatsapp-join {
+        padding: 10px 14px;
+        border-radius: 100px;
+      }
+      .whatsapp-join .wj-small { display: none; }
+      .whatsapp-join .wj-big { font-size: 12.5px; }
+    }
+
+    /* Medium phones + tablets (480px - 767px): full two-line label */
+    @media (min-width: 480px) and (max-width: 767px) {
+      .whatsapp-join {
+        padding: 11px 16px;
+        border-radius: 100px;
+      }
+      .whatsapp-join .wj-small { font-size: 10px; }
+      .whatsapp-join .wj-big { font-size: 13px; }
+    }
+
+    /* Desktop (>= 768px): bigger, more breathing room */
+    @media (min-width: 768px) {
+      .whatsapp-join {
+        padding: 12px 20px;
+        gap: 10px;
+      }
+      .whatsapp-join i { font-size: 20px; }
+      .whatsapp-join .wj-small { font-size: 10.5px; }
+      .whatsapp-join .wj-big { font-size: 14px; }
+    }
+
     /* ---- Overall progress ---- */
     .overall {
       background: linear-gradient(135deg, #e8f3ed 0%, #f2f7f3 100%);
@@ -809,6 +909,19 @@
       <div class="greeting-text">
         <p class="greeting-hello" id="greetingHello">Sannu 👋</p>
         <h1 class="greeting-title" id="greetingTitle">Ci gaba da koyo</h1>
+
+        <a
+          href="https://chat.whatsapp.com/FGdikqyJPUQ1EuSvetgYzX"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="whatsapp-join"
+        >
+          <i class="fa-brands fa-whatsapp"></i>
+          <span class="wj-text">
+            <span class="wj-small" id="waJoinSmall">Shiga rukuninmu</span>
+            <span class="wj-big" id="waJoinBig">WhatsApp</span>
+          </span>
+        </a>
       </div>
     </section>
 
@@ -875,6 +988,14 @@
       document.getElementById("greetingHello").textContent = hello + " 👋";
       document.getElementById("greetingTitle").textContent =
         isHa ? "Ci gaba da koyo" : "Continue learning";
+
+      /* WhatsApp join button labels */
+      const waSmall = document.getElementById("waJoinSmall");
+      const waBig = document.getElementById("waJoinBig");
+      if (waSmall) waSmall.textContent = isHa ? "Shiga rukuninmu" : "Join our group";
+      if (waBig) waBig.textContent = isHa
+        ? "WhatsApp"
+        : "WhatsApp";
 
       /* Overall progress */
       const overall = STORAGE.getOverallProgress();
