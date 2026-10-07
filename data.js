@@ -160,7 +160,7 @@ const DATA = {
           order: 1,
           title_ha: "Menene Wayar Zamani?",
           title_en: "What is a Smartphone?",
-          video: "https://youtu.be/9Tk1jNWQx3o?si=0PSHJ3czmkxQRJaUhttps://youtu.be/9Tk1jNWQx3o?si=0PSHJ3czmkxQRJaU",
+          video: "https://www.youtube.com/embed/9Tk1jNWQx3o?si=_YdksU0A-T7E-BUm",
           read_ha:
             "Wayar zamani (smartphone) kayan aiki ne mai ƙarfi da ke cikin aljihunka.\n\n" +
             "**Abin da take iya yi:**\n" +
@@ -197,7 +197,7 @@ const DATA = {
           order: 2,
           title_ha: "Bincike a Google",
           title_en: "Searching on Google",
-          video: "",
+          video: "https://www.youtube.com/embed/1KBwovVb9ls?si=9CX5F3iefceZrJD9",
           read_ha:
             "Google ita ce hanya mafi sauƙi don samun amsa ga kowace tambaya.\n\n" +
             "**Yadda za ka yi bincike mai kyau:**\n" +
@@ -574,7 +574,7 @@ const DATA = {
           order: 1,
           title_ha: "Tushen WhatsApp",
           title_en: "WhatsApp Basics",
-          video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+          video: "https://www.youtube.com/embed/eBjYn9SxcZw?si=_A7AvDryJUNGmzou",
           read_ha:
             "WhatsApp ita ce manhajar sadarwa mafi amfani a duniya.\n\n" +
             "**Abin da za ka iya yi:**\n" +
