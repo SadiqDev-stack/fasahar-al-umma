@@ -232,7 +232,7 @@ const DATA = {
           order: 3,
           title_ha: "Sauke Manhajoji",
           title_en: "Downloading Apps",
-          video: "",
+          video: "https://www.youtube.com/embed/E675VFsJxrw?si=oc719Sc32_KOr9WQ",
           read_ha:
             "Manhajoji (apps) su ne shirye-shiryen da ke aiki a wayarka.\n\n" +
             "**Inda za ka samu su:**\n" +
@@ -273,7 +273,7 @@ const DATA = {
           order: 4,
           title_ha: "Aika Fayiloli",
           title_en: "Sharing Files",
-          video: "",
+          video: "https://www.youtube.com/embed/kileMEnEeZw?si=WG9wue6Gy9cmRR_R",
           read_ha:
             "Za ka iya aika hoto, takarda, ko bidiyo ga wani ta hanyoyi da yawa.\n\n" +
             "**Hanyoyin da aka fi amfani:**\n" +
