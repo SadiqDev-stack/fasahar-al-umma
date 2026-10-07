@@ -13,8 +13,8 @@
    v3 — added download endpoints, files folder check, final polish
    ============================================================ */
 
-const CACHE_VERSION = "fasahar-alumma-v3";
-const RUNTIME_CACHE = "fasahar-alumma-runtime-v3";
+const CACHE_VERSION = "fasahar-alumma-v4";
+const RUNTIME_CACHE = "fasahar-alumma-runtime-v4";
 
 /* ============================================================
    PRE-CACHE — every file the app needs to work offline

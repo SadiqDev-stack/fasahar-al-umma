@@ -364,7 +364,7 @@ const DATA = {
           order: 1,
           title_ha: "Buɗe Imel Mai Aminci",
           title_en: "Creating a Safe Email",
-          video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+          video: "",
           read_ha:
             "Imel ita ce hanyar sadarwa ta hukuma a yanar gizo.\n\n" +
             "**Dole ka sami imel idan:**\n" +
@@ -774,7 +774,7 @@ const DATA = {
           order: 1,
           title_ha: "Gane Zamba",
           title_en: "Spotting Scams",
-          video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+          video: "",
           read_ha:
             "Zamba na yawaita a yanar gizo. Ka koyi gane su.\n\n" +
             "**Alamun zamba:**\n" +
@@ -982,7 +982,7 @@ const DATA = {
           order: 1,
           title_ha: "Menene AI?",
           title_en: "What is AI?",
-          video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+          video: "",
           read_ha:
             "AI (Basirar Wucin Gadi) ita ce manhaja da ke iya taimaka maka da tambayoyi, rubutu, da ayyuka.\n\n" +
             "**Abin da AI za ta iya yi:**\n" +
@@ -1184,7 +1184,7 @@ const DATA = {
           order: 1,
           title_ha: "Sayarwa a Kan Layi",
           title_en: "Selling Online",
-          video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+          video: "",
           read_ha:
             "Za ka iya sayar da kayayyaki ba tare da shago ba.\n\n" +
             "**Inda za ka sayar:**\n" +
@@ -1398,7 +1398,7 @@ const DATA = {
       "- It never asks for your OTP or PIN\n" +
       "- It can be verified through an official channel\n\n" +
       "**If an opportunity asks for money or OTP, it's a scam.**",
-    guide_video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    guide_video: "",
     items: [
       {
         id: "boi-youth",
